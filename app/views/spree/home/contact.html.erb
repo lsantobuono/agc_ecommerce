@@ -1,0 +1,69 @@
+<% self.title = "Contacto" %>
+<% @custom_flash=true %>
+
+<script  async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQ5sCEZZo1eV-iUY-8Em9G56DYHy8IdDI&callback=loadMap">
+</script>
+
+
+<div class="row">
+	<div class="preview-map" id="map"></div>		
+      
+    <% flash.each do |key, value| %>
+    	<div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+
+	<div class="col-sm-12 col-md-8">
+		<h2 style="text-align: left; font-size: 2em;"> CONTACTANOS </h2>
+		<p style="color: $light-grey; font-size:1em; font-style: italic;"> Dejanos tu consulta y nos contactaremos a la brevedad</p>
+		<%= render 'spree/shared/contact_form' %>
+	</div>
+	<hr>
+	<div class="col-sm-12  col-md-4">
+		<h2 style="text-align: left; font-size: 2em;"> UBICACIÓN </h2>
+		<p> Nos encontramos en Virrey Cisneros 8649, José León Suarez Provincia de Buenos Aires, República Argentina </p>
+		<p> CP:B1655KRM </p>
+		<p> Tel:  (5411) 4729-7481 </p>
+		<p> Fax: (5411) 4729-7481 </p>
+		<p> www.agc.com.ar </p>
+		<%= image_tag("frente.jpg", alt: "Frente") %>
+	</div>
+
+</div>
+
+<style >
+/* map  */
+
+.preview-map {
+  height: 20em;
+  text-align:center;
+  margin:0 -100%; /* old browsers fallback */
+  margin:0 calc(50% - 50vw);
+  margin-top:-20px;
+}
+
+.alert {
+	margin:0 -100%; /* old browsers fallback */
+	margin:0 calc(50% - 50vw);
+	text-align: center;
+}
+
+</style>
+
+<script type="text/javascript">
+
+
+ 	function loadMap()
+ 	{
+	 		var uluru = {lat: -34.515755, lng: -58.575583};
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 14,
+				center: uluru
+			});
+			var marker = new google.maps.Marker({
+				position: uluru,
+				map: map
+	 		});
+ 	}
+
+</script>
+

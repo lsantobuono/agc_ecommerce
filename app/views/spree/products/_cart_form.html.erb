@@ -57,6 +57,7 @@
           <div class="add-to-cart">
             <br />
             <div class="input-group">
+              <%= f.label :quantity, "Cantidad" %>
               <%= number_field_tag :quantity, 1, class: 'title form-control', min: 1 %>
               <span class="input-group-btn">
                 <%= button_tag class: 'btn btn-success', id: 'add-to-cart-button', type: :submit do %>

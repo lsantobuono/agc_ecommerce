@@ -1,0 +1,13 @@
+<% if object.errors.any? %>
+  <div id="error_explanation">
+
+    <ul>
+    <% object.errors.full_messages.each do |msg| %>
+<!--      <% msg.sub!   'Name', 'Nombre' %>
+      <% msg.sub!   'Content', 'Consulta' %>-->
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+

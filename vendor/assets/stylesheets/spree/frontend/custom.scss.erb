@@ -1,4 +1,47 @@
 
+$dark-grey: #333333;
+$light-grey: #cccccc;
+$light-orange:#ffc266;
+
+/* Left bar */
+
+#sidebar  {
+	color: orange;
+
+	a {
+		&:link {
+    		color: $dark-grey;
+   	 	}
+    
+    	&:visited {
+			color: $dark-grey;
+   	 	}
+    
+    	&:hover {
+			color: $dark-grey;
+     		cursor:pointer;
+     		background-color: $light-orange;
+    	}
+	}
+    	
+    .active
+	{
+		color: $dark-grey;
+    	cursor:pointer;
+     	background-color: $light-orange;    
+     	border-color: $light-orange;
+    }
+}
+.list-group-item {
+	padding: 5px 10px;
+	color : orange;
+
+
+}
+
+
+/* Index display de previews */
+
 .product-list-item{
 	[data-hook="product_price"] {
     /* Stookyles */
@@ -11,4 +54,66 @@
 		margin-top:1em;
 		width:100%;
 	}
+	.add-to-cart {
+		text-align: center;
+	}
+	input[type=number] {
+		height:2em;
+		padding: 5px 10px;
+		width: 30%;
+		float:none;
+		margin-left: 1em;
+	}
+	label {
+		margin-left: 1em;
+	}
 }
+
+
+
+/* form */
+
+label {
+	text-decoration: none;
+	color: $dark-grey;
+	font-size:0.9em;
+	font-weight: normal;
+
+}
+
+.field {
+	margin-top:1em;
+}
+
+.actions {
+	margin-top:1em;
+}
+
+// Hide number picker
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+// Show number picker on focus
+input[type=number]:focus::-webkit-inner-spin-button,
+input[type=number]:focus::-webkit-outer-spin-button,
+input[type=number]:hover::-webkit-inner-spin-button,
+input[type=number]:hover::-webkit-outer-spin-button {
+   -webkit-appearance: inner-spin-button;
+   margin: 0 2px 0 0 ;
+}
+
+// Firefox:
+// Hide number picker
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+// Show number picker on focus
+input[type=number]:focus,
+input[type=number]:hover {
+  -moz-appearance:number-input;
+}
+

@@ -1,0 +1,16 @@
+TODO
+
+Armar mailer de mensajes.
+Probar mails en producciòn.
+Ver el tema del lenguaje, usamos Ie , o le mandamos cumbia a mano? 
+El tema de venir de ML
+Ver que hacemos con todas las cosas que genera la app y no se usan (sacar rutas de spree?, o borrar los links a mano)
+Revisar bien el panel de admin para ver las configuraciones
+
+El boton de carrito va quedando bien en la home pero se rompe en la pantalla de productos.
+
+opcion 1:
+	Duplicamos el parcial y customizamos los dos como nos pinta (probablemente esta sea)
+
+opcion 2: 
+	definir distintos css para las distintas paginas (bardo al pedo)
