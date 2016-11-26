@@ -7,10 +7,13 @@ El tema de venir de ML
 Ver que hacemos con todas las cosas que genera la app y no se usan (sacar rutas de spree?, o borrar los links a mano)
 Revisar bien el panel de admin para ver las configuraciones
 
-El boton de carrito va quedando bien en la home pero se rompe en la pantalla de productos.
 
-opcion 1:
-	Duplicamos el parcial y customizamos los dos como nos pinta (probablemente esta sea)
+Falta que ande el carrito en la home cuando hay mas de 1 variant
+Falta que ande la actualizacion de imagenes en la home cuando hay mas de 1 variant
+Falta que ande la actualizacion de precio en la home cuando hay mas de 1 variant
 
-opcion 2: 
-	definir distintos css para las distintas paginas (bardo al pedo)
+Cuando accedes a la home el select está en "seleccionar" y es valido el boton y si lo tocas pincha..
+	o ponerle valor default una de los estilos
+	o corregir eso con js
+
+

@@ -34,7 +34,7 @@
               <%= content_tag(:span, truncate(product.name, length: 50), class: 'info', itemprop: "name", title: product.name) %>            
              </div>
           <% end %>
-              <div id="thumbnails" data-hook>
+              <div id="thumbnails" data-hook style="height:0">
                 <%= render :partial => 'spree/products/thumbnails_home' , :locals => {product: product} %>
               </div>
 

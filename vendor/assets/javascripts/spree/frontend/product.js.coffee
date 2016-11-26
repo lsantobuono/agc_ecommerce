@@ -61,7 +61,7 @@ Spree.ready ($) ->
 
   Spree.updateVariantPriceHome = (variant) ->
     variantPrice = variant.data('price')
-    ($ variant).parent().parent().parent().find('.price.selling').text(variantPrice) if variantPrice
+    ($ variant).parent().parent().parent().parent().parent().parent().parent().find('.price.selling').text(variantPrice) if variantPrice
 
   Spree.disableCartFormHome = (variant) ->
     inStock = variant.data('in-stock')
@@ -71,7 +71,7 @@ Spree.ready ($) ->
   radios = ($ '#product-variants input[type="radio"]')
   home = false
   if radios.length == 0
-    radios = ($ '#order_variant option')
+    radios = ($ '#variant_id option')
     if radios.length > 0
       home = true
 
@@ -88,7 +88,7 @@ Spree.ready ($) ->
       Spree.disableCartForm ($ this)
 
   else if home
-    selected = ($ '#order_variant option:selected')
+    selected = ($ '#variant_id option:selected')
     console.log(selected)
     Spree.showVariantImagesHome(selected.attr('value'), selected.data('producto-id'))
     Spree.updateVariantPriceHome selected
