@@ -15,7 +15,9 @@ Spree.config do |config|
   # Example:
   # Uncomment to stop tracking inventory levels in the application
   # config.track_inventory_levels = false
-
+	country = Spree::Country.find_by_name('Argentina')
+	config.default_country_id = country.id if country.present?	
+	config.currency = "ars"
 end
 
 Spree.user_class = "Spree::User"
