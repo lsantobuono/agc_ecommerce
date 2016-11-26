@@ -40,18 +40,14 @@ Spree.ready ($) ->
     $('#add-to-cart-button').attr('disabled', !inStock)
 
   Spree.showVariantImagesHome = (variantId,productId) ->
-    console.log(variantId)
-    console.log(productId)
     originalDiv = ($ "#product-images-#{productId}").parent().parent()
     originalDiv.find("ul.thumbnails li.vtmb").hide()
     originalDiv.find("ul.thumbnails li.tmb-" + variantId).show()
     currentThumb = ($ '#' + ($ "#main-image-#{productId}").data('selectedThumbId'))
     if not currentThumb.hasClass('vtmb-' + variantId)
-      console.log("limon")
       thumb = originalDiv.find("ul.thumbnails li:visible.vtmb").eq(0)
       thumb = originalDiv.find("ul.thumbnails li:visible").eq(0) unless thumb.length > 0
       newImg = thumb.find('a').attr('href')
-      console.log(newImg)
 
       ($ "#product-images-#{productId} ul.thumbnails li").removeClass 'selected'
       thumb.addClass 'selected'
@@ -89,7 +85,6 @@ Spree.ready ($) ->
 
   else if home
     selected = ($ '#variant_id option:selected')
-    console.log(selected)
     Spree.showVariantImagesHome(selected.attr('value'), selected.data('producto-id'))
     Spree.updateVariantPriceHome selected
     Spree.disableCartFormHome selected

@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require spree/frontend
+//= require bootstrap-select.min
 
 //= require_tree .
 //= require spree/frontend/spree_auth

@@ -18,7 +18,7 @@
             }
           %>
      
-          <%= select_tag(:variant_id,  options_for_select(variants_array),{:prompt => 'Seleccionar Variante', name:"variant_id"}) %>
+          <%= select_tag(:variant_id,  options_for_select(variants_array),{:prompt => 'Seleccionar Variante', name:"variant_id",:data => { :width => "85%"}}) %>
 
       </div>
     <% else %>
@@ -58,6 +58,14 @@
   </div>
 <% end %>
 
+<script >
+    $(window).load(function() {
+      var cols = document.getElementsByClassName('btn dropdown-toggle btn-default');
+    for(i=0; i<cols.length; i++) {
+        cols[i].style = 'font-size:0.9em; text-align:center; ';
+      }
+  });
+</script>
 <% 
 =begin %>
   

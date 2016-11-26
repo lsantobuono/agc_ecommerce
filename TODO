@@ -1,12 +1,13 @@
 TODO
 
-Armar mailer de mensajes.
 Probar mails en producciòn.
 Ver el tema del lenguaje, usamos Ie , o le mandamos cumbia a mano? 
 El tema de venir de ML
 Ver que hacemos con todas las cosas que genera la app y no se usan (sacar rutas de spree?, o borrar los links a mano)
 Revisar bien el panel de admin para ver las configuraciones
+Customizar login docs
 
+Terminar de definir validacion de Usuarios, 
 
 Falta que ande el carrito en la home cuando hay mas de 1 variant
 Falta que ande la actualizacion de imagenes en la home cuando hay mas de 1 variant
@@ -17,3 +18,6 @@ Cuando accedes a la home el select está en "seleccionar" y es valido el boton y
 	o corregir eso con js
 
 
+
+El select bootstrap quedo instalado pero rompe todo el coffe script del select de la home... quiza verlo despues cuando esté al pedo
+:class => "selectpicker", Agregar al select
