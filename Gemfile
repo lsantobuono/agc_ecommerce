@@ -48,6 +48,7 @@ end
 gem 'spree', '~> 3.1.0'
 gem 'spree_auth_devise', '~> 3.1.0'
 gem 'spree_gateway', '~> 3.1.0'
+gem "font-awesome-rails"
 
 gem 'spree_i18n', github: 'spree-contrib/spree_i18n', branch: '3-1-stable'
 

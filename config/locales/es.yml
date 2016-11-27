@@ -1,0 +1,8 @@
+
+es:
+  spree:
+    add_to_cart: "Agregar al carrito "
+    shop_by_taxonomy: "%{taxonomy}"
+    login: "Ingresar"
+    empty_cart: "Vaciar Carrito"
+    continue_shopping: "Seguir comprando"

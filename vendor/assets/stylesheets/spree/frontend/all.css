@@ -5,6 +5,7 @@
  *
  *= require spree/frontend
  *= require bootstrap-select.min
+ *= require font-awesome
  *= require_self
  *= require_tree .
 */

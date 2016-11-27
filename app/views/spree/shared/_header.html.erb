@@ -3,7 +3,9 @@
     <div class="container">
       <div class="row">
         <figure id="logo" class="col-md-4 col-sm-3" data-hook>
-          <%= logo %>
+          <%= link_to root_path do %>
+            <%= image_tag("logo.JPG", alt: "logo agc", style: "max-height:3em; max-width:5em;") %>
+          <% end %>
         </figure>
         <%= render :partial => 'spree/shared/nav_bar' %>
       </div>

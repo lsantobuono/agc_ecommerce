@@ -1,3 +1,17 @@
+<style>
+.breadcrumb {
+    margin-bottom: 0px;
+}
+
+@media only screen and (min-width: 860px) {
+  .nav-breadcrumbs
+  {
+    margin-left: 25%;
+    width:75%;
+  }
+}
+</style>
+
 <% content_for :head do %>
   <% if products.respond_to?(:total_pages) %>
     <%= rel_next_prev_link_tags products %>
@@ -26,12 +40,12 @@
           
           <%= link_to url, itemprop: "url" do %>
             <div id="product-images-<%= product.id %>" data-hook="product_images">
-              <div id="main-image-<%= product.id %>" class="panel panel-default" data-hook>
+              <div id="main-image-<%= product.id %>" class="panel panel-default main-image-home" data-hook>
                 <div class="panel-body text-center">
                  <%= render :partial => 'spree/products/image_home' , :locals => {product: product} %>
                 </div>
               </div>
-              <%= content_tag(:span, truncate(product.name, length: 50), class: 'info', itemprop: "name", title: product.name) %>            
+              <%= content_tag(:span, truncate("#{product.name} - #{product.description}", length: 50), class: 'info', itemprop: "name", title: product.name) %>            
              </div>
           <% end %>
               <div id="thumbnails" data-hook style="height:0">

@@ -31,8 +31,10 @@
       
       <div class="field">
         <%= f.label :subject ,"Asunto" %><br>
-        <%= f.select :subject , ["Stock y Reposición","Envios y Despachos","Información Técnica",
-                                "Consulta General","Reclamos", "Informe de Falla"] %>
+        <label class="label-select" style="width:200px; font:7px; height:30px">
+          <%= f.select :subject , ["Stock y Reposición","Envios y Despachos","Información Técnica",
+                                "Consulta General","Reclamos", "Informe de Falla"], {},{:style => "width:200px;height:30px"} %>
+        </label>
       </div>
 
       <div class="field">

@@ -10,15 +10,17 @@
           <% variants_array = @product.variants_and_option_values(current_currency).each.map { 
               |variant|
               if variant.can_supply? #TODO Testear esto.
-                value = "#{variant_options variant} - #{variant_price variant}"
+                value = "#{variant_options variant}"
                 price = variant.price_in(current_currency).money
                 stock = variant.can_supply?
                 [value, variant.id, { 'data-price' => price, 'data-in-stock'=> stock , 'data-producto-id'=> @product.id }]
               end
             }
           %>
-     
+
+      <label class="label-select">
           <%= select_tag(:variant_id,  options_for_select(variants_array),{:prompt => 'Seleccionar Variante', name:"variant_id",:data => { :width => "85%"}}) %>
+      </label>
 
       </div>
     <% else %>
@@ -38,7 +40,7 @@
               <%= number_field_tag :quantity, 1, class: 'title form-control', min: 1 %>
               <span class="input-group-btn">
                 <%= button_tag class: 'btn btn-success', id: 'add-to-cart-button', type: :submit do %>
-                  <%= Spree.t(:add_to_cart) %>
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i> <%= Spree.t(:add_to_cart) %>
                 <% end %>
               </span>
             </div>
