@@ -39,6 +39,11 @@ Spree.ready ($) ->
     inStock = variant.data('in-stock')
     $('#add-to-cart-button').attr('disabled', !inStock)
 
+  Spree.showVariantRangePrices = (variantId) ->
+    $('.variant-table-prices').hide()
+    console.log('#variant-table-'+variantId)
+    $('#variant-table-'+variantId).show()
+
   Spree.showVariantImagesHome = (variantId,productId) ->
     originalDiv = ($ "#product-images-#{productId}").parent().parent()
     originalDiv.find("ul.thumbnails li.vtmb").hide()
@@ -77,11 +82,13 @@ Spree.ready ($) ->
     Spree.showVariantImages selectedRadio.attr('value')
     Spree.updateVariantPrice selectedRadio
     Spree.disableCartForm selectedRadio
+    Spree.showVariantRangePrices selectedRadio.attr('value')
 
     radios.click (event) ->
       Spree.showVariantImages @value
       Spree.updateVariantPrice ($ this)
       Spree.disableCartForm ($ this)
+      Spree.showVariantRangePrices @value
 
   else if home
     selected = ($ '#variant_id option:selected')

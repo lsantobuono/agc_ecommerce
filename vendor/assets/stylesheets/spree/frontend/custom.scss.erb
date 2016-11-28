@@ -6,7 +6,8 @@
 $dark-grey: #333333;
 $light-grey: #cccccc;
 $light-orange:#ffc266;
-
+$brown: #b35900;
+$light-brown: #cc9966;
 
 @font-face {  
 	font-family: 'olney_light';  
@@ -16,7 +17,21 @@ $light-orange:#ffc266;
 }  
 
 body{  
-	font-family: 'olney_light';  
+	font-family: 'olney_light';
+	a {
+		&:link {
+    		color: orange;
+   	 	}
+    
+    	&:visited {
+			color: orange;
+   	 	}
+    
+    	&:hover {
+			color: orange;
+     		cursor:pointer;
+    	}
+    }
 }  
 
 /* header */
@@ -145,7 +160,23 @@ body{
 
 }
 
+/* producto show */
+#thumbnails {
+	li.selected {
+		a {
+			img {
+					border: 1px solid $light-brown;
+			}
+		}
+	}
+}
 
+#product-properties {
+	border: 2px solid grey;
+	.even {
+		background-color: $light-brown;
+	}
+}
 /* properties */
 
 .breadcrumb {
@@ -223,3 +254,12 @@ input[type=number]:hover {
   -moz-appearance:number-input;
 }
 
+/* Carrito ooo ohh oo oo */
+
+.cart-item-price {
+	color: brown;
+}
+
+.cart-item-total {
+	color: brown;
+}

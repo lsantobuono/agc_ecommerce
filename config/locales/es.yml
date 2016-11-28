@@ -12,12 +12,20 @@ es:
     address: "Dirección"
     confirmation: "Confirmar Usuario"
     user_confirmated: "Usuario confirmado"
+
+    total_price: "Precio Total"
+    percent_discount: "Decuento Porcentual"
+    price_discount: "Descuento Precio"
+    bulk_discount: "Descuento por cantidad"
   activerecord:
     attributes:
       spree/user:
         phone_number: "Número de Telefono"
         first_name: "Nombre"
         last_name: "Apellido"
+    errors:
+      messages:
+        must_be_in_format: "Usar el formato correcto en el rango, ej: (1..10) , (100+)"
   devise:
     registrations:
       spree_user:

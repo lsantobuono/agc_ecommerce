@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161127222258) do
+ActiveRecord::Schema.define(version: 20161128103735) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -1056,6 +1056,33 @@ ActiveRecord::Schema.define(version: 20161127222258) do
   add_index "spree_variants", ["sku"], name: "index_spree_variants_on_sku"
   add_index "spree_variants", ["tax_category_id"], name: "index_spree_variants_on_tax_category_id"
   add_index "spree_variants", ["track_inventory"], name: "index_spree_variants_on_track_inventory"
+
+  create_table "spree_variants_volume_price_models", force: :cascade do |t|
+    t.integer "volume_price_model_id"
+    t.integer "variant_id"
+  end
+
+  add_index "spree_variants_volume_price_models", ["variant_id"], name: "variant_id"
+  add_index "spree_variants_volume_price_models", ["volume_price_model_id"], name: "volume_price_model_id"
+
+  create_table "spree_volume_price_models", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spree_volume_prices", force: :cascade do |t|
+    t.integer  "variant_id"
+    t.string   "name"
+    t.string   "range"
+    t.decimal  "amount",                precision: 8, scale: 2
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "discount_type"
+    t.integer  "role_id"
+    t.integer  "volume_price_model_id"
+  end
 
   create_table "spree_zone_members", force: :cascade do |t|
     t.integer  "zoneable_id"

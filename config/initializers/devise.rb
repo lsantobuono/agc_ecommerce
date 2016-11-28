@@ -2,7 +2,7 @@ Devise.secret_key = "f7fedb6d79fab85c5593b97c52b5883d8d0fd9926471732cd0dc2608d66
 
 Devise.setup do |config|
   # Required so users don't lose their carts when they need to confirm.
-  config.allow_unconfirmed_access_for = 1.days
+  config.allow_unconfirmed_access_for = nil
 
   # Fixes the bug where Confirmation errors result in a broken page.
   config.router_name = :spree
