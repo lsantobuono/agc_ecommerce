@@ -1,8 +1,28 @@
 
 es:
   spree:
+    returns: "Retornos"
     add_to_cart: "Agregar al carrito "
     shop_by_taxonomy: "%{taxonomy}"
     login: "Ingresar"
     empty_cart: "Vaciar Carrito"
     continue_shopping: "Seguir comprando"
+    phone_number: "Número de Teléfono"
+    enterprise: "Empresa"
+    address: "Dirección"
+    confirmation: "Confirmar Usuario"
+    user_confirmated: "Usuario confirmado"
+  activerecord:
+    attributes:
+      spree/user:
+        phone_number: "Número de Telefono"
+        first_name: "Nombre"
+        last_name: "Apellido"
+  devise:
+    registrations:
+      spree_user:
+        signed_up: "Alta exitosa. Bienvenido."
+    sessions:
+      spree_user:
+        signed_out: "Sesión cerrada"
+    

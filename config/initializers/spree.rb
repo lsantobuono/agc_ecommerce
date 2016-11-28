@@ -18,6 +18,11 @@ Spree.config do |config|
 	country = Spree::Country.find_by_name('Argentina')
 	config.default_country_id = country.id if country.present?	
 	config.currency = "ars"
+	#config.site_name = "AGC Repuestos para video juegos"
 end
 
 Spree.user_class = "Spree::User"
+
+Spree::Auth::Config[:confirmable] = true
+
+Spree::PermittedAttributes.user_attributes.push :phone_number, :first_name, :last_name, :enterprise, :address

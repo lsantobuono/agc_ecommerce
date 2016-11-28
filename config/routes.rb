@@ -70,4 +70,11 @@ Spree::Core::Engine.routes.draw do
   get "/contact" => "home#contact"
   post "/messages" => "home#createMessage"
   get "/new_message" => "home#newMessage"
+  namespace :admin , path: Spree.admin_path do
+    resources :users do
+      member do
+        put :confirmate
+      end
+    end
+  end
 end

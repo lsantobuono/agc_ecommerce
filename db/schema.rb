@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126181516) do
+ActiveRecord::Schema.define(version: 20161127222258) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -1016,6 +1016,11 @@ ActiveRecord::Schema.define(version: 20161126181516) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "phone_number"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "enterprise"
+    t.string   "address"
   end
 
   add_index "spree_users", ["bill_address_id"], name: "index_spree_users_on_bill_address_id"
