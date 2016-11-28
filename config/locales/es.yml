@@ -18,10 +18,14 @@ es:
     bulk_discount: "Descuento por cantidad"
     files: "Archivos"
     all_departments: "Categorías"
+    continuar: Continuar
     adjustment_labels:
       tax_rates:
         including_tax: '%{name}%{amount} (Included in Price)'
         excluding_tax: '%{name}%{amount}'
+    order_number: 'Orden %{number}'
+    order_state:
+      confirmar: 'Confirmar'
         
   activerecord:
     attributes:
