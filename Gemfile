@@ -43,6 +43,7 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'letter_opener'
 end
 
 gem 'rails_db'
@@ -55,3 +56,5 @@ gem "font-awesome-rails"
 gem 'spree_i18n', github: 'spree-contrib/spree_i18n', branch: '3-1-stable'
 
 gem 'spree_volume_pricing', :git => 'https://github.com/lsantobuono/spree_volume_pricing.git', branch: 'master'
+gem 'puma'
+

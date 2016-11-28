@@ -1,7 +1,7 @@
 
 es:
   spree:
-    returns: "Retornos"
+    returns: "Devoluciones"
     add_to_cart: "Agregar al carrito "
     shop_by_taxonomy: "%{taxonomy}"
     login: "Ingresar"
@@ -34,3 +34,4 @@ es:
       spree_user:
         signed_out: "Sesión cerrada"
     
+
