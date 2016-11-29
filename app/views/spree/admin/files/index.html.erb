@@ -1,55 +1,44 @@
 <%= render partial: 'spree/admin/shared/product_tabs', locals: { current: :files } %>
 
 <% content_for :page_actions do %>
-  <%= button_link_to(Spree.t(:new_file), spree.new_admin_product_file_url(@product), { class: "btn-success", icon: 'add', id: 'new_file_link' }) if can? :create, Spree::File %>
+  <%= button_link_to(Spree.t(:new_file), spree.admin_product_files_new_path(@product), { class: "btn-success", icon: 'add', id: 'new_file_link' }) %>
 <% end %>
 
-<% has_variants = @product.has_variants? %>
 
-<% unless @product.variant_files.any? %>
-  <div class="alert alert-warning">
-    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::File)) %>.
-  </div>
-<% else %>
-  <table class="table sortable" data-hook="files_table" data-sortable-link="<%= update_positions_admin_product_files_url(@product) %>">
-    <thead>
-      <tr data-hook="files_header">
-        <th colspan="2">
-          <%= Spree.t(:thumbnail) %>
-        </th>
-        <% if has_variants %>
+
+    <table class="table sortable" data-hook="files_table">
+      <thead>
+        <tr data-hook="files_header">
+          <th class="move-handle text-center" >
+            <%= Spree.t(:thumbnail) %>
+          </th>
           <th>
             <%= Spree::Variant.model_name.human %>
           </th>
-        <% end %>
-        <th>
-          <%= Spree.t(:alt_text) %>
-        </th>
-        <th class="actions"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% (@product.variant_files).each do |file| %>
-        <tr id="<%= spree_dom_id files %>" data-hook="files_row">
-          <td class="move-handle text-center">
-            <% if can? :edit, files %>
-              <span class="icon icon-move handle"></span>
-            <% end %>
-          </td>
-          <td class="files">
-            <%= link_to files_tag(files.attachment.url(:mini)), files.attachment.url(:product) %>
-          </td>
-          <% if has_variants %>
-            <td><%= options_text_for(file) %></td>
-          <% end %>
-          <td><%= file.alt %></td>
-          <td class="actions actions-2 text-right">
-            <%= link_to_with_icon('edit', Spree.t(:edit), spree.edit_admin_product_file_url(@product, file), class: 'btn btn-primary btn-sm', no_text: true, data: { action: 'edit' }) if can? :edit, file %>
-            <%= link_to_delete(file, { url: spree.admin_product_file_url(@product, file), no_text: true }) if can? :destroy, file %>
-          </td>
+          <th>
+            <%= Spree.t(:alt_text) %>
+          </th>
+          <th class="actions"></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+      </thead>
+      <tbody>
+        <% @variants.each do |v| %>
+          <% if v.file.present? %>
+            <tr data-hook="files_row">
+              <td class="move-handle text-center">
+                <%= link_to "Download PDF",spree.admin_product_download_product_file_path(@product,v) %>
+              </td>
+              <td >
+                <%= variant_options v %>
+              </td>
+              <td>
+                  <%= v.file_alt %>
+              </td>
+              <td class="actions actions-2 text-right">
+                <%= link_to_delete(v.id, { url: spree.admin_product_delete_product_file_path(@product, v.id), no_text: true }) %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>

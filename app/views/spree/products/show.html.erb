@@ -36,6 +36,7 @@
            <%= render partial: 'spree/products/volume_pricing', locals: { product: @product } %>
           <div id="cart-form" data-hook="cart_form">
             <%= render :partial => 'cart_form' %>
+            <%= render :partial => 'spree/products/files' , :locals => {product: @product} %>
           </div>
         </div>
 
