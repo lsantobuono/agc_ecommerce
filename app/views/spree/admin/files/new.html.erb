@@ -18,6 +18,7 @@
                 value = "#{variant_options variant}"
                 [value, variant.id] }
               %>
+              <% variants_array << [@product.master.name,@product.master.id] %>
 		      <%= label_tag :variant_id, Spree::Variant.model_name.human %>
 		      <%= select_tag :variant_id, options_for_select(variants_array), {:class => 'select2'} %>
 		    </div>
@@ -25,7 +26,7 @@
 		  <div data-hook="alt_text" class="col-md-6">
 		    <div class="form-group">
 		      <%= label_tag :alt, Spree.t(:alt_text) %>
-		      <%= text_area_tag :alt, nil,:rows => 4, :class => 'form-control' %>
+		      <%= text_area_tag :alt, nil,:rows => 4, :class => 'form-control', :placeholder => "Descripción del archivo" %>
 		    </div>
 		  </div>
 		</div>

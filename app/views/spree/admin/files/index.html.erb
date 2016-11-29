@@ -22,14 +22,18 @@
         </tr>
       </thead>
       <tbody>
-        <% @variants.each do |v| %>
+        <% (@variants << @product.master).each do |v| %>
           <% if v.file.present? %>
             <tr data-hook="files_row">
               <td class="move-handle text-center">
                 <%= link_to "Download PDF",spree.admin_product_download_product_file_path(@product,v) %>
               </td>
               <td >
-                <%= variant_options v %>
+                <%= if ((variant_options v) != "") 
+                      variant_options v
+                    else 
+                      v.name
+                    end %>
               </td>
               <td>
                   <%= v.file_alt %>

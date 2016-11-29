@@ -10,15 +10,15 @@
 			</div>
 		<% end %>
 	<% end %>
-<% else %>
-		<% if @product.master.file.present? %>
-			<br>
-	    	<div class="master-file" id="master-file-<%=product.master.id%>">
-	    	<%= link_to spree.public_download_product_file_path(@product,product.master) do%>
-		    	<%= image_tag "pdf-icon.png", style:"width:2em" %>
-				<%= "Descargar Hoja Técnica - #{@product.master.name}" %>
-	    	<%end%>
-			</div>
-			<br>
-		<% end %>
-<%end %>
+<% end %>
+
+<% if @product.master.file.present? %>
+	<br>
+	<div class="master-file" id="master-file-<%=product.master.id%>">
+	<%= link_to spree.public_download_product_file_path(@product,product.master) do%>
+		<%= image_tag "pdf-icon.png", style:"width:2em" %>
+		<%= "Descargar Hoja Técnica - #{@product.master.name}" %>
+	<%end%>
+	</div>
+	<br>
+<% end %>
