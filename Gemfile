@@ -35,6 +35,19 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'pry-rails'
+  gem 'faker'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+end
+
+group :test do
+  gem 'rspec-rails'
+
+  gem 'timecop'
+  gem 'webmock'
+
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do
