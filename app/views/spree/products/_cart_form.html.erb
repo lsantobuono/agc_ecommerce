@@ -33,23 +33,24 @@
 
     <% if @product.price_in(current_currency) && !@product.price.nil? %>
       <div data-hook="product_price" class="col-md-5">
-        <div id="product-price">
-          <h6 class="product-section-title"><%= Spree.t(:price) %></h6>
-          <div>
-            <span class="lead price selling" itemprop="price">
-              <%= display_price(@product) %>
-            </span>
-            <span itemprop="priceCurrency" content="<%= @product.currency %>"></span>
+        <% if current_spree_user && current_spree_user.confirmed? %>
+          <div id="product-price">
+            <h6 class="product-section-title"><%= Spree.t(:price) %></h6>
+            <div>
+              <span class="lead price selling" itemprop="price">
+                <%= display_price(@product) %>
+              </span>
+              <span itemprop="priceCurrency" content="<%= @product.currency %>"></span>
+            </div>
+
+            <% if @product.master.can_supply? %>
+              <link itemprop="availability" href="https://schema.org/InStock" />
+            <% elsif @product.variants.empty? %>
+              <br />
+              <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
+            <% end %>
           </div>
-
-          <% if @product.master.can_supply? %>
-            <link itemprop="availability" href="https://schema.org/InStock" />
-          <% elsif @product.variants.empty? %>
-            <br />
-            <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
-          <% end %>
-        </div>
-
+        <% end %>
         <% if @product.can_supply? %>
           <div class="add-to-cart">
             <br />

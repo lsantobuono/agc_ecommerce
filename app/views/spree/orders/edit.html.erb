@@ -18,8 +18,10 @@
 
           <div class="links col-md-6 navbar-form pull-right text-right" data-hook="cart_buttons">
             <div class="form-group">
-              <%= button_tag class: 'btn btn-primary', id: 'update-button' do %>
-                <%= Spree.t(:update) %>
+              <% if current_spree_user && current_spree_user.confirmed? %> <!-- Este boton actualiza los precios, pero si no tengo usuario y no los ve, no tiene sentido -->
+                <%= button_tag class: 'btn btn-primary', id: 'update-button' do %>
+                  <%= Spree.t(:update) %>
+                <% end %>
               <% end %>
               <%= button_tag class: 'btn btn-lg btn-success', id: 'checkout-link', name: 'checkout' do %>
                 <%= Spree.t(:checkout) %>

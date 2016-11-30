@@ -1,10 +1,28 @@
 <% max_level = Spree::Config[:max_level_in_taxons_menu] || 1 %>
 
 <nav id="taxonomies" class="sidebar-item" data-hook>
-  <% @taxonomies.each do |taxonomy| %>
-    <% cache [I18n.locale, taxonomy, max_level, @taxon] do %>
-      <h4 class='taxonomy-root'><%= Spree.t(:shop_by_taxonomy, :taxonomy => taxonomy.name) %></h4>
-      <%= taxons_tree(taxonomy.root, @taxon, max_level) %>
-    <% end %>
-  <% end %>
+	<% @taxonomies.each do |taxonomy| %>
+		<% cache [I18n.locale, taxonomy, max_level, @taxon] do %>
+		<div class="panel-group accordion" id="accordion">
+			<a data-toggle="collapse" data-parent="#accordion" href="<%= '#' + (20*taxonomy.root.id).to_s %>"><span id="main_icon" class="glyphicon glyphicon-align-justify">
+			</span><%= Spree.t(:shop_by_taxonomy, taxonomy: taxonomy.name) %></a></div>
+			<%= taxons_tree(taxonomy.root, @taxon, max_level,taxonomy.root.id*20) %>
+		<% end %>
+	<% end %>
 </nav>
+
+
+	
+<!--
+<%
+=begin %>
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default heading" >
+			<div class="panel-heading">
+			<h4 class='taxonomy-root'><a data-toggle="collapse" data-parent="#accordion" href="<%= '#' + taxonomy.root.id.to_s %>"><span id="main_icon" class="glyphicon glyphicon-align-justify">
+			</span><%= Spree.t(:shop_by_taxonomy, taxonomy: taxonomy.name) %></a></h4></div></div></div>
+			<%= taxons_tree(taxonomy.root, @taxon, max_level,taxonomy.root.id) %>-->
+
+<%
+=end %>
+-->	
