@@ -67,15 +67,16 @@ RSpec.describe Spree::Order do
           expect(order.state).to eq 'address'
         end
 
-        # context 'al pasar al estado' do
-        #   before do
-        #     order.next
-        #   end
+        context 'al pasar al estado' do
+          before do
+            order.next
+            pp order.errors.full_messages
+          end
 
-        #   it 'el estado es cart' do
-        #     expect(order.state).to eq 'delivery'
-        #   end
-        # end
+          it 'el estado es cart' do
+            expect(order.state).to eq 'delivery'
+          end
+        end
       end
     end
   end
