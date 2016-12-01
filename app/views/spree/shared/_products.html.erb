@@ -45,6 +45,9 @@
                  <%= render :partial => 'spree/products/image_home' , :locals => {product: product} %>
                 </div>
               </div>
+              <% unless product.variants.empty? %>
+              	<span class="tag-variantes" > Producto con Variantes </span>
+              <% end %>
               <%= content_tag(:span, truncate("#{product.name} - #{product.description}", length: 50), class: 'info', itemprop: "name", title: product.name) %>            
              </div>
           <% end %>
@@ -55,12 +58,14 @@
           
              <div id="cart-form-home" data-hook="cart_form">
                 <%= render :partial => 'spree/products/cart_form_home' , :locals => {product: product} %>
-              </div>            
-            <div class="panel-footer text-center">
-              <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                <span class="price selling lead" itemprop="price"><%= display_price(product) %></span>
-              </span>
-            </div>
+              </div>
+            <% if current_spree_user && current_spree_user.confirmed? %>
+              <div class="panel-footer text-center">
+                <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                  <span class="price selling lead" itemprop="price"><%= display_price(product) %></span>
+                </span>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>

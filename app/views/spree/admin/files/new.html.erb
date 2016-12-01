@@ -1,0 +1,38 @@
+<%= render partial: 'spree/admin/shared/product_tabs', locals: { current: :files } %>
+
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @product } %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:new_file) %>
+<% end %>
+
+<%= form_tag spree.admin_product_create_product_file_path(@product), { multipart: true }  %>
+  <fieldset data-hook="new_file">
+		<div data-hook="admin_file_form_fields" class="row">
+		  <div class="col-md-6">
+			   <%= label_tag :attachment, Spree.t(:filename) %>
+  				<%= file_field_tag :attachment, accept: 'pdf' %>
+		    <div data-hook="variant" class="form-group">
+			  <% variants_array = @product.variants_and_option_values(current_currency).each.map { 
+              	|variant|
+                value = "#{variant_options variant}"
+                [value, variant.id] }
+              %>
+              <% variants_array << [@product.master.name,@product.master.id] %>
+		      <%= label_tag :variant_id, Spree::Variant.model_name.human %>
+		      <%= select_tag :variant_id, options_for_select(variants_array), {:class => 'select2'} %>
+		    </div>
+		  </div>
+		  <div data-hook="alt_text" class="col-md-6">
+		    <div class="form-group">
+		      <%= label_tag :alt, Spree.t(:alt_text) %>
+		      <%= text_area_tag :alt, nil,:rows => 4, :class => 'form-control', :placeholder => "Descripción del archivo" %>
+		    </div>
+		  </div>
+		</div>
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.create'), 'save' %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <%= button_link_to Spree.t('actions.cancel'), spree.admin_product_files_url(@product), icon: 'delete', id: 'cancel_link' %>
+    </div>
+  </fieldset>

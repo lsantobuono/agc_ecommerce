@@ -70,11 +70,20 @@ Spree::Core::Engine.routes.draw do
   get "/contact" => "home#contact"
   post "/messages" => "home#createMessage"
   get "/new_message" => "home#newMessage"
+  get "/download/:product_id/:variant_id" => "home#downloadFile", as: "public_download_product_file"
   namespace :admin , path: Spree.admin_path do
     resources :users do
       member do
         put :confirmate
       end
+    end
+
+    resources :products do
+        get "/files" => "products#indexFile"
+        get "/files/new" => "products#newFile"
+        get "/files/:variant_id" => "products#downloadFile", as: "download_product_file"
+        post "/files" => "products#createFile", as:"create_product_file"
+        delete "/files/:variant_id" => "products#destroyFile", as:"delete_product_file"
     end
   end
 end

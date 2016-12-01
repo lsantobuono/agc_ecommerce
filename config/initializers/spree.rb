@@ -18,6 +18,8 @@ Spree.config do |config|
 	country = Spree::Country.find_by_name('Argentina')
 	config.default_country_id = country.id if country.present?	
 	config.currency = "ars"
+	config.allow_guest_checkout = false
+	config.max_level_in_taxons_menu = 10
 	#config.site_name = "AGC Repuestos para video juegos"
 end
 

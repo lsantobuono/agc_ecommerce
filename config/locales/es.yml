@@ -12,11 +12,17 @@ es:
     address: "Dirección"
     confirmation: "Confirmar Usuario"
     user_confirmated: "Usuario confirmado"
-
     total_price: "Precio Total"
     percent_discount: "Decuento Porcentual"
     price_discount: "Descuento Precio"
     bulk_discount: "Descuento por cantidad"
+    files: "Archivos"
+    all_departments: "Categorías"
+    adjustment_labels:
+      tax_rates:
+        including_tax: '%{name}%{amount} (Included in Price)'
+        excluding_tax: '%{name}%{amount}'
+        
   activerecord:
     attributes:
       spree/user:
@@ -25,7 +31,8 @@ es:
         last_name: "Apellido"
     errors:
       messages:
-        must_be_in_format: "Usar el formato correcto en el rango, ej: (1..10) , (100+)"
+        extension_whitelist_error: "Archivo de formato inválido"
+
   devise:
     registrations:
       spree_user:
@@ -33,5 +40,4 @@ es:
     sessions:
       spree_user:
         signed_out: "Sesión cerrada"
-    
 
