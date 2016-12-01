@@ -17,6 +17,12 @@ es:
     price_discount: "Descuento Precio"
     bulk_discount: "Descuento por cantidad"
     files: "Archivos"
+    all_departments: "Categorías"
+    adjustment_labels:
+      tax_rates:
+        including_tax: '%{name}%{amount} (Included in Price)'
+        excluding_tax: '%{name}%{amount}'
+        
   activerecord:
     attributes:
       spree/user:
@@ -26,6 +32,7 @@ es:
     errors:
       messages:
         extension_whitelist_error: "Archivo de formato inválido"
+
   devise:
     registrations:
       spree_user:

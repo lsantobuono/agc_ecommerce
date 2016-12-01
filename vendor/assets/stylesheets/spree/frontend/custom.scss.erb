@@ -2,6 +2,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/* General */
 
 $dark-grey: #333333;
 $light-grey: #cccccc;
@@ -32,14 +33,43 @@ body{
      		cursor:pointer;
     	}
     }
-}  
+}
 
-/* header */
+.btn.btn-success {
+	background-color:orange; 
+	border-color:orange;
+}
+
+.btn.btn-success:hover, .btn.btn-success:active, .btn.btn-success:focus {
+	background-color: orange !important; 
+}
+
+.btn.btn-primary {
+	background-color:orange; 
+	border-color:orange;
+}
+
+.btn.btn-primary:hover, .btn.btn-primary:active, .btn.btn-primary:focus {
+	background-color: orange !important; 
+}
+/* header 
+ search searchbox */
+
 
 #spree-header {
 	background: url(<%= asset_path 'background-header.jpg' %>) center center no-repeat;	
 }
 
+#keywords {
+	height: 2em;
+}
+
+#top-nav-bar {
+	
+	.btn.btn-success {
+		 padding:0.1em;
+	}
+}
 
 /* Left bar */
 
@@ -71,34 +101,23 @@ body{
      	border-color: $light-orange;
     }
     .list-group {
-    	.list-group {
-    		a {
-			     background-color: $light-brown;
-				&:link {
-		    		color: $dark-grey;
-		   	 	}
-		    
-		    	&:visited {
-					color: $dark-grey;
-		   	 	}
-		    
-		    	&:hover {
-					color: $dark-grey;
-		     		cursor:pointer;
-		     		background-color: $light-brown;
-		    	}
-			}
-    	}
-    	.active
-		{
-			color: $dark-grey;
-	    	cursor:pointer;
-	     	background-color: $light-brown;
-	     	border-color: $light-brown;
+    	a {
+	    	background-color: #ffebcc;
 	    }
-	     background-color: $light-brown;
-
-    }
+    	.list-group {
+	    	a {
+				background-color: #ffcc80;
+			}
+			.list-group {
+		    	a {
+					background-color: #ffad33;
+				}
+			}
+	    }
+	}
+	.btn {
+		margin-top:2em;
+	}
 }
 .list-group-item {
 	padding: 5px 10px;
@@ -189,6 +208,34 @@ body{
 
 }
 
+.tag-variantes {
+	padding-left:0.5em;
+	padding-right:0.5em;
+	display:inline-block;
+	font-size:0.8em;
+	background-color: $light-brown;
+	color:white;
+	margin-top:-2.4em;
+	margin-left:15px;
+	line-height: 20px;
+	left:0;
+	position:absolute;
+}
+.tag-variantes::after {
+ 	position: absolute;
+	content: '';
+	display: block;
+	width: 0;
+	height: 0;
+	border: .9em solid $light-brown;
+	border-bottom-color: transparent;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	position: absolute;
+	right: -1.8em;
+	top:0em;
+}
+
 /* producto show */
 #thumbnails {
 	li.selected {
@@ -206,6 +253,7 @@ body{
 		background-color: $light-brown;
 	}
 }
+
 /* properties */
 
 .breadcrumb {
@@ -236,7 +284,7 @@ body{
 }
 
 
-/* form */
+/* forms */
 
 label {
 	text-decoration: none;
@@ -253,6 +301,18 @@ label {
 .actions {
 	margin-top:1em;
 }
+
+/* Carrito ooo ohh oo oo */
+
+.cart-item-price {
+	color: brown;
+}
+
+.cart-item-total {
+	color: brown;
+}
+
+
 
 // Oculta las flechitas en los input numericos....
 
@@ -281,14 +341,4 @@ input[type=number] {
 input[type=number]:focus,
 input[type=number]:hover {
   -moz-appearance:number-input;
-}
-
-/* Carrito ooo ohh oo oo */
-
-.cart-item-price {
-	color: brown;
-}
-
-.cart-item-total {
-	color: brown;
 }

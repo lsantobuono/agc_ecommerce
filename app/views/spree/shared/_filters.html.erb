@@ -1,4 +1,5 @@
 <% filters = @taxon ? @taxon.applicable_filters : [Spree::Core::ProductFilters.all_taxons] %>
+<% printButton = false %>
 
 <% unless filters.empty? %>
   <%= form_tag '', :method => :get, :id => 'sidebar_products_search' do %>
@@ -7,6 +8,7 @@
       <% if (filter[:name]!=Spree.t(:price_range)) or (current_spree_user and current_spree_user.confirmed?) %>
         <% labels = filter[:labels] || filter[:conds].map {|m,c| [m,m]} %>
         <% next if labels.empty? %>
+        <% printButton = true %>        
         <div class="navigation" data-hook="navigation">
           <h4 class="filter-title"> <%= filter[:name] %> </h4>
           <ul class="list-group">
@@ -25,6 +27,8 @@
         </div>
       <% end %>
     <% end %>
-    <%= submit_tag Spree.t(:search), :name => nil, :class => 'btn btn-primary' %>
+    <% if (printButton == true) %>
+      <%= submit_tag Spree.t(:search), :name => nil, :class => 'btn btn-primary' %>
+    <% end %>
   <% end %>
 <% end %>

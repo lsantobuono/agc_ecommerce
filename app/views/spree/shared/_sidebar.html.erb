@@ -4,16 +4,14 @@
 
 <script>
 $(".list-group-item").click( function () {
-	console.log($(this).attr("aria-expanded"))
-	(".list-group-item")
 	if ($(this).attr("aria-expanded") == "true")
 	{
-		$(this).css("background-color","white");
+	//	$(this).css("background-color","white");
 		$(this).find("#arrow-icon").attr("class","fa fa-arrow-down");
 	}
 	else 
 	{
-		$(this).css("background-color","orange");
+	//	$(this).css("background-color","orange");
 		$(this).find("#arrow-icon").attr("class","fa fa-arrow-up");
 	}
 });

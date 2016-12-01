@@ -45,6 +45,9 @@
                  <%= render :partial => 'spree/products/image_home' , :locals => {product: product} %>
                 </div>
               </div>
+              <% unless product.variants.empty? %>
+              	<span class="tag-variantes" > Producto con Variantes </span>
+              <% end %>
               <%= content_tag(:span, truncate("#{product.name} - #{product.description}", length: 50), class: 'info', itemprop: "name", title: product.name) %>            
              </div>
           <% end %>
