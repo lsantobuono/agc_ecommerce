@@ -48,22 +48,28 @@ module Spree
       #	end
 
       	#Magia Negra  . 
-		def taxons_tree(root_taxon, current_taxon, max_level = 1, root_id)
+		def taxons_tree(root_taxon, current_taxon, max_level = 1, root_id, original_category)
 			return '' if max_level < 1 || root_taxon.leaf?
-			content_tag :div, id:root_id, class: 'list-group panel-collapse accordion-body collapse' do
+			if original_category == true
+				listClass = 'list-group panel-collapse accordion-body collapse in'
+			else
+				listClass = 'list-group panel-collapse accordion-body collapse'
+			end
+			content_tag :div, id:root_id, class: listClass, style:"margin-bottom:0" do
 				taxons = root_taxon.children.map do |taxon|
 					link = seo_url(taxon)
+					root_id = (root_id*max_level)+1					
 					unless taxon.children.empty?
-						link = "##{root_id+1}"
-						content_tag :div, id:"accordion-#{root_id+1}", class: "" do
-							l = link_to(link, class: "list-group-item", data: {toggle: "collapse", parent: "#accordion-#{root_id+1}" }) do
-								content_tag(:div, " ", class: "fa fa-arrow-down", style:"float:right") +taxon.name
+						link = "##{root_id}"
+						content_tag :div, id:"accordion-#{root_id}", class: "" do
+							l = link_to(link, class: "list-group-item", data: {toggle: "collapse", parent: "#accordion-#{root_id}" }) do
+								content_tag(:div, " ", id:"arrow-icon", class: "fa fa-arrow-down", style:"float:right") +taxon.name
 							end
-							l + taxons_tree(taxon, current_taxon, max_level - 1,root_id+1)
+							l + taxons_tree(taxon, current_taxon, max_level - 1,root_id,false)
 						end 
 					else 
 						link_to(link, class: 'list-group-item '){content_tag(:span, " ", class: "glyphicon glyphicon-chevron-right") 
-							+ taxon.name} + taxons_tree(taxon, current_taxon, max_level - 1,root_id+1)
+							+ taxon.name} + taxons_tree(taxon, current_taxon, max_level - 1,root_id,false)
 					end
 				end
 				safe_join(taxons, "\n")
