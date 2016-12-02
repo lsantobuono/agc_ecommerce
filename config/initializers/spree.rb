@@ -15,8 +15,10 @@ Spree.config do |config|
   # Example:
   # Uncomment to stop tracking inventory levels in the application
   # config.track_inventory_levels = false
-	country = Spree::Country.find_by_name('Argentina')
-	config.default_country_id = country.id if country.present?	
+  if ActiveRecord::Base.connection.table_exists? 'spree_countries'
+    country = Spree::Country.find_by_name('Argentina')
+    config.default_country_id = country.id if country.present?
+  end
 	config.currency = "ars"
 	config.allow_guest_checkout = false
 	config.max_level_in_taxons_menu = 10
