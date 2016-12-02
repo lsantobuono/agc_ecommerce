@@ -60,44 +60,24 @@ RSpec.describe Spree::Order do
 
       context 'al pasar de estado' do
         before do
+          order.email = Faker::Internet.email
           order.next
         end
 
-        it 'el estado es address' do
-          expect(order.state).to eq 'cosas'
+        it 'el estado es confirmar' do
+          expect(order.state).to eq 'confirmar'
         end
 
         context 'al pasar de estado' do
           before do
-            # order.email = Faker::Internet.email
             order.next
           end
 
-          it 'el estado es address' do
-            expect(order.state).to eq 'address'
+          it 'el estado es complete' do
+            expect(order.state).to eq 'complete'
           end
-
-          context 'al pasar de estado' do
-            before do
-              order.email = Faker::Internet.email
-              order.next
-            end
-
-            it 'el estado es payment' do
-              expect(order.state).to eq 'payment'
-            end
-
-            context 'al pasar de estado' do
-              before do
-                order.next
-                # pp order.errors.full_messages
-                # pagos
-              end
-
-              it 'el estado es complete' do
-                expect(order.state).to eq 'complete'
-              end
-            end
+          it 'el estado es complete' do
+            expect(order).to be_completed
           end
         end
       end
