@@ -19,6 +19,7 @@ es:
     files: "Archivos"
     all_departments: "Categorías"
     continuar: Continuar
+    properties: "Datos técnicos"
     adjustment_labels:
       tax_rates:
         including_tax: '%{name}%{amount} (Included in Price)'
@@ -26,6 +27,9 @@ es:
     order_number: 'Orden %{number}'
     order_state:
       confirmar: 'Confirmar'
+    order_mailer:
+      confirm_email:
+        instructions: "Por favor, revisa y conserva la siguiente información del pedido de tus registros. Nos pondremos en contacto a la brevedad para detallar tu presupuesto y coordinar pago y envío."
         
   activerecord:
     attributes:
@@ -36,7 +40,6 @@ es:
     errors:
       messages:
         extension_whitelist_error: "Archivo de formato inválido"
-
   devise:
     registrations:
       spree_user:
@@ -44,4 +47,4 @@ es:
     sessions:
       spree_user:
         signed_out: "Sesión cerrada"
-
+  

@@ -42,7 +42,6 @@ Spree.ready ($) ->
   Spree.showVariantRangePricesAndFiles = (variantId) ->
     $('.variant-table-prices').hide()
     $('.variant-file').hide()
-    console.log('#variant-table-'+variantId)
     $('#variant-table-'+variantId).show()
     $('#variant-file-'+variantId).show()
 

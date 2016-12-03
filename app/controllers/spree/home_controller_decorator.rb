@@ -4,7 +4,8 @@ module Spree
     	@message=Message.new
     end
 
-
+    def about_us
+    end
 	def newMessage
     	@message = Message.new
   	end

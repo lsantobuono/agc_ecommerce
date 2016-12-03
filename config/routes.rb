@@ -68,6 +68,7 @@ end
 
 Spree::Core::Engine.routes.draw do
   get "/contact" => "home#contact"
+  get "/about_us" => "home#about_us"
   post "/messages" => "home#createMessage"
   get "/new_message" => "home#newMessage"
   get "/download/:product_id/:variant_id" => "home#downloadFile", as: "public_download_product_file"

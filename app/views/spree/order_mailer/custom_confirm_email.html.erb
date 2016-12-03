@@ -1,0 +1,28 @@
+<table class="row header">
+  <tr>
+    <td>
+      <p class="lede">
+        <%= Spree.t('order_mailer.confirm_email.dear_customer') %>
+      </p>
+      <p>
+        <%= Spree.t('order_mailer.confirm_email.instructions') %>
+      </p>
+      <p>
+        <%= Spree.t('order_mailer.confirm_email.order_summary', number: @order.number) %>
+      </p>
+      <table class="container">
+        <tr>
+          <td class="wrapper last">
+            <table class="twelve columns">
+              <%= render collection: @order.line_items, partial: 'spree/shared/custom_mailer_line_item', as: :line_item %>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <p>
+        <%= Spree.t('order_mailer.confirm_email.thanks') %>
+      </p>
+    </td>
+    <td class="expander"></td>
+  </tr>
+</table>

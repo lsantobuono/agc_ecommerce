@@ -10,5 +10,11 @@ module Spree
       go_to_state :complete
       # remove_transition from: :delivery, to: :confirm
     end
+
+      def deliver_order_confirmation_email
+        OrderMailer.custom_confirm_email(id).deliver_later 
+        update_column(:confirmation_delivered, true)
+      end
+
   end
 end

@@ -14,5 +14,5 @@
   <div class="form-group">
     <%= search_field_tag :keywords, params[:keywords], :placeholder => Spree.t(:search), class: "form-control" %>
   </div>
-  <%= submit_tag Spree.t(:search), :name => nil, class: "btn btn-success" %>
+  <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i> </button>
 <% end %>
