@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161202145617) do
+ActiveRecord::Schema.define(version: 20161203172526) do
 
   create_table "combo_lines", force: :cascade do |t|
     t.integer  "combo_id",   null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20161202145617) do
     t.string   "code",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

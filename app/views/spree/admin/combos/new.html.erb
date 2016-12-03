@@ -1,0 +1,56 @@
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @combo } %>
+
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:combos), spree.admin_combos_url %> /
+  <%= Spree.t(:new_combo) %>
+<% end %>
+
+<%= form_for [:admin, @combo], :html => { :multipart => true } do |f| %>
+  <fieldset data-hook="new_combo">
+    <%= f.field_container :name, :class => ['form-group'] do %>
+      <%= f.label :name, Spree.t(:name) %> <span class="required">*</span>
+      <%= f.text_field :name, :class => 'form-control title' %>
+      <%= f.error_message_on :name %>
+    <% end %>
+
+    <div data-hook="new_combo_attrs" class="row">
+      <div data-hook="new_combo_available_on" class="col-md-4">
+        <%= f.field_container :code, :class => ['form-group'] do %>
+          <%= f.label :code, Spree.t(:code) %>
+          <%= f.error_message_on :code %>
+          <%= f.text_field :code, :class => 'form-control' %>
+        <% end %>
+      </div>
+
+    </div>
+
+    <div data-hook="combo-from-prototype" id="combo-from-prototype">
+      <%= render :file => 'spree/admin/prototypes/show' if @prototype %>
+    </div>
+
+    <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+
+  </fieldset>
+<% end %>
+
+<script type="text/javascript">
+//<![CDATA[
+  (function($){
+    var base_url = "<%= spree.admin_prototypes_url %>";
+    var prototype_select = $('#combo_prototype_id');
+    prototype_select.change(function() {
+      var id = prototype_select.val();
+      if (id.length) {
+        var url = new Uri(base_url);
+        url.setPath(url.path() + '/' + id);
+        $('#combo-from-prototype').load(url.toString());
+      } else {
+        $('#combo-from-prototype').empty();
+      }
+    })
+    if (prototype_select.html() == "") {
+      prototype_select.change();
+    }
+  })(jQuery);
+//]]>
+</script>
