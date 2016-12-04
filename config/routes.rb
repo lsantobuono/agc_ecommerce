@@ -63,7 +63,8 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
+  get '*id', :to => 'spree/taxons#show', :as => :categories
+  
 end
 
 Spree::Core::Engine.routes.draw do
@@ -87,4 +88,6 @@ Spree::Core::Engine.routes.draw do
         delete "/files/:variant_id" => "products#destroyFile", as:"delete_product_file"
     end
   end
+
+
 end
