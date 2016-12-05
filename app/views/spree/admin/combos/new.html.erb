@@ -5,7 +5,7 @@
   <%= Spree.t(:new_combo) %>
 <% end %>
 
-<%= form_for [:admin, @combo], :html => { :multipart => true } do |f| %>
+<%= nested_form_for [:admin, @combo], :html => { :multipart => true } do |f| %>
   <fieldset data-hook="new_combo">
     <%= render partial: 'form', locals: { f: f } %>
     <%= render :partial => 'spree/admin/shared/new_resource_links' %>

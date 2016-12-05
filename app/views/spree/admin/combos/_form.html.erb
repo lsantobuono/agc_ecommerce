@@ -27,6 +27,38 @@
           <%= f.error_message_on :code %>
         <% end %>
       </div>
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            Productos
+          </h1>
+        </div>
+        <%= f.fields_for :combo_lines do |line_form| %>
+          <div class="row">
+            <div class="col-sm-6">
+              <%= line_form.text_field :product_id, class: 'form-control' %>
+            </div>
+            <div class="col-sm-4">
+              <%= line_form.text_field :quantity, class: 'form-control' %>
+            </div>
+            <div class="col-sm-2">
+              <%= line_form.link_to_remove do %>
+                <span class="icon icon-remove"></span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <p>
+          <br>
+          <%= f.link_to_add :combo_lines do %>
+            <button class="btn btn-default">
+              Agregar producto
+              <span class="icon icon-add"></span>
+            </button>
+
+          <% end %>
+        </p>
+      </div>
     </div>
 
   </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203172526) do
+ActiveRecord::Schema.define(version: 20161204230556) do
 
   create_table "combo_lines", force: :cascade do |t|
     t.integer  "combo_id",   null: false

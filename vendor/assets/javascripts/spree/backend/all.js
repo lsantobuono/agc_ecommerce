@@ -11,3 +11,5 @@
 //= require_tree .
 //= require spree/backend/spree_i18n
 //= require spree/backend/spree_volume_pricing
+
+//= require jquery_nested_form
