@@ -28,12 +28,19 @@ module Spree
 	sheet1.each do |row| 
 	  level = row[0]
 	  name = row[1]
+	  description = row[2]
 
 	  t = Spree::Taxon.new()
 	  auxiliarLevel[level] = t
 
 	  t.name=name
 	  t.taxonomy=taxonomy
+	  t.description=description
+	  
+	  if (row[3]!= nil)
+	  	t.icon = File.open(row[3])
+	  end
+
 	  if (auxiliarLevel[level-1] != nil)
 	  	t.parent_id = auxiliarLevel[level-1].id
 	  else
@@ -176,5 +183,22 @@ module Spree
 	    stock_items.save!
 	  end
 
+	end
+
+
+	book = Spreadsheet.open('scripts/imagenes.xls')
+	sheet1 = book.worksheet('Hoja1') 
+	sheet1.each do |row| 
+		if (row[0] == 'P')
+			p = Product.find_by(name: row[1])
+			if (p != nil)
+				p.images << Spree::Image.new(attachment: File.open(row[2]))
+			end
+		elsif (row[0] == 'V')
+			v = Variant.find_by(sku: row[1])
+			if (v != nil)
+				v.images << Spree::Image.new(attachment: File.open(row[2]))
+			end
+		end
 	end
 end

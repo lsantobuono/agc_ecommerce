@@ -1,4 +1,11 @@
 <h1 class="taxon-title"><%= @taxon.name %></h1>
+<hr>
+<div class="row">
+<%= link_to(image_tag(@taxon.icon(:normal), style: "float:left; margin-left:1em; margin-right:2em;"), seo_url(@taxon)) unless
+@taxon.icon_file_name.nil? %>
+<p style=" font-size:0.9em"> <%= @taxon.description %> </p>
+</div>
+<hr>
 
 <% content_for :sidebar do %>
   <div data-hook="taxon_sidebar_navigation">

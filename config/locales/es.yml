@@ -20,6 +20,8 @@ es:
     all_departments: "Categorías"
     continuar: Continuar
     properties: "Datos técnicos"
+    confirmar: Confirmar
+    address_instructions: "Por favor, ingrese sus detalles de facturación para agilizar el proceso de compra."
     adjustment_labels:
       tax_rates:
         including_tax: '%{name}%{amount} (Included in Price)'
@@ -30,7 +32,8 @@ es:
     order_mailer:
       confirm_email:
         instructions: "Por favor, revisa y conserva la siguiente información del pedido de tus registros. Nos pondremos en contacto a la brevedad para detallar tu presupuesto y coordinar pago y envío."
-        
+    api:
+      must_specify_api_key: "No se permite acceder sin key"      
   activerecord:
     attributes:
       spree/user:

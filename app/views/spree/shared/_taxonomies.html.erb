@@ -1,11 +1,12 @@
 <% max_level = Spree::Config[:max_level_in_taxons_menu] || 1 %>
 
-<nav id="taxonomies" class="sidebar-item" data-hook>
+<nav id="taxonomies" class="sidebar-item" data-hook style="font-size:0.9em;">
 	<% @taxonomies.each do |taxonomy| %>
 		<% cache [I18n.locale, taxonomy, max_level, @taxon] do %>
 		<div class="panel-group accordion" id="accordion">
-			<h4 class='taxonomy-root'><a data-toggle="collapse" data-parent="#accordion" href="<%= '#' + (20*taxonomy.root.id).to_s %>">
-			</span><%= Spree.t(:shop_by_taxonomy, taxonomy: taxonomy.name) %></a></h4></div>
+			<h4 class='taxonomy-root'><!--<a data-toggle="collapse" data-parent="#accordion" >-->
+			</span><%= Spree.t(:shop_by_taxonomy, taxonomy: taxonomy.name) %><!--</a>--></h4></div>
+			<hr>
 			<%= taxons_tree(taxonomy.root, @taxon, max_level,taxonomy.root.id*20,true) %>
 		<% end %>
 	<% end %>
