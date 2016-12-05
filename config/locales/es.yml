@@ -21,6 +21,7 @@ es:
     continuar: Continuar
     properties: "Datos técnicos"
     confirmar: Confirmar
+    qty: Cantidad
     address_instructions: "Por favor, ingrese sus detalles de facturación para agilizar el proceso de compra."
     adjustment_labels:
       tax_rates:
