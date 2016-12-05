@@ -5,7 +5,7 @@
 <div id="checkout" data-hook>
   <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
 
-  <div class="row" data-hook="checkout_header">
+  <div class="row" data-hook="checkout_header" style="margin-bottom: 2em;">
     <div class="col-sm-6">
       <h1 data-hook="checkout_title"><%= Spree.t(:checkout) %></h1>
     </div>

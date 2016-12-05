@@ -86,6 +86,7 @@ Spree.ready ($) ->
     Spree.showVariantRangePricesAndFiles selectedRadio.attr('value')
 
     radios.click (event) ->
+      console.log(this)
       Spree.showVariantImages @value
       Spree.updateVariantPrice ($ this)
       Spree.disableCartForm ($ this)
@@ -93,15 +94,18 @@ Spree.ready ($) ->
 
   else if home
     selected = ($ '#variant_id option:selected')
+
     Spree.showVariantImagesHome(selected.attr('value'), selected.data('producto-id'))
     Spree.updateVariantPriceHome selected
     Spree.disableCartFormHome selected
+  
+    ($ '.home-select').on "change", ->
+      radios = ($ this).find(":selected")[0]
 
-    radios.click (event) ->
-      producto_id=($ this).data('producto-id')
-      Spree.showVariantImagesHome(@value,producto_id)
-      Spree.updateVariantPriceHome ($ this)
-      Spree.disableCartFormHome ($ this)
+      producto_id= $(radios).data('producto-id')
+      Spree.showVariantImagesHome(radios.value,producto_id)
+      Spree.updateVariantPriceHome ($ radios)
+      Spree.disableCartFormHome ($ radios)
 
 
   Spree.addImageHandlers()

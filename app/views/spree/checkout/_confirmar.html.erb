@@ -1,8 +1,14 @@
 <div class="row">
   <div class="col-sm-6" data-hook="billing_fieldset_wrapper">
-      <h4>Por favor, confirmá tu order.</h4>
-      <p>Pronto nos pondremos en contacto contigo. </p>
-    </div>
-</div>
+      <p style="font-size:0.9em">Por favor, confirmá tu orden luego de verificar que sea correcta.<br>
+      Pronto nos pondremos en contacto contigo. </p>
 
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+      <%= render partial: 'spree/shared/order_detail_checkout', locals: { order: @order } %>
+   </div>
+ </div>
  <%= submit_tag Spree.t(:confirmar), :class => 'btn btn-lg btn-success' %>
