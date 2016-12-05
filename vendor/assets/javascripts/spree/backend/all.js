@@ -13,3 +13,10 @@
 //= require spree/backend/spree_volume_pricing
 
 //= require jquery_nested_form
+
+
+$(document).on('nested:fieldAdded', function(event){
+  var field = event.field; 
+  var select2_field = field.find('.select2');
+  select2_field.select2();
+})

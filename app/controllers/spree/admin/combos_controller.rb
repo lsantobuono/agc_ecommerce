@@ -1,10 +1,16 @@
 module Spree::Admin
   class CombosController < ResourceController
+    before_action :set_products
+
     def model_class
       Combo
     end
 
     private
+
+    def set_products
+      @products = Spree::Product.all
+    end
 
     # def combo_params
     #   params.require(:combo).permit(:name, :code)
