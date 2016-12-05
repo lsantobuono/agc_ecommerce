@@ -1,0 +1,14 @@
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @combo } %>
+
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:combos), spree.admin_combos_url %> /
+  <%= Spree.t(:new_combo) %>
+<% end %>
+
+<%= nested_form_for [:admin, @combo], :html => { :multipart => true } do |f| %>
+  <fieldset data-hook="new_combo">
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>
+

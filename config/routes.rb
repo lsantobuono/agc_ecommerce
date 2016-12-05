@@ -80,6 +80,7 @@ Spree::Core::Engine.routes.draw do
       end
     end
 
+    resources :combos
     resources :products do
         get "/files" => "products#indexFile"
         get "/files/new" => "products#newFile"

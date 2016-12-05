@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129142412) do
+ActiveRecord::Schema.define(version: 20161204230556) do
+
+  create_table "combo_lines", force: :cascade do |t|
+    t.integer  "combo_id",   null: false
+    t.integer  "product_id", null: false
+    t.integer  "quantity",   null: false
+    t.decimal  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "combos", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "code",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -292,6 +309,7 @@ ActiveRecord::Schema.define(version: 20161129142412) do
     t.integer  "state_lock_version",                                               default: 0,       null: false
     t.decimal  "taxable_adjustment_total",                precision: 10, scale: 2, default: 0.0,     null: false
     t.decimal  "non_taxable_adjustment_total",            precision: 10, scale: 2, default: 0.0,     null: false
+    t.integer  "combo_id"
   end
 
   add_index "spree_orders", ["approver_id"], name: "index_spree_orders_on_approver_id"

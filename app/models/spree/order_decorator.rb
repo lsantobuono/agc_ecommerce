@@ -1,5 +1,7 @@
 module Spree
   Order.class_eval do
+    belongs_to :combo
+
     checkout_flow do
       go_to_state :address
       go_to_state :confirmar

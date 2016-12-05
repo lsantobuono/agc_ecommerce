@@ -35,6 +35,7 @@ es:
         instructions: "Por favor, revisa y conserva la siguiente información del pedido de tus registros. Nos pondremos en contacto a la brevedad para detallar tu presupuesto y coordinar pago y envío."
     api:
       must_specify_api_key: "No se permite acceder sin key"      
+    new_combo: Nuevo combo
   activerecord:
     attributes:
       spree/user:
