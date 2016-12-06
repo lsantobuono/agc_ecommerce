@@ -22,7 +22,8 @@ es:
     properties: "Datos técnicos"
     confirmar: Confirmar
     qty: Cantidad
-    address_instructions: "Por favor, ingrese sus detalles de facturación para agilizar el proceso de compra."
+    address_instructions: "Ingrese sus detalles de facturación para agilizar el proceso de compra."
+    registration_before_order_instructions: "Bienvenido a AGC. Le pedimos que por favor se registre antes de realizar pedidos. Muchas Gracias. "
     adjustment_labels:
       tax_rates:
         including_tax: '%{name}%{amount} (Included in Price)'
@@ -32,7 +33,8 @@ es:
       confirmar: 'Confirmar'
     order_mailer:
       confirm_email:
-        instructions: "Por favor, revisa y conserva la siguiente información del pedido de tus registros. Nos pondremos en contacto a la brevedad para detallar tu presupuesto y coordinar pago y envío."
+        dear_customer: "Estimado Cliente,"
+        instructions: "Revise y conserve la siguiente información del pedido. Nos pondremos en contacto a la brevedad para detallar su presupuesto y coordinar pago y envío."
     api:
       must_specify_api_key: "No se permite acceder sin key"      
     new_combo: Nuevo combo

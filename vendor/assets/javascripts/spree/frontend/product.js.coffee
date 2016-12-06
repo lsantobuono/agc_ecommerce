@@ -99,7 +99,17 @@ Spree.ready ($) ->
     Spree.updateVariantPriceHome selected
     Spree.disableCartFormHome selected
   
-    ($ '.home-select').on "change", ->
+    $(document).ready ->    
+      $('.home-select').each (index, object) =>
+        radios = ($ object).find(":selected")[0]
+    
+        producto_id= $(radios).data('producto-id')
+        Spree.showVariantImagesHome(radios.value,producto_id)
+        Spree.updateVariantPriceHome ($ radios)
+        Spree.disableCartFormHome ($ radios)
+        
+
+    ($ '.home-select').on "change ", ->
       radios = ($ this).find(":selected")[0]
 
       producto_id= $(radios).data('producto-id')

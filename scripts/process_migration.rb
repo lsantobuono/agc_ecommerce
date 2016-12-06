@@ -201,4 +201,12 @@ module Spree
 			end
 		end
 	end
+
+	s = Store.first
+	s.name = "AGC - Repuestos Arcade en Argentina"
+	s.meta_description="Nos dedicamos a la venta de repuestos Arcade en Argentina. Video-juegos, flippers, metegoles, pools, máquinas de manejo"
+	s.meta_keywords="Repuestos, VideoJuegos, Flipper, Metegol, Pool, Máquina de Manejo"
+	s.url = "www.agc.com.ar"
+	s.default_currency = "ars"
+	s.save!
 end

@@ -3,7 +3,7 @@
 <div class="row">
 <%= link_to(image_tag(@taxon.icon(:normal), style: "float:left; margin-left:1em; margin-right:2em;"), seo_url(@taxon)) unless
 @taxon.icon_file_name.nil? %>
-<p style=" font-size:0.9em"> <%= @taxon.description %> </p>
+<p style=" margin-left:1em; font-size:0.9em"> <%= @taxon.description %> </p>
 </div>
 <hr>
 
