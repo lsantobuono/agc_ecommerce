@@ -303,6 +303,8 @@ GEM
     redis (3.3.2)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rollbar (2.13.3)
+      multi_json
     routing-filter (0.5.1)
       actionpack (~> 4.2)
       activesupport (~> 4.2)
@@ -494,6 +496,7 @@ DEPENDENCIES
   puma
   rails (= 4.2.5)
   rails_db
+  rollbar
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
