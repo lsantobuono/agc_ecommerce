@@ -14,10 +14,12 @@ module Spree
       # remove_transition from: :delivery, to: :confirm
     end
 
-      def deliver_order_confirmation_email
-        OrderMailer.custom_confirm_email(id).deliver_later 
-        update_column(:confirmation_delivered, true)
-      end
+    def deliver_order_confirmation_email
+      OrderMailer.custom_confirm_email(id).deliver_later 
+      update_column(:confirmation_delivered, true)
+    end
 
+    # Al crear los shipments se decrementa el stock
+    Spree::Order.state_machine.before_transition :to => :complete, :do => :create_proposed_shipments
   end
 end
