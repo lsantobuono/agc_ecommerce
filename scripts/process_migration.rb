@@ -210,4 +210,9 @@ module Spree
 	s.url = "www.agc.com.ar"
 	s.default_currency = "ars"
 	s.save!
+
+	Price.all.each do |p|
+		p.currency="ars"
+		p.save!
+	end
 end
