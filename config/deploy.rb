@@ -14,7 +14,7 @@ set :ssh_options, {
 
 set :application, 'agc_ecommerce'
 set :repo_url, 'git@github.com:lsantobuono/agc_ecommerce.git'
-set :branch, 'capistrano'
+set :branch, 'master'
 
 set :puma_threads,    [1, 1]
 set :puma_workers,    1
