@@ -24,6 +24,7 @@ es:
     qty: Cantidad
     address_instructions: "Ingrese sus detalles de facturación para agilizar el proceso de compra."
     registration_before_order_instructions: "Bienvenido a AGC. Le pedimos que por favor se registre antes de realizar pedidos. Muchas Gracias. "
+    price_file: "Archivo de precios"
     adjustment_labels:
       tax_rates:
         including_tax: '%{name}%{amount} (Included in Price)'

@@ -84,6 +84,7 @@ module Spree
 	  p = Product.new()
 
 	  # Valores normales
+	  p.master.sku=sku # el ID producto corresponde al sku del variant master.
 	  p.name=name
 	  p.description=descripcion
 	  p.price = precio

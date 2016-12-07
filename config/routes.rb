@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
   get '*id', :to => 'spree/taxons#show', :as => :categories
   
 end
@@ -74,6 +75,10 @@ Spree::Core::Engine.routes.draw do
   get "/new_message" => "home#newMessage"
   get "/download/:product_id/:variant_id" => "home#downloadFile", as: "public_download_product_file"
   namespace :admin , path: Spree.admin_path do
+    get '/prices_files', to: 'price_file#index', as: :prices_files
+    post '/prices_files', to: 'price_file#create', as: :create_prices_files
+    post '/prices_files_confirm', to: 'price_file#confirm', as: :confirm_prices_files
+
     resources :users do
       member do
         put :confirmate

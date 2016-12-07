@@ -1,0 +1,22 @@
+<% puseTitulo=false %>
+
+<% @product_properties.each do |product_property| %>
+	<%  if product_property.property.presentation.starts_with? "recurso-video" %>
+	    <% if puseTitulo==false %>
+	    	<h1> Recursos adicionales </h1>
+	    	<% puseTitulo = true %>
+	    <% end %>
+		<% property =  product_property.value.split('#') %>
+		<p> <%= property[0] %> </p>
+		<div class="row">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+				<div class="videoWrapper">
+			  		<iframe src=<%= raw(property[1]) %> title="YouTube video player" width="560" height="349" 
+			  		frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+		<br>
+    <% end %>
+<% end %>
+

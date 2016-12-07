@@ -1,0 +1,47 @@
+
+
+<% if !( (defined? @listaCambios) || (defined? @preciosActualizados)) %>
+  <p> Subir archivo de precios para actualizar los precios del sistema </p>
+
+  <%= form_tag spree.admin_create_prices_files_path(), { multipart: true } do %>
+    <fieldset data-hook="new_file">
+      <div class="col-md-6">
+        <%= label_tag :attachment, Spree.t(:price_file) %>
+        <%= file_field_tag :attachment, accept: 'xls' %>
+      </div>
+      <div class="form-actions" data-hook="buttons">
+        <%= button "Subir y ver preview", 'save' %>
+      </div>
+    </fieldset>
+  <% end -%>
+<% end %>
+
+<% if defined? @listaCambios %>
+  <div class="panel-body">
+    <% if @listaCambios.empty? %>
+      No hay nada que actualizar
+    <% else %>
+      <% @listaCambios.each do |key,value| %>
+        <p> Se actualizará la variante de id <b><%= key %></b>.  Precio actual: <b><%= value[0] %></b> >>> Se cambiará a: <b> <%= value[1] %></b> </p>
+      <% end %>
+
+      <%= form_tag spree.admin_confirm_prices_files_path() do %>
+        <fieldset >
+          <%= button "Confirmar cambios", 'save' %>
+        </fieldset>
+      <% end -%>
+    <% end %>
+  </div>
+<% end %>
+
+
+<% if defined? @preciosActualizados %>
+  <div class="panel-body" style="color:green">
+    <% @preciosActualizados.each do |key,value| %>
+      <p> Se actualizó le variante id <b><%= key %></b>.  Precio anterior: <b><%= value[0] %></b> >>> Se cambió a: <b> <%= value[1] %></b> </p>
+    <% end %>
+  </div>
+<% end %>
+
+
+
