@@ -1,0 +1,8 @@
+<h1> Combos </h1>
+<p>Obtenga descuentos comprando directamente productos en combo. Seleccione el que desee y escoja sus preferencias antes de ordenarlo !</p>
+
+<% Combo.all.each do |c| %>
+	<%= link_to ordenar_combo_url(c) do %>
+		<%= render('preview_combo', {combo: c}) %>
+	<% end %>
+<% end %>

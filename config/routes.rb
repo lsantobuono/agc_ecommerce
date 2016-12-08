@@ -74,6 +74,15 @@ Spree::Core::Engine.routes.draw do
   post "/messages" => "home#createMessage"
   get "/new_message" => "home#newMessage"
   get "/download/:product_id/:variant_id" => "home#downloadFile", as: "public_download_product_file"
+
+  get "/combos" => "combos#index"
+  get "/combos/:combo_id" => "combos#ordenar_combo", as: :ordenar_combo
+  
+  resources :orders, except: [:index, :new, :create, :destroy] do
+    post :populate, on: :collection
+    post :populate_combos, on: :collection
+  end
+
   namespace :admin , path: Spree.admin_path do
     get '/prices_files', to: 'price_file#index', as: :prices_files
     post '/prices_files', to: 'price_file#create', as: :create_prices_files
