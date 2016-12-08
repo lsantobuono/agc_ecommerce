@@ -29,4 +29,7 @@ Spree.user_class = "Spree::User"
 
 Spree::Auth::Config[:confirmable] = true
 
+Spree::PermittedAttributes.product_attributes << :security_stock
+Spree::PermittedAttributes.variant_attributes << :security_stock
+
 Spree::PermittedAttributes.user_attributes.push :phone_number, :first_name, :last_name, :enterprise, :address

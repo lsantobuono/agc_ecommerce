@@ -79,6 +79,8 @@ Spree::Core::Engine.routes.draw do
     post '/prices_files', to: 'price_file#create', as: :create_prices_files
     post '/prices_files_confirm', to: 'price_file#confirm', as: :confirm_prices_files
 
+    get '/stock_list', to: 'stock_list#index', as: :stock_list
+
     resources :users do
       member do
         put :confirmate

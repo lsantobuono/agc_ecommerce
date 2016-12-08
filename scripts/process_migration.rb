@@ -172,7 +172,17 @@ module Spree
 		end
 
 	    producto.variants << v
-	    
+
+	    stock_producto = producto.master.stock_items.first
+	    stock_producto.backorderable = true  #El tema es asi.... si le creo una variante a un prod, no quiero que me joda
+	    # el stock del master, porque el master no se va a usar si hay variantes...
+
+	    if !stock_producto.save!
+		  stock_producto.errors.each do |e|
+	  	  puts "stock_producto en variants errores : #{e}"
+	      end
+		end
+
 	    if !v.save!
 		  v.errors.each do |e|
 	  	  puts "variant errores : #{e}"

@@ -1,0 +1,19 @@
+<h1> Listado de productos fuera de stock de seguridad </h1>
+
+<p> Recordar: Si un producto tiene tildada la opción de "Devuelto" (En la pestaña Stock), se ignora esta validación y siempre está disponible. </p>
+
+<% Spree::Variant.all.each do |v| %>
+	<% if !v.can_supply? %>
+		<% 
+			description = ""
+			if v.is_master?
+				description = v.product.name
+			else
+				description = variant_options v 
+			end
+		%>
+		<p>Id: <%= v.sku %> ### Producto: <%= description %> ### <%= link_to "Agregar Stock", spree.stock_admin_product_url(v.product) %> </p>
+		<br>
+
+	<% end %>
+<% end %>

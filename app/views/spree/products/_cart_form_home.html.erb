@@ -14,8 +14,10 @@
                 price = variant.price_in(current_currency).money
                 stock = variant.can_supply?
                 [value, variant.id, { 'data-price' => price, 'data-in-stock'=> stock , 'data-producto-id'=> @product.id }]
+              else 
+                nil
               end
-            }
+            }.compact
           %>
 
       <label class="label-select">
