@@ -9,6 +9,9 @@ module Spree
       order = current_order(create_order_if_necessary: true)
       error = false
 
+      order.ml_user ||=params[:ml_user] 
+      order.ml_purchase_id ||=params[:ml_purchase_id] 
+      
       params.each do |key,value|
         if key.starts_with? "quantity_"
           variant_id = key.split("_")[1]
@@ -30,6 +33,7 @@ module Spree
       end
 
       if combo.validateGeneratedOrder order
+        order.save!
         redirect_to checkout_state_path(order.checkout_steps.first)
         return
       else

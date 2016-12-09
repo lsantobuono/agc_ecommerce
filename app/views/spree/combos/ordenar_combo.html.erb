@@ -1,42 +1,60 @@
-<h1> Combo <%= @combo.name %> </h1>
+<h1> Ordenar Combo <%= @combo.name %> </h1>
 
-<p>Este Combo contiene: </p>
+<p>  </p>
 <%= form_tag populate_combos_orders_path do %>
-	<div class="col-md-5 col-sm-12">
-		<%= hidden_field_tag :"combo_id", @combo.id %>
+	  <%= hidden_field_tag :"combo_id", @combo.id %>
+	  <p style="font-style: italic; font-size: 0.9em;"> Por favor, en caso de haber comprado previamente el combo por MercadoLibre, ingrese su información </p>
+		<%= text_field_tag :"ml_user", nil, class: 'form-control ', style:"width:150px; height: 2em; ", placeholder: "Usuario ML" %>
+		<br>
+		<%= text_field_tag :"ml_purchase_id", nil, class: 'form-control ', style:"width:150px; height: 2em; ",placeholder: "Id de compra ML" %>	
+		<br>
 
-		<% @combo.combo_lines.each do |cl| %>  
-			<p> <%= cl.product.name %> : <subT style="font-size:2em"><%= pluralize(cl.quantity,"unidad","unidades") %> </subT></p>   
-			<% if cl.product.has_variants? %>
-			  <div class="select-variant-panel">
-				<p> Seleccionar variante y cantidades </p>
-				<table>
-				<% cl.product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
-				  <% if variant.can_supply?  %> 
-				    <tr>
-				    <% i = cl.product.variant_images.find_by(viewable_id: variant.id) # Busco la foto de la variant %>
-				    <td class="cellComboChoose">  
-				    <% if i != nil              # Si no hay foto para la variant uso la primer imagen del producto %>
-					    <%= image_tag(i.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 1px;") %> 
-					<% else %>
-					    <%= image_tag(cl.product.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px;") %> 
-					<% end %>
-				    </td>
-				    <td class="cellComboChoose"><p style="margin:0px; line-height:2em; "><b><%=variant_options variant%></b></p></td> 
-				    <td class="cellComboChoose"><%= number_field_tag :"quantity_#{variant.id}", 1, class: 'form-control', min: 0, 
-				    style:"width:50px; display:inline-block; height: 2em;" %></td>
-				    </tr>
-				  <% end %>
-			    <% end %>
-				</table>
-		      </div>
-			<% else %>
-				<%= hidden_field_tag :"quantity_#{cl.product.master.id}", cl.quantity %>
-     		<% end %>
-     		<hr>
+	  <% @combo.combo_lines.each do |cl| %>  
+		<% if cl.product.has_variants? %>
+    	  <div id="accordion-<%= cl.product.id %>">
+    	    <a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= cl.product.id %>" href="#<%= cl.product.id %>" style="padding:0 ; border:0;">
+    	<% end %>
+	        <%= image_tag(cl.product.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px; display:inline-block;") %> 
+	    	<%= cl.product.name %>
+		  	<%= number_field_tag :"product_q_#{cl.product.id}", 1, class: 'form-control ', disabled: true, value: cl.quantity, 
+				    style:"width:50px; display:inline-block; height: 2em; " %>
+		<% if cl.product.has_variants? %>
+		    </a>
 		<% end %>
-		<div class="text-right ">
-		<%= submit_tag "Ordenar!" , class: "btn btn-success" %>
-		</div>
-	</div>
+	    <% if cl.product.has_variants? %>
+	      <div class="row" style="margin: 0;">
+	        <br>
+	        <div id="<%= cl.product.id %>" class="list-group panel-collapse accordion-body collapse">
+			    <div class="select-variant-panel">
+				  <p> Seleccionar variante y cantidades para <b><%= cl.product.name %></b> (Deben sumar <b><%= cl.quantity %></b>) </p>
+				  <table>
+				    <% cl.product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+					    <% if variant.can_supply?  %> 
+					      <tr>
+							  <% i = cl.product.variant_images.find_by(viewable_id: variant.id) # Busco la foto de la variant %>
+							  <td class="cellComboChoose">  
+							    <% if i != nil              # Si no hay foto para la variant uso la primer imagen del producto %>
+						          <%= image_tag(i.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 1px;") %> 
+							    <% else %>
+						     	  <%= image_tag(cl.product.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px;") %> 
+							    <% end %>
+						      </td>
+						      <td class="cellComboChoose"><p style="margin:0px; line-height:2em; "><b><%=variant_options variant%></b></p></td> 
+					    	  <td class="cellComboChoose"><%= number_field_tag :"quantity_#{variant.id}", 1, class: 'form-control', min: 0, 
+								    style:"width:50px; display:inline-block; height: 2em;" %></td>
+						  </tr>
+						<% end %>
+				    <% end %>
+				  </table>
+			    </div>
+			  </div>
+			</div>
+		  </div>
+		<% else %>
+          <%= hidden_field_tag :"quantity_#{cl.product.master.id}", cl.quantity %>
+     	<% end %>
+	  <% end %>	
+	  <br>
+	  <br>
+	  <%= submit_tag "Ordenar!" , class: "btn btn-success" %>
 <% end %>  

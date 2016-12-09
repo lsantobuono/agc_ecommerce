@@ -50,6 +50,8 @@ es:
       spree/line_item:
         price: Precio
         quantity: Cantidad
+      spree/order:
+        ml_user: "Usuario ML"
     errors:
       messages:
         extension_whitelist_error: "Archivo de formato inválido"
