@@ -39,8 +39,8 @@
 						     	  <%= image_tag(cl.product.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px;") %> 
 							    <% end %>
 						      </td>
-						      <td class="cellComboChoose"><p style="margin:0px; line-height:2em; "><b><%=variant_options variant%></b></p></td> 
-					    	  <td class="cellComboChoose"><%= number_field_tag :"quantity_#{variant.id}", 1, class: 'form-control', min: 0, 
+						      <td class="cellComboChoose"><p style="margin:0px; line-height:2em; "><b><%=variant_options variant%></b></p></td>
+					    	  <td class="cellComboChoose"><%= number_field_tag :"quantity_#{variant.id}", 0, class: 'form-control', min: 0,
 								    style:"width:50px; display:inline-block; height: 2em;" %></td>
 						  </tr>
 						<% end %>

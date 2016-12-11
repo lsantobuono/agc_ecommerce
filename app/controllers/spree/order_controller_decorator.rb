@@ -7,6 +7,7 @@ module Spree
       #poco de miedo meterme  aver todo el codigo de la current order, y ver si tiene alguna logica compleja acoplada.
 
       order = current_order(create_order_if_necessary: true)
+      order.bill_address = order.user.bill_address
       error = false
 
       order.ml_user ||=params[:ml_user] 
