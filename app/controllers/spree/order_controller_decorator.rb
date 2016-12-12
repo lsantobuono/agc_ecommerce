@@ -11,6 +11,7 @@ module Spree
 
       order.ml_user ||=params[:ml_user] 
       order.ml_purchase_id ||=params[:ml_purchase_id] 
+      order.combo_id ||= params[:combo_id]
       
       params.each do |key,value|
         if key.starts_with? "quantity_"

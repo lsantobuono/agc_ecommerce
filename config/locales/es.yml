@@ -52,6 +52,7 @@ es:
         quantity: Cantidad
       spree/order:
         ml_user: "Usuario ML"
+        combo_id: "Combo Id"
     errors:
       messages:
         extension_whitelist_error: "Archivo de formato inválido"

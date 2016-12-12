@@ -4,6 +4,8 @@ class Combo < ActiveRecord::Base
   has_many :combo_lines
   accepts_nested_attributes_for :combo_lines, allow_destroy: true
 
+  mount_uploader :image, Spree::ComboImageUploader
+
   validates :name, :code, presence: true
   validates :name, :code, uniqueness: true
 

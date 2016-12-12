@@ -165,6 +165,7 @@
          <% end %>
         <th><%= sort_link @search, :email,            I18n.t(:email, :scope => 'activerecord.attributes.spree/order') %></th>
         <th><%= sort_link @search, :ml_user,            I18n.t(:ml_user, :scope => 'activerecord.attributes.spree/order') %></th>
+        <th><%= sort_link @search, :combo_id,            I18n.t(:combo_id, :scope => 'activerecord.attributes.spree/order') %></th>
         <th><%= sort_link @search, :total,            I18n.t(:total, :scope => 'activerecord.attributes.spree/order') %></th>
         <th data-hook="admin_orders_index_header_actions" class="actions"></th>
       </tr>
@@ -212,6 +213,13 @@
         <td>
           <% if order.ml_user %>
              <%= order.ml_user %> 
+          <% else %>
+             -
+          <% end %>
+        </td>
+        <td>
+          <% if order.combo_id %>
+             <%= order.combo_id %> 
           <% else %>
              -
           <% end %>

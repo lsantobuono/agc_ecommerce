@@ -48,7 +48,12 @@
               <% unless product.variants.empty? %>
               	<span class="tag-variantes" > Producto con Variantes </span>
               <% end %>
-              <%= content_tag(:span, truncate("#{product.name} - #{product.description}", length: 50), class: 'info', itemprop: "name", title: product.name, style:"font-size:0.9em;") %>            
+              <% lengthDescription = 50 %>
+              <% if  product.variants.empty? %>
+                  <% lengthDescription = 110 %>
+              <% end %>
+              <%= content_tag(:span, truncate("#{product.name} - <subText style='font-size:0.8em'>#{product.description}</subText>",
+               length: (lengthDescription +  "<subText style='font-size:0.8em'></subText>".length) , escape: false) , class: 'info', itemprop: "name", title: product.name, style:"font-size:0.9em;") %>            
              </div>
           <% end %>
               <div id="thumbnails" data-hook style="height:0">
