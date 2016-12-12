@@ -47,6 +47,19 @@ module Spree
         end
       end
     end
+
+    def empty
+      if @order = current_order
+        @order.empty!
+        @order.combo_id=nil
+        @order.ml_user=nil
+        @order.ml_purchase_id=nil
+        @order.save!
+      end
+
+      redirect_to spree.cart_path
+    end
+
   end
 end
 
