@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <% (@variants << @product.master).each do |v| %>
+        <% @variants.each do |v| %>
           <% if v.file.present? %>
             <tr data-hook="files_row">
               <td class="move-handle text-center">

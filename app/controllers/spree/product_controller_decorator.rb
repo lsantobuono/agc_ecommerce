@@ -46,18 +46,16 @@ module Spree
 		     	  	:url_based_filename => true)
   			end
 
-  			#TODO Esto renderiza mal.
 			def destroyFile
 				@variant = @product.variants.find_by(id: params[:variant_id])
 				@variant = @product.master if @variant.nil?
 				@variant.remove_file!
 				if @variant.save
-					flash.now[:success] = "Archivo eliminado!"
-					render("spree/admin/files/index")
+					flash[:success] = "Archivo eliminado!"
 				else
-					flash.now[:error] = "Error en eliminación de archivo"
-					render("spree/admin/files/index")
+					flash[:error] = "Error en eliminación de archivo"
 				end
+				render_js_for_destroy
 			end
 		end
 	end
