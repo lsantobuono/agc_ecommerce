@@ -77,10 +77,9 @@ RSpec.describe Spree::Order do
             expect(order.state).to eq 'confirmar'
           end
 
-          context 'se decrementa el stock' do
-            subject { order.next }
+          context 'no se decrementa el stock' do
             it do
-              expect { subject }.to change { order.line_items.first.variant.stock_items.first.count_on_hand }
+              expect { order.next }.not_to change { order.line_items.first.variant.stock_items.first.count_on_hand }
             end
           end
 
@@ -97,6 +96,19 @@ RSpec.describe Spree::Order do
             end
             it 'el estado es complete' do
               expect(order).to be_completed
+            end
+            it 'no esta aprobada' do
+              expect(order).not_to be_approved
+            end
+
+            context 'al pasar de estado' do
+              before do
+                order.next
+              end
+
+              it 'el estado sigue siendo complete' do
+                expect(order.state).to eq 'complete'
+              end
             end
           end
         end

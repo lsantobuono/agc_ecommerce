@@ -22,7 +22,7 @@ module Spree
     Spree::Order.state_machine.before_transition :to => :complete, :do => :validate_combo
 
     # Al crear los shipments se decrementa el stock
-    Spree::Order.state_machine.before_transition :to => :complete, :do => :create_proposed_shipments
+    # Spree::Order.state_machine.before_transition :to => :complete, :do => :create_proposed_shipments
 
     def update_line_item_prices!
       # Esta funcion le ponia el impuesto de VAT por zona, y por algun motivo rompia el tema de las variaciones de precio por cantidad
