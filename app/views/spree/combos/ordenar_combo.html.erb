@@ -18,7 +18,7 @@
 	    	<%= cl.product.name %>
 		<% if !cl.product.has_variants? %>
 		  	<%= number_field_tag :"product_q_#{cl.product.id}", 1, class: 'form-control ', disabled: true, value: cl.quantity, 
-				    style:"width:50px; display:inline-block; height: 2em; " %>
+				    style:"width:50px; display:inline-block; height: 2em; " %><br>
 		<% else %>
 			- Despliegue la lista para elegir las variantes deseadas.
 		<% end %>

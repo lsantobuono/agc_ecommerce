@@ -76,6 +76,7 @@ group :development do
   gem 'capistrano-sidekiq'
 end
 
+gem 'fog',                     '1.38.0'
 
 gem 'rails_db'
 

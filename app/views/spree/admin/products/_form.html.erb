@@ -107,14 +107,6 @@
           <% end %>
         </div>
 
-        <div data-hook="admin_product_form_promotionable">
-          <%= f.field_container :promotionable, class: ['form-group'] do %>
-              <%= f.label :promotionable, Spree.t(:promotionable) %>
-              <%= f.error_message_on :promotionable %>
-              <%= f.check_box :promotionable, class: 'form-control' %>
-          <% end %>
-        </div>
-
         <div id="shipping_specs" class="row">
           <div class="col-md-6">
             <div id="shipping_specs_weight_field" data-hook="admin_product_form_weight" class="form-group">
@@ -146,21 +138,7 @@
         </div>
       <% end %>
 
-      <div data-hook="admin_product_form_shipping_categories">
-        <%= f.field_container :shipping_categories, class: ['form-group'] do %>
-          <%= f.label :shipping_category_id, Spree.t(:shipping_categories) %>
-          <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
-          <%= f.error_message_on :shipping_category %>
-        <% end %>
-      </div>
 
-      <div data-hook="admin_product_form_tax_category">
-        <%= f.field_container :tax_category, class: ['form-group'] do %>
-          <%= f.label :tax_category_id, Spree.t(:tax_category) %>
-          <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
-          <%= f.error_message_on :tax_category %>
-        <% end %>
-      </div>
     </div>
 
   </div>
