@@ -1,4 +1,4 @@
-<nav class="col-md-12">
+<nav class="col-md-12" style="padding-left:0; padding-right:0;">
   <div id="main-nav-bar" class="navbar">
     <ul class="nav navbar-nav" data-hook>
       <li id="home-link" data-hook><%= link_to Spree.t(:home), spree.root_path %></li>
@@ -6,7 +6,7 @@
       <li><%= link_to "Contacto", spree.contact_path %></li>
       <li><%= link_to "Sobre Nosotros", spree.about_us_path %></li>
     </ul>
-    <ul class="nav navbar-nav navbar-right" data-hook>
+    <ul class="nav navbar-nav navbar-right"  style="padding-right:1em" data-hook>
       <%= render "spree/shared/login_bar" %>
       <li id="link-to-cart" data-hook>
         <noscript>

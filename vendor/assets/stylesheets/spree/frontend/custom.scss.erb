@@ -10,6 +10,7 @@ $light-orange:#ffc266;
 $brown: #b35900;
 $light-brown: #cc9966;
 
+$navbar-blue:rgb(44,84,136);
 @font-face {  
 	font-family: 'olney_light';  
 	src: url(<%= asset_path 'olney_light.otf' %>);
@@ -21,37 +22,37 @@ body{
 	font-family: 'olney_light';
 	a {
 		&:link {
-    		color: orange;
+    		color:  $navbar-blue;;
    	 	}
     
     	&:visited {
-			color: orange;
+			color:  $navbar-blue;;
    	 	}
     
     	&:hover {
     		text-decoration: none;
-			color: orange;
+			   color:  $navbar-blue;;
      		cursor:pointer;
     	}
     }
 }
 
 .btn.btn-success {
-	background-color:orange; 
-	border-color:orange;
+	background-color:$navbar-blue; 
+	border-color:$navbar-blue;
 }
 
 .btn.btn-success:hover, .btn.btn-success:active, .btn.btn-success:focus {
-	background-color: orange !important; 
+	background-color: $navbar-blue !important; 
 }
 
 .btn.btn-primary {
-	background-color:orange; 
-	border-color:orange;
+	background-color:$navbar-blue; 
+	border-color:$navbar-blue;
 }
 
 .btn.btn-primary:hover, .btn.btn-primary:active, .btn.btn-primary:focus {
-	background-color: orange !important; 
+	background-color: $navbar-blue !important; 
 }
 
 .btn.btn-error {
@@ -67,7 +68,12 @@ body{
 
 
 #spree-header {
-	background: url(<%= asset_path 'background-header.jpg' %>) center center no-repeat;	
+  background: none;
+}
+
+#spree-header #header {
+  background-color:white ;  
+
 }
 
 #keywords {
@@ -76,6 +82,12 @@ body{
 
 #header {
 	padding-bottom: 10px;
+}
+
+/* navbar */
+
+#main-nav-bar {
+  background-color: $navbar-blue;
 }
 
 #top-nav-bar {
@@ -88,7 +100,12 @@ body{
 /* Left bar */
 
 #sidebar  {
-	color: orange;
+  
+  .taxonomy-root {
+    color: $navbar-blue;
+  }
+
+	color:  $navbar-blue;
 	font-family: 'olney_light';  
 
 	a {
@@ -97,47 +114,61 @@ body{
    	 	}
     
     	&:visited {
-			color: $dark-grey;
+  			color: $dark-grey;
    	 	}
     
     	&:hover {
-			color: $dark-grey;
-     		cursor:pointer;
-     		background-color: $light-orange;
+			 color: $dark-grey;
+     	  cursor:pointer;
     	}
 	}
     	
-    .active
-	{
-		color: $dark-grey;
-    	cursor:pointer;
-     	background-color: $light-orange;    
-     	border-color: $light-orange;
+
+  .list-group {
+   	a {
+	   	background-color: rgb(108,161,213);
+      &:hover {
+        background-color: rgb(206,230,255);
+      }      
     }
-    .list-group {
-    	a {
-	    	background-color: #ffebcc;
-	    }
-    	.list-group {
-	    	a {
-				background-color: #ffcc80;
-			}
+   	.list-group {
+     	a {
+	   		background-color: rgb(136, 179, 221);
+        &:hover {
+         background-color: rgb(206,230,255);
+        }
+      }
 			.list-group {
-		    	a {
-					background-color: #ffad33;
+		    a {
+					background-color: rgb(175, 204, 233);
+          &:hover {
+            background-color: rgb(206,230,255);
+          }
+        }
+        .list-group {
+          a {
+             background-color: rgb(215, 230, 244);
+             &:hover {
+                background-color: rgb(206,230,255);
+              }
+            }
+          }
 				}
 			}
-	    }
-	}
+	  }
+	
 	.btn {
 		margin-top:2em;
 	}
 }
 .list-group-item {
 	padding: 5px 10px;
-	color : orange;
+	color : $navbar-blue;
 }
 
+#random-img-show {
+  margin-top:2em;
+}
 
 /* Index display de previews */
 
@@ -192,14 +223,10 @@ body{
 	}
 
 	.price.selling.lead {
-		color:orange;
+		color: $navbar-blue;
 		font-size: 2em;
 	}
 
-	#add-to-cart-button {
-		background-color: orange;
-		border-color: orange;
-	}
 
 	input[type=number] {
 		height:2em;
@@ -264,7 +291,7 @@ body{
 #product-properties {
 	border: none;
 	.even {
-		background-color: #ffebcc;
+		background-color: rgb(108,161,213);
 	}
 }
 
@@ -297,14 +324,14 @@ body{
 /* properties */
 
 .breadcrumb {
-	background-color: #ffe0b3;
+	background-color: $navbar-blue;
 	a {
 		&:link {
-	    	color: $dark-grey;
+	    	color: white;
 	   	 }
 	    
 	    &:visited {
-			color: $dark-grey;
+			color: white;
 	   	 }
 	    
 	    &:hover {
@@ -315,7 +342,7 @@ body{
 
 .breadcrumb > li + li::before {
     content: "> ";
-    color:black;
+    color:white;
 }
 
 .breadcrumb
@@ -376,8 +403,8 @@ label {
 /* footer */
 
 .footer {
-	background: url(<%= asset_path 'background-header.jpg' %>) center center no-repeat;	
-	color:white;
+	background: none;	
+	color:$navbar-blue;
 	margin-top:1em;
 }
 

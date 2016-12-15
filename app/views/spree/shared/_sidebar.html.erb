@@ -1,18 +1,27 @@
 <aside id="sidebar" class="col-sm-4 col-md-3" data-hook>
   <%= yield :sidebar %>
+  <img id="random-img-show" />
 </aside>
 
 <script>
 $(".list-group-item").click( function () {
 	if ($(this).attr("aria-expanded") == "true")
 	{
-	//	$(this).css("background-color","white");
 		$(this).find("#arrow-icon").attr("class","fa fa-arrow-down");
 	}
 	else 
 	{
-	//	$(this).css("background-color","orange");
 		$(this).find("#arrow-icon").attr("class","fa fa-arrow-up");
 	}
 });
+
+$(document).ready(function(){
+	var arrImages =  <%= raw(Spree::Asset.all.map { |asset| asset.attachment.url}) %> ;
+	console.log(arrImages);
+	setInterval(function() {
+		$("#random-img-show").attr("src",arrImages[Math.floor(Math.random() * arrImages.length)]);
+	},
+	2000);
+});
+
 </script>
