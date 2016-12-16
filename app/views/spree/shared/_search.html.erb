@@ -1,6 +1,6 @@
 <% @taxons = @taxon && @taxon.parent ? @taxon.parent.children : Spree::Taxon.roots %>
 
-<%= form_tag spree.products_path, :method => :get, class: "navbar-form" do %>
+<%= form_tag spree.products_path, :method => :get, class: "xnavbar-form" do %>
  <!-- <label for="Categoría"  />
   <div class="form-group">
     <% cache(cache_key_for_taxons) do %>
@@ -11,8 +11,10 @@
     <% end %>
   </div>-->
   <label for="Palabras clave" />
-  <div class="form-group">
+  <div class="input-group">
     <%= search_field_tag :keywords, params[:keywords], :placeholder => Spree.t(:search), class: "form-control" %>
-  </div>
-  <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i> </button>
+    <span class="input-group-btn">
+      <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i> </button>
+    </span>
+  </div><!-- /input-group -->
 <% end %>

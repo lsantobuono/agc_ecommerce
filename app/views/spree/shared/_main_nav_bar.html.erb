@@ -1,20 +1,31 @@
-<nav class="col-md-12" style="padding-left:0; padding-right:0;">
+<nav class="" style="">
   <div id="main-nav-bar" class="navbar">
-    <ul class="nav navbar-nav" data-hook>
-      <li id="home-link" data-hook><%= link_to Spree.t(:home), spree.root_path %></li>
-      <li><%= link_to "Combos", spree.combos_path %></li>
-      <li><%= link_to "Contacto", spree.contact_path %></li>
-      <li><%= link_to "Sobre Nosotros", spree.about_us_path %></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right"  style="padding-right:1em" data-hook>
-      <%= render "spree/shared/login_bar" %>
-      <li id="link-to-cart" data-hook>
-        <noscript>
-          <%= link_to Spree.t(:cart), '/cart' %>
-        </noscript>
-        &nbsp;
-      </li>
-      <script>Spree.fetch_cart()</script>
-    </ul>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav" data-hook>
+        <li id="home-link" data-hook><%= link_to Spree.t(:home), spree.root_path %></li>
+        <li><%= link_to "Combos", spree.combos_path %></li>
+        <li><%= link_to "Contacto", spree.contact_path %></li>
+        <li><%= link_to "Sobre Nosotros", spree.about_us_path %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right"  style="padding-right:1em" data-hook>
+        <%= render "spree/shared/login_bar" %>
+        <li id="link-to-cart" data-hook>
+          <noscript>
+            <%= link_to Spree.t(:cart), '/cart' %>
+          </noscript>
+          &nbsp;
+        </li>
+        <script>Spree.fetch_cart()</script>
+      </ul>
+    </div>
   </div>
 </nav>
