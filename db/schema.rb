@@ -448,6 +448,7 @@ ActiveRecord::Schema.define(version: 20161216101107) do
     t.string   "meta_title"
     t.datetime "discontinue_on"
     t.integer  "security_stock"
+    t.integer  "position"
   end
 
   add_index "spree_products", ["available_on"], name: "index_spree_products_on_available_on", using: :btree

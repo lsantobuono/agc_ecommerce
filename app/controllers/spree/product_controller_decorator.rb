@@ -4,6 +4,10 @@ module Spree
 			
 			before_filter :getProductAndVariants, only: [:indexFile, :newFile, :createFile, :downloadFile, :destroyFile]
 
+			def ordenar_productos
+				@collection = Spree::Product.unscoped.order(:position)
+			end
+
 			def getProductAndVariants
 				@product = Product.friendly.find(params[:product_id])
 				@variants = @product.variants

@@ -41,7 +41,8 @@
               <span class="input-group-btn">
               <% if @product.can_supply? %>
                 <%= button_tag class: 'btn btn-success', id: 'add-to-cart-button', type: :submit do %>
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i> <%= Spree.t(:add_to_cart) %>
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <%= Spree.t(:add_to_cart) %>
                 <% end %>
               <% else %>
                 <%= button_tag class: 'btn btn-error', disabled:true,   id: 'add-to-cart-button', style:"color:white; background-color:red", type: :submit do %>

@@ -98,6 +98,10 @@ Spree::Core::Engine.routes.draw do
 
     resources :combos
     resources :products do
+      collection do
+        get :ordenar_productos
+        post :update_positions
+      end
         get "/files" => "products#indexFile"
         get "/files/new" => "products#newFile"
         get "/files/:variant_id" => "products#downloadFile", as: "download_product_file"
