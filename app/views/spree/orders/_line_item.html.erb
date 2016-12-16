@@ -11,14 +11,16 @@
     </td>
     <td class="cart-item-description" data-hook="cart_item_description">
       <h4><%= link_to line_item.name, product_path(variant.product) %></h4>
-      <%= variant.options_text %>
-      <% if line_item.insufficient_stock? %>
-        <span class="out-of-stock">
-          <%= Spree.t(:out_of_stock) %>&nbsp;&nbsp;<br />
-        </span>
-      <% end %>
-      <span class="line-item-description" data-hook="line_item_description">
-        <%= line_item_description_text(line_item.description) %>
+      <span id="variant_text_line_item">
+        <%= variant.options_text %>    
+        <% if line_item.insufficient_stock? %>
+          <span class="out-of-stock">
+            <%= Spree.t(:out_of_stock) %>&nbsp;&nbsp;<br />
+          </span>
+        <% end %>
+     </span>
+     <span class="line-item-description" data-hook="line_item_description">
+        <%= line_item_description_text(line_item.description) %> 
       </span>
     </td>
     <% if current_spree_user && current_spree_user.confirmed? %>

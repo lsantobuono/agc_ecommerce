@@ -12,22 +12,25 @@ class Combo < ActiveRecord::Base
   def validateGeneratedOrder(order)
   	orderQuantities = {}
 
+
   	order.line_items.each do |li|
   		var = Spree::Variant.find(li.variant_id)
-  		if (orderQuantities[var.product.id] == nil)
-  			orderQuantities[var.product.id] = 0
-  		end
-  		orderQuantities[var.product.id] += li.quantity
-	end
+      var.product.taxons.each do |t|
+    		if (orderQuantities[t.id] == nil)
+    			orderQuantities[t.id] = 0
+  	   	end
+        orderQuantities[t.id] += li.quantity
+      end
+  	end
 
-	if !(orderQuantities.count == self.combo_lines.count)
-		return false
+	if (orderQuantities.count < self.combo_lines.count) # menor porque como los prod pueden tener mas de un taxon, puede generar que tenga mas 
+		return false                                       # orderquantitis que combo lines
 	end
 
 	orderQuantities.each do |key,value|
 		matcheo = false
 		self.combo_lines.each do |cl|
-			if (cl.product.id == key && cl.quantity == value)
+			if (cl.taxon.id == key && cl.quantity == value)
 				matcheo = true
 			end
 		end

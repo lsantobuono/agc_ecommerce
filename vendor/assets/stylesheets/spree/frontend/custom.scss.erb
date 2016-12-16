@@ -37,6 +37,42 @@ body{
     }
 }
 
+/* esclusivo para responsive, en principio no son tantas cosas asi que por ahora tiremos todo aca */ 
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  #main-nav-bar {
+    ul > li {
+      padding-left:1em;
+    }
+  }
+  #random-img-show {
+    visibility: hidden;
+  }
+
+  #nav-bar-social {
+    float: right!important;
+  }
+  #nav-bar-social>li, {
+   float: left !important;
+  }
+  #nav-bar-social:last-child {
+    margin-right: -15px !important; 
+  }
+
+  #search_input {
+    display:inline-block;
+  }
+
+  .line-item-description {
+    display: none;    
+  }
+
+  #variant_text_line_item {
+    display: none;    
+  }
+}
+
+
 .btn.btn-success {
 	background-color:$navbar-blue; 
 	border-color:$navbar-blue;
@@ -403,8 +439,8 @@ label {
 /* footer */
 
 .footer {
-	background: none;	
-	color:$navbar-blue;
+	background: $navbar-blue;	
+	color:white;
 	margin-top:1em;
 }
 

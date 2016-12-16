@@ -28,6 +28,7 @@ es:
     security_stock: "Stock de Seguridad"
     selected_quantity_not_available: "La cantidad seleccionada para el producto no está disponible"
     error_combo_validation: "Por favor no agregué artículos si ha seleccionado un combo"
+    product_added: "Producto agregado"
     adjustment_labels:
       tax_rates:
         including_tax: '%{name}%{amount} (Included in Price)'

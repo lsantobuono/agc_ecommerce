@@ -11,7 +11,7 @@
     <% end %>
   </div>-->
   <label for="Palabras clave" />
-  <div class="form-group">
+  <div class="form-group" id="search_input">
     <%= search_field_tag :keywords, params[:keywords], :placeholder => Spree.t(:search), class: "form-control" %>
   </div>
   <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i> </button>
