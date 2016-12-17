@@ -17,3 +17,6 @@
 /tmp
 
 .byebug_history
+
+public/spree
+public/uploads
