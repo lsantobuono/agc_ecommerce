@@ -1,8 +1,35 @@
 <h1>  Videos de categorias </h1>
 
+
+<%= form_for @video , :url => admin_videos_path  do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :taxon,"Categoría" %>
+  <% taxon_array = Spree::Taxon.all.map { |t| [t.name, t.id] } %>
+  <%= f.select(:taxon, options_for_select(taxon_array),{:prompt => 'Categoría'}) %>
+  <br>
+  <%= f.label :video,"Video" %>
+  <%= f.text_field :video %>
+  <br>
+  <%= f.label :descripcion,"Descripcion" %>
+  <%= f.text_field :descripcion %>
+
+  <%= f.submit "Agregar video", class: "btn btn-primary" %>
+<% end %>
+
 <% Spree::Video.all.each do |v| %>
-  <h3> Video <%= v.id %></h3>
+  <p><b> Video : </b></p>
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <div class="videoWrapper">
+        <iframe src=<%= raw(v.video) %> title="YouTube video player" width="560" height="349" 
+            frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
   <p> Categoría : <%= v.taxon.name %> </p>
   <p> Descripción : <%= v.descripcion %> </p>
-  <p> video : <%= v.video %> </p>
+  <%=link_to "Borrar video?", admin_delete_video_path(v.id), :method => :delete, :class => "delete", :confirm => "Borrar video?"%>    
 <% end %>
+

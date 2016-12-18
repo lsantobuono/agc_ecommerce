@@ -90,12 +90,9 @@ Spree::Core::Engine.routes.draw do
 
     get '/stock_list', to: 'stock_list#index', as: :stock_list
 
-    resources :taxon do
-        get '/taxon_video', to: 'taxon_video#index', as: :taxon_video
-        post '/taxon_video', to: 'taxon_video#create', as: :create_taxon_video
-        delete '/taxon_video/:taxon_video_id', to: 'taxon_video#destroy', as: :delete_taxon_video
-    end
-
+    get '/taxon_video', to: 'taxon_video#index'
+    post '/taxon_video', to: 'taxon_video#create', as: :videos
+    delete '/taxon_video/:id', to: 'taxon_video#destroy', as: :delete_video
 
     resources :users do
       member do
