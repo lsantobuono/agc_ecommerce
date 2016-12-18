@@ -1,0 +1,48 @@
+<% if p.has_variants? %>
+  <div id="accordion-<%= p.id %>">
+      <a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= p.id %>" href="#<%= p.id %>" style="padding:0 ; border:0;">
+<% end %>
+<%= image_tag(p.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px; display:inline-block;") %> 
+<%= p.name %>
+<% if !p.has_variants? %>
+  <% if type ==0 %>
+    <%= number_field_tag :"quantity_#{p.master.id}", 1, class: 'form-control ', value: 0,  min: 0, style:"width:50px; display:inline-block; height: 2em; " %><br>
+  <% else %>
+    <%= number_field_tag :"quantity_#{p.master.id}", 1, class: 'form-control ', value: cl.quantity, readonly: true, min: 0, style:"width:50px; display:inline-block; height: 2em; " %><br>
+  <% end %>
+<% else %>
+  - Despliegue la lista para elegir las variantes deseadas del producto.
+<% end %>
+<% if p.has_variants? %>
+  </a>
+<% end %>
+<% if p.has_variants? %>
+  <div class="row" style="margin: 0;">
+    <br>
+    <div id="<%= p.id %>" class="list-group panel-collapse accordion-body collapse">
+    <div class="select-variant-panel">
+    <table>
+    <% p.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+    <% if variant.can_supply?  %> 
+      <tr>
+        <% i = p.variant_images.find_by(viewable_id: variant.id) # Busco la foto de la variant %>
+        <td class="cellComboChoose">  
+          <% if i != nil              # Si no hay foto para la variant uso la primer imagen del producto %>
+             <%= image_tag(i.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 1px;") %> 
+          <% else %>
+            <%= image_tag(p.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px;") %> 
+          <% end %>
+        </td>
+        <td class="cellComboChoose"><p style="margin:0px; line-height:2em; "><b><%=variant_options variant%></b></p></td>
+        <td class="cellComboChoose"><%= number_field_tag :"quantity_#{variant.id}", 0, class: 'form-control', min: 0,
+            style:"width:50px; display:inline-block; height: 2em;" %></td>
+      </tr>
+    <% end %>
+<% end %>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>   
+<% end %>
+<br>
