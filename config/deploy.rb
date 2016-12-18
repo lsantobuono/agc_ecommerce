@@ -43,6 +43,7 @@ set :rbenv_ruby, File.read('.ruby-version').strip
 
 
 set :linked_files, %w{.rbenv-vars}
+set :linked_dirs,  %w{public/uploads public/spree}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
