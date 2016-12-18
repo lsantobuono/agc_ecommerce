@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161216101107) do
+ActiveRecord::Schema.define(version: 20161218152941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "combo_lines", force: :cascade do |t|
     t.integer  "combo_id",   null: false
-    t.integer  "product_id", null: false
+    t.integer  "product_id"
     t.integer  "quantity",   null: false
     t.decimal  "price"
     t.datetime "created_at", null: false
@@ -1004,6 +1004,14 @@ ActiveRecord::Schema.define(version: 20161216101107) do
   add_index "spree_taxons", ["position"], name: "index_spree_taxons_on_position", using: :btree
   add_index "spree_taxons", ["rgt"], name: "index_spree_taxons_on_rgt", using: :btree
   add_index "spree_taxons", ["taxonomy_id"], name: "index_taxons_on_taxonomy_id", using: :btree
+
+  create_table "spree_taxons_videos", force: :cascade do |t|
+    t.string   "video"
+    t.string   "descripcion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "taxon_id",    null: false
+  end
 
   create_table "spree_trackers", force: :cascade do |t|
     t.string   "analytics_id"

@@ -9,7 +9,7 @@
 		<% property =  product_property.value.split('#') %>
 		<p> <%= property[0] %> </p>
 		<div class="row">
-			<div class="col-sm-12 col-md-6 col-lg-4">
+			<div class="col-sm-12 col-md-6 col-lg-6">
 				<div class="videoWrapper">
 			  		<iframe src=<%= raw(property[1]) %> title="YouTube video player" width="560" height="349" 
 			  		frameborder="0" allowfullscreen></iframe>
@@ -18,5 +18,25 @@
 		</div>
 		<br>
     <% end %>
+<% end %>
+
+
+<% @product.all_parents.each do |t| %>
+	<%  t.videos.each do |v| %>
+	  <% if puseTitulo==false %>
+	   	<h1> Recursos adicionales </h1>
+	    <% puseTitulo = true %>
+	  <% end %>
+		<p> <%= v.descripcion %> </p>
+		<div class="row">
+			<div class="col-sm-12 col-md-6 col-lg-6">
+				<div class="videoWrapper">
+			  		<iframe src=<%= raw(v.video) %> title="YouTube video player" width="560" height="349" 
+			  		frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+		<br>
+  <% end %>
 <% end %>
 

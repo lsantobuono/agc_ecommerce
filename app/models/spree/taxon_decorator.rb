@@ -1,6 +1,8 @@
 module Spree
   Taxon.class_eval do
 
+    has_many :videos, dependent: :destroy
+
     def all_children
       ret = Set.new
       ret.merge self.products 

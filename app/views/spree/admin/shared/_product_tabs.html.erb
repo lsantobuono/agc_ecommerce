@@ -23,5 +23,8 @@
     <%= content_tag :li, class: ('active' if current == :files) do %>
       <%= link_to_with_icon 'picture', Spree.t(:files), spree.admin_product_files_path(@product) %>
     <% end if !@product.deleted? %>
+   <%= content_tag :li, class: ('active' if current == :files) do %>
+      <%= link_to_with_icon 'picture', Spree.t(:files), spree.admin_product_files_path(@product) %>
+    <% end if !@product.deleted? %>
   </ul>
 <% end %>

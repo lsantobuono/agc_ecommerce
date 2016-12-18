@@ -1,0 +1,8 @@
+<h1>  Videos de categorias </h1>
+
+<% Spree::Video.all.each do |v| %>
+  <h3> Video <%= v.id %></h3>
+  <p> Categoría : <%= v.taxon.name %> </p>
+  <p> Descripción : <%= v.descripcion %> </p>
+  <p> video : <%= v.video %> </p>
+<% end %>
