@@ -5,4 +5,6 @@ class ComboLine < ActiveRecord::Base
 
   scope :with_product, -> { where('product_id IS NOT NULL') }
   scope :with_taxon, -> { where('taxon_id IS NOT NULL') }
+
+  validates :quantity, presence: true
 end
