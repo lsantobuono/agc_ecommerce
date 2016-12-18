@@ -2,7 +2,11 @@ class Combo < ActiveRecord::Base
   acts_as_paranoid
 
   has_many :combo_lines
-  accepts_nested_attributes_for :combo_lines, allow_destroy: true
+  has_many :combo_lines_products, -> { with_product }, class_name: 'ComboLine'
+  has_many :combo_lines_taxons, -> { with_taxon }, class_name: 'ComboLine'
+
+  accepts_nested_attributes_for :combo_lines_products, allow_destroy: true
+  accepts_nested_attributes_for :combo_lines_taxons, allow_destroy: true
 
   mount_uploader :image, Spree::ComboImageUploader
 

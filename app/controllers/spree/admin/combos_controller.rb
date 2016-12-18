@@ -10,6 +10,7 @@ module Spree::Admin
 
     def set_products
       @taxons = Spree::Taxon.all
+      @products = Spree::Product.all
     end
 
     # def combo_params

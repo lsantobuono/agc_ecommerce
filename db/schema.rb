@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218152941) do
+ActiveRecord::Schema.define(version: 20161218183706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "combo_lines", force: :cascade do |t|
     t.integer  "combo_id",   null: false
-    t.integer  "product_id", null: false
+    t.integer  "product_id"
     t.integer  "quantity",   null: false
     t.decimal  "price"
     t.datetime "created_at", null: false

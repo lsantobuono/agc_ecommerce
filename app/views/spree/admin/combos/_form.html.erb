@@ -41,12 +41,12 @@
             Productos
           </h1>
         </div>
-        <div style="padding: 0 20px">
-          <%= f.fields_for :combo_lines do |line_form| %>
+        <div style="padding: 20px 20px">
+          <%= f.fields_for :combo_lines_products, f.object.combo_lines_products do |line_form| %>
             <div class="row">
               <div class="col-sm-6">
                 <div data-hook="admin_product_form_shipping_categories">
-                  <%= line_form.collection_select(:product_id, @taxons, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
+                  <%= line_form.collection_select(:product_id, @products, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
                 </div>
               </div>
               <div class="col-sm-2">
@@ -62,15 +62,47 @@
               </div>
             </div>
           <% end %>
-          <p>
-            <br>
-            <%= f.link_to_add :combo_lines do %>
-              <button class="btn btn-default">
-                Agregar producto
-                <span class="icon icon-add"></span>
-              </button>
-            <% end %>
-          </p>
+          <%= f.link_to_add :combo_lines_products do %>
+            <button class="btn btn-default">
+              Agregar producto
+              <span class="icon icon-add"></span>
+            </button>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            Categorías
+          </h1>
+        </div>
+        <div style="padding: 20px 20px">
+          <%= f.fields_for :combo_lines_taxons, f.object.combo_lines_taxons do |line_form| %>
+            <div class="row">
+              <div class="col-sm-6">
+                <div data-hook="admin_product_form_shipping_categories">
+                  <%= line_form.collection_select(:taxon_id, @taxons, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <%= line_form.text_field :quantity, class: 'form-control', placeholder: 'Cantidad' %>
+              </div>
+              <div class="col-sm-2">
+                <%= line_form.text_field :price, class: 'form-control', placeholder: 'Precio' %>
+              </div>
+              <div class="col-sm-2">
+                <%= line_form.link_to_remove do %>
+                  <span class="icon icon-remove"></span>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          <%= f.link_to_add :combo_lines_taxons do %>
+            <button class="btn btn-default">
+              Agregar categoría
+              <span class="icon icon-add"></span>
+            </button>
+          <% end %>
         </div>
       </div>
     </div>
