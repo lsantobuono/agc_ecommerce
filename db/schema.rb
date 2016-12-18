@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20161218152941) do
 
   create_table "combo_lines", force: :cascade do |t|
     t.integer  "combo_id",   null: false
-    t.integer  "product_id"
+    t.integer  "product_id", null: false
     t.integer  "quantity",   null: false
     t.decimal  "price"
     t.datetime "created_at", null: false
