@@ -72,6 +72,14 @@ body{
   #variant_text_line_item {
     display: none;    
   }
+
+  .about-image-bot {
+    display:none
+  }
+  .about-image-top {
+    display:none
+  }
+
 }
 
 
@@ -234,6 +242,7 @@ body{
     	width:100%;
 	}
 
+
 	.main-image-home {
 		border:none;
 		margin-bottom: 0.3em;
@@ -285,6 +294,13 @@ body{
 		height:40px;
 	}
 
+}
+
+.button-checkout-home {
+  position:fixed;
+  bottom:2em;
+  right:1em;
+  z-index:1000;
 }
 
 .tag-variantes {
@@ -418,6 +434,60 @@ label {
 }
 /* about */
 
+.boton-contacto 
+{
+  margin-top:1em;
+  font-size:0.7em; 
+  font-weight: bold; 
+  padding:1em 2em;
+}
+
+.btn.btn-primary.boton-contacto:hover, .btn.btn-primary.boton-contacto:active, .btn.btn-primary.boton-contacto:focus {
+  background-color: #6ca1d5 !important; 
+  border-color:#6ca1d5 !important; 
+}
+
+
+.boton-checkout 
+{
+  height:3em;
+  margin-top:1em;
+  padding: 0.5em;
+
+  font-size:1.2em; 
+  font-weight: bold; 
+  background-color: #00cc99 !important; 
+  border-color: #00cc99 !important;   
+}
+
+.btn.btn-primary.boton-checkout:hover, .btn.btn-primary.boton-checkout:active, .btn.btn-primary.boton-checkout:focus {
+  background-color: #00cc99  !important; 
+  border-color:#00cc99  !important; 
+}
+
+
+.about-tokens
+{
+  font-weight: bold;
+  color: $navbar-blue;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+}
+
+.about-image-top {
+  width:20em; 
+  height:10em; 
+  margin-bottom:2em;
+  margin-top:3em;
+  border-radius: 0.5em;
+}
+
+.about-image-bot {
+  width:20em; 
+  height:15em; 
+  border-radius: 0.5em;
+}
+
 .panel-pic {
   background: url(<%= asset_path 'Varios_Arcade_SD.jpg' %>) no-repeat;
 
@@ -463,6 +533,45 @@ label {
 }
 
 /* combos */
+
+.comboList {
+    
+  list-style-type: none;
+  width: 80%;
+
+  * {margin: 0; padding: 0;}
+
+  img {
+    width:100px;
+  }
+   
+  div {
+    margin: 20px;
+  }
+      
+  h3 {
+    font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+  }
+   
+  li img {
+    float: left;
+    margin: 0 15px 0 0;
+  }
+   
+  li p {
+    font: 200 12px/1.5 Georgia, Times New Roman, serif;
+  }
+   
+  li {
+    padding: 10px;
+    overflow: auto;
+  }
+   
+  li:hover {
+    background: #eee;
+    cursor: pointer;
+  }
+}
 
 #form-combo {
   h1,h2,h4,h5 {

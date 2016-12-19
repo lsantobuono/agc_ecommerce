@@ -1,22 +1,38 @@
 <% self.title = "Sobre Nosotros" %>
 
+<div class="text-center" style="font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; "> 
+<h4 >
+Somos una empresa que, desde <b>1987</b>, trabaja en el gremio de <b>recreativos</b>, fábricando productos para el mismo.
+</h4>
 
-<h4>
-Somos una empresa que, desde <b>1987</b>, trabaja en el gremio de <b>recreativos</b>, fábricando productos para el mismo.</h4>
+<div class="row">
+  <div class="col-sm-4 col-md-4">
+    <%= image_tag "about-1.jpg", class: "about-image-top", style: "float:left;" %>
+    <%= image_tag "about-3.jpg", class: "about-image-bot", style: "float:left;" %>
+  </div>
+  <div class="col-sm-4 col-md-4">
+    <p style="font-size:0.8em ">
 
-<%= image_tag "Varios_Arcade_SD.jpg", style:"width:30em; float:right;" %>
+    Nos dedicamos a la fabricación y venta de repuestos y accesorios para:<br>
+     <p class="about-tokens">Video Juegos</p>
+     <p class="about-tokens">Máquinas de Manejo</p>
+     <p class="about-tokens">Flippers</p>
+     <p class="about-tokens">Metegoles</p>
+     <p class="about-tokens">Pooles </p>
 
-<p>
-Nos dedicamos a la fabricación y venta de repuestos y accesorios para:
-<ul>
-<li> Video Juegos </li>
-<li> Máquinas de Manejo </li>
-<li> Flippers </li>
-<li> Metegoles </li>
-<li> Pooles </li>
-</ul>
+    Atendemos durante todo el año y no cerramos por vacaciones. 
+  </div>
+  <div class="col-sm-4 col-md-4">
+    <%= image_tag "about-2.jpg", class: "about-image-top", style: "float:right;" %>
+    <%= image_tag "about-4.jpg", class: "about-image-bot", style: "float:right;"  %>
+  </div>
+</div>
 
-Atendemos durante todo el año y no cerramos por vacaciones. 
-No dudes en <%= link_to "Contactarnos", spree.contact_path %>.
-
-<p>
+<div class="row">
+<p class="text-center">
+  <%= link_to  spree.contact_path do %>
+    <button class="btn btn-primary boton-contacto " > CONTACTANOS </button>
+  <% end %>
+</p>
+</div>
+</p>

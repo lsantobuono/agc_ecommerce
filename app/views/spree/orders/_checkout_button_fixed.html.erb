@@ -1,0 +1,13 @@
+<div class="button-checkout-home">
+  <% order = current_order %>
+  <% if order != nil %>
+    <%= form_for order, url: update_cart_path, html: { id: 'update-cart' } do |order_form| %>
+      <%= button_tag class: 'btn btn-primary boton-checkout', id: 'checkout-link', name: 'checkout' do %>
+      <div style="height:2em; line-height:2em;">
+        <span style="vertical-align:middle;"><%= Spree.t(:checkout)  %></span>
+        <span style="vertical-align:middle; font-size:2em;"> <i class="fa fa-caret-right " aria-hidden="true"></i></span>
+      </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
