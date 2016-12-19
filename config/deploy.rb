@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.7.0'
+lock '3.7.1'
 
 
 role :app, %w{ubuntu@agc.programando.com.ar}
