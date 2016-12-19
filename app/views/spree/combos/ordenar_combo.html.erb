@@ -1,3 +1,12 @@
+<% self.title = "Ordenar Combos" %>
+
+<% @custom_flash=true %>
+
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= sanitize(value) %></div>
+<% end %>
+
+
 <%= form_tag populate_combos_orders_path, id: "form-combo" do %>
 		<h1> Ordenar Combo <%= @combo.name %> </h1>
 	  <%= hidden_field_tag :"combo_id", @combo.id %>

@@ -33,9 +33,8 @@ module Spree
       
       if (self.combo_id != nil)
         combo = Combo.find(self.combo_id)
-        if !combo.validateGeneratedOrder self
+        if !combo.validateGeneratedOrder( self,errors)
           restart_checkout_flow
-          errors.add(:base, Spree.t(:error_combo_validation))
           return false
         end
       end

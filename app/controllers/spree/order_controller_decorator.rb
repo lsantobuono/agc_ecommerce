@@ -72,15 +72,15 @@ module Spree
         end
       end
 
-      if combo.validateGeneratedOrder order
+      errors= ActiveModel::Errors.new(self)
+      if combo.validateGeneratedOrder(order,errors)
         order.save!
         redirect_to checkout_state_path(order.checkout_steps.first)
         return
       else
-        error= "Hubo un error en la validación de su orden, por favor intentelo nuevamente o pongase en contacto con nosotros"
         order.delete
         if error
-          flash[:error] = error
+          flash[:error] = errors.messages[:"Combo_Errors"].first.html_safe
           redirect_back_or_default(spree.root_path)
         end
       end

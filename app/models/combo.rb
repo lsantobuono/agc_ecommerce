@@ -13,7 +13,7 @@ class Combo < ActiveRecord::Base
   validates :name, :code, presence: true
   validates :name, :code, uniqueness: true
 
-  def validateGeneratedOrder(order)
+  def validateGeneratedOrder(order, errors)
     orderProductQuantities = {}
     orderTaxonQuantities = {}
 
@@ -35,33 +35,38 @@ class Combo < ActiveRecord::Base
         orderTaxonQuantities[t.id] += li.quantity
       end
   	end
-  	#if (orderQuantities.count < self.combo_lines.count) # menor porque como los prod pueden tener mas de un taxon, puede generar que tenga mas 
-  	#	return false                                       # orderquantitis que combo lines
-  	#end
 
     #Lo que tengo en orderQuantitis es un array con key : product_id, y value: cantidad
     #Entonces, para validar el combo line de tipo producto es trivial, en taxon tengo que ver que el producto sea hijo de esa taxon
     #Podria haber quilombos si un combo tiene un taxon, y tambien un hijo de esa taxon, hay que consultar esto....    
-    self.combo_lines.each do |cl|
-      matcheo=false
-      if cl.taxon_id != nil # Validacion para COMBO LINE de tipo TAXOn, una vez definida la base revisar.
-        orderTaxonQuantities.each do |key, value|
-          if (cl.taxon_id == key && cl.quantity == value)
-            matcheo=true
-          end
-        end
-      elsif cl.product_id != nil
-        orderProductQuantities.each do |key,value|
-          if (cl.product_id==key && cl.quantity == value)
-            matcheo=true
-          end
+
+
+    self.combo_lines_taxons.each do |cl|
+      matcheoTaxons=false
+      orderTaxonQuantities.each do |key, value|
+        if (cl.taxon_id == key && cl.quantity == value)
+          matcheoTaxons=true
         end
       end
-      if (!matcheo)
+      if !matcheoTaxons
+        errors.add("Combo_Errors", "Error en la sumatoria de productos de la categoría <b> #{cl.taxon.name} </b>. La suma debe ser de <b> #{cl.quantity} </b>")
         return false
       end
     end
 
+    self.combo_lines_products.each do |cl|
+      matcheoProductos=false
+      orderProductQuantities.each do |key,value|
+        if (cl.product_id==key && cl.quantity == value)
+           matcheoProductos=true
+        end
+      end
+      if !matcheoProductos
+        errors.add("Combo_Errors", "Error en la sumatoria de productos del producto <b> #{cl.product.name} </b>. La suma debe ser de <b> #{cl.quantity} </b>")        
+        return false
+      end
+    end
+  
     return true
   end
 end

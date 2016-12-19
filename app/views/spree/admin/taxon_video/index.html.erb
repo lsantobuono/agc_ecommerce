@@ -1,21 +1,42 @@
-<h1>  Videos de categorias </h1>
+<div class="panel panel-default" >
+  <div class="panel-heading">
+      <h1 class="panel-title">
+        Videos de categorias
+      </h1>
+    </div>   
+  <div style="padding:20px">
+    <%= form_for @video , :url => admin_videos_path  do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
 
-
-<%= form_for @video , :url => admin_videos_path  do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-
-  <%= f.label :taxon,"Categoría" %>
-  <% taxon_array = Spree::Taxon.all.map { |t| [t.name, t.id] } %>
-  <%= f.select(:taxon, options_for_select(taxon_array),{:prompt => 'Categoría'}) %>
-  <br>
-  <%= f.label :video,"Video" %>
-  <%= f.text_field :video %>
-  <br>
-  <%= f.label :descripcion,"Descripcion" %>
-  <%= f.text_field :descripcion %>
-
-  <%= f.submit "Agregar video", class: "btn btn-primary" %>
-<% end %>
+      <div class="row">
+        <div class="col-md-8" data-hook="admin_combo_form_right">
+          <div class="row">
+            <div class="omega two columns">
+              <%= f.field_container :taxon, class: ['form-group'] do %>
+                <%= f.label :taxon,"Categoría" %>
+                <% taxon_array = Spree::Taxon.all.map { |t| [t.name, t.id] } %>
+                <%= f.select(:taxon, options_for_select(taxon_array),{:prompt => 'Categoría'}) %>
+              <% end %>
+            </div>
+            <div class="omega two columns">
+              <%= f.field_container :video, class: ['form-group'] do %>
+                <%= f.label :video,"Video" %>
+                <%= f.text_field :video %> Usar formato embed
+              <% end %>
+            </div>
+            <div class="omega two columns">
+              <%= f.field_container :descripcion, class: ['form-group'] do %>
+                <%= f.label :descripcion,"Descripcion" %>
+                <%= f.text_field :descripcion %>
+              <% end %>
+            </div>
+                <%= f.submit "Agregar video", class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <% Spree::Video.all.each do |v| %>
   <p><b> Video : </b></p>
