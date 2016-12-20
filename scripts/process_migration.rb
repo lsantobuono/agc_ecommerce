@@ -4,7 +4,7 @@ module Spree
 	book = Spreadsheet.open('scripts/categorias.xls')
 	sheet1 = book.worksheet('Hoja1')
 
-	taxonomy_name = "Probando"
+	taxonomy_name = "Categorias"
 
 	t=Taxonomy.find_by(name: taxonomy_name)
 	if (t != nil)
@@ -26,28 +26,30 @@ module Spree
 	auxiliarLevel[0] = root
 
 	sheet1.each do |row| 
-	  level = row[0]
-	  name = row[1]
-	  description = row[2]
+		if (row[0] != nil && row[0] != "")
+		  level = row[0]
+		  name = row[1]
+		  description = row[2]
 
-	  t = Spree::Taxon.new()
-	  auxiliarLevel[level] = t
+		  t = Spree::Taxon.new()
+		  auxiliarLevel[level] = t
 
-	  t.name=name
-	  t.taxonomy=taxonomy
-	  t.description=description
-	  
-	  if (row[3]!= nil)
-	  	t.icon = File.open(row[3])
-	  end
+		  t.name=name
+		  t.taxonomy=taxonomy
+		  t.description=description
+		  
+		  if (row[3]!= nil)
+		  	t.icon = File.open(row[3])
+		  end
 
-	  if (auxiliarLevel[level-1] != nil)
-	  	t.parent_id = auxiliarLevel[level-1].id
-	  else
-	  	t.parent_id = root
-	  end
+		  if (auxiliarLevel[level-1] != nil)
+		  	t.parent_id = auxiliarLevel[level-1].id
+		  else
+		  	t.parent_id = root
+		  end
 
-	  t.save!
+		  t.save!
+		end
 	end
 
 	Spree::LineItem.all.each do |li| 
@@ -60,66 +62,77 @@ module Spree
 	book = Spreadsheet.open('scripts/productos.xls')
 	sheet1 = book.worksheet('Hoja1') 
 	sheet1.each do |row| 
-	  sku = row[0]
-	  name = row[1]
-	  descripcion = row[2]
-	  precio = row[3]
-	  slug = row[4] #Link al producto. minusculas, dben ser unicos
-	  category = row[5]
-	  cost_price = row[7]
-	  stock = row[8]
-	  properties = {}
-	  pro =  row[6].split(';')
-	  pro.each do |p|
-		aux = p.split(':')
-		properties[aux[0]] = aux[1]
-	  end
+		if (row[0] != nil && row[0] != "")
+		  sku = row[0]
+		  name = row[1]
+		  descripcion = row[2]
+		  precio = row[3]
+		  slug = row[4] #Link al producto. minusculas, dben ser unicos
+		  category = row[5]
+		  cost_price = row[7]
+		  
+		  stock = 100 # default 100
+		  if (row[8] != nil && row[8] != "")
+			  stock = row[8]
+			end
 
-	  old = Product::find_by(name: name)
-	  if (old != nil) # aca hay un bug con los slugs... flagea el producto pero no borra el slut y eso hace que falle.
-	  	old.destroy!
-	  end
+		  properties = {}
+
+		  if (row[6] != nil && row[6] != "")
+			  pro =  row[6].split(';')
+			  pro.each do |p|
+					aux = p.split(':')
+					properties[aux[0]] = aux[1]
+			  end
+			end
+
+		  old = Product::find_by(name: name)
+		  if (old != nil) # aca hay un bug con los slugs... flagea el producto pero no borra el slut y eso hace que falle.
+		  	old.destroy!
+		  end
 
 
-	  p = Product.new()
+		  p = Product.new()
 
-	  # Valores normales
-	  p.master.sku=sku # el ID producto corresponde al sku del variant master.
-	  p.name=name
-	  p.description=descripcion
-	  p.price = precio
-	  p.cost_price = cost_price 
-	  p.available_on = DateTime.now.to_date 
-	  # Valores hardcodeados (No se usan o los dejo asi por default)
-	  p.shipping_category_id=1
-	  p.tax_category_id = 1
+		  # Valores normales
+		  p.master.sku=sku # el ID producto corresponde al sku del variant master.
+		  p.name=name
+		  p.description=descripcion
+		  p.price = precio
+		  p.cost_price = cost_price 
+		  p.available_on = DateTime.now.to_date 
+		  # Valores hardcodeados (No se usan o los dejo asi por default)
+		  p.shipping_category_id=1
+		  p.tax_category_id = 1
 
-	  # Valores que se calculan..
-	  p.taxons << Taxon::find_by(name: category)
-	  properties.each do |prop|
-	  	pr = Property::find_by(name: prop[0])
-	  	if (pr == nil)
-	  		aux = Property::new();
-	  		aux.name = prop[0]
-	  		aux.presentation = prop[0]
-	 			aux.save!
-	 		pr = aux
-	  	end
-	  	pp = ProductProperty::new()
-	  	pp.property = pr
-	  	pp.value = prop[1]
-	  	p.product_properties << pp
-	  end
-	  
-	  if !p.save!
-		p.errors.each do |e|
-	  	  puts "productos- errores : #{e}"
-	  	end
-	  end	
+		  # Valores que se calculan..
+		  p.taxons << Taxon::find_by(name: category)
+		  properties.each do |prop|
+		  	pr = Property::find_by(name: prop[0])
+		  	if (pr == nil)
+		  		aux = Property::new();
+		  		aux.name = prop[0]
+		  		aux.presentation = prop[0]
+		 			aux.save!
+		 		pr = aux
+		  	end
+		  	pp = ProductProperty::new()
+		  	pp.property = pr
+		  	pp.value = prop[1]
+		  	p.product_properties << pp
+		  end
+		  
+		  if !p.save!
+			p.errors.each do |e|
+		  	  puts "productos- errores : #{e}"
+		  	end
+		  end	
 
-	  stock_items = p.stock_items.first
-	  stock_items.count_on_hand = stock
-	  stock_items.save!
+
+		  stock_items = p.stock_items.first
+		  stock_items.count_on_hand = stock
+		  stock_items.save!
+		end
 	end
 
 	book = Spreadsheet.open('scripts/variantes.xls')
