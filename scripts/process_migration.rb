@@ -39,7 +39,9 @@ module Spree
 		  t.description=description
 		  
 		  if (row[3]!= nil)
-		  	t.icon = File.open(row[3])
+        if (File.exists?(row[3]))
+        	t.icon = File.open(row[3])
+        end
 		  end
 
 		  if (auxiliarLevel[level-1] != nil)
