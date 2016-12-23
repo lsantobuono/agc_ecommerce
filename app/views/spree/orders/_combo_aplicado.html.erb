@@ -1,0 +1,22 @@
+<% combo = combo_aplicado.combo %>
+
+<tr class="line-item">
+  <td class="cart-item-image" data-hook="cart_item_image">
+    <%= image_tag combo.image, style: "max-height:85px;" %>
+  </td>
+  <td class="cart-item-description" data-hook="cart_item_description">
+    <h4><%= link_to combo.name, nil %></h4>
+    <span id="variant_text_line_item">
+      <%= nil %>    
+   </span>
+   <span class="line-item-description" data-hook="line_item_description">
+      <%= line_item_description_text(combo.description) %> 
+    </span>
+  </td>
+  <td class="cart-item-quantity" data-hook="cart_item_quantity" valign="center">
+    1
+  </td>
+  <td class="cart-item-delete">
+    <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-minus-sign'), remove_combo_aplicado_orders_path(combo_aplicado: combo_aplicado.id), method: :delete, class: '' %>
+  </td>
+</tr>

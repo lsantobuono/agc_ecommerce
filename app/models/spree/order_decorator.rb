@@ -1,6 +1,6 @@
 module Spree
   Order.class_eval do
-    belongs_to :combo
+    has_many :combo_aplicados, inverse_of: :order, foreign_key: :spree_order_id, dependent: :destroy
 
     checkout_flow do
       go_to_state :address
@@ -19,7 +19,7 @@ module Spree
       update_column(:confirmation_delivered, true)
     end
 
-    Spree::Order.state_machine.before_transition :to => :complete, :do => :validate_combo
+    Spree::Order.state_machine.before_transition :to => :complete, :do => :validate_combos
 
     # Al crear los shipments se decrementa el stock
     # Spree::Order.state_machine.before_transition :to => :complete, :do => :create_proposed_shipments
@@ -29,16 +29,32 @@ module Spree
       # Como no creo que nos afecte lo del VAT, directamente la vacío aca para no entrar en detalles y hacer lio
     end
 
-    def validate_combo
-      
-      if (self.combo_id != nil)
-        combo = Combo.find(self.combo_id)
-        if !combo.validateGeneratedOrder( self,errors)
-          restart_checkout_flow
-          return false
-        end
+    def validate_combos
+      combo_aplicados.each do |combo_aplicado|
+        combo_aplicado.validate!
       end
-      return true 
+    end
+
+    def empty!
+      if completed?
+        raise Spree.t(:cannot_empty_completed_order)
+      else
+        line_items.destroy_all
+        updater.update_item_count
+        adjustments.destroy_all
+        shipments.destroy_all
+        state_changes.destroy_all
+        order_promotions.destroy_all
+        combo_aplicados.destroy_all
+        self.ml_user=nil
+        self.ml_purchase_id=nil
+
+
+        update_totals
+        persist_totals
+        restart_checkout_flow
+        self
+      end
     end
 
   end

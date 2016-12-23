@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218183706) do
+ActiveRecord::Schema.define(version: 20161223200523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "combo_aplicados", force: :cascade do |t|
+    t.integer "combo_id",       null: false
+    t.integer "spree_order_id", null: false
+  end
+
+  add_index "combo_aplicados", ["combo_id"], name: "index_combo_aplicados_on_combo_id", using: :btree
+  add_index "combo_aplicados", ["spree_order_id"], name: "index_combo_aplicados_on_spree_order_id", using: :btree
 
   create_table "combo_lines", force: :cascade do |t|
     t.integer  "combo_id",   null: false
@@ -214,8 +222,10 @@ ActiveRecord::Schema.define(version: 20161218183706) do
     t.decimal  "pre_tax_amount",               precision: 12, scale: 4, default: 0.0, null: false
     t.decimal  "taxable_adjustment_total",     precision: 10, scale: 2, default: 0.0, null: false
     t.decimal  "non_taxable_adjustment_total", precision: 10, scale: 2, default: 0.0, null: false
+    t.integer  "combo_aplicado_id"
   end
 
+  add_index "spree_line_items", ["combo_aplicado_id"], name: "index_spree_line_items_on_combo_aplicado_id", using: :btree
   add_index "spree_line_items", ["order_id"], name: "index_spree_line_items_on_order_id", using: :btree
   add_index "spree_line_items", ["tax_category_id"], name: "index_spree_line_items_on_tax_category_id", using: :btree
   add_index "spree_line_items", ["variant_id"], name: "index_spree_line_items_on_variant_id", using: :btree
@@ -315,7 +325,6 @@ ActiveRecord::Schema.define(version: 20161218183706) do
     t.integer  "state_lock_version",                                               default: 0,       null: false
     t.decimal  "taxable_adjustment_total",                precision: 10, scale: 2, default: 0.0,     null: false
     t.decimal  "non_taxable_adjustment_total",            precision: 10, scale: 2, default: 0.0,     null: false
-    t.integer  "combo_id"
     t.string   "ml_user"
     t.string   "ml_purchase_id"
   end
@@ -1148,5 +1157,8 @@ ActiveRecord::Schema.define(version: 20161218183706) do
   add_index "spree_zones", ["default_tax"], name: "index_spree_zones_on_default_tax", using: :btree
   add_index "spree_zones", ["kind"], name: "index_spree_zones_on_kind", using: :btree
 
+  add_foreign_key "combo_aplicados", "combos"
+  add_foreign_key "combo_aplicados", "spree_orders"
   add_foreign_key "combo_lines", "combos"
+  add_foreign_key "spree_line_items", "combo_aplicados"
 end

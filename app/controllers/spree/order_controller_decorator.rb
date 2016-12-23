@@ -34,70 +34,62 @@ module Spree
     end
 
 
-    def populate_combos
-      
-      combo = Combo.find(params[:combo_id])
-      current_order(create_order_if_necessary: true).empty! # Le vacío la orden actual... Quiza con un Order.new sea suficiente, pero me da un
-      #poco de miedo meterme  aver todo el codigo de la current order, y ver si tiene alguna logica compleja acoplada.
+    def remove_combo_aplicado
+      order = current_order
+      combo_aplicado = order.combo_aplicados.find(params[:combo_aplicado])
+      order.line_items.where(combo_aplicado: combo_aplicado).each do |line_item|
+        order.contents.remove_line_item(line_item)
+      end
+      combo_aplicado.destroy
+      redirect_back_or_default(spree.root_path)
+    end
 
+    def populate_combos
+      combo = Combo.find(params[:combo_id])
       order = current_order(create_order_if_necessary: true)
-  
-      if order.user != nil # Sin esto pincha cuando un guest ordena un combo
+
+      if order.bill_address.blank? && order.user.present? # Sin esto pincha cuando un guest ordena un combo
         order.bill_address = order.user.bill_address
       end
-    
-      error = false
+      ActiveRecord::Base.transaction do
+        error = false
 
-      order.ml_user ||=params[:ml_user] 
-      order.ml_purchase_id ||=params[:ml_purchase_id] 
-      order.combo_id ||= params[:combo_id]
-      
-      params.each do |key,value|
-        if key.starts_with? "quantity_"
-          variant_id = key.split("_")[1]
-          variant  = Spree::Variant.find(variant_id)
+        order.ml_user ||=params[:ml_user]
+        order.ml_purchase_id ||=params[:ml_purchase_id]
+        combo_aplicado = ComboAplicado.create(combo: combo, order: order)
+
+        params.each do |key,value|
           quantity = value.to_i
-          options  = params[:options] || {}
-
-          # 2,147,483,647 is crazy. See issue #2695.
-          if quantity.between?(1, 2_147_483_647)
+          if (key.starts_with? "quantity_") && quantity.between?(1, 2_147_483_647)
+            variant_id = key.split("_")[1]
+            variant  = Spree::Variant.find(variant_id)
+            options  = params[:options] || {}
             begin
-              order.contents.add(variant, quantity, options)
+              line_item = order.contents.add(variant, quantity, options, combo_aplicado)
             rescue ActiveRecord::RecordInvalid => e
               error = e.record.errors.full_messages.join(", ")
             end
-          else
-            error = Spree.t(:please_enter_reasonable_quantity)
           end
         end
-      end
 
-      errors= ActiveModel::Errors.new(self)
-      if combo.validateGeneratedOrder(order,errors)
-        order.save!
-        redirect_to checkout_state_path(order.checkout_steps.first)
-        return
-      else
-        order.delete
         if error
-          flash[:error] = errors.messages[:"Combo_Errors"].first.html_safe
+          flash[:error] = error
           redirect_back_or_default(spree.root_path)
+          return
+        end
+
+        order.validate_combos
+
+        if order.errors.empty?
+          flash[:success] = "Combo agregado al carrito!"
+          redirect_to spree.root_path
+        else
+          flash[:error] = order.errors.messages[:"Combo_Errors"].first.html_safe
+          redirect_back_or_default(spree.root_path)
+          raise ActiveRecord::Rollback
         end
       end
     end
-
-    def empty
-      if @order = current_order
-        @order.empty!
-        @order.combo_id=nil
-        @order.ml_user=nil
-        @order.ml_purchase_id=nil
-        @order.save!
-      end
-
-      redirect_to spree.cart_path
-    end
-
   end
 end
 

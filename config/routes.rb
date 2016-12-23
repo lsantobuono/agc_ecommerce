@@ -81,6 +81,7 @@ Spree::Core::Engine.routes.draw do
   resources :orders, except: [:index, :new, :create, :destroy] do
     post :populate, on: :collection
     post :populate_combos, on: :collection
+    delete :remove_combo_aplicado, on: :collection
   end
 
   namespace :admin , path: Spree.admin_path do
