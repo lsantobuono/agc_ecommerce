@@ -2,7 +2,9 @@
   <div id="accordion-<%= p.id %>">
       <a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= p.id %>" href="#<%= p.id %>" style="padding:0 ; border:0;">
 <% end %>
-<%= image_tag(p.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px; display:inline-block;") %> 
+<% if defined? p.images.first.attachment %>
+  <%= image_tag(p.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px; display:inline-block;") %> 
+<% end %>
 <%= p.name %>
 <% if !p.has_variants? %>
   <% if type ==0 %>
