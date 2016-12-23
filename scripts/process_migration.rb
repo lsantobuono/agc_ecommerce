@@ -68,7 +68,9 @@ module Spree
 		  sku = row[0]
 		  name = row[1]
 		  descripcion = row[2]
-		  precio = row[3]
+		  
+		  precio = 1 # Este valor es solo para la carga inicial... despues se actualiza con el proceso normal del excel
+
 		  slug = row[4] #Link al producto. minusculas, dben ser unicos
 		  category = row[5]
 		  cost_price = row[7]

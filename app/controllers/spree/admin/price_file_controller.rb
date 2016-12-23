@@ -16,15 +16,15 @@ module Spree::Admin
       file.write(uploaded.read)
       
       book = Spreadsheet.open(file.path)
-      sheet1 = book.worksheet('Hoja1') 
+      sheet1 = book.worksheet 1
       sheet1.each do |row| 
-        if (row[2] != "" && row[2] != nil)
-          var = Spree::Variant.find_by(sku: row[2])
-          if (var != nil && var.price != row[8])
+        if (row[0] != "" && row[0] != nil)
+          var = Spree::Variant.find_by(sku: row[0])
+          if (var != nil &&  ((var.price - row[4].value).abs > 0.003)) # Esta porqueria es por como se guardan los float en ruby.. es basicamente un !=
             arrPrice=[]
             arrPrice[0] = var.price
-            arrPrice[1] = row[8]
-            @listaCambios[row[2]] = arrPrice
+            arrPrice[1] = row[4].value
+            @listaCambios[row[0]] = arrPrice
           end
         end
       end
@@ -37,18 +37,18 @@ module Spree::Admin
 
       file = File.open("/tmp/csvprice.xls", 'rb')
       book = Spreadsheet.open(file.path)
-      sheet1 = book.worksheet('Hoja1') 
+      sheet1 = book.worksheet 1
       sheet1.each do |row| 
-        if (row[2] != "" && row[2] != nil)
-          var = Spree::Variant.find_by(sku: row[2])
-          if (var != nil)
+        if (row[0] != "" && row[0] != nil)
+          var = Spree::Variant.find_by(sku: row[0])
+          if (var != nil &&  ((var.price - row[4].value).abs > 0.003)) # Esta porqueria es por como se guardan los float en ruby.. es basicamente un !=
             auxPrice = var.price
-            var.price = row[8]
+            var.price = row[4].value
             if var.save!
               arrPrice=[]
               arrPrice[0] = auxPrice
               arrPrice[1] = var.price
-              @preciosActualizados[row[2]] = arrPrice
+              @preciosActualizados[row[0]] = arrPrice
             end
           end
         end     
