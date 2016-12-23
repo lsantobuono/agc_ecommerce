@@ -26,6 +26,7 @@ es:
     registration_before_order_instructions: "Bienvenido a AGC. Le pedimos que por favor se registre antes de realizar pedidos. Muchas Gracias. "
     price_file: "Archivo de precios"
     security_stock: "Stock de Seguridad"
+    price_range: "Filtrar por Precios"
     selected_quantity_not_available: "La cantidad seleccionada para el producto no está disponible"
     error_combo_validation: "Por favor no agregué artículos si ha seleccionado un combo"
     product_added: "Producto agregado"

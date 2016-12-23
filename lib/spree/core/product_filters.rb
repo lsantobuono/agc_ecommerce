@@ -67,11 +67,11 @@ module Spree
 
       def ProductFilters.price_filter
         v = Spree::Price.arel_table
-        conds = [ [ Spree.t(:under_price, price: format_price(10))     , v[:amount].lteq(10)],
-                  [ "#{format_price(10)} - #{format_price(15)}"        , v[:amount].in(10..15)],
-                  [ "#{format_price(15)} - #{format_price(18)}"        , v[:amount].in(15..18)],
-                  [ "#{format_price(18)} - #{format_price(20)}"        , v[:amount].in(18..20)],
-                  [ Spree.t(:or_over_price, price: format_price(20)) , v[:amount].gteq(20)]]
+        conds = [ [ Spree.t(:under_price, price: format_price(30))     , v[:amount].lteq(30)],
+                  [ "#{format_price(30)} - #{format_price(50)}"        , v[:amount].in(30..50)],
+                  [ "#{format_price(50)} - #{format_price(75)}"        , v[:amount].in(50..75)],
+                  [ "#{format_price(75)} - #{format_price(150)}"        , v[:amount].in(75..150)],
+                  [ Spree.t(:or_over_price, price: format_price(150)) , v[:amount].gteq(150)]]
         {
           name:   Spree.t(:price_range),
           scope:  :price_range_any,
