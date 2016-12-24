@@ -36,7 +36,6 @@
       <% url = spree.product_path(product, taxon_id: @taxon.try(:id)) %>
       <div id="product_<%= product.id %>" class="col-md-3 col-sm-6 col-xs-12 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
         <div class="panel panel-default">
-          <% cache(@taxon.present? ? [I18n.locale, current_currency, @taxon, product] : cache_key_for_product(product)) do %>
           
           <%= link_to url, itemprop: "url" do %>
             <div id="product-images-<%= product.id %>" data-hook="product_images">
@@ -78,7 +77,7 @@
                 </span>
               </div>
             <% end %>
-          <% end %>
+         
         </div>
       </div>
     <% end %>
