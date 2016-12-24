@@ -17,7 +17,6 @@ $(".list-group-item").click( function () {
 
 $(document).ready(function(){
 	var arrImages =  <%= raw(Spree::Asset.all.map { |asset| asset.attachment.url}) %> ;
-	console.log(arrImages);
 	setInterval(function() {
 		$("#random-img-show").attr("src",arrImages[Math.floor(Math.random() * arrImages.length)]);
 	},

@@ -86,7 +86,6 @@ Spree.ready ($) ->
     Spree.showVariantRangePricesAndFiles selectedRadio.attr('value')
 
     radios.click (event) ->
-      console.log(this)
       Spree.showVariantImages @value
       Spree.updateVariantPrice ($ this)
       Spree.disableCartForm ($ this)

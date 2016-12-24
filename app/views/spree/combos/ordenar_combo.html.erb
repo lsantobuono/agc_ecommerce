@@ -19,10 +19,15 @@
 	  <% @combo.combo_lines.each do |cl| %>
 	  	<% if cl.taxon != nil %>
 	  		<h3> <%= pluralize(cl.quantity,"unidad","unidades") %> de la categoría <b><%= cl.taxon.name %></b>  </h3>
-	  		<p> Seleccione productos y cantidades para la categoría (Deben sumar <b><%= cl.quantity %></b>) </p>
-				<% cl.taxon.all_children.each do |p| %> 
-					<%= render partial: "product_combo", locals: {p: p, cl: cl, type: 0} %>
-			  <% end %>
+	  		<div id="accordion-<%= (cl.id*cl.quantity)-cl.id %>">
+		    	<a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= (cl.id*cl.quantity)-cl.id %>" href="#<%= (cl.id*cl.quantity)-cl.id %>" style="padding:0 ; border:0;">
+		  		<p> Seleccione productos y cantidades para la categoría (Deben sumar <b><%= cl.quantity %></b>) </p>  		</a>
+		  		<div id="<%= (cl.id*cl.quantity)-cl.id %>" class="list-group panel-collapse accordion-body collapse">
+						<% cl.taxon.all_children.each do |p| %> 
+							<%= render partial: "product_combo", locals: {p: p, cl: cl, type: 0} %>
+					  <% end %>
+					</div>
+				</div>
 			<% elsif cl.taxon == nil && cl.product != nil %>
 				<h3> <%= pluralize(cl.quantity,"unidad","unidades") %> del producto <b><%= cl.product.name %></b>  </h3>
 					<% if cl.product.has_variants? %>

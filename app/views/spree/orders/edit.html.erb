@@ -24,10 +24,7 @@
                 <% end %>
               <% end %>
               <%= button_tag class: 'btn btn-primary boton-checkout', id: 'checkout-link', name: 'checkout' do %>
-                <div style="height:2em; line-height:2em;">
-                  <span style="vertical-align:middle;"><%= Spree.t(:checkout)  %></span>
-                  <span style="vertical-align:middle; font-size:2em;"> <i class="fa fa-caret-right " aria-hidden="true"></i></span>
-                </div>
+                  <%= Spree.t(:checkout)  %>  <i class="fa fa-caret-right " aria-hidden="true"></i>
               <% end %>
             </div>
           </div>
