@@ -35,8 +35,16 @@ module Spree
 
     def register_ml
       order = current_order(create_order_if_necessary: true)
-      order.ml_user ||=params[:ml_user]
-      order.ml_purchase_id ||=params[:ml_purchase_id]
+
+      order.ml_user =params[:ml_user]
+      order.ml_purchase_id =params[:ml_purchase_id]
+
+      if (params[:ml_user] == "")
+        flash[:error] = "Por favor ingrese su usuario de Mercado Libre"
+        redirect_back_or_default(spree.root_path)
+        return
+      end
+
       combo = Combo.find_by_code(order.ml_purchase_id )
       if (combo == nil)
         flash[:error] = "Se ingresó un id de combo inválido, por favor chequee que sea correcto, o comuniquese con nosotros"
