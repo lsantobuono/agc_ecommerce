@@ -1,0 +1,8 @@
+<%= form_tag register_ml_orders_path, id: "form-combo" do %>
+    <p style="font-style: italic; font-size: 0.9em;"> Por favor, ingrese su usuario e id de compra </p>
+    <%= text_field_tag :"ml_user", nil, class: 'form-control ', style:"width:150px; height: 2em; ", placeholder: "Usuario ML" %>
+    <br>
+    <%= text_field_tag :"ml_purchase_id", nil, class: 'form-control ', style:"width:150px; height: 2em; ",placeholder: "Id de compra ML" %> 
+    <br>
+    <%= submit_tag "Ordenar!" , class: "btn btn-success" %>
+<% end %>  

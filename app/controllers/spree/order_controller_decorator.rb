@@ -33,6 +33,19 @@ module Spree
       end
     end
 
+    def register_ml
+      order = current_order(create_order_if_necessary: true)
+      order.ml_user ||=params[:ml_user]
+      order.ml_purchase_id ||=params[:ml_purchase_id]
+      combo = Combo.find_by_code(order.ml_purchase_id )
+      if (combo == nil)
+        flash[:error] = "Se ingresó un id de combo inválido, por favor chequee que sea correcto, o comuniquese con nosotros"
+        redirect_back_or_default(spree.root_path)
+      else
+        order.save!
+        redirect_to ordenar_combo_path combo
+      end
+    end
 
     def remove_combo_aplicado
       order = current_order
@@ -54,8 +67,6 @@ module Spree
       ActiveRecord::Base.transaction do
         error = false
 
-        order.ml_user ||=params[:ml_user]
-        order.ml_purchase_id ||=params[:ml_purchase_id]
         combo_aplicado = ComboAplicado.create(combo: combo, order: order)
 
         params.each do |key,value|
@@ -80,7 +91,14 @@ module Spree
 
         order.validate_combos
 
-        if order.errors.empty?
+        if (order.ml_user != nil && order.ml_purchase_id != nil) # Caso ML directo al checkout!
+          if order.bill_address.blank? && order.user.present? # Sin esto pincha cuando un guest ordena un combo
+            order.bill_address = order.user.bill_address
+          end
+          order.save!
+          flash[:success] = "Combo configurado correctamente!"
+          redirect_to checkout_state_path(order.checkout_steps.first)
+        elsif order.errors.empty?
           flash[:success] = "Combo agregado al carrito!"
           redirect_to spree.root_path
         else

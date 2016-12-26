@@ -10,12 +10,8 @@
 <%= form_tag populate_combos_orders_path, id: "form-combo" do %>
 		<h1> Ordenar Combo <%= @combo.name %> </h1>
 	  <%= hidden_field_tag :"combo_id", @combo.id %>
-	  <p style="font-style: italic; font-size: 0.9em;"> Por favor, en caso de haber comprado previamente el combo por MercadoLibre, ingrese su usuario e id de compra </p>
-		<%= text_field_tag :"ml_user", nil, class: 'form-control ', style:"width:150px; height: 2em; ", placeholder: "Usuario ML" %>
-		<br>
-		<%= text_field_tag :"ml_purchase_id", nil, class: 'form-control ', style:"width:150px; height: 2em; ",placeholder: "Id de compra ML" %>	
-		<br>
- 		<h1> El combo contiene:  </h1> 
+	  
+	  <h1> El combo contiene:  </h1> 
 	  <% @combo.combo_lines.each do |cl| %>
 	  	<% if cl.taxon != nil %>
 	  		<h3> <%= pluralize(cl.quantity,"unidad","unidades") %> de la categoría <b><%= cl.taxon.name %></b>  </h3>

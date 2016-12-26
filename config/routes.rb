@@ -76,11 +76,13 @@ Spree::Core::Engine.routes.draw do
   get "/download/:product_id/:variant_id" => "home#downloadFile", as: "public_download_product_file"
 
   get "/combos" => "combos#index"
+  get "/mercado_libre" => "combos#mercado_libre", as: :mercado_libre
   get "/combos/:combo_id" => "combos#ordenar_combo", as: :ordenar_combo
   
   resources :orders, except: [:index, :new, :create, :destroy] do
     post :populate, on: :collection
     post :populate_combos, on: :collection
+    post :register_ml, on: :collection
     delete :remove_combo_aplicado, on: :collection
   end
 

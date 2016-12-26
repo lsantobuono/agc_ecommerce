@@ -3,6 +3,10 @@ module Spree
     def index
     end
 
+    def mercado_libre
+    end
+
+
     def ordenar_combo
       @combo = Combo.find(params[:combo_id])
       render ("ordenar_combo")
