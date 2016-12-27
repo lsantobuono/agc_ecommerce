@@ -27,26 +27,21 @@
     </tr>
     <%= render "spree/orders/adjustments" %>
   <% end %>
-  <% if current_spree_user && current_spree_user.confirmed? %>
-    <tr class="warning cart-total">
-      <td colspan="4" align='right'><h5><%= Spree.t(:total) %></h5></td>
-      <td class="lead" colspan><%= order_form.object.display_total %></td>
-      <td></td>
-    </tr>
-  <% end %>
+
 </table>
 
 <table class="table" id="cart-detail" data-hook>
   <thead>
     <tr class="active" data-hook="cart_items_headers">
       <th class="cart-item-description-header" colspan="2"><%= Spree.t(:combo) %></th>
-      <% if current_spree_user && current_spree_user.confirmed? %>
-        <th class="cart-item-price-header"><%= Spree.t(:price) %></th>
-      <% end %>
       <th class="cart-item-quantity-header"><%= Spree.t(:qty) %></th>
+      <th></th>
       <% if current_spree_user && current_spree_user.confirmed? %>
         <th class="cart-item-total-header"><%= Spree.t(:total) %></th>
+      <% else %>
+        <th > </th>
       <% end %>
+      <th></th>
       <th class="cart-item-delete-header"></th>
     </tr>
   </thead>
@@ -64,11 +59,52 @@
     </tr>
     <%= render "spree/orders/adjustments" %>
   <% end %>
-  <% if current_spree_user && current_spree_user.confirmed? %>
+
+    <% if current_spree_user && current_spree_user.confirmed? %>
     <tr class="warning cart-total">
       <td colspan="4" align='right'><h5><%= Spree.t(:total) %></h5></td>
       <td class="lead" colspan><%= order_form.object.display_total %></td>
       <td></td>
+      <td></td>
     </tr>
   <% end %>
 </table>
+
+<script> 
+
+jQuery.fn.extend({
+    changeText: function () {
+      var t = $(this).text();
+      if (t.indexOf("Ver") == -1)
+        t = t.replace("Ocultar","Ver");
+      else
+        t = t.replace("Ver","Ocultar");
+      
+      $(this).text(t);
+    }
+  });
+
+jQuery.fn.extend({
+    changeTextOcult: function () {
+      var t = $(this).find("th").first().text();
+      t = t.replace("Ocultar","Ver");
+      $(this).find("th").first().text(t);
+    }
+  });
+
+$(".combo-description-link").click(function() {
+  var id = $(this).attr('id').replace('tlink', '');
+  var bodyId='#tbody'.concat(id);
+  var headId='#thead'.concat(id);
+
+  $(".body-combo-description:not(".concat(bodyId).concat(")")).fadeOut();
+  $(bodyId).fadeToggle();
+  $(".head-combo-description:not(".concat(headId).concat(")")).fadeOut();
+  $(headId).fadeToggle();
+  $(".combo-description-link").changeTextOcult();
+
+  $(this).find("th").first().changeText();
+});
+
+
+</script>
