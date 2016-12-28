@@ -16,11 +16,41 @@ es:
     percent_discount: "Decuento Porcentual"
     price_discount: "Descuento Precio"
     bulk_discount: "Descuento por cantidad"
+    new_file: "Agregar Archivo"
     files: "Archivos"
     all_departments: "Categorías"
+    taxons: Categorías
+    details: Detalles
     continuar: Continuar
+    
+    add_volume_price: Agregar Precio por Cantidad
+    volume_prices: Precios por Cantidad
+    volume_price_model: Modelo de Precio por Cantidad
+    stock: Stock
+    discount_type: Tipo de Descuento
+    range: Rango
+    position: Posición
+    role: Rol
+
+    order_line_items: "Items de Orden"
+    thumbnail: Miniatura
+    available: Disponible
+    track_inventory: Llevar Inventario
     properties: "Datos técnicos"
+    volume_pricing: "Precios por cantidad"
+    volume_price_models: "Modelos para precios por cantidad"
+    new_volume_price_model: "Nuevo modelo de precio por cantidad"
     confirmar: Confirmar
+    filter: "Filtrar"
+    admin:
+      tab:
+        option_types: Tipos de Opciones
+        properties: Propiedades
+        taxonomies: Categorizaciones
+        taxons: Categorías
+        prices_files: Archivo de Precios
+        stock_list: Listado de Stock
+        taxon_video: Videos de Categoría 
     qty: Cantidad
     address_instructions: "Ingrese sus detalles de facturación para agilizar el proceso de compra."
     registration_before_order_instructions: "Bienvenido a AGC. Le pedimos que por favor se registre antes de realizar pedidos. Muchas Gracias. "
@@ -30,6 +60,8 @@ es:
     selected_quantity_not_available: "La cantidad seleccionada para el producto no está disponible"
     error_combo_validation: "Por favor no agregué artículos si ha seleccionado un combo"
     product_added: "Producto agregado"
+    i18n:
+      locales_displayed_on_frontend_select_box: Lenguajes mostrados
     adjustment_labels:
       tax_rates:
         including_tax: '%{name}%{amount} (Included in Price)'
@@ -46,6 +78,8 @@ es:
     new_combo: Nuevo combo
   activerecord:
     attributes:
+      spree/store:
+        mail_from_address: Dirección de Origen de Mails
       spree/user:
         phone_number: "Número de Telefono"
         first_name: "Nombre"

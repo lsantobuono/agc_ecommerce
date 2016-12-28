@@ -20,9 +20,6 @@
     <%= content_tag :li, class: ('active' if current == :stock) do %>
       <%= link_to_with_icon 'home', Spree.t(:stock), stock_admin_product_url(@product) %>
     <% end if can?(:admin, Spree::Stock) && !@product.deleted? %>
-    <%= content_tag :li, class: ('active' if current == :files) do %>
-      <%= link_to_with_icon 'picture', Spree.t(:files), spree.admin_product_files_path(@product) %>
-    <% end if !@product.deleted? %>
    <%= content_tag :li, class: ('active' if current == :files) do %>
       <%= link_to_with_icon 'picture', Spree.t(:files), spree.admin_product_files_path(@product) %>
     <% end if !@product.deleted? %>
