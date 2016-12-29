@@ -16,6 +16,7 @@ es:
     percent_discount: "Decuento Porcentual"
     price_discount: "Descuento Precio"
     bulk_discount: "Descuento por cantidad"
+    custom_mail_header: "Mensaje de mail personalizado"
     new_file: "Agregar Archivo"
     files: "Archivos"
     all_departments: "Categorías"
