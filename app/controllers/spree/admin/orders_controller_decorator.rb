@@ -14,7 +14,6 @@ module Spree::Admin
     end
 
     def resend
-      params[:custom_mail_header] =" HOluu"
       Spree::OrderMailer.confirm_email(@order.id, true,params[:custom_mail_header]).deliver_later
       flash[:success] = Spree.t(:order_email_resent)
 
