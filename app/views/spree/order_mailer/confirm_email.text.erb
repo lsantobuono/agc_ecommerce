@@ -2,6 +2,7 @@
 
 <%= Spree.t('order_mailer.confirm_email.instructions') %>
 
+<%= @custom_text %>
 ============================================================
 <%= Spree.t('order_mailer.confirm_email.order_summary', number: @order.number) %>
 ============================================================
