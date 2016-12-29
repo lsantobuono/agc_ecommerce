@@ -8,3 +8,8 @@
  *= require_self
  *= require_tree .
 */
+
+
+.label-confirmar {
+  color: black;
+}
