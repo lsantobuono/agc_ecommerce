@@ -56,7 +56,11 @@
             <% if @order.completed? %>
               <div>
                 <span class="badge">
-                  <%= @order.user.nil? ? Spree.t(:say_yes) : Spree.t(:say_no) %>
+                  <% guest = @order.user.nil? %>
+                  <%= guest ? Spree.t(:say_yes) : Spree.t(:say_no) %>
+                  <div class="hidden">
+                    <%= radio_button_tag :guest_checkout, true, guest %>
+                  </div>
                 </span>
               </div>
             <% else %>
@@ -74,6 +78,18 @@
                 <% end %>
               </div>
               <%= hidden_field_tag :user_id, @order.user_id %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div data-hook="customer_fields" class="row">
+        <div class="col-md-8">
+          <div class="form-group">
+            <%= f.label :custom_mail_header, Spree.t(:custom_mail_header) %>
+            <% if can? :edit, @order.user %>
+              <%= f.text_area :custom_mail_header, class: 'form-control' %>
+            <% else %>
+              <p><%= @order.user.try(:custom_mail_header) || @order.custom_mail_header %></p>
             <% end %>
           </div>
         </div>
