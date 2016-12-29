@@ -97,6 +97,9 @@ Spree::Core::Engine.routes.draw do
     post '/taxon_video', to: 'taxon_video#create', as: :videos
     delete '/taxon_video/:id', to: 'taxon_video#destroy', as: :delete_video
 
+    get '/customize_emails', to: 'customize_emails#index'
+    put '/customize_emails/update', to: 'customize_emails#update'
+
     resources :users do
       member do
         put :confirmate
