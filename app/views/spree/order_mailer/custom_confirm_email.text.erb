@@ -1,5 +1,9 @@
 <%= Spree.t('order_mailer.confirm_email.dear_customer') %>
 
+<% if @order.custom_mail_header.present? %>
+  <%= @order.custom_mail_header %>
+<% end %>
+
 <%= Spree::Store.current.confirm_email_header %>
 
 ============================================================

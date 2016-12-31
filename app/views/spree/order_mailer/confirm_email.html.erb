@@ -5,11 +5,10 @@
         <%= Spree.t('order_mailer.confirm_email.dear_customer') %>
       </p>
       <% if @order.custom_mail_header.present? %>
-        <p><%= @order.custom_mail_header %></p>
+        <%= simple_format @order.custom_mail_header %>
       <% end %>
-      <p>
-        <%= Spree::Store.current.confirm_email_header %>
-      </p>
+      <%= simple_format Spree::Store.current.confirm_email_header %>
+      
       <p>
         <%= Spree.t('order_mailer.confirm_email.order_summary', number: @order.number) %>
       </p>
@@ -64,9 +63,7 @@
           </td>
         </tr>
       </table>
-      <p>
-        <%= Spree::Store.current.confirm_email_footer %>
-      </p>
+      <%= simple_format Spree::Store.current.confirm_email_footer %>
     </td>
     <td class="expander"></td>
   </tr>
