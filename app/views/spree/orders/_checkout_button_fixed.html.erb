@@ -1,6 +1,6 @@
 <div class="button-checkout-home">
   <% order = current_order %>
-  <% if order != nil %>
+  <% if order != nil && order.item_count > 0%>
     <%= form_for order, url: update_cart_path, html: { id: 'update-cart' } do |order_form| %>
       <%= button_tag class: 'btn btn-primary boton-checkout', id: 'checkout-link', name: 'checkout' do %>
         <%= Spree.t(:checkout)  %>  <i class="fa fa-caret-right " aria-hidden="true"></i>
