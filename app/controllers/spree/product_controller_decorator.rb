@@ -5,7 +5,7 @@ module Spree
 			before_filter :getProductAndVariants, only: [:indexFile, :newFile, :createFile, :downloadFile, :destroyFile]
 
 			def ordenar_productos
-				@collection = Spree::Product.unscoped.order(:position)
+				@collection = Spree::Product.unscoped.where(deleted_at: nil).order(:position)
 			end
 
 			def getProductAndVariants

@@ -1,0 +1,42 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:customize_emails) %>
+<% end %>
+
+<%= form_tag admin_customize_emails_update_path, method: :put do %>
+  <div id="preferences" data-hook>
+    <div class="panel panel-default security">
+      <div class="panel-heading">
+        <h1 class="panel-title">
+          <%= Spree.t(:confirm_email) %>
+        </h1>
+      </div>
+
+      <div class="panel-body">
+        <%= fields_for :store do |f| %>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" data-hook="admin_general_setting_input_name">
+                <%= f.label Spree.t(:confirm_email_header) %>
+                <%= f.text_area :confirm_email_header, class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" data-hook="admin_general_setting_input_name">
+                <%= f.label Spree.t(:confirm_email_footer) %>
+                <%= f.text_area :confirm_email_footer, class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'save' %>
+    </div>
+
+  </div>
+
+<% end %>

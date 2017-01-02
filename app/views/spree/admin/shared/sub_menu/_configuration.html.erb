@@ -1,5 +1,7 @@
 <ul data-hook="admin_configurations_sidebar_menu" class="collapse nav nav-pills nav-stacked" id="sidebar-configuration">
   <%= configurations_sidebar_menu_item(Spree.t(:general_settings), spree.edit_admin_general_settings_path) if can? :manage, Spree::Config %>
+  
+  <%= configurations_sidebar_menu_item(Spree.t(:customize_emails), admin_customize_emails_path) if can? :manage, Spree::Config %>
 
   <% if country = Spree::Country.find_by_id(Spree::Config[:default_country_id]) || Spree::Country.first %>
     <%= configurations_sidebar_menu_item(Spree.t(:states), spree.admin_country_states_path(country)) if can? :manage, Spree::Country %>
