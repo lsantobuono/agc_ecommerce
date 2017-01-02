@@ -8,6 +8,7 @@
     <%= render partial: 'spree/shared/head' %>
   </head>
   <body class="<%= body_class %>" id="<%= @body_id || 'default' %>" data-hook="body">
+    <div class="wrapper">
     <%= render partial: 'spree/shared/google_analytics.js' %>
     <%= render partial: 'spree/shared/header' %>
 
@@ -29,6 +30,9 @@
         
       </div>
     </div>
+    <div class="push"></div>
+    </div>
+
     <%= render partial: 'spree/shared/footer' %>
   </body>
 </html>

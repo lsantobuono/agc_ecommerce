@@ -37,9 +37,36 @@ body{
     }
 }
 
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -140px;
+}
+.footer,
+.push {
+  height: 140px;
+}
+
+
 /* esclusivo para responsive, en principio no son tantas cosas asi que por ahora tiremos todo aca */ 
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -330px;
+}
+
+.footer,
+.push {
+  height: 330px;
+}
+
   #main-nav-bar {
     ul > li {
       padding-left:1em;
@@ -521,6 +548,8 @@ label {
 	background: $navbar-blue;	
 	color:white;
 	margin-top:1em;
+
+
 }
 
 /* address */
