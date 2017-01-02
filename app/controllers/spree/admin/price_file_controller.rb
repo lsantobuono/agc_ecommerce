@@ -8,6 +8,10 @@ module Spree::Admin
     def index
     end
 
+    def is_number? string
+      true if Float(string) rescue false
+    end
+
     def create
       @listaCambios = {}
       
@@ -18,9 +22,9 @@ module Spree::Admin
       book = Spreadsheet.open(file.path)
       sheet1 = book.worksheet 1
       sheet1.each do |row| 
-        if (row[0] != "" && row[0] != nil)
+        if (row[0] != nil &&  row[0] != "" &&  row[4] != nil && row[4].value != nil && row[4].value != "" && (is_number? row[4].value))
           var = Spree::Variant.find_by(sku: row[0])
-          if (var != nil &&  ((var.price - row[4].value).abs > 0.003)) # Esta porqueria es por como se guardan los float en ruby.. es basicamente un !=
+          if (var != nil &&  ((var.price - row[4].value).abs > 0.0045)) # Esta porqueria es por como se guardan los float en ruby.. es basicamente un !=
             arrPrice=[]
             arrPrice[0] = var.price
             arrPrice[1] = row[4].value
@@ -39,9 +43,9 @@ module Spree::Admin
       book = Spreadsheet.open(file.path)
       sheet1 = book.worksheet 1
       sheet1.each do |row| 
-        if (row[0] != "" && row[0] != nil)
+        if (row[0] != nil &&  row[0] != "" &&  row[4] != nil && row[4].value != nil && row[4].value != "" && (is_number? row[4].value))
           var = Spree::Variant.find_by(sku: row[0])
-          if (var != nil &&  ((var.price - row[4].value).abs > 0.003)) # Esta porqueria es por como se guardan los float en ruby.. es basicamente un !=
+          if (var != nil &&  ((var.price - row[4].value).abs > 0.0045)) # Esta porqueria es por como se guardan los float en ruby.. es basicamente un !=
             auxPrice = var.price
             var.price = row[4].value
             if var.save!
