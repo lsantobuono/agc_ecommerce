@@ -22,7 +22,7 @@ es:
     taxons: Categorías
     details: Detalles
     continuar: Continuar
-
+    user_info: Información del usuario
     customize_emails: Personalizar emails
     confirm_email: Email de confirmación de pedido
     confirm_email_header: Encabezado
@@ -108,4 +108,6 @@ es:
     sessions:
       spree_user:
         signed_out: "Sesión cerrada"
-  
+    mailer:
+      registration_notice:
+        subject: "Bienvenido"

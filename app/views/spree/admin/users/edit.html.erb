@@ -49,6 +49,23 @@
 </div>
 
 
+<div id="user-info" class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      <%= Spree.t('user_info') %>
+    </h1>
+  </div>
+  <br>
+  <div class="panel-body">
+
+    <p> <b>Nombre:</b> <%= @user.first_name %> </p>
+     <p> <b>Apellido:</b> <%= @user.last_name %> </p>
+     <p> <b>Empresa:</b> <%= @user.enterprise %></p>
+     <p> <b>Dirección:</b> <%= @user.address %></p>
+     <p> <b>Telefono:</b> <%= @user.phone_number %></p>
+  </div>
+</div>
+
 
 
 <%= render 'spree/admin/users/lifetime_stats' %>

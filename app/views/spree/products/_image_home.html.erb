@@ -3,7 +3,10 @@
     end %>
     
 <% if defined?(image) && image %>
-  <%= image_tag image.attachment.url(:product), :style => "xwidth:100%", :itemprop => "image", :class => 'img-responsive' %>
+<!--  <%= image_tag image.attachment.url(:product), :style => "xwidth:100%", :itemprop => "image", :class => 'img-responsive' %>-->
+  <span class="image-helper"></span><%= image_tag image.attachment.url(:product), :itemprop => "image" %>
+
 <% else %>
-  <%= product_image(@product, :itemprop => "image",:style => "xwidth:100%", :class => 'img-responsive') %>
+  <span class="image-helper"></span>
+  <%= product_image(@product, :itemprop => "image") %>
 <% end %>
