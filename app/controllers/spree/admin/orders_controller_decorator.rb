@@ -14,9 +14,12 @@ module Spree::Admin
     end
 
     def resend
-      Spree::OrderMailer.confirm_email(@order.id, true).deliver_later
-      flash[:success] = Spree.t(:order_email_resent)
-
+      if (@order.email == nil)
+        flash[:error] = Spree.t(:error_email_resent)
+      else
+        Spree::OrderMailer.confirm_email(@order.id, true).deliver_later
+        flash[:success] = Spree.t(:order_email_resent)
+      end
       redirect_to :back
     end
 

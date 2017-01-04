@@ -37,6 +37,7 @@ es:
     role: Rol
 
     order_line_items: "Items de Orden"
+    error_email_resent: "Error, no hay email configurado en el pedido"
     thumbnail: Miniatura
     available: Disponible
     track_inventory: Llevar Inventario
