@@ -1,8 +1,8 @@
 <%= form_tag register_ml_orders_path, id: "form-combo" do %>
-    <p style="font-style: italic; font-size: 0.9em;"> Por favor, ingrese su usuario e id de compra </p>
-    <%= text_field_tag :"ml_user", nil, class: 'form-control ', style:"width:150px; height: 2em; ", placeholder: "Usuario ML" %>
+    <p style=" font-size: 1em;"> Si ya ha adquirido un combo por Mercado Libre, por favor ingrese su usuario e id de producto adquirido </p>
+    <%= text_field_tag :"ml_user", nil, class: 'form-control ', style:"width:200px; height: 2em; ", placeholder: "Usuario ML" %>
     <br>
-    <%= text_field_tag :"ml_purchase_id", nil, class: 'form-control ', style:"width:150px; height: 2em; ",placeholder: "Id de compra ML" %> 
+    <%= text_field_tag :"ml_purchase_id", nil, class: 'form-control ', style:"width:200px; height: 2em; ",placeholder: "Id del producto adquirido" %> 
     <br>
     <%= submit_tag "Ordenar!" , class: "btn btn-success" %>
 <% end %>  
