@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229211134) do
+ActiveRecord::Schema.define(version: 20170104185743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20161229211134) do
     t.integer  "country_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "dni_cuit"
   end
 
   add_index "spree_addresses", ["country_id"], name: "index_spree_addresses_on_country_id", using: :btree
@@ -329,6 +330,10 @@ ActiveRecord::Schema.define(version: 20161229211134) do
     t.string   "ml_purchase_id"
     t.boolean  "creado_por_admin",                                                 default: false,   null: false
     t.string   "custom_mail_header"
+    t.integer  "tipo_factura"
+    t.integer  "metodo_envio"
+    t.string   "metodo_envio_otros"
+    t.string   "checkout_notes"
   end
 
   add_index "spree_orders", ["approver_id"], name: "index_spree_orders_on_approver_id", using: :btree

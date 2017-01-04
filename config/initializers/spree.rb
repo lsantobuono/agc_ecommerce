@@ -32,7 +32,8 @@ Spree::Auth::Config[:confirmable] = true
 Spree::PermittedAttributes.product_attributes << :security_stock
 Spree::PermittedAttributes.variant_attributes << :security_stock
 
-Spree::PermittedAttributes.checkout_attributes.push :ml_user, :ml_purchase_id
+Spree::PermittedAttributes.checkout_attributes.push :ml_user, :ml_purchase_id, :tipo_factura, :metodo_envio, :metodo_envio_otros, :checkout_notes
+Spree::PermittedAttributes.address_attributes.push :dni_cuit
 
 Spree::PermittedAttributes.user_attributes.push :phone_number, :first_name, :last_name, :enterprise, :address
 

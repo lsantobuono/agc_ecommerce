@@ -4,34 +4,33 @@
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= Spree.t(:tipo_de_factura) %></h3>
+        <h3 class="panel-title"><%= Spree.t(:metodo_de_envio) %></h3>
       </div>
       <div class="panel-body">
-        <% Spree::Order.tipo_facturas.each do |tipo, id| %>
+        <% Spree::Order.metodo_envios.each do |tipo, id| %>
           <p>
-            <%= form.radio_button :tipo_factura, tipo, class: 'tipo_factura' %>
-            <%= form.label "tipo_factura_#{tipo}", Spree.t("tipos_factura.#{tipo}") %>
+            <%= form.radio_button :metodo_envio, tipo, class: 'metodo_envio' %>
+            <%= form.label "metodo_envio_#{tipo}", Spree.t("metodos_envio.#{tipo}") %>
+            <% if tipo == 'other' %>
+              <%= form.text_field :metodo_envio_otros, class: 'form-control', style: 'width:70%; display:inline-block;margin-left:30px' %>
+            <% end %>
           </p>
         <% end %>
       </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-sm-6" data-hook="billing_fieldset_wrapper">
-    <div class="panel panel-default" id="billing" data-hook data-big-total="<%= @order.total > 1000 ? 'yes' : 'no' %>">
-      <%= form.fields_for :bill_address do |bill_form| %>
-        <div class="panel-heading">
-          <h3 class="panel-title"><%= Spree.t(:datos_de_facturacion) %></h3>
-        </div>
-        <div class="panel-body">
-          <%= render :partial => 'spree/address/form', :locals => { :form => bill_form, :address_type => 'billing', :address => @order.bill_address } %>
-        </div>
-      <% end %>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= Spree.t(:notas_adicionales) %></h3>
+      </div>
+      <div class="panel-body">
+        <%= form.text_area :checkout_notes, class: 'form-control', placeholder: 'Ingrese notas adicionales aquí' %>
+      </div>
     </div>
   </div>
-
-<!--
+</div>
+<div class="row">
   <div class="col-sm-6" data-hook="shipping_fieldset_wrapper">
     <div class="panel panel-default" id="shipping" data-hook>
       <%= form.fields_for :ship_address do |ship_form| %>
@@ -50,7 +49,6 @@
       <% end %>
     </div>
   </div>
--->
 </div>
 
 

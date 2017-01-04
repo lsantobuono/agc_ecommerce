@@ -16,6 +16,29 @@
         </td>
       </tr>
       <tr>
+        <td width="35%" data-hook>
+          <strong><%= Spree.t(:tipo_factura) %>:</strong>
+        </td>
+        <td>
+          <span>
+            <%= Spree.t("tipos_factura.#{@order.tipo_factura}") %>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td width="35%" data-hook>
+          <strong><%= Spree.t(:metodo_envio) %>:</strong>
+        </td>
+        <td>
+          <span>
+            <%= Spree.t("metodos_envio.#{@order.metodo_envio}") %>
+            <% if @order.metodo_envio == 'other' %>
+              : <%= @order.metodo_envio_otros %>
+            <% end %>
+          </span>
+        </td>
+      </tr>
+      <tr>
         <td data-hook='admin_order_tab_subtotal_title'>
           <strong><%= Spree.t(:subtotal) %>:</strong>
         </td>

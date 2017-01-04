@@ -23,21 +23,23 @@ $(document).on('nested:fieldAdded', function(event){
 
 $(document).ready(function() {
   var order_set_billing_input = $('input#order_set_billing');
-  var order_set_billing = function () {
-    if (order_set_billing_input.is(':checked')) {
-      $('#billing').show();
-      $('#billing input').attr('disabled', null);
-      $('#billing select').attr('disabled', null);
-    } else {
-      $('#billing').hide();
-      $('#billing input').attr('disabled', '1');
-      $('#billing select').attr('disabled', '1');
-    }
-  };
+  if( order_set_billing_input.is('*') ) {
+    var order_set_billing = function () {
+      if (order_set_billing_input.is(':checked')) {
+        $('#billing').show();
+        $('#billing input').attr('disabled', null);
+        $('#billing select').attr('disabled', null);
+      } else {
+        $('#billing').hide();
+        $('#billing input').attr('disabled', '1');
+        $('#billing select').attr('disabled', '1');
+      }
+    };
 
-  order_set_billing_input.click(function() {
+    order_set_billing_input.click(function() {
+      order_set_billing();
+    });
+
     order_set_billing();
-  });
-
-  order_set_billing();
+  }
 });

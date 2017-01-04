@@ -36,6 +36,21 @@ es:
     position: Posición
     role: Rol
 
+    # Facturacion
+    first_name_last_name_company: Nombre y apellido/Empresa
+    dni_cuit: DNI/CUIT
+    street_address: Dirección
+    city: Localidad
+    tipos_factura:
+      consumidor_final: Factura Consumidor Final
+      factura_a: Factura A
+      factura_b: Factura B Monotributo
+
+    # Método de envío
+    metodo_envio: Método de envío
+    metodos_envio:
+      other: Otros
+
     order_line_items: "Items de Orden"
     error_email_resent: "Error, no hay email configurado en el pedido"
     thumbnail: Miniatura
@@ -73,7 +88,9 @@ es:
         excluding_tax: '%{name}%{amount}'
     order_number: 'Orden %{number}'
     order_state:
+      address: "Facturación"
       confirmar: 'Confirmar'
+      metodo_envio: "Envío"
     order_mailer:
       confirm_email:
         dear_customer: "Estimado Cliente,"
