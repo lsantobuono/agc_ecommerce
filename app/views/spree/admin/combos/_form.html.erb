@@ -26,6 +26,13 @@
               <%= f.error_message_on :description %>
             <% end %>
           </div>
+          <div data-hook="admin_combo_form_hidden"   >
+            <%= f.field_container :hidden do %>
+              <%= f.label :hidden, Spree.t(:hidden) %>
+              <%= f.check_box :hidden  %>
+              <%= f.error_message_on :hidden %>
+            <% end %>
+          </div>
           <div data-hook="admin_combo_form_image"   >
             <%= f.field_container :image do %>
               <%= f.label :image, Spree.t(:image) %>

@@ -35,7 +35,7 @@ es:
     range: Rango
     position: Posición
     role: Rol
-
+    hidden: Oculto
     # Facturacion
     first_name_last_name_company: Nombre y apellido/Empresa
     dni_cuit: DNI/CUIT

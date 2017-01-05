@@ -27,6 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'nested_form'
 
 gem 'rollbar'
+gem 'spree_sitemap', github: 'spree-contrib/spree_sitemap', branch: '3-1-stable'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -96,3 +97,4 @@ gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 gem "spreadsheet"
 
 gem 'aws-sdk', '< 2.0'
+gem 'whenever', :require => false

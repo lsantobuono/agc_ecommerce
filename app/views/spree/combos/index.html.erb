@@ -5,6 +5,8 @@
 
 <ul class="comboList">
 <% Combo.all.each do |c| %>
-	<%= render('preview_combo', {combo: c}) %>
+  <% if !c.hidden %>
+  	<%= render('preview_combo', {combo: c}) %>
+  <% end %>
 <% end %>
 </table>

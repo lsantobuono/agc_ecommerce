@@ -14,6 +14,7 @@
         <th><%= sort_link @search,:name, Spree.t(:name), { default_order: "desc" }, {title: 'admin_combos_listing_name_title'} %></th>
         <th><%= Spree.t(:code) %></th>
         <th><%= Spree.t(:productos) %></th>
+        <th><%= Spree.t(:hidden) %></th>
 
         <th data-hook="admin_combos_index_header_actions" class="actions"></th>
       </tr>
@@ -24,6 +25,7 @@
             <td class="name"><%= combo.name %></td>
             <td class="code"><%= combo.code %></td>
             <td class="code"><%= combo.combo_lines.count %></td>
+            <td class="code"><%= combo.hidden ? 'Verdadero' : 'Falso' %></td>
             <td class="actions actions-3 text-right" data-hook="admin_combos_index_row_actions">
               <%= link_to_edit combo, no_text: true, class: 'edit' if can?(:edit, combo) && !combo.deleted? %>
               <%= link_to_delete combo, no_text: true if can?(:delete, combo) && !combo.deleted? %>

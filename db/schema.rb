@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104185743) do
+ActiveRecord::Schema.define(version: 20170105095911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20170104185743) do
     t.datetime "deleted_at"
     t.string   "description"
     t.string   "image"
+    t.boolean  "hidden"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
