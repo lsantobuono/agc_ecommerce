@@ -25,12 +25,20 @@ module Spree
       update_column(:confirmation_delivered, true)
     end
 
-    Spree::Order.state_machine.before_transition :from => :address, :do => :validate_tipo_factura
-    Spree::Order.state_machine.before_transition :from => :metodo_envio, :do => :validate_metodo_envio
-    Spree::Order.state_machine.before_transition :to => :complete, :do => :validate_combos
-
+    Spree::Order.state_machine.before_transition from: :address, do: :validate_tipo_factura
+    Spree::Order.state_machine.before_transition to: :metodo_envio, do: :assign_default_addresses!
+    Spree::Order.state_machine.before_transition from: :metodo_envio, do: :validate_metodo_envio
+    Spree::Order.state_machine.before_transition from: :metodo_envio, do: :persist_user_address!
+    Spree::Order.state_machine.before_transition to: :complete, do: :validate_combos
     # Al crear los shipments se decrementa el stock
     # Spree::Order.state_machine.before_transition :to => :complete, :do => :create_proposed_shipments
+
+    def assign_default_addresses!
+      if user
+        clone_billing
+        clone_shipping
+      end
+    end
 
     def update_line_item_prices!
       # Esta funcion le ponia el impuesto de VAT por zona, y por algun motivo rompia el tema de las variaciones de precio por cantidad
