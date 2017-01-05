@@ -98,4 +98,4 @@ gem "spreadsheet"
 
 gem 'aws-sdk', '< 2.0'
 gem 'whenever', :require => false
-gem 'route_downcaser'
+

@@ -457,8 +457,6 @@ GEM
       railties (>= 4.2.0, < 5.1)
     rollbar (2.14.0)
       multi_json
-    route_downcaser (1.2.0)
-      activesupport (>= 3.2, < 5.1)
     routing-filter (0.5.1)
       actionpack (~> 4.2)
       activesupport (~> 4.2)
@@ -659,7 +657,6 @@ DEPENDENCIES
   rails (= 4.2.5)
   rails_db
   rollbar
-  route_downcaser
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
