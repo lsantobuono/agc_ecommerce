@@ -20,9 +20,11 @@
           <strong><%= Spree.t(:tipo_factura) %>:</strong>
         </td>
         <td>
-          <span>
-            <%= Spree.t("tipos_factura.#{@order.tipo_factura}") %>
-          </span>
+          <% if @order.tipo_factura.present? %>
+            <span>
+              <%= Spree.t("tipos_factura.#{@order.tipo_factura}") %>
+            </span>
+          <% end %>
         </td>
       </tr>
       <tr>
@@ -30,12 +32,14 @@
           <strong><%= Spree.t(:metodo_envio) %>:</strong>
         </td>
         <td>
-          <span>
-            <%= Spree.t("metodos_envio.#{@order.metodo_envio}") %>
-            <% if @order.metodo_envio == 'other' %>
-              : <%= @order.metodo_envio_otros %>
-            <% end %>
-          </span>
+          <% if @order.metodo_envio.present? %>
+            <span>
+              <%= Spree.t("metodos_envio.#{@order.metodo_envio}") %>
+              <% if @order.metodo_envio == 'other' %>
+                : <%= @order.metodo_envio_otros %>
+              <% end %>
+            </span>
+          <% end %>
         </td>
       </tr>
       <tr>
