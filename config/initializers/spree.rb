@@ -22,6 +22,10 @@ Spree.config do |config|
 	config.currency = "ars"
 	config.allow_guest_checkout = false
 	config.max_level_in_taxons_menu = 10
+
+  #Busqueda custom para skus, esta en lib/spree
+  config.searcher_class= Spree::MySearch
+
 	#config.site_name = "AGC Repuestos para video juegos"
 end
 
@@ -36,6 +40,7 @@ Spree::PermittedAttributes.checkout_attributes.push :ml_user, :ml_purchase_id, :
 Spree::PermittedAttributes.address_attributes.push :dni_cuit
 
 Spree::PermittedAttributes.user_attributes.push :phone_number, :first_name, :last_name, :enterprise, :address
+
 
 if Rails.env.production?
   attachment_config = {

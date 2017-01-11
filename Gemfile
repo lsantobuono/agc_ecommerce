@@ -99,3 +99,8 @@ gem "spreadsheet"
 gem 'aws-sdk', '< 2.0'
 gem 'whenever', :require => false
 
+gem 'spree_print_invoice', github: 'spree-contrib/spree_print_invoice', branch: 'master'
+
+group :development do
+  gem 'meta_request'
+end

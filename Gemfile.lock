@@ -11,6 +11,15 @@ GIT
       spree_core (~> 3.1.0.beta)
 
 GIT
+  remote: git://github.com/spree-contrib/spree_print_invoice.git
+  revision: fa7502f6af6e315d788d4ecd9ba3ad6d3e5ad441
+  branch: master
+  specs:
+    spree_print_invoice (3.0.0.beta)
+      prawn-rails (~> 0.1.1)
+      spree_core (~> 3.1.0.beta)
+
+GIT
   remote: git://github.com/spree-contrib/spree_sitemap.git
   revision: 7d0941cfed1ac54b25d30d13a1f8e5949170a399
   branch: 3-1-stable
@@ -95,6 +104,7 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.2)
     byebug (9.0.6)
+    callsite (0.0.11)
     camertron-eprun (1.1.1)
     cancancan (1.10.1)
     canonical-rails (0.0.11)
@@ -111,7 +121,7 @@ GEM
     capistrano-harrow (0.5.3)
     capistrano-postgresql (4.2.1)
       capistrano (>= 3.0)
-    capistrano-rails (1.2.1)
+    capistrano-rails (1.2.2)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     capistrano-rails-db (0.0.2)
@@ -136,8 +146,7 @@ GEM
       mime-types (>= 1.16)
     chronic (0.10.2)
     cldr-plurals-runtime-rb (1.0.1)
-    climate_control (0.0.3)
-      activesupport (>= 3.0)
+    climate_control (0.1.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     codemirror-rails (5.16.0)
@@ -258,7 +267,7 @@ GEM
       multi_json (~> 1.10)
     fog-local (0.3.1)
       fog-core (~> 1.27)
-    fog-openstack (0.1.18)
+    fog-openstack (0.1.19)
       fog-core (>= 1.40)
       fog-json (>= 1.0)
       ipaddress (>= 0.8)
@@ -269,7 +278,7 @@ GEM
     fog-profitbricks (3.0.0)
       fog-core (~> 1.42)
       fog-json (~> 1.0)
-    fog-rackspace (0.1.2)
+    fog-rackspace (0.1.3)
       fog-core (>= 1.35)
       fog-json (>= 1.0)
       fog-xml (>= 0.1)
@@ -317,6 +326,7 @@ GEM
     formatador (0.2.5)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
+    git-version-bump (0.15.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     hashdiff (0.3.2)
@@ -350,6 +360,10 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    meta_request (0.4.0)
+      callsite (~> 0.0, >= 0.0.11)
+      rack-contrib (~> 1.1)
+      railties (>= 3.0.0, < 5.1.0)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -357,16 +371,16 @@ GEM
     mimemagic (0.3.0)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
-    monetize (1.5.0)
-      money (~> 6.7)
-    money (6.8.0)
+    monetize (1.6.0)
+      money (~> 6.8)
+    money (6.8.1)
       i18n (>= 0.6.4, <= 0.7.0)
       sixarm_ruby_unaccent (>= 1.1.1, < 2)
     multi_json (1.12.1)
     nested_form (0.3.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (4.0.0)
+    net-ssh (4.0.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
@@ -378,10 +392,20 @@ GEM
       mimemagic (= 0.3.0)
     paranoia (2.1.5)
       activerecord (~> 4.0)
+    pdf-core (0.6.1)
     pg (0.19.0)
     polyamorous (1.3.1)
       activerecord (>= 3.0)
     polyglot (0.3.5)
+    prawn (2.1.0)
+      pdf-core (~> 0.6.1)
+      ttfunk (~> 1.4.0)
+    prawn-rails (0.1.1)
+      prawn
+      prawn-table
+      rails (>= 3.1.0)
+    prawn-table (0.2.2)
+      prawn (>= 1.3.0, < 3.0.0)
     premailer (1.8.7)
       css_parser (>= 1.4.5)
       htmlentities (>= 4.0.0)
@@ -399,6 +423,9 @@ GEM
     rabl (0.12.0)
       activesupport (>= 2.3.14)
     rack (1.6.5)
+    rack-contrib (1.4.0)
+      git-version-bump (~> 0.15)
+      rack (~> 1.4)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -493,12 +520,12 @@ GEM
       thor (~> 0.14)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
-    sidekiq (4.2.7)
+    sidekiq (4.2.8)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
       redis (~> 3.2, >= 3.2.1)
-    simple_form (3.3.1)
+    simple_form (3.4.0)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
     sitemap_generator (5.1.0)
@@ -593,6 +620,7 @@ GEM
     timecop (0.8.1)
     trollop (2.1.2)
     truncate_html (0.9.3)
+    ttfunk (1.4.0)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
@@ -650,6 +678,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener
+  meta_request
   nested_form
   pg
   pry-rails
@@ -666,6 +695,7 @@ DEPENDENCIES
   spree_auth_devise (~> 3.1.0)
   spree_gateway (~> 3.1.0)
   spree_i18n!
+  spree_print_invoice!
   spree_sitemap!
   spree_volume_pricing!
   spring

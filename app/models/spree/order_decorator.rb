@@ -33,6 +33,11 @@ module Spree
     # Al crear los shipments se decrementa el stock
     # Spree::Order.state_machine.before_transition :to => :complete, :do => :create_proposed_shipments
 
+
+    # Este decorator es de la gema de print invoice... por algun motivo si no lo agrego aca no anda, creo que tiene que ver
+    # con todo el quilombo de redefinicion de estados que hacemos en este decorator, jode al otro decorator (el de la gema)
+    Spree::Order.state_machine.before_transition to: :complete, do: :invoice_for_order
+
     def assign_default_addresses!
       if user
         clone_billing

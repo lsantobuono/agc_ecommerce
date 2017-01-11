@@ -16,5 +16,6 @@ module Spree
         end
         return ret
       end
+
   end
 end

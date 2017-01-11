@@ -43,3 +43,4 @@ $(document).ready(function() {
     order_set_billing();
   }
 });
+//= require spree/backend/spree_print_invoice

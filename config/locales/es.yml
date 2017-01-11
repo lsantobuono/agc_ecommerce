@@ -23,6 +23,7 @@ es:
     details: Detalles
     continuar: Continuar
     user_info: Información del usuario
+    order_resumed: Orden reanudada
     customize_emails: Personalizar emails
     confirm_email: Email de confirmación de pedido
     confirm_email_header: Encabezado
@@ -71,6 +72,8 @@ es:
         prices_files: Archivo de Precios
         stock_list: Listado de Stock
         taxon_video: Videos de Categoría 
+        invoices: Facturas
+        packaging_slips: Recibos embalaje
     qty: Cantidad
     address_instructions: "Ingrese sus detalles de facturación para agilizar el proceso de compra."
     registration_before_order_instructions: "Bienvenido a AGC. Le pedimos que por favor se registre antes de realizar pedidos. Muchas Gracias. "
@@ -98,6 +101,15 @@ es:
     api:
       must_specify_api_key: "No se permite acceder sin key"      
     new_combo: Nuevo combo
+    printable_number: Numero impresión
+    print_invoice:
+      date: Fecha
+      document_type: Tipo Documento
+      number: Nro Factura
+      firstname: Nombre
+      lastname: Apellido
+      email: Email
+      total: Total
   activerecord:
     attributes:
       spree/store:
