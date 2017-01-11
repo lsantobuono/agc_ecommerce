@@ -45,6 +45,22 @@ module Spree
       end
     end
 
+    def clone_billing_address
+      if bill_address
+        if self.ship_address.nil?
+          self.ship_address = bill_address.clone
+        else
+          self.ship_address.attributes = bill_address.attributes.except('id', 'updated_at', 'created_at')
+        end
+      end
+      true
+    end
+
+    def shipping_eq_billing_address?
+      return true unless bill_address.present?
+      (bill_address.empty? && ship_address.empty?) || bill_address.same_as?(ship_address)
+    end
+
     def update_line_item_prices!
       # Esta funcion le ponia el impuesto de VAT por zona, y por algun motivo rompia el tema de las variaciones de precio por cantidad
       # Como no creo que nos afecte lo del VAT, directamente la vacío aca para no entrar en detalles y hacer lio
