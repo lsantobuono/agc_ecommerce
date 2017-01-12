@@ -30,6 +30,8 @@ require 'capistrano/rbenv_vars'
 require 'capistrano/bundler'
 require 'capistrano/rails/db'
 require 'capistrano/postgresql'
+require 'capistrano/sitemap_generator'
+
 # require 'capistrano/sidekiq'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
