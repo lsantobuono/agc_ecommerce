@@ -4,7 +4,7 @@ module Spree
     def get_products_conditions_for(base_scope, query)
       unless query.blank?
 
-        fields = ["spree_products.name", "spree_products.description", "spree_variants.sku"]
+        fields = ["unaccent(spree_products.name)", "spree_products.description", "spree_variants.sku"]
         values = query.split
         where_str = fields.map { |field| Array.new(values.size, "#{field} ILIKE ?").join(' OR ') }.join(' OR ')
 

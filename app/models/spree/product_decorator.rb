@@ -1,21 +1,27 @@
 module Spree
   Product.class_eval do
-      acts_as_list
+    acts_as_list
 
-      def all_parents
-        ret = Set.new
-        ret.merge self.taxons
-        self.taxons.each do |t|
-          if t.is_a?(Taxon)
-            aux = t.parent
-            while (aux.is_a? (Taxon))
-              ret = ret.add aux
-              aux = aux.parent
-            end
+    self.whitelisted_ransackable_attributes = %w[description name name_unaccented slug discontinue_on]
+
+    ransacker :name_unaccented, type: :string do |parent|
+      Arel.sql("unaccent(\"name\")")
+    end
+
+
+    def all_parents
+      ret = Set.new
+      ret.merge self.taxons
+      self.taxons.each do |t|
+        if t.is_a?(Taxon)
+          aux = t.parent
+          while (aux.is_a? (Taxon))
+            ret = ret.add aux
+            aux = aux.parent
           end
         end
-        return ret
       end
-
+      return ret
+    end
   end
 end

@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170111091735) do
+ActiveRecord::Schema.define(version: 20170112142325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "combo_aplicados", force: :cascade do |t|
     t.integer "combo_id",       null: false
