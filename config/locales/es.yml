@@ -1,7 +1,7 @@
 es:
   spree:
     returns: "Devoluciones"
-    add_to_cart: "Agregar al carrito "
+    add_to_cart: "AGREGAR AL CARRITO"
     shop_by_taxonomy: "%{taxonomy}"
     login: "Ingresar"
     empty_cart: "Vaciar Carrito"
@@ -30,6 +30,7 @@ es:
     confirm_email_footer: Pie
     add_volume_price: Agregar Precio por Cantidad
     volume_prices: Precios por Cantidad
+    combo: Combo
     volume_price_model: Modelo de Precio por Cantidad
     stock: Stock
     discount_type: Tipo de Descuento
@@ -37,6 +38,14 @@ es:
     position: Posición
     role: Rol
     hidden: Oculto
+
+    #navbar
+    home: INICIO
+    my_account: MI CUENTA
+    logout: CERRAR SESIÓN
+    login: INICIAR SESIÓN 
+    cart: ""
+
     # Facturacion
     first_name_last_name_company: Nombre y apellido/Empresa
     dni_cuit: DNI/CUIT

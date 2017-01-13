@@ -26,7 +26,9 @@ module Spree
         redirect_back_or_default(spree.root_path)
       else
         flash[:info] = Spree.t(:product_added)
-        redirect_to spree.root_path        
+        redirect_back_or_default(spree.root_path)
+
+#        redirect_to spree.root_path        
        # respond_with(order) do |format|
           #format.html { redirect_to cart_path }
        # end

@@ -3,7 +3,7 @@ module Spree
 	    def breadcrumbs(taxon, separator="&nbsp;")
 	      return "" if current_page?("/") || taxon.nil?
 	      separator = raw(separator)
-	      crumbs = [content_tag(:li, content_tag(:span, link_to(content_tag(:span, Spree.t(:home), itemprop: "name"), spree.root_path, itemprop: "url") + separator, itemprop: "item"), itemscope: "itemscope", itemtype: "https://schema.org/ListItem", itemprop: "itemListElement")]
+	      crumbs = [content_tag(:li, content_tag(:span, link_to(content_tag(:span, '<i class="fa fa-home" style="font-size:18px" aria-hidden="true"></i>',{ itemprop: "name"}, false), spree.root_path, itemprop: "url") + separator, itemprop: "item"), itemscope: "itemscope", itemtype: "https://schema.org/ListItem", itemprop: "itemListElement")]
 	      if taxon
 #	        crumbs << content_tag(:li, content_tag(:span, link_to(content_tag(:span, Spree.t(:products), itemprop: "name"), spree.products_path, itemprop: "url") + separator, itemprop: "item"), itemscope: "itemscope", itemtype: "https://schema.org/ListItem", itemprop: "itemListElement")
 	        crumbs << taxon.ancestors.drop(1).collect { |ancestor| content_tag(:li, content_tag(:span, link_to(content_tag(:span, ancestor.name, itemprop: "name"), seo_url(ancestor), itemprop: "url") + separator, itemprop: "item"), itemscope: "itemscope", itemtype: "https://schema.org/ListItem", itemprop: "itemListElement") } unless taxon.ancestors.empty?
@@ -20,10 +20,10 @@ module Spree
 		      css_class = nil
 
 		      if simple_current_order.nil? or simple_current_order.item_count.zero?
-		        text = "<span class='glyphicon glyphicon-shopping-cart'></span> #{text}: (#{Spree.t('empty')})"
+		        text = "<span class='glyphicon glyphicon-shopping-cart'></span> #{text} (#{Spree.t('empty')})"
 		        css_class = 'empty'
 		      else
-		        text = "<span class='glyphicon glyphicon-shopping-cart'></span> #{text}: (#{simple_current_order.item_count})"
+		        text = "<span class='glyphicon glyphicon-shopping-cart'></span> #{text} (#{simple_current_order.item_count})"
 		        if current_spree_user && current_spree_user.confirmed?
 					text +=  "<span class='amount'>#{simple_current_order.display_total.to_html}</span>"
 				end
@@ -63,7 +63,7 @@ module Spree
 						link = "##{root_id}"
 						content_tag :div, id:"accordion-#{root_id}", class: "" do
 							l = link_to(link, class: "list-group-item", data: {toggle: "collapse", parent: "#accordion-#{root_id}" }) do
-								content_tag(:div, " ", id:"arrow-icon", class: "fa fa-arrow-down", style:"float:right") +taxon.name
+								content_tag(:div, " ", id:"arrow-icon", class: "fa fa-chevron-down", style:"float:right") +taxon.name
 							end
 							l + taxons_tree(taxon, current_taxon, max_level - 1,root_id,false)
 						end 

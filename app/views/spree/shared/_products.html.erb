@@ -91,6 +91,32 @@
 
 <%= render "spree/orders/checkout_button_fixed" %>
 
+<script>
+$(document).ready(function() {
+    $("img[itemprop='image']").each(function() {
+        // Calculate aspect ratio and store it in HTML data- attribute
+        var aspectRatio = $(this).width()/$(this).height();
+
+        var pic_real_width = $(this)[0].naturalWidth;
+
+        console.log(pic_real_width);
+        // Conditional statement
+        if(aspectRatio > 2) {
+            // Image is landscape
+            $(this).prev(".image-helper").css({display:"inline-block"});
+            $(this).css({ "margin-left"  : "-0.5em", "padding-left" : "1px"});
+
+        }
+        if (pic_real_width < 100) { //Si es una imagen chica pongo el span y no la resiseo
+            $(this).prev(".image-helper").css({display:"inline-block"});
+            $(this).css({ "width"  : "auto"});            
+        }
+    });
+});
+</script>
+
+
+
 <% 
 =begin %>
 

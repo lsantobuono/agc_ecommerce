@@ -30,6 +30,7 @@
 
 </table>
 
+<% if (order_form.object.combo_aplicados != nil && !order_form.object.combo_aplicados.empty?) %>
 <table class="table" id="cart-detail" data-hook>
   <thead>
     <tr class="active" data-hook="cart_items_headers">
@@ -69,16 +70,18 @@
     </tr>
   <% end %>
 </table>
+<% end %>
 
 <script> 
 
 jQuery.fn.extend({
     changeText: function () {
       var t = $(this).text();
-      if (t.indexOf("Ver") == -1)
-        t = t.replace("Ocultar","Ver");
+ //     console.log(t);
+      if (t.indexOf("Desplegar") == -1)
+        t = t.replace("Ocultar","Desplegar");
       else
-        t = t.replace("Ver","Ocultar");
+        t = t.replace("Desplegar","Ocultar");
       
       $(this).text(t);
     }
@@ -87,7 +90,9 @@ jQuery.fn.extend({
 jQuery.fn.extend({
     changeTextOcult: function () {
       var t = $(this).find("th").first().text();
-      t = t.replace("Ocultar","Ver");
+      console.log($(this).find("th").first().text());
+
+      t = t.replace("Ocultar","Desplegar");
       $(this).find("th").first().text(t);
     }
   });
@@ -101,7 +106,9 @@ $(".combo-description-link").click(function() {
   $(bodyId).fadeToggle();
   $(".head-combo-description:not(".concat(headId).concat(")")).fadeOut();
   $(headId).fadeToggle();
-  $(".combo-description-link").changeTextOcult();
+  $(".combo-description-link").not(this).each( function(t) {
+    $(this).changeTextOcult();
+  });
 
   $(this).find("th").first().changeText();
 });

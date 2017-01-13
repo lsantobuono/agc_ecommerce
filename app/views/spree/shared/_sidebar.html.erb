@@ -1,17 +1,17 @@
 <aside id="sidebar" class="col-sm-4 col-md-3" data-hook>
   <%= yield :sidebar %>
-  <img id="random-img-show" class="img-responsive" />
+  <img id="random-img-show" class="img-responsive" style="height: 200px"/>
 </aside>
 
 <script>
 $(".list-group-item").click( function () {
 	if ($(this).attr("aria-expanded") == "true")
 	{
-		$(this).find("#arrow-icon").attr("class","fa fa-arrow-down");
+		$(this).find("#arrow-icon").attr("class","fa fa-chevron-down");
 	}
 	else 
 	{
-		$(this).find("#arrow-icon").attr("class","fa fa-arrow-up");
+		$(this).find("#arrow-icon").attr("class","fa fa-chevron-up");
 	}
 });
 

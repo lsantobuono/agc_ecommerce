@@ -1,29 +1,56 @@
 <footer class="footer" >
 <div class="container" style="padding-top:2em; font-size:0.9em">
   <nav>
-    <div class="row text-center" >
+    <div class="row" >
+      
       <div class="col-md-4">
+        <a  href="/">
+          <%= image_tag("logo.png", alt: "logo agc", style: "max-height:6em; max-width:100%;") %>
+        </a>
+        <br><br>
         <p>
-          <b>Dirección</b><br> 
-          <hr> 
-          Virrey Cisneros 8649 - Jose León Suarez<br>
-          Buenos Aires - Argentina<br>
-      	</p>
+          <b>Horarios</b><br> 
+          <hr>
+          Lunes - Viernes : 8:00-20:00 <br>
+          Sábado : 10:00-20:00 <br>
+        </p>
       </div>
+
       <div class="col-md-4">
         <p>
           <b> Contacto </b><br>
           <hr>
           Tel:  (5411) 4729-7481<br>
-		  info@agc.com.ar
-      </p>
+          <a href="mailto:info@agc.com.ar" style="color:white" target="_top">info@agc.com.ar</a><br>
+          Virrey Cisneros 8649 - Jose León Suarez<br>
+          Buenos Aires - Argentina<br>
+        </p>
+      </div>
+
+      <div class="col-md-4">
+        <o>
+          <b> Seguinos en las Redes Sociales </b><br>
+          <hr>
+          <span style="margin-right:1em;">
+            <%= image_tag "facebook-icon.png", style: "width:2.7em;" %>
+          </span>
+          <span style="margin-right:1em;">
+            <%= image_tag "whatsapp-icon.png", style: "width:2.7em;" %>
+          </span>
+          <span style="margin-right:1em;">
+            <%= image_tag "youtube-icon.png", style: "width:2.7em;" %>
+          </span>
+          <span style="margin-right:1em;">
+            <%= image_tag "gplus-icon.png", style: "width:2.5em;" %>
+          </span>
       </div>
       <div class="col-md-4">
-        <p>
-          <b>Horarios</b><br> 
-          <hr>
-          Lunes - Viernes : 8:00-20:00 <br>
-          Sábado : 10:00-20:00 </p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        Copyright © 2017 AGC - Developed by <a href="mailto:luciano.santobuono@gmail.com" style="color:white" target="_top">Programando</a><br>
       </div>
     </div>
   </nav>

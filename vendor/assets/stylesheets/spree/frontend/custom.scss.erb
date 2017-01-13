@@ -11,6 +11,9 @@ $brown: #b35900;
 $light-brown: #cc9966;
 
 $navbar-blue:rgb(44,84,136);
+$hover-blue: rgb(56, 109, 173);
+
+
 @font-face {  
 	font-family: 'olney_light';  
 	src: url(<%= asset_path 'olney_light.otf' %>);
@@ -45,11 +48,11 @@ html, body {
 }
 .wrapper {
   min-height: 100%;
-  margin-bottom: -130px;
+  margin-bottom: -330px;
 }
 .footer,
 .push {
-  height: 130px;
+  height: 330px;
 }
 
 
@@ -57,16 +60,23 @@ html, body {
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 
+
+
 .wrapper {
   min-height: 100%;
-  margin-bottom: -330px;
+  margin-bottom: -530px;
 }
 
 .footer,
 .push {
-  height: 330px;
+  height: 530px;
 }
 
+.footer {
+  .col-md-4 {
+    margin-top:1em;
+  }
+}
   #main-nav-bar {
     ul > li {
       padding-left:1em;
@@ -167,6 +177,16 @@ html, body {
 
 #main-nav-bar {
   background-color: $navbar-blue;
+  ul {
+    li {
+      a {
+        border-bottom: 3px solid $navbar-blue;
+        &:hover {
+          border-bottom: 3px solid #33ccff !important;
+        }
+      }
+    }
+  }
 }
 
 #top-nav-bar {
@@ -189,15 +209,15 @@ html, body {
 
 	a {
 		&:link {
-    		color: $dark-grey;
+    		color: white;
    	 	}
     
     	&:visited {
-  			color: $dark-grey;
+        color: white;
    	 	}
     
     	&:hover {
-			 color: $dark-grey;
+        color: white;
      	  cursor:pointer;
     	}
 	}
@@ -205,30 +225,30 @@ html, body {
 
   .list-group {
    	a {
-	   	background-color: rgb(76,140,205);
+	   	background-color: $navbar-blue;
       &:hover {
-        background-color: rgb(206,230,255);
+        background-color: $hover-blue;
       }      
     }
    	.list-group {
      	a {
-	   		background-color: rgb(156, 191, 227);
+	   		background-color: rgb(82, 134, 199);
         &:hover {
-         background-color: rgb(206,230,255);
+         background-color: $hover-blue;
         }
       }
 			.list-group {
 		    a {
-					background-color: rgb(196, 217, 237);
+					background-color: rgb(159, 188, 224);
           &:hover {
-            background-color: rgb(206,230,255);
+            background-color: $hover-blue;
           }
         }
         .list-group {
           a {
              background-color: rgb(235, 242, 249);
              &:hover {
-                background-color: rgb(206,230,255);
+                background-color: $hover-blue;
               }
             }
           }
@@ -252,8 +272,18 @@ html, body {
 
 /* Index display de previews */
 
-
+#content {
+  hr {
+    margin-top:10px;
+    margin-bottom: 10px ; //Las hr se usan para separar la descripcion d e los productos, pero 20px es medio mucho
+  }
+}
 .product-list-item{
+  .panel {
+    &:hover {
+      box-shadow: 0 0 2em rgba(0, 0, 0, 0.2);
+    }
+  }
 	a {
 		&:link {
     		color: $dark-grey;
@@ -285,19 +315,30 @@ html, body {
       height:100%;
       white-space: nowrap;
       padding:0;
-      padding-left:1px;
+      &:before {
+        content: "";
+        display:none;
+      }
+      &:after {
+          content:"";
+          display:none;
+      }  
+
+   //   padding-left:1px;
     }
 	}
+
+  img {
+    width:100%;
+    //margin-left:-0.5em;
+    max-height: 100%; // Esto puede romper el layout eventualmente... O en realidad puede dejar imagenes muy deformadas... pero de
+    max-width: 100%;
+  }
 
 	#product-variants {
 		text-align: center;
 	}
 
-	img {
-    margin-left:-0.5em;
-		max-height: 100%; // Esto puede romper el layout eventualmente... O en realidad puede dejar imagenes muy deformadas... pero de
-    max-width: 100%;
-	}
 
 	.input-group {
 		display:block;
@@ -306,7 +347,16 @@ html, body {
 	#add-to-cart-button{
 		margin-top:1em;
 		width:100%;
+    p {
+      font-size:0.9em;
+      margin-bottom: 0;
+    }
 	}
+
+  #add-to-cart-button:hover, .btn.btn-success:active, .btn.btn-success:focus {
+  background-color: $hover-blue !important;
+  }
+
 
 	.add-to-cart {
 		text-align: center;
@@ -339,12 +389,20 @@ html, body {
 
 }
 
+//Va afuera xq se usa tanto en el show como en la home
+.image-helper {
+  display: none;
+  height: 100%;
+  vertical-align: middle;
+}
+      
+
 .button-checkout-home {
   position:fixed;
   bottom:12em;
   right:0em;
   z-index:1000;
-  box-shadow: .25em .25em .5em rgba(0, 0, 0, 0.3);
+  box-shadow: .25em .25em .5em rgba(0, 0, 0, 0.1);
 }
 
 .tag-variantes {
@@ -376,6 +434,13 @@ html, body {
 }
 
 /* producto show */
+
+[data-hook="product_images"] {
+  #main-image {
+    border:none;
+  }
+}
+
 #thumbnails {
 	li.selected {
 		a {
@@ -391,12 +456,6 @@ html, body {
 	.even {
 		background-color: rgb(108,161,213);
 	}
-}
-
-.image-helper {
-	display: inline-block;
-    height: 100%;
-    vertical-align: middle;
 }
 
 .videoWrapper {
@@ -509,6 +568,10 @@ label {
   cursor:pointer;
   background-color: $navbar-blue !important;
   color:white;
+  &:hover {
+    background-color: white !important;
+    color: $navbar-blue;
+  }
 }
 
 .about-tokens
@@ -681,4 +744,16 @@ input,textarea {
   &:hover {
     background-color:#fbfafb;
   }
+
+}
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+  .product-list-item {
+    img {
+      width:auto; 
+    }
+  }
+
 }
