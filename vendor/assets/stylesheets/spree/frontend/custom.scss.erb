@@ -12,7 +12,7 @@ $light-brown: #cc9966;
 
 $navbar-blue:rgb(44,84,136);
 $hover-blue: rgb(56, 109, 173);
-
+$light-blue: #33ccff;
 
 @font-face {  
 	font-family: 'olney_light';  
@@ -182,7 +182,7 @@ html, body {
       a {
         border-bottom: 3px solid $navbar-blue;
         &:hover {
-          border-bottom: 3px solid #33ccff !important;
+          border-bottom: 3px solid $light-blue !important;
         }
       }
     }
@@ -279,7 +279,7 @@ html, body {
   }
 }
 .product-list-item{
-  .panel {
+  .panel.panel-default.panel-image {
     &:hover {
       box-shadow: 0 0 2em rgba(0, 0, 0, 0.2);
     }
@@ -353,9 +353,6 @@ html, body {
     }
 	}
 
-  #add-to-cart-button:hover, .btn.btn-success:active, .btn.btn-success:focus {
-  background-color: $hover-blue !important;
-  }
 
 
 	.add-to-cart {
@@ -387,6 +384,11 @@ html, body {
 		height:40px;
 	}
 
+}
+
+
+#add-to-cart-button:hover, .btn.btn-success:active, .btn.btn-success:focus {
+  background-color: $hover-blue !important;
 }
 
 //Va afuera xq se usa tanto en el show como en la home
@@ -492,7 +494,7 @@ html, body {
 	   	 }
 	    
 	    &:hover {
-			color: orange;
+			color: $light-blue;
 	    }	
 	}
 }
@@ -555,8 +557,8 @@ label {
 {
   font-size:1.3em; 
   font-weight: bold; 
-  background-color: #33ccff !important; 
-  border-color: #33ccff !important;   
+  background-color: $light-blue !important; 
+  border-color: $light-blue !important;   
 }
 
 .btn.btn-primary.boton-checkout:hover, .btn.btn-primary.boton-checkout:active, .btn.btn-primary.boton-checkout:focus {
@@ -681,6 +683,26 @@ label {
     background: #eee;
     cursor: pointer;
   }
+}
+
+.plus-button,.substract-button {
+  background-color: $navbar-blue;
+  font-size:1.5em;
+  border:1px solid black;
+  &:disabled {
+    background-color: $light-grey;
+    &:hover{
+      cursor: not-allowed;
+    }
+  }
+}
+
+.plus-button {
+  color: white;
+}
+
+.substract-button { 
+  color: white
 }
 
 #form-combo {

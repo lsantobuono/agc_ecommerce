@@ -1,8 +1,66 @@
 <% if @product.taxons.present? %>
-  <h3 class="product-section-title"><%= Spree.t(:look_for_similar_items) %></h3>
+  <div class="panel">
+  <div class="panel-header">
+    <h3 class="product-section-title"><%= Spree.t(:look_for_similar_items) %></h3>
+  </div>
+  <div class="panel-body">
   <ul class="list-group" id="similar_items_by_taxon" data-hook>
-    <% @product.taxons.each do |taxon| %>
-      <li class="list-group-item"><%= link_to taxon.name, seo_url(taxon) %></li>
+    <%  products = @product.get_relacionados %>
+    <% if products.any? %>
+      <div id="products" class="row" data-hook>
+        <% products.each do |product| %>
+          <% url = spree.product_path(product, taxon_id: @taxon.try(:id)) %>
+          <div id="product_<%= product.id %>" class="col-md-4 col-sm-6 col-xs-12 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
+            <div class="panel panel-default panel-image">
+              
+              <%= link_to url, itemprop: "url" do %>
+                <div id="product-images-<%= product.id %>" data-hook="product_images">
+                  <div id="main-image-<%= product.id %>" class="panel panel-default main-image-home" data-hook>
+                    <div class="panel-body text-center">
+                     <%= render :partial => 'spree/products/image_home' , :locals => {product: product} %>
+                    </div>
+                  </div>
+                  <% unless product.variants.empty? %>
+                    <span class="tag-variantes" > Producto con Variantes </span>
+                  <% end %>
+                  <% lengthDescription = 40 %>
+                  <% if  product.variants.empty? %>
+                      <% lengthDescription = 110 %>
+                  <% end %>
+                   <% descripcionProducto= content_tag(:span, truncate("#{product.name} - <subText style='font-size:0.8em'>#{product.description}</subText>",
+                     length: (lengthDescription +  "<subText style='font-size:0.8em'></subText>".length) , escape: false) , class: 'info', itemprop: "name", title: product.name, style:"font-size:0.9em;") %>            
+                  <% if descripcionProducto.length < 300 && product.variants.empty? %>
+                    <div style= "height:80px;">
+                      <%= descripcionProducto %>
+                    </div>
+                  <% else %>
+                      <%= descripcionProducto %>
+                  <% end %>
+                 </div>
+              <% end %>
+                  <div id="thumbnails" data-hook style="height:0">
+                    <%= render :partial => 'spree/products/thumbnails_home' , :locals => {product: product} %>
+                  </div>
+
+              
+                 <div id="cart-form-home" data-hook="cart_form">
+                    <%= render :partial => 'spree/products/cart_form_home' , :locals => {product: product} %>
+                  </div>
+                <% if current_spree_user && current_spree_user.confirmed? %>
+                  <div class="panel-footer text-center">
+                    <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                      <span class="price selling lead" itemprop="price"><%= display_price(product) %></span>
+                    </span>
+                  </div>
+                <% end %>
+             
+            </div>
+          </div>
+        <% end %>
+        <% reset_cycle("classes") %>
+      </div>
     <% end %>
   </ul>
+  </div>
+  </div>
 <% end %>

@@ -23,7 +23,15 @@
 <% if p.has_variants? %>
   <div class="row" style="margin: 0;">
     <br>
-    <div id="<%= p.id %>" class="list-group panel-collapse accordion-body collapse">
+    <div id="<%= p.id %>" class="list-group panel-collapse accordion-body collapse accordion-category">
+      <p style="font-size: 1em;"> Disponible: 
+        <span class="available_quantity_label" id="available_quantity_<%= (cl.id*cl.quantity)-cl.id %>" >
+          <%= cl.quantity %>
+        </span>
+        <span class="status_label" >
+        </span>
+          
+      </p>
 
     <div class="select-variant-panel">
     <table>

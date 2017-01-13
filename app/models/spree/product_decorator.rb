@@ -8,6 +8,15 @@ module Spree
       Arel.sql("unaccent(\"name\")")
     end
 
+    def get_relacionados
+      ret = Set.new
+      self.taxons.each do |t|
+        ret.merge(t.products)
+      end
+      ret.delete(self)
+      ret = ret.to_a.sample(3)
+    end
+
 
     def all_parents
       ret = Set.new

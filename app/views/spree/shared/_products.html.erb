@@ -35,7 +35,7 @@
     <% products.each do |product| %>
       <% url = spree.product_path(product, taxon_id: @taxon.try(:id)) %>
       <div id="product_<%= product.id %>" class="col-md-3 col-sm-6 col-xs-12 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
-        <div class="panel panel-default">
+        <div class="panel panel-default panel-image">
           
           <%= link_to url, itemprop: "url" do %>
             <div id="product-images-<%= product.id %>" data-hook="product_images">

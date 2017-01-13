@@ -18,7 +18,15 @@
 	  		<div id="accordion-<%= (cl.id*cl.quantity)-cl.id %>">
 		    	<a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= (cl.id*cl.quantity)-cl.id %>" href="#<%= (cl.id*cl.quantity)-cl.id %>" style="padding:0 ; border:0;">
 		  		<p> Seleccione productos y cantidades para la categoría (Deben sumar <b><%= cl.quantity %></b>) </p>  		</a>
-		  		<div id="<%= (cl.id*cl.quantity)-cl.id %>" class="list-group panel-collapse accordion-body collapse">
+		  		<div id="<%= (cl.id*cl.quantity)-cl.id %>" class="list-group panel-collapse accordion-body collapse accordion-category">
+		  		<p style="font-size: 1em;"> Disponible: 
+		  		<span class="available_quantity_label" id="available_quantity_<%= (cl.id*cl.quantity)-cl.id %>" >
+		  			<%= cl.quantity %>
+		  		</span>
+		  		<span class="status_label" >
+		  		</span>
+		  		
+		  		</p>
 						<% cl.taxon.all_children.each do |p| %> 
 							<%= render partial: "product_combo", locals: {p: p, cl: cl, type: 0} %>
 					  <% end %>
@@ -26,13 +34,83 @@
 				</div>
 			<% elsif cl.taxon == nil && cl.product != nil %>
 				<h3> <%= pluralize(cl.quantity,"unidad","unidades") %> del producto <b><%= cl.product.name %></b>  </h3>
-					<% if cl.product.has_variants? %>
-						<p> Seleccione variantes y cantidades para el producto (Deben sumar <b><%= cl.quantity %></b>) </p>
-					<% end %>
-					<%= render partial: "product_combo", locals: {p: cl.product, cl: cl, type: 1} %>
+					<%= render partial: "producto_unico_combo", locals: {p: cl.product, cl: cl, type: 1} %>
 			<% end %>
 		 <% end %>
 		 <br>
 	 <br>
 	  <%= submit_tag "Ordenar!" , class: "btn btn-success" %>
 <% end %>  
+
+<script>
+
+// Disable function
+jQuery.fn.extend({
+    disable: function(state) {
+        return this.each(function() {
+            this.disabled = state;
+        });
+    }
+});
+
+// El boton de MAS
+$(".plus-button").click(function() {
+	
+	var num = parseInt($(this).prev("input").val());
+	num  = num+1;
+	//El boton de resta correspondiente se habilita porque estoy sumandole 1 a esta variante
+	$(this).next(".substract-button").disable(false);
+
+	//Actualizo el input
+	$(this).prev("input").val(num);
+	
+	//Obtengo el nro de "disponible"
+	var disp = parseInt($(this).closest(".accordion-category").find(".available_quantity_label").text());
+	
+	disp = disp-1;
+
+	//Lo actualizo
+	$(this).closest(".accordion-category").find(".available_quantity_label").text(disp);
+
+	//Si llegue a la cantidad, pongo el label a correcto y disableo todos los botones de suma
+	if (disp == 0)
+	{
+		$(this).closest(".accordion-category").find('.plus-button').disable(true);
+		$(this).closest(".accordion-category").find('.status_label').text("Configuración correcta!");
+	}
+	// Sino quito el correcto del label
+	else {
+		$(this).closest(".accordion-category").find('.status_label').text("");
+	}
+});
+
+//Boton de Resta
+$(".substract-button").click(function() {
+
+	var num = parseInt($(this).prev().prev().val());
+	num  = num-1;
+	
+	//Si por algun motivo esto llevaria a menor que 0 , no deberia pasar, o a 0, disableo este boton
+	if (num <= 0)
+	{
+		num =0 ;
+		$(this).disable(true)
+	}
+
+	//Esto actualiza el valor del input
+	$(this).prev().prev().val(num);
+
+	//Obtengo disponible y lo actualizo
+	var disp = parseInt($(this).closest(".accordion-category").find(".available_quantity_label").text());
+	disp = disp+1;
+	$(this).closest(".accordion-category").find(".available_quantity_label").text(disp);
+
+	//Si la resta es correcta, todos los plus se habilitan automaticamente
+	$(this).closest(".accordion-category").find('.plus-button').disable(false);
+
+});
+
+
+
+</script>
+
