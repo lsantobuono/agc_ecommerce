@@ -107,6 +107,17 @@ $(".substract-button").click(function() {
 
 	//Si la resta es correcta, todos los plus se habilitan automaticamente
 	$(this).closest(".accordion-category").find('.plus-button').disable(false);
+	//Si llegue a la cantidad, pongo el label a correcto y disableo todos los botones de suma
+	
+	if (disp == 0)
+	{
+		$(this).closest(".accordion-category").find('.plus-button').disable(true);
+		$(this).closest(".accordion-category").find('.status_label').text("Configuración correcta!");
+	}
+	// Sino quito el correcto del label
+	else {
+		$(this).closest(".accordion-category").find('.status_label').text("");
+	}
 
 });
 
