@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
+
+<div id="spree-header">
+  <header id="header" style="padding-bottom:10px;">
+    <div class="container">
+      <div class="row">
+        <div id="logo" class="col-md-6 col-sm-6">
+          <%= link_to root_path do %>
+            <%= image_tag("logo.png", alt: "logo agc", style: "max-height:6em; max-width:13 em;") %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+
+  <title>Página no encontrada</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   body {
-    background-color: #EFEFEF;
+    background-color: white;
     color: #2E2F30;
     text-align: center;
     font-family: arial, sans-serif;
@@ -58,10 +74,9 @@
   <!-- This file lives in public/404.html -->
   <div class="dialog">
     <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
+      <h1>Esta página no existe. Quiza la movimos o nunca existió </h1>
+        <%= link_to "Volvé", spree.root_path %>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
   </div>
 </body>
 </html>

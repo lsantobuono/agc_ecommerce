@@ -38,7 +38,10 @@ es:
     position: Posición
     role: Rol
     hidden: Oculto
-
+    shopping_cart: Carrito de Productos
+    continue_shopping: Seguir cargando
+    checkout: Solicitar Cotización
+    instrucciones_ml: Si ya ha adquirido un producto o combo por Mercado Libre, por favor ingrese su usuario e id de producto adquirido
     #navbar
     home: INICIO
     my_account: MI CUENTA
@@ -85,7 +88,9 @@ es:
         invoices: Facturas
         packaging_slips: Recibos embalaje
     qty: Cantidad
-    address_instructions: "Ingrese sus detalles de facturación para agilizar el proceso de compra."
+
+    address_instructions: "Ingrese sus detalles de facturación para agilizar el proceso de cotización."
+    shipping_instructions: "Ingrese sus preferencias de envío para agilizar el proceso de cotización."
     registration_before_order_instructions: "Bienvenido a AGC. Le pedimos que por favor se registre antes de realizar pedidos. Muchas Gracias. "
     price_file: "Archivo de precios"
     security_stock: "Stock de Seguridad"
@@ -107,6 +112,7 @@ es:
     order_mailer:
       confirm_email:
         dear_customer: "Estimado Cliente,"
+        order_summary: "Resumen del presupuesto"
         instructions: "Revise y conserve la siguiente información del pedido. Nos pondremos en contacto a la brevedad para detallar su presupuesto y coordinar pago y envío."
     api:
       must_specify_api_key: "No se permite acceder sin key"      
