@@ -19,7 +19,7 @@ module Spree::Admin
       end
 
       respond_with(@order) do |format|
-        format.html { redirect_to collection_url }
+        format.html { redirect_to admin_orders_path }
         format.js  { render_js_for_destroy }
       end
     end
