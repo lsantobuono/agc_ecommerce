@@ -56,8 +56,8 @@
             <div class="row">
               <div class="col-sm-6">
                 <div data-hook="admin_product_form_shipping_categories">
-                  <!--<%= line_form.hidden_field :product_id, class: "variant_autocomplete fullwidth-input" %>-->
-                  <%= line_form.collection_select(:product_id, @products, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
+                  <%#= line_form.collection_select(:product_id, @products, :id, :name, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }) %>
+                  <%= line_form.hidden_field :product_id, class: "variant_autocomplete fullwidth-input" %>
                 </div>
               </div>
               <div class="col-sm-2">

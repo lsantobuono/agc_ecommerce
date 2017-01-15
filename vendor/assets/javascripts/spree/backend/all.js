@@ -19,6 +19,7 @@ $(document).on('nested:fieldAdded', function(event){
   var field = event.field; 
   var select2_field = field.find('.select2');
   select2_field.select2();
+  $(".variant_autocomplete").variantAutocomplete();
 })
 
 $(document).ready(function() {
