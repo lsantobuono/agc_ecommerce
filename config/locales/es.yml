@@ -126,6 +126,9 @@ es:
       lastname: Apellido
       email: Email
       total: Total
+    notice_messages:
+      order_deleted: La orden ha sido borrada
+      order_not_deleted: La orden no pudo ser borrada
   activerecord:
     attributes:
       spree/store:

@@ -1,10 +1,29 @@
 module Spree::Admin
   OrdersController.class_eval do
+    before_action :load_order, only: [:edit, :update, :destroy, :cancel, :resume, :approve, :resend, :open_adjustments, :close_adjustments, :cart]
+
     def new
       @order = Spree::Order.create(order_params.merge(creado_por_admin: true))
       redirect_to cart_admin_order_url(@order)
     end
-    
+
+    def destroy
+      begin
+        if @order.destroy
+          flash[:success] = Spree.t('notice_messages.order_deleted')
+        else
+          flash[:error] = Spree.t('notice_messages.order_not_deleted')
+        end
+      rescue ActiveRecord::RecordNotDestroyed => e
+        flash[:error] = Spree.t('notice_messages.order_not_deleted')
+      end
+
+      respond_with(@order) do |format|
+        format.html { redirect_to collection_url }
+        format.js  { render_js_for_destroy }
+      end
+    end
+
     def approve
       @order.create_proposed_shipments
       @order.finalize!
