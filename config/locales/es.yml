@@ -47,7 +47,7 @@ es:
     my_account: MI CUENTA
     logout: CERRAR SESIÓN
     login: INICIAR SESIÓN 
-    cart: ""
+    cart: "Carrito"
 
     # Facturacion
     first_name_last_name_company: Nombre y apellido/Empresa
