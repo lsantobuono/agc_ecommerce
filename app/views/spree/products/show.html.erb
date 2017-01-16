@@ -30,8 +30,10 @@
           <h1 class="product-title" itemprop="name"><%= @product.name %></h1>
 
           <div class="well" itemprop="description" data-hook="description">
-            <%= product_description(@product) %>
+            <%= product_description(@product) %><br>
+            Código: <b><%= @product.master.sku %></b>
           </div>
+
           <% if current_spree_user && current_spree_user.confirmed? %>
             <%= render partial: 'spree/products/volume_pricing', locals: { product: @product } %>
           <% end %>

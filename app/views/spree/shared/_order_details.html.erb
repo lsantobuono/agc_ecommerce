@@ -1,5 +1,5 @@
 <div class="row steps-data">
-  <% if order.has_step?("address") %>
+  <% if order.has_step?("address") && order.bill_address != nil %>
     <div class="col-md-3 col-sm-3 col-xs-6" data-hook="order-bill-address">
       <h4><%= Spree.t(:billing_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless order.completed? %></h4>
       <%= render 'spree/shared/address', address: order.bill_address %>

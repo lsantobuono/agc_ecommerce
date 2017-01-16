@@ -52,12 +52,20 @@ SitemapGenerator::Sitemap.create do
   add mercado_libre_path
   add contact_path
   add about_us_path
+  add descargas_path
 
   Combo.all.each do |combo|
     if !combo.hidden
       add ordenar_combo_path(combo), lastmod: combo.updated_at
     end
   end  
+
+  add download_static_file_path("B3")
+  add download_static_file_path("C2")
+  add download_static_file_path("catalogo B3-L y LE")
+  add download_static_file_path("catalogo crane")
+  add download_static_file_path("Tejo")
+  add download_static_file_path("TODOS LOS MODELOS")
 
   add_taxons
   add_products
