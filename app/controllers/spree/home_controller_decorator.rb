@@ -5,6 +5,11 @@ module Spree
       @products = @searcher.retrieve_products.order("spree_products.position ASC")
       @products = @products.includes(:possible_promotions) if @products.respond_to?(:includes)
       @taxonomies = Spree::Taxonomy.includes(root: :children)
+      
+      if (session["news_message_display"] != "true")
+        flash.now[:info]= "Por el momento nos encontramos sin teléfono. Por favor comuníquese por email o desde la página de contacto."
+        session["news_message_display"]= "true"
+      end
     end
 
     def contact
