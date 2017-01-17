@@ -125,7 +125,7 @@ es:
     new_combo: Nuevo combo
     printable_number: Numero impresión
     print_invoice:
-      invoice_number: "Número de pedido: %{number}"
+      invoice_number: "Número de presup.: %{number}"
       invoice_date: "Fecha: %{date}"
       date: Fecha
       document_type: Tipo Documento

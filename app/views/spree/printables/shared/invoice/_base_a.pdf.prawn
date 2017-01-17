@@ -7,6 +7,9 @@ prawn_document(force_download: true) do |pdf|
   pdf.define_grid(columns: 5, rows: 8, gutter: 10)
   pdf.font font_style[:face], size: font_style[:size]
 
+
+  pdf.move_down 20
+
   pdf.repeat(:all) do
     render 'spree/printables/shared/header', pdf: pdf, printable: doc
   end
@@ -22,12 +25,13 @@ prawn_document(force_download: true) do |pdf|
     pdf.move_down 10
 
     render 'spree/printables/shared/invoice/items_a', pdf: pdf, invoice: doc
-
+    pdf.move_down 10
+    pdf.text "PRESUPUESTO VÁLIDO POR 10 DÍAS", size: 14
     pdf.move_down 10
 
     render 'spree/printables/shared/totals_a', pdf: pdf, invoice: doc
 
-    pdf.move_down 30
+    pdf.move_down 20
 
     pdf.text Spree::PrintInvoice::Config[:return_message], align: :right, size: font_style[:size]
   end

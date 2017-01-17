@@ -15,12 +15,13 @@ prawn_document(force_download: true) do |pdf|
   pdf.grid([1,0], [6,4]).bounding_box do
 
     render 'spree/printables/shared/invoice/items_b', pdf: pdf, invoice: doc
-
+    pdf.move_down 10
+    pdf.text "PRESUPUESTO VÁLIDO POR 10 DÍAS", size: 14
     pdf.move_down 10
 
     render 'spree/printables/shared/totals_b', pdf: pdf, invoice: doc
 
-    pdf.move_down 30
+    pdf.move_down 20
 
     pdf.text Spree::PrintInvoice::Config[:return_message], align: :right, size: font_style[:size]
   end

@@ -49,8 +49,6 @@ module Spree
     else 
       bookkeeping_documents.create(template: 'invoice_mostrador') # Si no tiene tipo es xq la crearon a mano y se usa el pdf mostrador
     end
- #     debugger
- #     bookkeeping_documents.create(template: 'invoice')
   end
       
     def assign_default_addresses!

@@ -1,3 +1,22 @@
+
+im = Rails.application.assets.find_asset(Spree::PrintInvoice::Config[:logo_path])
+
+
+pdf.repeat(:all) do
+  pdf.grid([7,0], [7,2]).bounding_box do
+    if im && File.exist?(im.pathname)
+      pdf.image im.filename, vposition: :top, height: 40, scale: Spree::PrintInvoice::Config[:logo_scale]
+    end
+  end
+  pdf.grid([7,2], [7,4]).bounding_box do
+    pdf.text "Virrey Cisneros 8649 - José León Suarez - Prov. de Bs As.", align: :right, size: 11
+    pdf.text "www.agc.com.ar info@agc.com.ar ", align: :right, size: 11
+    pdf.text "Tel: (5411) 4729-7481    Cel:(5411) 15-6051-0878", align: :right, size: 11
+    pdf.text "Whatsapp: +54911 6051 0878", align: :right, size: 11
+  end
+end
+
+=begin
 pdf.repeat(:all) do
   pdf.grid([7,0], [7,4]).bounding_box do
 
@@ -12,3 +31,4 @@ pdf.repeat(:all) do
     end
   end
 end
+=end
