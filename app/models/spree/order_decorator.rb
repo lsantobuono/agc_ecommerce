@@ -38,6 +38,21 @@ module Spree
     # con todo el quilombo de redefinicion de estados que hacemos en este decorator, jode al otro decorator (el de la gema)
     Spree::Order.state_machine.before_transition to: :complete, do: :invoice_for_order
 
+
+  def invoice_for_order
+   if (self.tipo_factura == "consumidor_final" )
+      bookkeeping_documents.create(template: 'invoice_cf')
+    elsif (self.tipo_factura == "factura_a")
+      bookkeeping_documents.create(template: 'invoice_a')
+    elsif (self.tipo_factura == "factura_b")
+      bookkeeping_documents.create(template: 'invoice_b')
+    else 
+      bookkeeping_documents.create(template: 'invoice_mostrador') # Si no tiene tipo es xq la crearon a mano y se usa el pdf mostrador
+    end
+ #     debugger
+ #     bookkeeping_documents.create(template: 'invoice')
+  end
+      
     def assign_default_addresses!
       if user
         clone_billing

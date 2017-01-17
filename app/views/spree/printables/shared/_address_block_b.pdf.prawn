@@ -7,8 +7,9 @@ dataAddress = nil
 dataShip = nil
 
 if (bill_address != nil)
-  address_cell_billing  = pdf.make_cell(content: Spree.t(:billing_data), font_style: :bold)
-  billing =  "#{bill_address.firstname} #{bill_address.lastname}"
+  address_cell_billing  = pdf.make_cell(content: "#{Spree.t(:billing_data)} Factura B Monotributo", font_style: :bold)
+  billing =  "#{bill_address.dni_cuit} "
+  billing << "\n#{bill_address.firstname} #{bill_address.lastname}"
   billing << "\n#{bill_address.address1}"
   billing << "\n#{bill_address.address2}" unless bill_address.address2.blank?
   billing << "\n#{bill_address.city}, #{bill_address.state_text} #{bill_address.zipcode}"

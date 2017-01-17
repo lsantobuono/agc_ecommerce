@@ -46,13 +46,15 @@ es:
     order_summary: Resumen del presupuesto
     order_total: Total presupuesto
     order_processed_successfully: Tu pedido de cotización ha sido procesado con éxito 
+    bonificacion: "% Bonif"
     #navbar
     home: INICIO
     my_account: MI CUENTA
     logout: CERRAR SESIÓN
     login: INICIAR SESIÓN 
     cart: "Carrito"
-
+    billing_data: "Datos de facturación"
+    iva: "IVA 21%"
     # Facturacion
     first_name_last_name_company: Nombre y apellido/Empresa
     dni_cuit: DNI/CUIT
@@ -123,6 +125,8 @@ es:
     new_combo: Nuevo combo
     printable_number: Numero impresión
     print_invoice:
+      invoice_number: "Número de pedido: %{number}"
+      invoice_date: "Fecha: %{date}"
       date: Fecha
       document_type: Tipo Documento
       number: Nro Factura
@@ -130,6 +134,11 @@ es:
       lastname: Apellido
       email: Email
       total: Total
+      order_invoice_a: PRESUPUESTO
+      order_invoice_b: PRESUPUESTO
+      order_invoice_cf: PRESUPUESTO
+      order_invoice_mostrador: PRESUPUESTO
+
     notice_messages:
       order_deleted: La orden ha sido borrada
       order_not_deleted: La orden no pudo ser borrada
