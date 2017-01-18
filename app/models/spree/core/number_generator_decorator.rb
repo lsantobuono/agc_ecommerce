@@ -24,8 +24,6 @@ module Spree
           # If over half of all possible options are taken add another digit.
           length += 1 if host.count > Rational(BASE**length, 2)
         end
-
-        
       end
     
     end
