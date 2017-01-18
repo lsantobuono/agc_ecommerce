@@ -25,6 +25,11 @@ module Spree
       update_column(:confirmation_delivered, true)
     end
 
+    before_validation(on: :create) do
+      self.number = Spree::Core::NumberGenerator.new(prefix: 'P').send(:generate_permalink, Spree::Order)
+    end
+
+
     Spree::Order.state_machine.before_transition from: :address, do: :validate_tipo_factura
     Spree::Order.state_machine.before_transition to: :metodo_envio, do: :assign_default_addresses!
     Spree::Order.state_machine.before_transition from: :metodo_envio, do: :validate_metodo_envio

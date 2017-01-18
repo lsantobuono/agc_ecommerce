@@ -43,10 +43,6 @@ SitemapGenerator::Sitemap.create do
   #   Article.find_each do |article|
   #     add article_path(article), lastmod: article.updated_at
   #   end
-  add_login
-  add_signup
-  add_account
-  add_password_reset
   
   add combos_path
   add mercado_libre_path

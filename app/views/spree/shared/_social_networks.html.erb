@@ -5,7 +5,9 @@
             <% end %>
           </span>
           <span style="margin-right:1em;">
-            <%= image_tag "whatsapp-icon.png", style: "width:2.7em;" %>
+            <%= link_to "intent://send/5491160510878#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end" do %>
+              <%= image_tag "whatsapp-icon.png", style: "width:2.7em;" %>
+            <% end %>
           </span>
           <span style="margin-right:1em;">
             <%= link_to "https://www.youtube.com/channel/UCrGQIFiAEmNXz3W9SonAodA", target: '_blank' do %>

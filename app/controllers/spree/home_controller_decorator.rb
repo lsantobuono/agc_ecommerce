@@ -6,7 +6,13 @@ module Spree
       @products = @products.includes(:possible_promotions) if @products.respond_to?(:includes)
       @taxonomies = Spree::Taxonomy.includes(root: :children)
       
-        flash.now[:danger]= "Nos encontramos con desperfectos en nuestra línea telefónica, comuníquese por favor al: 11-6051-0878"
+      if (Spree::Store.first.eventuality_id !=nil && Spree::Store.first.eventuality_id != 0 )
+        e = Eventuality.find(Spree::Store.first.eventuality_id)
+        if (e != nil)
+          type = (e.type_eventuality == 0) ? :danger : :info 
+          flash.now[type]= e.message
+        end
+      end
     end
 
     def contact

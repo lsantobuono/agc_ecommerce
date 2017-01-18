@@ -1,0 +1,66 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:eventualities) %>
+<% end %>
+
+<%= form_for @eventuality , url: admin_create_eventualities_path do |f|%>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div id="preferences" data-hook>
+    <div class="panel panel-default security">
+      <div class="panel-heading">
+        <h1 class="panel-title">
+          <%= Spree.t(:eventualities) %>
+        </h1>
+      </div>
+
+      <div class="panel-body">
+        <div class="omega two columns">
+          <%= f.field_container :message, class: ['form-group'] do %>
+            <%= f.label :message,"Mensaje" %>
+            <%= f.text_area :message %> 
+          <% end %>
+        </div>
+        <div class="omega two columns">
+          <%= f.field_container :type_eventuality, class: ['form-group'] do %>
+            <%= f.label :type_eventuality,"Tipo" %>
+            <%= f.select(:type_eventuality, [["Danger",0], ["Info",1]],{:prompt => 'Tipo de Mensaje'}) %>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.create'), 'save' %>
+    </div>
+
+  </div>
+
+<% end %>
+
+<br><br>
+<div class="panel panel-default security">
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      Listado de <%= Spree.t(:eventualities) %>
+    </h1>
+  </div>
+  <div class="panel-body">
+    <% Eventuality.all.each do |e| %>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+        Mensaje:<p style="color: 
+        <%= if (e.type_eventuality == 0)
+              "red"
+            else
+              "green"
+            end
+        %>
+          "> <%= e.message %> 
+          <%=link_to admin_delete_eventualities_path(e.id), :style => "color:white" , :method => :delete, :class => "delete", :confirm => "Borrar mensaje?" do %>
+          <button class="btn btn-danger btn-sm " style="color:white; font-weight:bold" rel="nofollow" type="button" >Borrar</a>
+          <% end %>
+        </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

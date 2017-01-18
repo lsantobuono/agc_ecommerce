@@ -47,6 +47,7 @@ es:
     order_total: Total presupuesto
     order_processed_successfully: Tu pedido de cotización ha sido procesado con éxito 
     bonificacion: "% Bonif"
+    eventualities: "Eventualidades"
     #navbar
     home: INICIO
     my_account: MI CUENTA

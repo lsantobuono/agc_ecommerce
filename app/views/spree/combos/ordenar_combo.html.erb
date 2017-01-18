@@ -17,14 +17,17 @@
 	  		<h3> <%= pluralize(cl.quantity,"unidad","unidades") %> de la categoría <b><%= cl.taxon.name %></b>  </h3>
 	  		<div id="accordion-<%= (cl.id*cl.quantity)-cl.id %>">
 		    	<a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= (cl.id*cl.quantity)-cl.id %>" href="#<%= (cl.id*cl.quantity)-cl.id %>" style="padding:0 ; border:0;">
-		  		<p> Seleccione productos y cantidades para la categoría (Deben sumar <b><%= cl.quantity %></b>) </p>  		</a>
+		  			<p class="combo-instruction"> Seleccione productos y cantidades para la categoría (Deben sumar <b><%= cl.quantity %></b>)  		
+							<span class="status_label" >
+			  			</span>
+		  			</p>
+		  		</a>
 		  		<div id="<%= (cl.id*cl.quantity)-cl.id %>" class="list-group panel-collapse accordion-body collapse accordion-category">
 		  		<p style="font-size: 1em;"> Disponible: 
 		  		<span class="available_quantity_label" id="available_quantity_<%= (cl.id*cl.quantity)-cl.id %>" >
 		  			<%= cl.quantity %>
 		  		</span>
-		  		<span class="status_label" >
-		  		</span>
+
 		  		
 		  		</p>
 						<% cl.taxon.all_children.each do |p| %> 
@@ -41,6 +44,15 @@
 	 <br>
 	  <%= submit_tag "Agregar al Carrito" , class: "btn btn-success" %>
 <% end %>  
+
+
+<style>
+.status_label {
+	color: green;
+	font-weight: bold;
+}
+</style>
+
 
 <script>
 
@@ -76,11 +88,14 @@ $(".plus-button").click(function() {
 	if (disp == 0)
 	{
 		$(this).closest(".accordion-category").find('.plus-button').disable(true);
-		$(this).closest(".accordion-category").find('.status_label').text("Configuración correcta!");
+		$(this).closest(".accordion-category").prev(".list-group-item").find(".status_label").text("Configuración correcta!");
+		$(this).closest(".accordion-category").closest(".row").prev(".list-group-item").find(".status_label").text("Configuración correcta!");
+
 	}
 	// Sino quito el correcto del label
 	else {
-		$(this).closest(".accordion-category").find('.status_label').text("");
+		$(this).closest(".accordion-category").prev(".list-group-item").find(".status_label").text("");
+		$(this).closest(".accordion-category").closest(".row").prev(".list-group-item").find(".status_label").text("");
 	}
 });
 
@@ -112,11 +127,13 @@ $(".substract-button").click(function() {
 	if (disp == 0)
 	{
 		$(this).closest(".accordion-category").find('.plus-button').disable(true);
-		$(this).closest(".accordion-category").find('.status_label').text("Configuración correcta!");
+		$(this).closest(".accordion-category").prev(".list-group-item").find(".status_label").text("Configuración correcta!");
+		$(this).closest(".accordion-category").closest(".row").prev(".list-group-item").find(".status_label").text("Configuración correcta!");
 	}
 	// Sino quito el correcto del label
 	else {
-		$(this).closest(".accordion-category").find('.status_label').text("");
+		$(this).closest(".accordion-category").prev(".list-group-item").find(".status_label").text("");
+		$(this).closest(".accordion-category").closest(".row").prev(".list-group-item").find(".status_label").text("");
 	}
 
 });

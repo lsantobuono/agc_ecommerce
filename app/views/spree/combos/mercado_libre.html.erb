@@ -1,8 +1,9 @@
 <%= form_tag register_ml_orders_path, id: "form-combo" do %>
     <p style=" font-size: 1em;"> <%= Spree.t(:instrucciones_ml) %>  </p>
-    <%= text_field_tag :"ml_user", nil, class: 'form-control ', style:"width:200px; height: 2em; ", placeholder: "Usuario ML" %>
+    <%= text_field_tag :"ml_user", nil, class: 'form-control ', style:"width:400px; height: 2em; ", placeholder: "Usuario ML" %>
     <br>
-    <%= text_field_tag :"ml_purchase_id", nil, class: 'form-control ', style:"width:200px; height: 2em; ",placeholder: "Id del producto adquirido" %> 
+    <%= text_field_tag :"ml_purchase_id", nil, class: 'form-control ', style:"width:400px; height: 2em; ",placeholder: "Id del producto adquirido, Ejemplo: USB2-2C-18B-CC" %>  
+
     <br>
     <%= submit_tag "Ordenar!" , class: "btn btn-success" %>
 <% end %>  

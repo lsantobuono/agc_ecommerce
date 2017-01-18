@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112142325) do
+ActiveRecord::Schema.define(version: 20170118092959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(version: 20170112142325) do
     t.string   "description"
     t.string   "image"
     t.boolean  "hidden"
+  end
+
+  create_table "eventualities", force: :cascade do |t|
+    t.string   "message",          null: false
+    t.integer  "type_eventuality", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -963,6 +970,7 @@ ActiveRecord::Schema.define(version: 20170112142325) do
     t.datetime "updated_at",                           null: false
     t.string   "confirm_email_header"
     t.string   "confirm_email_footer"
+    t.integer  "eventuality_id"
   end
 
   add_index "spree_stores", ["code"], name: "index_spree_stores_on_code", using: :btree

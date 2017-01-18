@@ -102,6 +102,11 @@ Spree::Core::Engine.routes.draw do
     get '/customize_emails', to: 'customize_emails#index'
     put '/customize_emails/update', to: 'customize_emails#update'
 
+    get '/eventualities', to: 'eventualities#index'
+    post '/eventualities', to: 'eventualities#create', as: :create_eventualities
+    put '/eventualities/:id', to: 'eventualities#update', as: :update_eventualities
+    delete '/eventualities/:id', to: 'eventualities#destroy', as: :delete_eventualities
+
     resources :users do
       member do
         put :confirmate
