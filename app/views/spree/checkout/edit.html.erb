@@ -7,7 +7,7 @@
 
   <div class="row" data-hook="checkout_header" style="margin-bottom: 2em;">
     <div class="col-sm-6">
-      <h1 data-hook="checkout_title"><%= Spree.t(:checkout) %></h1>
+      <h1 data-hook="checkout_title"><%= Spree.t('checkout_steps.'+@order.state) %></h1>
     </div>
       <div class="col-sm-6" data-hook="checkout_progress">
       <%= checkout_progress %>

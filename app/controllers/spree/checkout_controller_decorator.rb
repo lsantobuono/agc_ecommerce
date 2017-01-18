@@ -3,7 +3,7 @@ module Spree
     def before_metodo_envio
       # le mando las dos addresses
       # @order.bill_address ||= Address.build_default
-      @order.ship_address ||= Address.build_default
+      @order.ship_address ||= Address.build_default unless params[:order].present? && params[:order][:metodo_envio] == 'retiro_local'
     end
 
     def before_address

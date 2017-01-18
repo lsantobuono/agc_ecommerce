@@ -8,7 +8,7 @@ module Spree
     has_many :combo_aplicados, inverse_of: :order, foreign_key: :spree_order_id, dependent: :destroy
 
     checkout_flow do
-      go_to_state :address
+      go_to_state :address, if: ->(order) { order.requiere_address? }
       go_to_state :metodo_envio, if: ->(order) { !order.creado_por_admin? }
       go_to_state :confirmar, if: ->(order) { !order.creado_por_admin? }
       # 
@@ -23,6 +23,17 @@ module Spree
     def deliver_order_confirmation_email
       OrderMailer.custom_confirm_email(id).deliver_later 
       update_column(:confirmation_delivered, true)
+    end
+
+    def requiere_address?
+      return true unless es_de_mercadolibre?
+      combo = combo_aplicados.first.try(:combo)
+      return true unless combo.present?
+      combo.caro?
+    end
+
+    def es_de_mercadolibre?
+      ml_user.present?
     end
 
     before_validation(on: :create) do

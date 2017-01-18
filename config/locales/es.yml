@@ -40,7 +40,10 @@ es:
     hidden: Oculto
     shopping_cart: Carrito de Productos
     continue_shopping: Seguir cargando
-    checkout: Solicitar Cotización
+    checkout: Solicitar cotización
+    checkout_steps:
+      address: Información de envío
+      metodo_envio: Datos para facturación
     instrucciones_ml: Si ya ha adquirido un producto o combo por Mercado Libre, por favor ingrese su usuario e id de producto adquirido
     thank_you_for_your_order: Por favor imprime una copia de esta página de confirmación para tus archivos.
     order_summary: Resumen del presupuesto
@@ -61,6 +64,7 @@ es:
     dni_cuit: DNI/CUIT
     street_address: Dirección
     city: Localidad
+    caro: ¿Precio mayor a $1000?
     tipos_factura:
       consumidor_final: Factura Consumidor Final
       factura_a: Factura A

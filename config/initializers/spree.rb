@@ -20,7 +20,7 @@ Spree.config do |config|
     config.default_country_id = country.id if country.present?
   end
 	config.currency = "ars"
-	config.allow_guest_checkout = false
+	config.allow_guest_checkout = true
 	config.max_level_in_taxons_menu = 10
 
   #Busqueda custom para skus, esta en lib/spree
