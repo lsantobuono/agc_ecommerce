@@ -42,8 +42,8 @@ es:
     continue_shopping: Seguir cargando
     checkout: Solicitar cotización
     checkout_steps:
-      address: Información de envío
-      metodo_envio: Datos para facturación
+      address: Datos para facturación
+      metodo_envio: Información de envío
     instrucciones_ml: Si ya ha adquirido un producto o combo por Mercado Libre, por favor ingrese su usuario e id de producto adquirido
     thank_you_for_your_order: Por favor imprime una copia de esta página de confirmación para tus archivos.
     order_summary: Resumen del presupuesto
