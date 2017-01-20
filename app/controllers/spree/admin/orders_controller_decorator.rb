@@ -1,6 +1,6 @@
 module Spree::Admin
   OrdersController.class_eval do
-    before_action :load_order, only: [:edit, :update, :destroy, :cancel, :resume, :approve, :resend, :open_adjustments, :close_adjustments, :cart]
+    before_action :load_order, only: [:edit, :update, :destroy, :cancel, :resume, :approve, :notificate, :resend, :open_adjustments, :close_adjustments, :cart]
 
     def new
       @order = Spree::Order.create(order_params.merge(creado_por_admin: true))
@@ -32,14 +32,24 @@ module Spree::Admin
       redirect_to :back
     end
 
+    def notificate
+      @order.update_column(:moderation_status, 1)
+      flash[:success] = Spree.t(:order_notificated)
+      redirect_to :back
+    end
+
     def resend
       if (@order.email == nil)
         flash[:error] = Spree.t(:error_email_resent)
       else
-        Spree::OrderMailer.confirm_email(@order.id, true).deliver_later
+        Spree::OrderMailer.confirm_email(@order.id).deliver_later
         flash[:success] = Spree.t(:order_email_resent)
       end
       redirect_to :back
+    end
+
+    def initialize_order_events
+      @order_events = %w{notificate approve cancel resume}
     end
 
   end

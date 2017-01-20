@@ -182,11 +182,7 @@
         </td>
 
         <td>
-          <% if order.approver_id != nil %>
-            <span class="label label-complete">Aprobada</span>
-          <% else %>
-            <span class="label label-pending">Pendiente</span>
-          <% end %>
+          <span class="label label-<%= Spree.t("moderation_status.label.#{order.moderation_status}") %>"><%= Spree.t("moderation_status.#{order.moderation_status}") %></span>
         </td>        
 
         <% if Spree::Order.checkout_step_names.include?(:delivery) %>

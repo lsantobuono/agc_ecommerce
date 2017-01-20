@@ -16,6 +16,16 @@
         </td>
       </tr>
       <tr>
+        <td id="order_status" width="35%" data-hook>
+          <strong><%= I18n.t(:approved, :scope => 'activerecord.attributes.spree/order') %>:</strong>
+        </td>
+        <td>
+          <span class="state label label-<%= Spree.t(@order.moderation_status, :scope => 'moderation_status.label') %>">
+            <%= Spree.t(@order.moderation_status, :scope => :moderation_status) %>
+          </span>
+        </td>
+      </tr>
+      <tr>
         <td width="35%" data-hook>
           <strong><%= Spree.t(:tipo_factura) %>:</strong>
         </td>

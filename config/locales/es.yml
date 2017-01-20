@@ -23,11 +23,13 @@ es:
     details: Detalles
     continuar: Continuar
     user_info: Información del usuario
-    order_resumed: Orden reanudada
+    order_resumed: Pedido reanudado
     customize_emails: Personalizar emails
     confirm_email: Email de confirmación de pedido
     confirm_email_header: Encabezado
     confirm_email_footer: Pie
+    presupuesto_email_header: Encabezado
+    presupuesto_email_footer: Pie
     add_volume_price: Agregar Precio por Cantidad
     volume_prices: Precios por Cantidad
     combo: Combo
@@ -70,6 +72,15 @@ es:
       consumidor_final: Factura Consumidor Final
       factura_a: Factura A
       factura_b: Factura B Monotributo
+    order_notificated: Pedido marcado como notificada
+    moderation_status:
+      pending: Pendiente
+      notified: Notificado
+      approved: Aprobado
+      label:
+        pending: pending
+        notified: info
+        approved: complete
 
     look_for_similar_items: Artículos similares
     # Método de envío
@@ -89,6 +100,10 @@ es:
     confirmar: Confirmar
     filter: "Filtrar"
     admin:
+      order:
+        events:
+          notificate: Notificado
+          resend: Enviar presupuesto
       tab:
         option_types: Tipos de Opciones
         properties: Propiedades
@@ -122,6 +137,8 @@ es:
       confirmar: 'Confirmar'
       metodo_envio: "Envío"
     order_mailer:
+      presupuesto_email:
+        subject: Presupuesto
       confirm_email:
         dear_customer: "Estimado Cliente,"
         order_summary: "Resumen del presupuesto"
