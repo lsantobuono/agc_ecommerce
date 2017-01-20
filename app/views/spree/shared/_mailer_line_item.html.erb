@@ -7,7 +7,12 @@
     (<%= line_item.variant.sku %>)
   </td>
     <td class="six sub-columns last right">
-       <%= line_item.quantity %> x <%= line_item.single_money %> = <%= line_item.display_amount %>
+       <% price_item = ((line_item.display_price.money.fractional.to_i / 100.00) - (line_item.bonification * (line_item.display_price.money.fractional.to_i / 100.00) / 100.00 )) %>
+       <%= line_item.quantity %> x <%= price_item %> 
+       <% if (line_item.bonification > 0) %>
+        (Bonif. <%=  line_item.bonification %> %)
+       <% end %>
+        = <%= price_item * line_item.quantity %>
     </td>
 
 </tr>

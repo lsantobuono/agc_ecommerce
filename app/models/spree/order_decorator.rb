@@ -20,6 +20,7 @@ module Spree
       # remove_transition from: :delivery, to: :confirm
     end
 
+
     def deliver_order_confirmation_email
       OrderMailer.custom_confirm_email(id).deliver_later 
       update_column(:confirmation_delivered, true)
@@ -40,6 +41,11 @@ module Spree
       self.number = Spree::Core::NumberGenerator.new(prefix: 'P').send(:generate_permalink, Spree::Order)
     end
 
+    after_save() do
+      if (self.state == "complete")
+        self.invoice_for_order
+      end
+    end
 
     Spree::Order.state_machine.before_transition from: :address, do: :validate_tipo_factura
     Spree::Order.state_machine.before_transition to: :metodo_envio, do: :assign_default_addresses!

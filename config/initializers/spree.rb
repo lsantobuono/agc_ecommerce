@@ -43,6 +43,9 @@ Spree::PermittedAttributes.user_attributes.push :phone_number, :first_name, :las
 
 Spree::PermittedAttributes.store_attributes.push :eventuality_id
 
+Spree::PermittedAttributes.line_item_attributes.push :bonification
+
+
 if Rails.env.production?
   attachment_config = {
     s3_credentials: {

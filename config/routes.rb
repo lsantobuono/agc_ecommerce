@@ -71,6 +71,7 @@ end
 Spree::Core::Engine.routes.draw do
   get "/contact" => "home#contact"
   get "/about_us" => "home#about_us"
+  get "/help" => "home#help"
   get "/descargas" => "home#descargas"
   post "/messages" => "home#createMessage"
   get "/new_message" => "home#newMessage"

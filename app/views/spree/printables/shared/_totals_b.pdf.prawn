@@ -2,17 +2,22 @@
 totals = []
 
 # Adjustments
-invoice.adjustments.each do |adjustment|
-  totals << [pdf.make_cell(content: adjustment.label), adjustment.display_amount.to_s]
-end
+#invoice.adjustments.each do |adjustment|
+#  totals << [pdf.make_cell(content: adjustment.label), adjustment.display_amount.to_s]
+#end
 
 # Shipments
-invoice.shipments.each do |shipment|
-  totals << [pdf.make_cell(content: shipment.shipping_method.name), shipment.display_cost.to_s]
-end
+#invoice.shipments.each do |shipment|
+#  totals << [pdf.make_cell(content: shipment.shipping_method.name), shipment.display_cost.to_s]
+#end
 
 # TOTAL
-totals << [pdf.make_cell(content: Spree.t(:order_total)), invoice.display_total.to_s]
+
+sumTotal = 0
+invoice.items.each { 
+    |item| sumTotal += (((item.display_price.money.fractional.to_i / 100.00) - (item.bonification * (item.display_price.money.fractional.to_i / 100.00) / 100.00 ))* item.quantity)
+}
+totals << [pdf.make_cell(content: Spree.t(:order_total)), Spree::Money.new(sumTotal).to_s]
 
 # Payments
 total_payments = 0.0

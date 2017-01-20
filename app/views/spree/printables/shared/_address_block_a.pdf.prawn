@@ -25,9 +25,13 @@ if (ship_address != nil)
   shipping << "\n#{ship_address.address1}"
   shipping << "\n#{ship_address.address2}" unless ship_address.address2.blank?
   shipping << "\n#{ship_address.city}, #{ship_address.state_text} #{ship_address.zipcode}"
-  shipping << "\n#{ship_address.country.name}"
+  if (ship_address.country != nil)
+    shipping << "\n#{ship_address.country.name}" 
+  end
   shipping << "\n#{ship_address.phone}"
-  shipping << "\n\n#{Spree.t(:via, scope: :print_invoice)} #{printable.shipping_methods.join(", ")}"
+  if (printable.shipments != nil && !printable.shipments.empty?)
+    shipping << "\n\n#{Spree.t(:via, scope: :print_invoice)} #{printable.shipping_methods.join(", ")}"
+  end
   dataShip = [[address_cell_shipping], [shipping]]
 end
 

@@ -22,6 +22,9 @@ module Spree
     def about_us
     end
 
+    def help
+    end
+
     def descargas
     end
 
@@ -65,7 +68,7 @@ module Spree
   	private
 
 		def message_params
-			params.require(:message).permit(:name, :tel,:email, :subject, :content)
+			params.require(:message).permit(:name, :tel,:email, :subject, :content, :enterprise)
 		end
   end
 end

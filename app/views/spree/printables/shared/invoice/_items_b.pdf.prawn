@@ -13,9 +13,10 @@ invoice.items.each do |item|
     item.sku,
     item.name,
     item.quantity,
-    (Spree::Money.new(item.display_price)).to_s, # El fractional devuelve centavos asi que lo divido x 100
-    "0",
-    (Spree::Money.new(item.display_total)).to_s,
+    (Spree::Money.new(item.display_price.money.fractional.to_i / 100.00)).to_s, # El fractional devuelve centavos asi que lo divido x 100
+    "#{item.bonification}%",
+     (Spree::Money.new(((item.display_price.money.fractional.to_i / 100.00) - (item.bonification * (item.display_price.money.fractional.to_i / 100.00) / 100.00 ))* item.quantity )).to_s,
+
   ]
   data += [row]
 end

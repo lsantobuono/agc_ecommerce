@@ -59,6 +59,7 @@ es:
     cart: "Carrito"
     billing_data: "Datos de facturación"
     iva: "IVA 21%"
+    bonification: "Bonificación"
     # Facturacion
     first_name_last_name_company: Nombre y apellido/Empresa
     dni_cuit: DNI/CUIT

@@ -2,23 +2,35 @@
 totals = []
 
 # Subtotal
-totals << [pdf.make_cell(content: Spree.t(:subtotal)), Spree::Money.new((invoice.display_item_total.money.fractional.to_i / 100 / 1.21)).to_s]
+#totals << [pdf.make_cell(content: Spree.t(:subtotal)), Spree::Money.new((invoice.display_item_total.money.fractional.to_i / 100.00 / 1.21)).to_s]
+sumSubTotal = 0
+invoice.items.each { 
+    |item| sumSubTotal += (((item.display_price.money.fractional.to_i / 100.00) - (item.bonification * (item.display_price.money.fractional.to_i / 100.00) / 100.00 ))* item.quantity / 1.21)
+}
+sumTotal = sumSubTotal*1.21
+iva = sumTotal - sumSubTotal
+
+totals << [pdf.make_cell(content: Spree.t(:subtotal)), Spree::Money.new(sumSubTotal).to_s]
+
 
 # Adjustments
-invoice.adjustments.each do |adjustment|
-  totals << [pdf.make_cell(content: adjustment.label), adjustment.display_amount.to_s]
-end
+#invoice.adjustments.each do |adjustment|
+#  totals << [pdf.make_cell(content: adjustment.label), adjustment.display_amount.to_s]
+#end
 
 # Shipments
-invoice.shipments.each do |shipment|
-  totals << [pdf.make_cell(content: shipment.shipping_method.name), shipment.display_cost.to_s]
-end
+#invoice.shipments.each do |shipment|
+#  totals << [pdf.make_cell(content: shipment.shipping_method.name), shipment.display_cost.to_s]
+#end
+
 
 # IVA
-totals << [pdf.make_cell(content: Spree.t(:iva)),  Spree::Money.new((invoice.display_total.money.fractional.to_i / 100 * 0.21)).to_s]
+#totals << [pdf.make_cell(content: Spree.t(:iva)),  Spree::Money.new((invoice.display_total.money.fractional.to_i / 100.00 * 0.21)).to_s]
+totals << [pdf.make_cell(content: Spree.t(:iva)),  Spree::Money.new(iva).to_s]
 
 # TOTAL
-totals << [pdf.make_cell(content: Spree.t(:order_total)), invoice.display_total.to_s]
+#totals << [pdf.make_cell(content: Spree.t(:order_total)), invoice.display_total.to_s]
+totals << [pdf.make_cell(content: Spree.t(:order_total)), Spree::Money.new(sumTotal).to_s]
 
 # Payments
 total_payments = 0.0

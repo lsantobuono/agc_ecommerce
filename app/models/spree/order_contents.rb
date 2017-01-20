@@ -49,6 +49,9 @@ module Spree
       Adjustable::AdjustmentsUpdater.update(line_item)
       TaxRate.adjust(order, [line_item]) if options[:line_item_created]
       persist_totals
+      if (order.state == "complete")
+        order.invoice_for_order
+      end
       line_item
     end
 

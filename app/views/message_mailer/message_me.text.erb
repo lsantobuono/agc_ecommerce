@@ -1,2 +1,11 @@
 Mensaje recibido
+
+Nombre: <%=  @msg.name %>
+Telefono: <%=  @msg.tel %>
+Email: <%=  @msg.email %>
+Asunto: <%=  @msg.subject %>
+<% if @msg.enterprise != "" %>
+Empresa: <%= @msg.enterprise %>
+<% end %>
+
 <%= @msg.content %>

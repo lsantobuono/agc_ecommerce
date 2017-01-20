@@ -12,6 +12,20 @@ module Spree
       end
     end
 
+    def items
+      printable.line_items.map do |item|
+        Spree::Printables::Invoice::Item.new(
+          sku: item.variant.sku,
+          name: item.variant.name,
+          options_text: item.variant.options_text,
+          price: item.price,
+          quantity: item.quantity,
+          bonification: item.bonification,
+          total: item.total
+        )
+      end
+    end
+
     private
    end
 end
