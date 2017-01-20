@@ -3,6 +3,7 @@ module Spree
     unless respond_to? :tipo_facturas # Esto es para fixear un bug raro, por algun motivo carga dos veces este decorator
       enum tipo_factura: [:consumidor_final, :factura_b, :factura_a]
       enum metodo_envio: [:mercado_envios, :retiro_local, :micro, :other]
+      enum moderation_status: [:pending, :notified, :approved]
     end
 
     has_many :combo_aplicados, inverse_of: :order, foreign_key: :spree_order_id, dependent: :destroy
@@ -20,6 +21,12 @@ module Spree
       # remove_transition from: :delivery, to: :confirm
     end
 
+    def can_notificate?
+      moderation_status == 'pending'
+    end
+    def can_approve?
+      moderation_status == 'notified'
+    end
 
     def deliver_order_confirmation_email
       OrderMailer.custom_confirm_email(id).deliver_later 
@@ -61,18 +68,22 @@ module Spree
     Spree::Order.state_machine.before_transition to: :complete, do: :invoice_for_order
 
 
-  def invoice_for_order
-   if (self.tipo_factura == "consumidor_final" )
-      bookkeeping_documents.create(template: 'invoice_cf')
-    elsif (self.tipo_factura == "factura_a")
-      bookkeeping_documents.create(template: 'invoice_a')
-    elsif (self.tipo_factura == "factura_b")
-      bookkeeping_documents.create(template: 'invoice_b')
-    else 
-      bookkeeping_documents.create(template: 'invoice_mostrador') # Si no tiene tipo es xq la crearon a mano y se usa el pdf mostrador
+    def invoice_for_order
+     if (self.tipo_factura == "consumidor_final" )
+        bookkeeping_documents.create(template: 'invoice_cf')
+      elsif (self.tipo_factura == "factura_a")
+        bookkeeping_documents.create(template: 'invoice_a')
+      elsif (self.tipo_factura == "factura_b")
+        bookkeeping_documents.create(template: 'invoice_b')
+      else 
+        bookkeeping_documents.create(template: 'invoice_mostrador') # Si no tiene tipo es xq la crearon a mano y se usa el pdf mostrador
+      end
     end
-  end
-      
+
+    def approve!
+      update_columns(considered_risky: false, moderation_status: 2)
+    end
+
     def assign_default_addresses!
       if user
         clone_billing

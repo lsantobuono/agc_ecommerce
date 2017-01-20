@@ -108,6 +108,12 @@ Spree::Core::Engine.routes.draw do
     put '/eventualities/:id', to: 'eventualities#update', as: :update_eventualities
     delete '/eventualities/:id', to: 'eventualities#destroy', as: :delete_eventualities
 
+    resources :orders, except: [:show] do
+      member do
+        put :notificate
+      end
+    end
+
     resources :users do
       member do
         put :confirmate

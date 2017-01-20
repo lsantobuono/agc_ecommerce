@@ -23,7 +23,7 @@ es:
     details: Detalles
     continuar: Continuar
     user_info: Información del usuario
-    order_resumed: Orden reanudada
+    order_resumed: Pedido reanudado
     customize_emails: Personalizar emails
     confirm_email: Email de confirmación de pedido
     confirm_email_header: Encabezado
@@ -70,6 +70,15 @@ es:
       consumidor_final: Factura Consumidor Final
       factura_a: Factura A
       factura_b: Factura B Monotributo
+    order_notificated: Pedido marcado como notificada
+    moderation_status:
+      pending: Pendiente
+      notified: Notificado
+      approved: Aprobado
+      label:
+        pending: pending
+        notified: info
+        approved: complete
 
     look_for_similar_items: Artículos similares
     # Método de envío
@@ -89,6 +98,9 @@ es:
     confirmar: Confirmar
     filter: "Filtrar"
     admin:
+      order:
+        events:
+          notificate: Notificado
       tab:
         option_types: Tipos de Opciones
         properties: Propiedades

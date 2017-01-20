@@ -11,5 +11,12 @@
 
 
 .label-confirmar {
-  color: black;
+  background-color: #F8D053;
+}
+.label-resumed {
+  background-color: #7DB942;
+}
+
+.icon.icon-notificate:before {
+  content: "\2709\e013";
 }

@@ -2,7 +2,7 @@ module Spree
   module Core
     NumberGenerator.class_eval  do
       
-      STARTING_NUMBER = 1
+      STARTING_NUMBER = '1'
 
       private 
 
