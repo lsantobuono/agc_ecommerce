@@ -72,7 +72,6 @@ es:
       consumidor_final: Factura Consumidor Final
       factura_a: Factura A
       factura_b: Factura B Monotributo
-    order_notificated: Pedido marcado como notificada
     moderation_status:
       pending: Pendiente
       notified: Notificado
@@ -102,8 +101,8 @@ es:
     admin:
       order:
         events:
-          notificate: Notificado
-          resend: Enviar presupuesto
+          send_presupuesto: Enviar presupuesto
+          resend: Reenviar presupuesto
       tab:
         option_types: Tipos de Opciones
         properties: Propiedades

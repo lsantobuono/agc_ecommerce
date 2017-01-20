@@ -3,11 +3,19 @@
     <%= event_links(order, events) %>
   <% end %>
   <% if can?(:resend, order) %>
-    <%= button_link_to Spree.t(:resend, scope: 'admin.order.events', default: Spree.t(:resend)),
-          resend_admin_order_url(order),
-          method: :post,
-          icon: 'envelope'
-    %>
+    <% if order.moderation_status == "pending" %>
+      <%= button_link_to Spree.t(:send_presupuesto, scope: 'admin.order.events'),
+            send_presupuesto_admin_order_url(order),
+            method: :post,
+            icon: 'envelope'
+      %>
+    <% else %>
+      <%= button_link_to Spree.t(:resend, scope: 'admin.order.events'),
+            resend_admin_order_url(order),
+            method: :post,
+            icon: 'envelope'
+      %>
+    <% end %>
   <% end %>
   <%= link_to admin_order_path(order), class: "btn btn-danger", method: :delete, data: { confirm: 'Estás seguro?' } do %>
     <span class="glyphicon glyphicon-trash"></span>

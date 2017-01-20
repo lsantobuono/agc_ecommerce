@@ -110,7 +110,7 @@ Spree::Core::Engine.routes.draw do
 
     resources :orders, except: [:show] do
       member do
-        put :notificate
+        post :send_presupuesto
       end
     end
 
