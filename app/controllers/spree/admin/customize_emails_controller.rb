@@ -15,7 +15,7 @@ module Spree::Admin
     private
 
     def store_params
-      params.require(:store).permit(:confirm_email_header, :confirm_email_footer)
+      params.require(:store).permit(:confirm_email_header, :confirm_email_footer, :presupuesto_email_header, :presupuesto_email_footer)
     end
 
     def set_store

@@ -42,7 +42,7 @@ module Spree::Admin
       if (@order.email == nil)
         flash[:error] = Spree.t(:error_email_resent)
       else
-        Spree::OrderMailer.confirm_email(@order.id, true).deliver_later
+        Spree::OrderMailer.confirm_email(@order.id).deliver_later
         flash[:success] = Spree.t(:order_email_resent)
       end
       redirect_to :back

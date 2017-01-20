@@ -28,6 +28,8 @@ es:
     confirm_email: Email de confirmación de pedido
     confirm_email_header: Encabezado
     confirm_email_footer: Pie
+    presupuesto_email_header: Encabezado
+    presupuesto_email_footer: Pie
     add_volume_price: Agregar Precio por Cantidad
     volume_prices: Precios por Cantidad
     combo: Combo
@@ -134,6 +136,8 @@ es:
       confirmar: 'Confirmar'
       metodo_envio: "Envío"
     order_mailer:
+      presupuesto_email:
+        subject: Presupuesto
       confirm_email:
         dear_customer: "Estimado Cliente,"
         order_summary: "Resumen del presupuesto"
