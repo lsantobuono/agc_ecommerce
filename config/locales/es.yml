@@ -103,6 +103,7 @@ es:
       order:
         events:
           notificate: Notificado
+          resend: Enviar presupuesto
       tab:
         option_types: Tipos de Opciones
         properties: Propiedades
