@@ -11,7 +11,7 @@
 ============================================================
 <% @order.line_items.each do |item| %>
   <% price_item = ((item.display_price.money.fractional.to_i / 100.00) - (item.bonification * (item.display_price.money.fractional.to_i / 100.00) / 100.00 )) %>
-  <%= item.variant.sku %> <%= raw(item.variant.product.name) %> <%= raw(item.variant.options_text) -%> (<%=item.quantity%>) <%= Spree.t('at_symbol') %>  <%= price_item %> = <%= price_item* item.quantity %>
+  <%= item.variant.sku %> <%= raw(item.variant.product.name) %> <%= raw(item.variant.options_text) -%> (<%=item.quantity%>) <%= Spree.t('at_symbol') %>  <%= Spree::Money.new(price_item).to_s %> = <%= Spree::Money.new(price_item* item.quantity).to_s %>
   <% if (item.bonification > 0) %>
     (Con bonificación del: <%= item.bonification %> %)
   <% end %>
