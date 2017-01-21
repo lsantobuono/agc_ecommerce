@@ -7,7 +7,7 @@ dataAddress = nil
 dataShip = nil
 
 if (bill_address != nil)
-  address_cell_billing  = pdf.make_cell(content: "#{Spree.t(:billing_data)} Factura A", font_style: :bold)
+  address_cell_billing  = pdf.make_cell(content: "#{Spree.t(:billing_data)} #{type_bill}", font_style: :bold)
   billing =  "#{bill_address.dni_cuit} "
   billing << "\n#{bill_address.firstname} #{bill_address.lastname}"
   billing << "\n#{bill_address.address1}"
@@ -29,9 +29,20 @@ if (ship_address != nil)
     shipping << "\n#{ship_address.country.name}" 
   end
   shipping << "\n#{ship_address.phone}"
-  if (printable.shipments != nil && !printable.shipments.empty?)
-    shipping << "\n\n#{Spree.t(:via, scope: :print_invoice)} #{printable.shipping_methods.join(", ")}"
+  if (printable.metodo_envio == "other")
+    shipping << "\nTipo Envio: Otro - #{printable.metodo_envio_otros}"
+  else
+    shipping << "\nTipo Envio: #{printable.metodo_envio}"
   end
+
+  if (printable.checkout_notes != "")
+    shipping << "\nNotas adicionales: #{printable.checkout_notes}"
+  end
+
+  if (printable.shipments != nil && !printable.shipments.empty?)
+    shipping << "\n#{Spree.t(:via, scope: :print_invoice)} #{printable.shipping_methods.join(", ")}"
+  end
+  
   dataShip = [[address_cell_shipping], [shipping]]
 end
 

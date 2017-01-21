@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120185658) do
+ActiveRecord::Schema.define(version: 20170121195230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,7 +247,7 @@ ActiveRecord::Schema.define(version: 20170120185658) do
     t.decimal  "taxable_adjustment_total",     precision: 10, scale: 2, default: 0.0, null: false
     t.decimal  "non_taxable_adjustment_total", precision: 10, scale: 2, default: 0.0, null: false
     t.integer  "combo_aplicado_id"
-    t.integer  "bonification",                                          default: 0,   null: false
+    t.integer  "bonification",                                          default: 10,  null: false
   end
 
   add_index "spree_line_items", ["combo_aplicado_id"], name: "index_spree_line_items_on_combo_aplicado_id", using: :btree

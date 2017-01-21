@@ -19,7 +19,7 @@ prawn_document(force_download: true) do |pdf|
 
     # address block on first page only
     if pdf.page_number == 1
-      render 'spree/printables/shared/address_block_a', pdf: pdf, printable: doc
+      render 'spree/printables/shared/address_block_custom', pdf: pdf, printable: doc, type_bill: "Factura A"
     end
 
     pdf.move_down 10

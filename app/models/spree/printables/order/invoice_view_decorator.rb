@@ -1,5 +1,19 @@
 module Spree
    Printables::Order::InvoiceView.class_eval do
+
+        def_delegators :@printable, #Por lo que entiendo, estos son los productos de ordenes accesibles desde el printable
+                   :email, # Tuve que agregarle metodo_envio a manopla sino no deja usarlo
+                   :bill_address,
+                   :ship_address,
+                   :tax_address,
+                   :item_total,
+                   :total,
+                   :payments,
+                   :shipments,
+                   :metodo_envio,
+                   :metodo_envio_otros,
+                   :checkout_notes
+
     def firstname
       if (printable.tax_address != nil)
         printable.tax_address.firstname

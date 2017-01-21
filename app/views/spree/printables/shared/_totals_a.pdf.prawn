@@ -4,10 +4,14 @@ totals = []
 # Subtotal
 #totals << [pdf.make_cell(content: Spree.t(:subtotal)), Spree::Money.new((invoice.display_item_total.money.fractional.to_i / 100.00 / 1.21)).to_s]
 sumSubTotal = 0
-invoice.items.each { 
-    |item| sumSubTotal += (((item.display_price.money.fractional.to_i / 100.00) - (item.bonification * (item.display_price.money.fractional.to_i / 100.00) / 100.00 ))* item.quantity / 1.21)
+invoice.items.each {  
+    |item| sumSubTotal += (((item.display_price.money.fractional.to_i / 100.00) *((100-item.bonification)/100.00))* item.quantity / 1.21)
 }
-sumTotal = sumSubTotal.round(2) *1.21
+sumTotal = sumSubTotal *1.21
+
+sumTotal = sumTotal.round 2
+sumSubTotal = sumSubTotal.round 2 
+ 
 iva = sumTotal - sumSubTotal
 
 totals << [pdf.make_cell(content: Spree.t(:subtotal)), Spree::Money.new(sumSubTotal).to_s]
