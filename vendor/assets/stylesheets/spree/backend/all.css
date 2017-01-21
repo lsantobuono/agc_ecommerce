@@ -16,7 +16,3 @@
 .label-resumed {
   background-color: #7DB942;
 }
-
-.icon.icon-notificate:before {
-  content: "\2709\e013";
-}

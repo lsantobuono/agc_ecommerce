@@ -21,9 +21,6 @@ module Spree
       # remove_transition from: :delivery, to: :confirm
     end
 
-    def can_notificate?
-      moderation_status == 'pending'
-    end
     def can_approve?
       moderation_status == 'notified'
     end
@@ -81,7 +78,7 @@ module Spree
     end
 
     def approve!
-      update_columns(considered_risky: false, moderation_status: 2)
+      update_attributes(considered_risky: false, moderation_status: :approved)
     end
 
     def assign_default_addresses!
