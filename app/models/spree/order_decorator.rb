@@ -66,14 +66,21 @@ module Spree
 
 
     def invoice_for_order
+     doc = nil
      if (self.tipo_factura == "consumidor_final" )
-        bookkeeping_documents.create(template: 'invoice_cf')
+        doc=bookkeeping_documents.create(template: 'invoice_cf')
       elsif (self.tipo_factura == "factura_a")
-        bookkeeping_documents.create(template: 'invoice_a')
+        doc=bookkeeping_documents.create(template: 'invoice_a')
       elsif (self.tipo_factura == "factura_b")
-        bookkeeping_documents.create(template: 'invoice_b')
+        doc=bookkeeping_documents.create(template: 'invoice_b')
       else 
-        bookkeeping_documents.create(template: 'invoice_mostrador') # Si no tiene tipo es xq la crearon a mano y se usa el pdf mostrador
+        doc=bookkeeping_documents.create(template: 'invoice_mostrador') # Si no tiene tipo es xq la crearon a mano y se usa el pdf mostrador
+      end
+      if (doc != nil)
+        doc.pdf # Sin esta llamada el archivo PDF no se genera y no se puede enviar adjunto porque no existe el file.. si el admin accede al file
+        # se genera, pero van a querer enviarlo sin tener que acceder cada vez.
+        # El problema es que esto se procesa como 4 veces cuando se realiza un checkout (imagin que porque la orden se guarda muchas veces en ese proceso)
+        # y genera basura en disco... pero en un principio no seria drama, se puede hacer un cleaner de archivos viejos y ya.
       end
     end
 

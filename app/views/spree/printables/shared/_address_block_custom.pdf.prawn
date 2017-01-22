@@ -32,7 +32,8 @@ if (ship_address != nil)
   if (printable.metodo_envio == "other")
     shipping << "\nTipo Envio: Otro - #{printable.metodo_envio_otros}"
   else
-    shipping << "\nTipo Envio: #{printable.metodo_envio}"
+    metodo_envio_str=Spree.t("metodos_envio.#{printable.metodo_envio}")
+    shipping << "\nTipo Envio: #{metodo_envio_str}"
   end
 
   if (printable.checkout_notes != "")

@@ -86,6 +86,9 @@ es:
     metodo_envio: Método de envío
     metodos_envio:
       other: Otros
+      retiro_local: Retiro Local
+      mercado_envios: Mercado Envíos
+      micro: Micro
 
     order_line_items: "Items de Orden"
     error_email_resent: "Error, no hay email configurado en el pedido"
