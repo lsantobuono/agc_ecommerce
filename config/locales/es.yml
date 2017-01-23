@@ -53,6 +53,7 @@ es:
     order_processed_successfully: Tu pedido de cotización ha sido procesado con éxito 
     bonificacion: "% Bonif"
     eventualities: "Eventualidades"
+    edit_profile: "Editar datos personales"
     #navbar
     home: INICIO
     my_account: MI CUENTA

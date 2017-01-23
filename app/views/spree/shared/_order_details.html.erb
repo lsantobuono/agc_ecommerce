@@ -52,6 +52,7 @@
       <th colspan="2"><%= Spree.t(:item) %></th>
       <th class="qty"><%= Spree.t(:qty) %></th>
       <% if current_spree_user && current_spree_user.confirmed? %>
+        <th class="price"><%= Spree.t(:bonification) %></th>
         <th class="price"><%= Spree.t(:price) %></th>
         <th class="total"><span><%= Spree.t(:total) %></span></th>
       <% end %>
@@ -75,8 +76,10 @@
         </td>
         <td data-hook="order_item_qty" class="order-qty"><%= item.quantity %></td>
         <% if current_spree_user && current_spree_user.confirmed? %>
-          <td data-hook="order_item_price" class="lead text-primary price"><span><%= item.single_money.to_html %></span></td>
-          <td data-hook="order_item_total" class="lead text-primary total"><span><%= item.display_amount.to_html %></span></td>
+          <td data-hook="order_item_bonification" class="lead text-primary price"><span><%= item.bonification %>%</span></td>
+          <% price = ((item.display_price.money.fractional.to_i / 100.00) - (item.bonification * (item.display_price.money.fractional.to_i / 100.00) / 100.00 ))  %>
+          <td data-hook="order_item_price" class="lead text-primary price"><span><%= Spree::Money.new(price).to_s %></span></td>
+          <td data-hook="order_item_total" class="lead text-primary total"><span><%= Spree::Money.new(price * item.quantity).to_s %></span></td>
         <% end %>
       </tr>
     <% end %>
@@ -85,14 +88,14 @@
   <% if current_spree_user && current_spree_user.confirmed? %>
     <tfoot id="order-total" data-hook="order_details_total">
       <tr class="warning total">
-        <td colspan="4" align="right"><b><%= Spree.t(:order_total) %>:</b></td>
+        <td colspan="5" align="right"><b><%= Spree.t(:order_total) %>:</b></td>
         <td class="total"><span id="order_total" class="lead text-primary"><%= order.display_total.to_html %></span></td>
       </tr>
     </tfoot>
 
     <tfoot id="subtotal" data-hook="order_details_subtotal">
       <tr class="total" id="subtotal-row">
-        <td colspan="4"><b><%= Spree.t(:subtotal) %>:</b></td>
+        <td colspan="5"><b><%= Spree.t(:subtotal) %>:</b></td>
         <td class="total"><span><%= order.display_item_total.to_html %></span></td>
       </tr>
     </tfoot>

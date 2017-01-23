@@ -51,7 +51,7 @@ module Spree
       	#Magia Negra  . 
 		def taxons_tree(root_taxon, current_taxon, max_level = 1, root_id, original_category)
 			return '' if max_level < 1 || root_taxon.leaf?
-			if original_category == true
+			if (original_category == true || (current_taxon != nil && current_taxon.self_and_ancestors.include?(root_taxon)))
 				listClass = 'list-group panel-collapse accordion-body collapse in'
 			else
 				listClass = 'list-group panel-collapse accordion-body collapse'
@@ -69,8 +69,13 @@ module Spree
 							l + taxons_tree(taxon, current_taxon, max_level - 1,root_id,false)
 						end 
 					else 
-						link_to(link, class: 'list-group-item '){content_tag(:span, " ", class: "glyphicon glyphicon-chevron-right") 
+						if (current_taxon == taxon)
+							link_to(link, class: 'list-group-item list-group-item-active'){content_tag(:span, " ", class: "glyphicon glyphicon-chevron-right") 
 							+ taxon.name} + taxons_tree(taxon, current_taxon, max_level - 1,root_id,false)
+						else
+							link_to(link, class: 'list-group-item '){content_tag(:span, " ", class: "glyphicon glyphicon-chevron-right") 
+							+ taxon.name} + taxons_tree(taxon, current_taxon, max_level - 1,root_id,false)
+						end
 					end
 				end
 				safe_join(taxons, "\n")

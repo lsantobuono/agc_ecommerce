@@ -51,7 +51,7 @@
               <% if  product.variants.empty? %>
                   <% lengthDescription = 110 %>
               <% end %>
-               <% descripcionProducto= content_tag(:span, truncate("#{product.name} - <subText style='font-size:0.8em'>#{product.description}</subText>",
+               <% descripcionProducto= content_tag(:span, truncate("#{product.name} <br> <subText style='font-size:0.8em'>#{product.description}</subText>",
                  length: (lengthDescription +  "<subText style='font-size:0.8em'></subText>".length) , escape: false) , class: 'info', itemprop: "name", title: product.name, style:"font-size:0.9em;") %>            
               <% if descripcionProducto.length < 300 && product.variants.empty? %>
                 <div style= "height:80px;">

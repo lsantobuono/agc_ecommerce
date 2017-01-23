@@ -2,8 +2,12 @@
 
 <div data-hook="account_summary" class="account-summary well">
   <dl id="user-info">
-    <dt><%= Spree.t(:email) %></dt>
-    <dd><%= @user.email %> (<%= link_to Spree.t(:edit), spree.edit_account_path %>)</dd>
+    <p><b><%= Spree.t(:email) %></b> <%= @user.email %></p>
+    <p><b><%= Spree.t(:first_name) %></b> <%= @user.first_name %></p>
+    <p><b><%= Spree.t(:last_name) %></b> <%= @user.last_name %></p>
+    <p><b><%= Spree.t(:phone) %></b> <%= @user.phone_number %></p>
+    <p><b><%= Spree.t(:enterprise) %></b> <%= @user.enterprise %></p>
+    <%= link_to Spree.t(:edit_profile), spree.edit_account_path %>
   </dl>
 </div>
 
@@ -17,8 +21,8 @@
         <th class="order-number"><%= Spree::Order.human_attribute_name(:number) %></th>
         <th class="order-date"><%= Spree.t(:date) %></th>
         <th class="order-status"><%= Spree.t(:status) %></th>
-        <th class="order-payment-state"><%= Spree.t(:payment_state) %></th>
-        <th class="order-shipment-state"><%= Spree.t(:shipment_state) %></th>
+<!--        <th class="order-payment-state"><%= Spree.t(:payment_state) %></th>
+        <th class="order-shipment-state"><%= Spree.t(:shipment_state) %></th> -->
         <% if current_spree_user && current_spree_user.confirmed? %>
           <th class="order-total"><%= Spree.t(:total) %></th>
         <% end %>
@@ -30,8 +34,8 @@
           <td class="order-number"><%= link_to order.number, order_url(order) %></td>
           <td class="order-date"><%= l order.completed_at.to_date %></td>
           <td class="order-status"><%= Spree.t("order_state.#{order.state}").titleize %></td>
-          <td class="order-payment-state"><%= Spree.t("payment_states.#{order.payment_state}").titleize if order.payment_state %></td>
-          <td class="order-shipment-state"><%= Spree.t("shipment_states.#{order.shipment_state}").titleize if order.shipment_state %></td>
+<!--          <td class="order-payment-state"><%= Spree.t("payment_states.#{order.payment_state}").titleize if order.payment_state %></td>
+          <td class="order-shipment-state"><%= Spree.t("shipment_states.#{order.shipment_state}").titleize if order.shipment_state %></td> -->
           <% if current_spree_user && current_spree_user.confirmed? %>
             <td class="lead text-primary order-total"><%= order.display_total %></td>
           <% end %>
