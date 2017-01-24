@@ -41,6 +41,11 @@ module Spree
       ml_user.present?
     end
 
+    def require_email
+      return false if es_de_mercadolibre?
+      true unless new_record? or ['cart', 'address'].include?(state)
+    end
+
     before_validation(on: :create) do
       self.number = Spree::Core::NumberGenerator.new(prefix: 'P').send(:generate_permalink, Spree::Order)
     end
