@@ -46,6 +46,14 @@ module Spree
       true unless new_record? or ['cart', 'address'].include?(state)
     end
 
+    def metodo_envios
+      if es_de_mercadolibre?
+        ['mercado_envios', 'retiro_local', 'micro', 'other']
+      else
+        ['retiro_local', 'micro', 'other']
+      end
+    end
+
     before_validation(on: :create) do
       self.number = Spree::Core::NumberGenerator.new(prefix: 'P').send(:generate_permalink, Spree::Order)
     end
