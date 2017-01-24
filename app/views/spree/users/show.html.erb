@@ -24,7 +24,7 @@
 <!--        <th class="order-payment-state"><%= Spree.t(:payment_state) %></th>
         <th class="order-shipment-state"><%= Spree.t(:shipment_state) %></th> -->
         <% if current_spree_user && current_spree_user.confirmed? %>
-          <th class="order-total"><%= Spree.t(:total) %></th>
+          <th class="order-total"><%= Spree.t(:approximate_total) %></th>
         <% end %>
       </tr>
       </thead>

@@ -41,7 +41,7 @@ Spree::PermittedAttributes.address_attributes.push :dni_cuit
 
 Spree::PermittedAttributes.user_attributes.push :phone_number, :first_name, :last_name, :enterprise, :address
 
-Spree::PermittedAttributes.store_attributes.push :eventuality_id
+Spree::PermittedAttributes.store_attributes.push :eventuality_id, :help_content
 
 Spree::PermittedAttributes.line_item_attributes.push :bonification
 

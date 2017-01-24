@@ -14,7 +14,6 @@
 #= require spree/frontend/spree_i18n
 
 
-
 Spree.ready ($) ->
   if ($ '#checkout_form_metodo_envio').is('*')
 

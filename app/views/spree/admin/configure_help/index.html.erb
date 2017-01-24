@@ -1,0 +1,46 @@
+
+
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+
+<!--<div id="summernote">Hello Summernote</div>-->
+
+
+
+
+<%= form_tag admin_configure_help_update_path, method: :put do %>
+  <div id="preferences" data-hook>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">
+          <%= Spree.t(:configure_help) %>
+        </h1>
+      </div>
+
+      <div class="panel-body">
+        <%= fields_for :store do |f| %>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <%= f.label Spree.t(:configure_help) %>
+                <%= f.text_area :help_content, as: :summernote, id:"summernote" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'save' %>
+    </div>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#summernote').summernote();
+    $('.dropdown-toggle').dropdown();
+  });
+</script>

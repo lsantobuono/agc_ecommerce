@@ -9,13 +9,15 @@ header = [
 data = [header]
 
 invoice.items.each do |item|
+  precio = (item.display_price.money.fractional.to_i / 100.00 / 1.21).round(2)
   row = [
     item.sku,
     item.name,
     item.quantity,
-    (Spree::Money.new(item.display_price.money.fractional.to_i / 100.00 / 1.21)).to_s, # El fractional devuelve centavos asi que lo divido x 100
+    (Spree::Money.new(precio)).to_s, # El fractional devuelve centavos asi que lo divido x 100
     "#{item.bonification}%",
-    (Spree::Money.new(((item.display_price.money.fractional.to_i / 100.00) - (item.bonification * (item.display_price.money.fractional.to_i / 100.00) / 100.00 ))* item.quantity / 1.21)).to_s,
+#    (Spree::Money.new(((item.display_price.money.fractional.to_i / 100.00) - (item.bonification * (item.display_price.money.fractional.to_i / 100.00) / 100.00 ))* item.quantity / 1.21)).to_s,
+     (Spree::Money.new(precio* item.quantity* ((100-item.bonification)/100.00))).to_s,
   ]
   data += [row]
 end

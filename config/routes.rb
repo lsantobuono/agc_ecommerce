@@ -108,6 +108,9 @@ Spree::Core::Engine.routes.draw do
     put '/eventualities/:id', to: 'eventualities#update', as: :update_eventualities
     delete '/eventualities/:id', to: 'eventualities#destroy', as: :delete_eventualities
 
+    get '/configure_help', to: 'configure_help#index'
+    put '/configure_help/update', to: 'configure_help#update'
+
     resources :orders, except: [:show] do
       member do
         post :send_presupuesto

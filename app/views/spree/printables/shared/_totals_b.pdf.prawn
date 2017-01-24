@@ -14,9 +14,14 @@ totals = []
 # TOTAL
 
 sumTotal = 0
-invoice.items.each { 
-    |item| sumTotal += (((item.display_price.money.fractional.to_i / 100.00) - (item.bonification * (item.display_price.money.fractional.to_i / 100.00) / 100.00 ))* item.quantity)
-}
+
+invoice.items.each do |item|
+  precio_redondeado = (item.display_price.money.fractional.to_i / 100.00).round(2)
+  sumTotal +=  precio_redondeado* item.quantity* ((100-item.bonification)/100.00)
+end
+
+sumTotal = sumTotal.round 2
+
 totals << [pdf.make_cell(content: Spree.t(:order_total)), Spree::Money.new(sumTotal).to_s]
 
 # Payments

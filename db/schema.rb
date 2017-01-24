@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170121195230) do
+ActiveRecord::Schema.define(version: 20170124102255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -976,6 +976,7 @@ ActiveRecord::Schema.define(version: 20170121195230) do
     t.integer  "eventuality_id"
     t.string   "presupuesto_email_header"
     t.string   "presupuesto_email_footer"
+    t.text     "help_content"
   end
 
   add_index "spree_stores", ["code"], name: "index_spree_stores_on_code", using: :btree

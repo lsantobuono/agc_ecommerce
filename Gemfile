@@ -104,3 +104,7 @@ gem 'spree_print_invoice', github: 'spree-contrib/spree_print_invoice', branch: 
 group :development do
   gem 'meta_request'
 end
+
+gem 'summernote-rails', '0.8.1'
+gem 'bootstrap-sass'     # required
+
