@@ -56,6 +56,7 @@ es:
     eventualities: "Eventualidades"
     edit_profile: "Editar datos personales"
     configure_help: "Configurar Ayuda"
+    configure_download: "Configurar Descargas"
     #navbar
     home: INICIO
     my_account: MI CUENTA

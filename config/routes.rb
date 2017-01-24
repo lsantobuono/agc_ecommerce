@@ -111,6 +111,9 @@ Spree::Core::Engine.routes.draw do
     get '/configure_help', to: 'configure_help#index'
     put '/configure_help/update', to: 'configure_help#update'
 
+    get '/configure_download', to: 'configure_download#index'
+    put '/configure_download/update', to: 'configure_download#update'
+
     resources :orders, except: [:show] do
       member do
         post :send_presupuesto

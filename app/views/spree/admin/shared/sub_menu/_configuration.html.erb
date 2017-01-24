@@ -7,6 +7,8 @@
 
   <%= configurations_sidebar_menu_item(Spree.t(:configure_help), admin_configure_help_path) if can? :manage, Spree::Config %>
 
+  <%= configurations_sidebar_menu_item(Spree.t(:configure_download), admin_configure_download_path) if can? :manage, Spree::Config %>
+
   <% if country = Spree::Country.find_by_id(Spree::Config[:default_country_id]) || Spree::Country.first %>
     <%= configurations_sidebar_menu_item(Spree.t(:states), spree.admin_country_states_path(country)) if can? :manage, Spree::Country %>
   <% end %>
