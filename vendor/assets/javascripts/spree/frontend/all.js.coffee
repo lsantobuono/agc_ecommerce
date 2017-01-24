@@ -30,17 +30,20 @@ Spree.ready ($) ->
 
     update_metodo_envio_otros_text metodo_envio_other
 
+    metodo_envio_mercado_envios = ($ 'input#order_metodo_envio_mercado_envios')
     metodo_envio_retiro_local = ($ 'input#order_metodo_envio_retiro_local')
     ($ 'input.metodo_envio').change ->
-      update_metodo_envio_retiro_local metodo_envio_retiro_local
+      update_metodo_envio_retiro_local()
     
-    update_metodo_envio_retiro_local = (metodo_envio_retiro_local) ->
-      if metodo_envio_retiro_local.is(':checked')
+    update_metodo_envio_retiro_local = ->
+      if metodo_envio_retiro_local.is(':checked') || metodo_envio_mercado_envios.is(':checked')
         ($ '#shipping .inner input, #shipping .inner select').prop 'disabled', true
       else
         ($ '#shipping .inner input, #shipping .inner select').prop 'disabled', false
 
-    update_metodo_envio_retiro_local metodo_envio_retiro_local
+    setTimeout(->
+      update_metodo_envio_retiro_local()
+    , 1)
 
 
 

@@ -87,8 +87,8 @@ es:
     metodo_envio: Método de envío
     metodos_envio:
       other: Otros
-      retiro_local: Retiro Local
-      mercado_envios: Mercado Envíos
+      retiro_local: Retiro en el local del vendedor
+      mercado_envios: Ya aboné Mercado Envíos
       micro: Micro
 
     order_line_items: "Items de Orden"
