@@ -11,7 +11,7 @@ HOLA
         <h3 class="panel-title"><%= Spree.t(:metodo_de_envio) %></h3>
       </div>
       <div class="panel-body">
-        <% Spree::Order.metodo_envios.each do |tipo, id| %>
+        <% @order.metodo_envios.each do |tipo, id| %>
           <p>
             <%= form.radio_button :metodo_envio, tipo, class: 'metodo_envio' %>
             <%= form.label "metodo_envio_#{tipo}", Spree.t("metodos_envio.#{tipo}") %>
