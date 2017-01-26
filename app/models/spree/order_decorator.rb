@@ -22,7 +22,7 @@ module Spree
     end
 
     def can_approve?
-      moderation_status == 'notified'
+      moderation_status == 'notified' || (moderation_status == 'pending' && email.blank?)
     end
 
     def deliver_order_confirmation_email

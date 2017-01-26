@@ -80,9 +80,9 @@ es:
       factura_a: Factura A
       factura_b: Factura B Monotributo
     moderation_status:
-      pending: Pendiente
-      notified: Notificado
-      approved: Aprobado
+      pending: pendiente
+      notified: notificado
+      approved: aprobado
       label:
         pending: pending
         notified: info

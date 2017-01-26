@@ -2,7 +2,7 @@
   <% if can?(:fire, order) %>
     <%= event_links(order, events) %>
   <% end %>
-  <% if can?(:resend, order) %>
+  <% if can?(:resend, order) && order.email.present?  %>
     <% if order.moderation_status == "pending" %>
       <%= button_link_to Spree.t(:send_presupuesto, scope: 'admin.order.events'),
             send_presupuesto_admin_order_url(order),
