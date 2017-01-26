@@ -47,7 +47,7 @@ module Spree
         return
       end
 
-      combo = Combo.find_by_code(order.ml_purchase_id )
+      combo = Combo.where('lower(code) = ?', order.ml_purchase_id.downcase).first
       if (combo == nil)
         flash[:error] = "Se ingresó un id de combo inválido, por favor chequee que sea correcto, o comuniquese con nosotros"
         redirect_back_or_default(spree.root_path)

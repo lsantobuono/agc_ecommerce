@@ -1,5 +1,7 @@
 module Spree
   HomeController.class_eval do
+    before_filter :check_for_mobile
+
     def index
       @searcher = build_searcher(params.merge(include_images: true))
       @products = @searcher.retrieve_products.order("spree_products.position ASC")

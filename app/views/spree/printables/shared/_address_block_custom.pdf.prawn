@@ -24,7 +24,7 @@ if (ship_address != nil)
   shipping =  "#{ship_address.firstname} #{ship_address.lastname}"
   shipping << "\n#{ship_address.address1}"
   shipping << "\n#{ship_address.address2}" unless ship_address.address2.blank?
-  shipping << "\n#{ship_address.city}, #{ship_address.state_text} #{ship_address.zipcode}"
+  shipping << "\n#{ship_address.city}, #{ship_address.state.name} "
   if (ship_address.country != nil)
     shipping << "\n#{ship_address.country.name}" 
   end

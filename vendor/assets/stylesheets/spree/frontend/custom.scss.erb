@@ -127,6 +127,36 @@ html, body {
   }
 }
 
+.custom-tooltip{display:inline;position:relative}
+.custom-tooltip:hover{text-decoration:none}
+
+.custom-tooltip:hover:after{
+  background:rgba(0,153,0,1);
+  border-radius:5px;
+  color:#fff;
+  content:"+54911 6051 0878";
+  display:block;
+  left:-100%;
+  top:210%;
+  padding:5px 15px;
+  position:absolute;
+  white-space:nowrap;
+  z-index:98;
+}
+.custom-tooltip:hover:before{  
+  border: .7em solid rgba(0,153,0,.8);
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+
+  content:"";
+  display:block;
+  left:0%;
+  top:100%;
+  position:absolute;
+  z-index:99;
+}
+
 
 .btn.btn-success {
 	background-color:$navbar-blue; 

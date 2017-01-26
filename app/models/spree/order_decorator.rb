@@ -34,6 +34,12 @@ module Spree
       return true unless es_de_mercadolibre?
       combo = combo_aplicados.first.try(:combo)
       return true unless combo.present?
+
+      if (!combo.caro?) # Si no es caro no va a pedir address.. 
+        #entonces le pongo tipo consumidor final.. solo los ML Combo deberian llegar aca, el resto ya retorno address
+        self.tipo_factura="consumidor_final"
+      end
+
       combo.caro?
     end
 
