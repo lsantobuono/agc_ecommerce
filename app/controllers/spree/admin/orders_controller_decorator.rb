@@ -1,6 +1,14 @@
 module Spree::Admin
   OrdersController.class_eval do
     before_action :load_order, only: [:edit, :update, :destroy, :cancel, :resume, :approve, :send_presupuesto, :resend, :open_adjustments, :close_adjustments, :cart]
+    before_action :new_product, only: [:cart]
+
+    def new_product
+      @product = Spree::Product.new(
+        shipping_category: Spree::ShippingCategory.first,
+        available_on: Time.zone.now
+      )
+    end
 
     def new
       @order = Spree::Order.create(order_params.merge(creado_por_admin: true))

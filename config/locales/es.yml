@@ -40,6 +40,7 @@ es:
     position: Posición
     role: Rol
     hidden: Oculto
+    add_new_product: Agregar nuevo producto
     shopping_cart: Carrito de Productos
     continue_shopping: Seguir cargando
     checkout: Solicitar cotización
@@ -72,6 +73,8 @@ es:
     street_address: Dirección
     city: Localidad
     caro: ¿Precio mayor a $1000?
+    actions:
+      add: Agregar
     tipos_factura:
       consumidor_final: Factura Consumidor Final
       factura_a: Factura A
