@@ -5,7 +5,7 @@
 <%= form_for :order, url: populate_orders_path do |f| %>
   <div class="row" id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
     <% if @product.variants_and_option_values(current_currency).any? %>
-      <div id="product-variants" class="col-md-12">
+      <div id="product-variants-home" class="col-md-12">
 
           <% variants_array = @product.variants_and_option_values(current_currency).each.map { 
               |variant|
