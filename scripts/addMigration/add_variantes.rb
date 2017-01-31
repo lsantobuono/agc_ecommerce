@@ -36,10 +36,10 @@ module Spree
       v = Variant::new()
       v.sku = "#{producto.master.sku}-#{varianteSku}"
       if (cost_price == nil || cost_price=="")
-        cost_price=1
+        cost_price=producto.master.cost_price
       end
       if (price == nil || price=="")
-        price=1
+        price=producto.master.price
       end
         
 
