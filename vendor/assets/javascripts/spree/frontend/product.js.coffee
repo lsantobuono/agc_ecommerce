@@ -94,7 +94,7 @@ Spree.ready ($) ->
   else if home
     selected = ($ '#variant_id option:selected')
 
-    Spree.showVariantImagesHome(selected.attr('value'), selected.data('producto-id'))
+    # comento esto Spree.showVariantImagesHome(selected.attr('value'), selected.data('producto-id'))
     Spree.updateVariantPriceHome selected
     Spree.disableCartFormHome selected
   
