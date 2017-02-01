@@ -1,20 +1,6 @@
 module Spree
   require 'spreadsheet'    
   require "i18n"
-  
-  cantidadEtiquetas=97
-  actual=1
-  while (actual <= cantidadEtiquetas) do
-    aux=Spree::Image.find_by(attachment_file_name: "E#{actual}.jpg")
-    if (aux == nil)
-      img=Spree::Image.new(attachment: File.open("FOTOS/ETIQUETAS/E#{actual}.jpg"))
-      img.save
-      puts "Foto grabada E#{actual}.jpg"
-    else
-      puts "Foto ya existia E#{actual}.jpg"
-    end
-    actual=actual+1    
-  end
 
   book = Spreadsheet.open('scripts/addMigration/variantes.xls')
   sheet1 = book.worksheet('Hoja1') 
@@ -73,7 +59,9 @@ module Spree
           v.option_values << myOpVal
       end
 
-        v.images << Spree::Image.find_by(attachment_file_name: "#{varianteSku}.jpg")
+        img=Spree::Image.new(attachment: File.open("FOTOS/ETIQUETAS/#{varianteSku}.jpg"))
+        v.images << img
+        
         if !v.save
           v.errors.each do |e|
             puts "variant errores : #{e}"
