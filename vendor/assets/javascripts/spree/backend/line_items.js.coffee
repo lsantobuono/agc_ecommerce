@@ -10,7 +10,7 @@ $(document).ready ->
     save = $ this
     line_item_id = save.data('line-item-id')
     quantity = parseInt(save.parents('tr').find('input.line_item_quantity').val())
-    bonification = parseInt(save.parents('tr').find('input.line_item_bonification').val())
+    bonification = parseFloat(save.parents('tr').find('input.line_item_bonification').val())
 
     toggleItemEdit()
     adjustLineItem(line_item_id, quantity,bonification)

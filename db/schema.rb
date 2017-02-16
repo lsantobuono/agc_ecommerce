@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170124192644) do
+ActiveRecord::Schema.define(version: 20170216171721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -232,22 +232,22 @@ ActiveRecord::Schema.define(version: 20170124192644) do
   create_table "spree_line_items", force: :cascade do |t|
     t.integer  "variant_id"
     t.integer  "order_id"
-    t.integer  "quantity",                                                            null: false
-    t.decimal  "price",                        precision: 10, scale: 2,               null: false
-    t.datetime "created_at",                                                          null: false
-    t.datetime "updated_at",                                                          null: false
+    t.integer  "quantity",                                                             null: false
+    t.decimal  "price",                        precision: 10, scale: 2,                null: false
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
     t.string   "currency"
     t.decimal  "cost_price",                   precision: 10, scale: 2
     t.integer  "tax_category_id"
     t.decimal  "adjustment_total",             precision: 10, scale: 2, default: 0.0
     t.decimal  "additional_tax_total",         precision: 10, scale: 2, default: 0.0
     t.decimal  "promo_total",                  precision: 10, scale: 2, default: 0.0
-    t.decimal  "included_tax_total",           precision: 10, scale: 2, default: 0.0, null: false
-    t.decimal  "pre_tax_amount",               precision: 12, scale: 4, default: 0.0, null: false
-    t.decimal  "taxable_adjustment_total",     precision: 10, scale: 2, default: 0.0, null: false
-    t.decimal  "non_taxable_adjustment_total", precision: 10, scale: 2, default: 0.0, null: false
+    t.decimal  "included_tax_total",           precision: 10, scale: 2, default: 0.0,  null: false
+    t.decimal  "pre_tax_amount",               precision: 12, scale: 4, default: 0.0,  null: false
+    t.decimal  "taxable_adjustment_total",     precision: 10, scale: 2, default: 0.0,  null: false
+    t.decimal  "non_taxable_adjustment_total", precision: 10, scale: 2, default: 0.0,  null: false
     t.integer  "combo_aplicado_id"
-    t.integer  "bonification",                                          default: 10,  null: false
+    t.decimal  "bonification",                 precision: 10, scale: 2, default: 10.0, null: false
   end
 
   add_index "spree_line_items", ["combo_aplicado_id"], name: "index_spree_line_items_on_combo_aplicado_id", using: :btree
