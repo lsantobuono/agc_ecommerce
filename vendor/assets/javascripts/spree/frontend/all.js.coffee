@@ -62,7 +62,7 @@ Spree.ready ($) ->
     update_shipping_form_state order_use_billing
   
   # Si el total de la factura es < 1000 entonces deshabilito los datos de facturacion si elige consumidor
-  if $("#billing").attr('data-big-total') == 'no'
+  if $("#billing").attr('data-should-hide-billing') == 'yes'
     if ($ '#checkout_form_address').is('*')
       tipo_factura_consumidor_final = ($ 'input#order_tipo_factura_consumidor_final')
       ($ 'input.tipo_factura').change ->

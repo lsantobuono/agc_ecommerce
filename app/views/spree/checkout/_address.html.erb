@@ -19,7 +19,7 @@
 </div>
 <div class="row">
   <div class="col-sm-6" data-hook="billing_fieldset_wrapper">
-    <div class="panel panel-default" id="billing" data-hook data-big-total="<%= @order.total > 1000 ? 'yes' : 'no' %>">
+    <div class="panel panel-default" id="billing" data-hook data-should-hide-billing="<%= @order.should_hide_billing? ? 'yes' : 'no' %>">
       <%= form.fields_for :bill_address do |bill_form| %>
         <div class="panel-heading">
           <h3 class="panel-title"><%= Spree.t(:datos_de_facturacion) %></h3>

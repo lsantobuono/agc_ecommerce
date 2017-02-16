@@ -9,7 +9,7 @@ module Spree
     has_many :combo_aplicados, inverse_of: :order, foreign_key: :spree_order_id, dependent: :destroy
 
     checkout_flow do
-      go_to_state :address, if: ->(order) { order.requiere_address? }
+      go_to_state :address
       go_to_state :metodo_envio, if: ->(order) { !order.creado_por_admin? }
       go_to_state :confirmar, if: ->(order) { !order.creado_por_admin? }
       # 
@@ -30,17 +30,8 @@ module Spree
       update_column(:confirmation_delivered, true)
     end
 
-    def requiere_address?
-      return true unless es_de_mercadolibre?
-      combo = combo_aplicados.first.try(:combo)
-      return true unless combo.present?
-
-      if (!combo.caro?) # Si no es caro no va a pedir address.. 
-        #entonces le pongo tipo consumidor final.. solo los ML Combo deberian llegar aca, el resto ya retorno address
-        self.tipo_factura="consumidor_final"
-      end
-
-      combo.caro?
+    def should_hide_billing?
+      !es_de_mercadolibre? && total < 1000
     end
 
     def es_de_mercadolibre?
