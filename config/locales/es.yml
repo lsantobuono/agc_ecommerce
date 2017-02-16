@@ -113,6 +113,7 @@ es:
       order:
         events:
           send_presupuesto: Enviar presupuesto
+          set_as_notified: Marcar como notificado
           resend: Reenviar presupuesto
       tab:
         option_types: Tipos de Opciones

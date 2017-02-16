@@ -2,6 +2,13 @@
   <% if can?(:fire, order) %>
     <%= event_links(order, events) %>
   <% end %>
+  <% if order.moderation_status == "pending" %>
+    <%= button_link_to Spree.t(:set_as_notified, scope: 'admin.order.events'),
+          set_as_notified_admin_order_url(order),
+          method: :post,
+          icon: 'envelope'
+    %>
+  <% end %>
   <% if can?(:resend, order) && order.email.present?  %>
     <% if order.moderation_status == "pending" %>
       <%= button_link_to Spree.t(:send_presupuesto, scope: 'admin.order.events'),
