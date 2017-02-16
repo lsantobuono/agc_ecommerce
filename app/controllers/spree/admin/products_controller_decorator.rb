@@ -1,7 +1,7 @@
 module Spree::Admin
   ProductsController.class_eval do
     unless respond_to? :el_metodo_que_no_hace_nada # Esto es para fixear un bug raro, por algun motivo carga dos veces este decorator
-      def el_metodo_que_no_hace_nada
+      def self.el_metodo_que_no_hace_nada
       end
 
       create.after :create_after
