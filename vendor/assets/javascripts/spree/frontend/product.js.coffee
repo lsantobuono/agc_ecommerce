@@ -103,7 +103,7 @@ Spree.ready ($) ->
         radios = ($ object).find(":selected")[0]
     
         producto_id= $(radios).data('producto-id')
-        Spree.showVariantImagesHome(radios.value,producto_id)
+        # Spree.showVariantImagesHome(radios.value,producto_id)
         Spree.updateVariantPriceHome ($ radios)
         Spree.disableCartFormHome ($ radios)
         
