@@ -5,7 +5,7 @@ module Spree
 
     def all_children
       ret = Set.new
-      ret.merge self.products 
+      ret.merge self.products.where("(discontinue_on is null OR discontinue_on > ?) and (deleted_at is null OR deleted_at > ?)", Date.today, Date.today)
       self.children.each do |c|
         if c.is_a?(Taxon)
           ret = ret.merge c.products
