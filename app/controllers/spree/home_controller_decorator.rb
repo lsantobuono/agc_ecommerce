@@ -45,7 +45,7 @@ module Spree
 
     def publicDownload
 
-      fileName= "public/descargas/#{params[:file_id]}.pdf"
+      fileName= "public/descargas/#{params[:file_id]}"
 
       send_file(fileName,
         :type => 'application/pdf',

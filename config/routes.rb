@@ -76,7 +76,7 @@ Spree::Core::Engine.routes.draw do
   post "/messages" => "home#createMessage"
   get "/new_message" => "home#newMessage"
   get "/download/:product_id/:variant_id" => "home#downloadFile", as: "public_download_product_file"
-  get "/decarga/static/:file_id " => "home#publicDownload", as: "download_static_file"
+  get "/decarga/static/:file_id" => "home#publicDownload", as: "download_static_file"
 
   get "/combos" => "combos#index"
   get "/mercado_libre" => "combos#mercado_libre", as: :mercado_libre
