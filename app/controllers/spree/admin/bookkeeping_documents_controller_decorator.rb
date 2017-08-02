@@ -14,7 +14,7 @@ module Spree
       def show
         respond_with(@bookkeeping_document) do |format|
           format.pdf do
-            send_data @bookkeeping_document.pdf, type: 'application/pdf', disposition: 'inline'
+            send_data @bookkeeping_document.pdf, type: 'application/pdf', disposition: 'attachment', filename: "#{@bookkeeping_document.printable.number}.pdf"
           end
         end
       end

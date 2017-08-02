@@ -172,6 +172,7 @@ es:
       order_invoice_b: PRESUPUESTO
       order_invoice_cf: PRESUPUESTO
       order_invoice_mostrador: PRESUPUESTO
+      documents_for_order: Documentos del pedido
 
     notice_messages:
       order_deleted: La orden ha sido borrada
