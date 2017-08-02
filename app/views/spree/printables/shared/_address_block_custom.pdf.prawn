@@ -8,7 +8,7 @@ dataShip = nil
 
 if (bill_address != nil)
   address_cell_billing  = pdf.make_cell(content: "#{Spree.t(:billing_data)} #{type_bill}", font_style: :bold)
-  billing =  "#{bill_address.dni_cuit} "
+  billing =  "DNI/CUIT: #{bill_address.dni_cuit} "
   billing << "\n#{bill_address.firstname} #{bill_address.lastname}"
   billing << "\n#{bill_address.address1}"
   billing << "\n#{bill_address.address2}" unless bill_address.address2.blank?
