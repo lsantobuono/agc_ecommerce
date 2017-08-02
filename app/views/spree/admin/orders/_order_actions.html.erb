@@ -6,7 +6,8 @@
     <%= button_link_to Spree.t(:set_as_notified, scope: 'admin.order.events'),
           set_as_notified_admin_order_url(order),
           method: :post,
-          icon: 'envelope'
+          icon: 'envelope',
+          data: { confirm: '¿Está seguro que desea marcar como notificado sin enviar email al cliente?' }
     %>
   <% end %>
   <% if can?(:resend, order) && order.email.present?  %>
@@ -24,7 +25,7 @@
       %>
     <% end %>
   <% end %>
-  <%= link_to admin_order_path(order), class: "btn btn-danger", method: :delete, data: { confirm: 'Estás seguro?' } do %>
+  <%= link_to admin_order_path(order), class: "btn btn-danger", method: :delete, data: { confirm: '¿Estás seguro?' } do %>
     <span class="glyphicon glyphicon-trash"></span>
     Borrar
   <% end %>
