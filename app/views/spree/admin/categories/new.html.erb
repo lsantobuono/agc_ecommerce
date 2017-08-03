@@ -1,0 +1,14 @@
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @category } %>
+
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:category), spree.admin_categories_url %> /
+  <%= Spree.t(:new_category) %>
+<% end %>
+
+<%= nested_form_for [:admin, @category], :html => { :multipart => true } do |f| %>
+  <fieldset data-hook="new_category">
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>
+

@@ -1,6 +1,7 @@
 class Combo < ActiveRecord::Base
   acts_as_paranoid
 
+  belongs_to :category
   has_many :combo_lines
   has_many :combo_lines_products, -> { with_product }, class_name: 'ComboLine'
   has_many :combo_lines_taxons, -> { with_taxon }, class_name: 'ComboLine'

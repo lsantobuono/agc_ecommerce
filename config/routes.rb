@@ -89,6 +89,7 @@ Spree::Core::Engine.routes.draw do
     delete :remove_combo_aplicado, on: :collection
   end
 
+
   namespace :admin , path: Spree.admin_path do
     get '/prices_files', to: 'price_file#index', as: :prices_files
     post '/prices_files', to: 'price_file#create', as: :create_prices_files
@@ -139,6 +140,13 @@ Spree::Core::Engine.routes.draw do
         post "/files" => "products#createFile", as:"create_product_file"
         delete "/files/:variant_id" => "products#destroyFile", as:"delete_product_file"
     end
+
+    resources :categories do
+      collection do
+        post :sort
+      end
+    end
+
   end
 
   get '/index.html', to: redirect('/', status: 301)

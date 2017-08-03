@@ -13,5 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require jquery-ui
 //= require jquery_nested_form
+//= require jquery-ui/sortable.js
+//= require jquery.mjs.nestedSortable.js
+//= require_tree .

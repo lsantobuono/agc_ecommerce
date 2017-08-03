@@ -125,6 +125,7 @@ es:
         taxon_video: Videos de Categoría 
         invoices: Facturas
         packaging_slips: Recibos embalaje
+        categories: Categorias de Combos
     qty: Cantidad
 
     address_instructions: "Ingrese sus detalles de facturación para agilizar el proceso de cotización."

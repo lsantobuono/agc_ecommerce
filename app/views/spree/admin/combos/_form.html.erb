@@ -26,6 +26,17 @@
               <%= f.error_message_on :description %>
             <% end %>
           </div>
+          <div data-hook="admin_combo_form_category" class="omega two columns">
+            <%= f.field_container :category_id, class: ['form-group'] do %>
+              <%= f.label :category_id, Spree.t(:category) %>
+              
+              <%#= f.select :category_id, , {:include_blank => 'Categoría raíz'}, class: "form-control chosen-select" %>
+
+              <%= f.collection_select :category_id, Category.leaves, :id, :name, {include_blank: "Categoría"}, class: "form-control chosen-select", required: true %>
+
+              <%= f.error_message_on :category_id %>
+            <% end %>
+          </div>
           <div data-hook="admin_combo_form_hidden"   >
             <%= f.field_container :hidden do %>
               <%= f.label :hidden, Spree.t(:hidden) %>

@@ -11,11 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216171721) do
+ActiveRecord::Schema.define(version: 20170803145609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "ancestry"
+    t.integer  "pos"
+  end
+
+  add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
 
   create_table "combo_aplicados", force: :cascade do |t|
     t.integer "combo_id",       null: false
@@ -45,7 +55,10 @@ ActiveRecord::Schema.define(version: 20170216171721) do
     t.string   "image"
     t.boolean  "hidden"
     t.boolean  "caro"
+    t.integer  "category_id"
   end
+
+  add_index "combos", ["category_id"], name: "index_combos_on_category_id", using: :btree
 
   create_table "eventualities", force: :cascade do |t|
     t.string   "message",          null: false
@@ -1199,5 +1212,6 @@ ActiveRecord::Schema.define(version: 20170216171721) do
   add_foreign_key "combo_aplicados", "combos"
   add_foreign_key "combo_aplicados", "spree_orders"
   add_foreign_key "combo_lines", "combos"
+  add_foreign_key "combos", "categories"
   add_foreign_key "spree_line_items", "combo_aplicados"
 end

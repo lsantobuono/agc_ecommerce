@@ -1,0 +1,15 @@
+<span rel="tooltip" title="Ver">
+  <%= link_to admin_category_url(item), class: 'btn btn-xs btn-primary' do %>
+    <span class="glyphico glyphicon-eye-open">&nbsp;</span>
+  <% end %>
+</span>
+<span rel="tooltip" title="Editar">
+  <%= link_to edit_admin_category_url(item), class: 'btn btn-xs btn-default' do %>
+    <span class="glyphicon glyphicon-edit">&nbsp;</span>
+  <% end %>
+</span>
+<span rel="tooltip" title="Borrar">
+  <%= link_to admin_category_url(item), data: {confirm: 'Seguro que quiere eliminar la categoría?'}, method: :delete, class: 'btn btn-xs btn-danger' do %>
+    <span class="glyphicon glyphicon-trash"></span>
+  <% end %>
+</span>

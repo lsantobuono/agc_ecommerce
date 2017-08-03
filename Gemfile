@@ -108,3 +108,9 @@ end
 gem 'summernote-rails', '0.8.1'
 gem 'bootstrap-sass'     # required
 
+gem 'ancestry'
+gem 'haml-rails', '~> 0.9'
+gem 'jquery-ui-rails'
+
+gem 'sortable_tree_rails'
+

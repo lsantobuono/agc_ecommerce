@@ -1,0 +1,13 @@
+
+<% content_for :page_title do %>
+  Categorías de combos
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_category), new_admin_category_url, { :class => "btn-success", :icon => 'add', :id => 'admin_new_category' } %>
+<% end %>
+
+<h5> Listado de categories </h5>
+<table class="table" id="listing_categories">
+  <%= render_sortable_tree(@items, {name_method: :name, sort_url: sort_admin_categories_url, max_levels: 5, controls_partial: 'controls'}) %>
+</table>
