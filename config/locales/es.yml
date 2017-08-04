@@ -158,6 +158,8 @@ es:
     api:
       must_specify_api_key: "No se permite acceder sin key"      
     new_combo: Nuevo combo
+    new_category: Nueva categoría
+    edit_category: Editar categoría
     printable_number: Numero impresión
     print_invoice:
       invoice_number: "Número de presup.: %{number}"

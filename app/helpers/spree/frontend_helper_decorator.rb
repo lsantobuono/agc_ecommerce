@@ -49,6 +49,48 @@ module Spree
       #	end
 
       	#Magia Negra  . 
+
+    def taxons_tree_combos(root_taxon , current_taxon, max_level = 1, root_id, original_category)
+			return '' if max_level < 1 || (!root_taxon.nil? && root_taxon.is_childless?)
+			#if (original_category == true || (current_taxon != nil && current_taxon.self_and_ancestors.include?(root_taxon)))
+			if (original_category == true || (current_taxon != nil && current_taxon.descendant_of?(root_taxon)))
+				listClass = 'list-group panel-collapse accordion-body collapse in'
+			else
+				listClass = 'list-group panel-collapse accordion-body collapse'
+			end
+			content_tag :div, id:root_id, class: listClass, style:"margin-bottom:0" do
+			
+				if (root_taxon.nil?)
+					auxiliar_taxons = Category.roots
+				else
+					auxiliar_taxons = root_taxon.children
+				end
+
+				taxons = auxiliar_taxons.map do |taxon|
+					link = "/categories_combos/#{taxon.id}"
+					root_id = (root_id*max_level)+1					
+					unless taxon.children.empty?
+						link = "##{root_id}"
+						content_tag :div, id:"accordion-#{root_id}", class: "" do
+							l = link_to(link, class: "list-group-item", data: {toggle: "collapse", parent: "#accordion-#{root_id}" }) do
+								content_tag(:div, " ", id:"arrow-icon", class: "fa fa-chevron-down", style:"float:right") +taxon.name
+							end
+							l + taxons_tree_combos(taxon, current_taxon, max_level - 1,root_id,false)
+						end 
+					else 
+						if (current_taxon == taxon)
+							link_to(link, class: 'list-group-item list-group-item-active'){content_tag(:span, " ", class: "glyphicon glyphicon-chevron-right") 
+							+ taxon.name} + taxons_tree_combos(taxon, current_taxon, max_level - 1,root_id,false)
+						else
+							link_to(link, class: 'list-group-item '){content_tag(:span, " ", class: "glyphicon glyphicon-chevron-right") 
+							+ taxon.name} + taxons_tree_combos(taxon, current_taxon, max_level - 1,root_id,false)
+						end
+					end
+				end
+				safe_join(taxons, "\n")
+			end
+		end
+
 		def taxons_tree(root_taxon, current_taxon, max_level = 1, root_id, original_category)
 			return '' if max_level < 1 || root_taxon.leaf?
 			if (original_category == true || (current_taxon != nil && current_taxon.self_and_ancestors.include?(root_taxon)))

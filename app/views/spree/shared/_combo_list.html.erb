@@ -1,0 +1,8 @@
+
+<ul class="comboList">
+  <% combos.each do |c| %>
+    <% if !c.hidden %>
+      <%= render('spree/shared/preview_combo', {combo: c}) %>
+    <% end %>
+  <% end %>
+</table>

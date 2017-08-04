@@ -81,7 +81,9 @@ Spree::Core::Engine.routes.draw do
   get "/combos" => "combos#index"
   get "/mercado_libre" => "combos#mercado_libre", as: :mercado_libre
   get "/combos/:combo_id" => "combos#ordenar_combo", as: :ordenar_combo
-  
+  get "/categories_combos/:category_id" => "categories#show"
+
+
   resources :orders, except: [:index, :new, :create, :destroy] do
     post :populate, on: :collection
     post :populate_combos, on: :collection

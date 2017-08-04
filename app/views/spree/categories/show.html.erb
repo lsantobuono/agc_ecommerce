@@ -2,6 +2,7 @@
 
 <h1> Combos </h1>
 
-<%= render('spree/shared/sidebar_categories') %>
+<%= render('spree/shared/sidebar_categories', {category: @category}) %>
 
 <%= render('spree/shared/combo_list', {combos: @combos}) %>
+

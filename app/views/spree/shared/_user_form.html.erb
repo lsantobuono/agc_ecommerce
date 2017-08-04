@@ -1,29 +1,37 @@
 <fieldset id="password-credentials">
   <div class="form-group">
-    <%= f.text_field :first_name, :class => 'form-control', :placeholder => "#{Spree.t(:first_name)} *" %>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, :class => 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.text_field :last_name, :class => 'form-control', :placeholder => "#{Spree.t(:last_name)} *" %>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, :class => 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.text_field :phone_number, :class => 'form-control', :placeholder => "#{Spree.t(:phone_number)} *" %>
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone_number, :class => 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.email_field :email, :class => 'form-control', :placeholder => "#{Spree.t(:email)} *" %>
+    <%= f.label :email %>
+    <%= f.email_field :email, :class => 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.text_field :address, :class => 'form-control', :placeholder => Spree.t(:address) %>
+    <%= f.label :address %>
+    <%= f.text_field :address, :class => 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.text_field :enterprise, :class => 'form-control', :placeholder => Spree.t(:enterprise) %>
+    <%= f.label :enterprise %>
+    <%= f.text_field :enterprise, :class => 'form-control' %>
   </div>
 
   <hr />
   <div class="form-group">
-    <%= f.password_field :password, :class => 'form-control', :placeholder => Spree.t(:password) %>
+    <%= f.label :password %>
+    <%= f.password_field :password, :class => 'form-control' %>
   </div> 
   <div class="form-group">
-    <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => Spree.t(:confirm_password) %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, :class => 'form-control' %>
   </div> 
 </fieldset>
 <div data-hook="signup_below_password_fields"></div>

@@ -1,6 +1,7 @@
 module Spree
   class CombosController < Spree::StoreController
     def index
+      @combos=Combo.all
     end
 
     def mercado_libre
