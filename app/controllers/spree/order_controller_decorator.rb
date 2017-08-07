@@ -109,7 +109,11 @@ module Spree
             redirect_to spree.root_path
           end
         else
-          flash[:error] = order.errors.messages[:"Combo_Errors"].first.html_safe
+          errores = ""
+          order.errors.messages[:"Combo_Errors"].each do |m|
+            errores += "#{m.html_safe}<br>"
+          end
+          flash[:error] = errores
           redirect_back_or_default(spree.root_path)
           raise ActiveRecord::Rollback
         end
