@@ -3,6 +3,8 @@ font_style = {
   size: Spree::PrintInvoice::Config[:font_size]
 }
 
+order = Spree::Order.find(doc.printable_id)
+
 prawn_document(force_download: true) do |pdf|
   pdf.define_grid(columns: 5, rows: 8, gutter: 10)
   pdf.font font_style[:face], size: font_style[:size]
@@ -19,18 +21,20 @@ prawn_document(force_download: true) do |pdf|
 
     # address block on first page only
     if pdf.page_number == 1
-      render 'spree/printables/shared/address_block_custom', pdf: pdf, printable: doc, type_bill: "Factura A"
+      render 'spree/printables/shared/address_block_custom', pdf: pdf, printable: doc, type_bill: "Factura A", order: order
     end
 
     pdf.move_down 10
 
-    render 'spree/printables/shared/invoice/items_a', pdf: pdf, invoice: doc
+    render 'spree/printables/shared/invoice/items_a', pdf: pdf, invoice: doc, order: order
     pdf.move_down 10
     pdf.text "PRESUPUESTO VÁLIDO POR 10 DÍAS", size: 14
     pdf.move_down 10
 
-    render 'spree/printables/shared/totals_a', pdf: pdf, invoice: doc
-
+    if (order.ml_user.nil? )
+      render 'spree/printables/shared/totals_a', pdf: pdf, invoice: doc, order: order
+    end
+    
     pdf.move_down 20
 
     pdf.text Spree::PrintInvoice::Config[:return_message], align: :right, size: font_style[:size]

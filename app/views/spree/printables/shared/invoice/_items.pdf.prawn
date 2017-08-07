@@ -1,20 +1,28 @@
 header = [
   pdf.make_cell(content: Spree.t(:sku)),
   pdf.make_cell(content: Spree.t(:item_description)),
-#  pdf.make_cell(content: Spree.t(:options)),
-  pdf.make_cell(content: Spree.t(:price)),
-  pdf.make_cell(content: Spree.t(:qty)),
-  pdf.make_cell(content: Spree.t(:total))
+  pdf.make_cell(content: Spree.t(:qty))
 ]
+
+if (order.ml_user.nil?)
+  header+= [
+    pdf.make_cell(content: Spree.t(:price)),
+    pdf.make_cell(content: Spree.t(:bonificacion)),
+    pdf.make_cell(content: Spree.t(:subtotal))
+  ]
+end
 data = [header]
 
 invoice.items.each do |item|
   row = [
     item.sku,
     item.name,
-    (item.display_price.to_s,
-    item.quantity,
-    (item.display_total.to_s
+    item.quantity
+  ]
+  if (order.ml_user.nil?)
+    row += [
+      (item.display_price.to_s,
+      (item.display_total.to_s
   ]
   data += [row]
 end
