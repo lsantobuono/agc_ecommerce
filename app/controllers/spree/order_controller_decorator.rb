@@ -57,6 +57,28 @@ module Spree
       end
     end
 
+    def register_ml_combo
+      order = current_order(create_order_if_necessary: true)
+      combo = Combo.find(params[:combo_id])
+
+      order.ml_user =params[:ml_user]
+
+      if (params[:ml_user] == "")
+        flash[:error] = "Por favor ingrese su usuario de Mercado Libre"
+        redirect_back_or_default(spree.root_path)
+        return
+      end
+
+      if (combo == nil)
+        flash[:error] = "Se ingresó un id de combo inválido, por favor chequee que sea correcto, o comuniquese con nosotros"
+        redirect_back_or_default(spree.root_path)
+        return
+      end
+
+      order.save
+      redirect_to ordenar_combo_path combo
+    end
+
     def remove_combo_aplicado
       order = current_order
       combo_aplicado = order.combo_aplicados.find(params[:combo_aplicado])
