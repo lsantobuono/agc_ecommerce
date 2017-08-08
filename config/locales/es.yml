@@ -197,6 +197,7 @@ es:
     errors:
       messages:
         extension_whitelist_error: "Archivo de formato inválido"
+        must_be_in_format: "Debe estar en formato correcto"
     models:
       spree/line_item:
         one: Item en Carrito
