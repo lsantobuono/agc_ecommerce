@@ -31,10 +31,6 @@ module Spree::Admin
   #    save_and_respond(@category, 'Categoría creada correctamente.')
  #   end
 
-    def update
-  #    update_and_respond(@category, category_params, 'Categoría actualizada correctamente.')
-    end
-
 
   #  def render_json
   #    return render json: [] unless params[:parent_id].present?
@@ -97,7 +93,7 @@ module Spree::Admin
     def categories_select
    #   @categories = ancestry_options(Category.roots.without_combos
    #                                          .arrange(order: 'name')) { |i| "#{'-' * i.depth} #{i.name}" }
-      @categories = Category.without_combos
+      @categories = Category.without_combos - Array(@category)
     end
 
     def category_params
