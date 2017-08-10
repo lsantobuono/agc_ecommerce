@@ -36,8 +36,12 @@
 					</div>
 				</div>
 			<% elsif cl.taxon == nil && cl.product != nil %>
-				<h3> <%= pluralize(cl.quantity,"unidad","unidades") %> del producto <b><%= cl.product.name %></b>  </h3>
+				<% if cl.product.can_supply? %>
+					<h3> <%= pluralize(cl.quantity,"unidad","unidades") %> del producto <b><%= cl.product.name %></b>  </h3>
 					<%= render partial: "producto_unico_combo", locals: {p: cl.product, cl: cl, type: 1} %>
+				<% else %>
+					<h3 style="color: red">  <b><%= cl.product.name %></b> sin stock </h3>
+				<% end %>
 			<% end %>
 		 <% end %>
 		 <br>

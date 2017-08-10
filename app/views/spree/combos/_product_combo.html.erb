@@ -6,13 +6,17 @@
   <%= image_tag(p.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px; display:inline-block;") %> 
 <% end %>
 <%= p.name %>
-<% if !p.has_variants? %>
-  <% if type ==0 %>
-    <%= text_field_tag :"quantity_#{p.master.id}", 1, class: 'form-control ', value: 0,  readonly: true, min: 0, style:"width:50px; display:inline-block; height: 2em; " %> <!-- Caso de categoria, productos con cantidad variable -->
-      <button id=<%= "plus_#{p.master.id}" %> class="plus-button" type=button >+</button>
-      <button id=<%= "substract_#{p.master.id}" %> class="substract-button" type=button disabled>-</button>
+<% if !p.has_variants?  %>
+  <% if !p.can_supply? %>
+    <span style="color:red"> &nbsp;    - Producto sin stock </span>
   <% else %>
-    <%= text_field_tag :"quantity_#{p.master.id}", 1, class: 'form-control ', value: cl.quantity, readonly: true, min: 0, style:"width:50px; display:inline-block; height: 2em; " %><br> <!-- Caso de producto con cantidad fija -->
+    <% if type ==0 %>
+      <%= text_field_tag :"quantity_#{p.master.id}", 1, class: 'form-control ', value: 0,  readonly: true, min: 0, style:"width:50px; display:inline-block; height: 2em; " %> <!-- Caso de categoria, productos con cantidad variable -->
+        <button id=<%= "plus_#{p.master.id}" %> class="plus-button" type=button >+</button>
+        <button id=<%= "substract_#{p.master.id}" %> class="substract-button" type=button disabled>-</button>
+    <% else %>
+      <%= text_field_tag :"quantity_#{p.master.id}", 1, class: 'form-control ', value: cl.quantity, readonly: true, min: 0, style:"width:50px; display:inline-block; height: 2em; " %><br> <!-- Caso de producto con cantidad fija -->
+    <% end %>
   <% end %>
 <% else %>
   - Despliegue la lista para elegir las variantes deseadas del producto.
