@@ -1,6 +1,6 @@
 module Spree::Admin
   OrdersController.class_eval do
-    before_action :load_order, only: [:edit, :update, :destroy, :cancel, :resume, :approve, :set_as_notified, :send_presupuesto, :resend, :open_adjustments, :close_adjustments, :cart]
+    before_action :load_order, only: [:edit, :update, :destroy, :cancel, :resume, :approve, :set_as_notified, :set_as_delivered, :send_presupuesto, :resend, :open_adjustments, :close_adjustments, :cart]
     before_action :new_product, only: [:cart]
 
     def new_product
@@ -43,6 +43,11 @@ module Spree::Admin
     def set_as_notified
       @order.update_attributes(moderation_status: :notified)
       flash[:success] = Spree.t(:order_email_resent)
+      redirect_to :back
+    end
+    def set_as_delivered
+      @order.update_attributes(moderation_status: :delivered)
+      flash[:success] = "wachin" # TOOD
       redirect_to :back
     end
 

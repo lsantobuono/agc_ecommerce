@@ -3,7 +3,7 @@ module Spree
     unless respond_to? :tipo_facturas # Esto es para fixear un bug raro, por algun motivo carga dos veces este decorator
       enum tipo_factura: [:consumidor_final, :factura_b, :factura_a]
       enum metodo_envio: [:mercado_envios, :retiro_local, :micro_domicilio, :micro_terminal, :motomensajeria, :other]
-      enum moderation_status: [:pending, :notified, :approved]
+      enum moderation_status: [:pending, :notified, :approved, :delivered]
     end
 
     has_many :combo_aplicados, inverse_of: :order, foreign_key: :spree_order_id, dependent: :destroy
