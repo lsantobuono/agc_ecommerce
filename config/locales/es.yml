@@ -97,7 +97,9 @@ es:
       other: Otros
       retiro_local: Retiro en el local del vendedor
       mercado_envios: Ya aboné Mercado Envíos
-      micro: Micro
+      micro_domicilio: Micro a domicilio
+      micro_terminal: Micro a terminal
+      motomensajeria: Moto Mensajería
 
     order_line_items: "Items de Orden"
     error_email_resent: "Error, no hay email configurado en el pedido"

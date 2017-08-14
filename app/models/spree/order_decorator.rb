@@ -2,7 +2,7 @@ module Spree
   Order.class_eval do
     unless respond_to? :tipo_facturas # Esto es para fixear un bug raro, por algun motivo carga dos veces este decorator
       enum tipo_factura: [:consumidor_final, :factura_b, :factura_a]
-      enum metodo_envio: [:mercado_envios, :retiro_local, :micro, :other]
+      enum metodo_envio: [:mercado_envios, :retiro_local, :micro_domicilio, :micro_terminal, :motomensajeria, :other]
       enum moderation_status: [:pending, :notified, :approved]
     end
 
@@ -45,9 +45,9 @@ module Spree
 
     def metodo_envios
       if es_de_mercadolibre?
-        ['mercado_envios', 'retiro_local', 'micro', 'other']
+        ['mercado_envios', 'retiro_local', 'micro_terminal', 'micro_domicilio', 'motomensajeria', 'other']
       else
-        ['retiro_local', 'micro', 'other']
+        ['retiro_local','micro_terminal', 'micro_domicilio', 'motomensajeria', 'other']
       end
     end
 
