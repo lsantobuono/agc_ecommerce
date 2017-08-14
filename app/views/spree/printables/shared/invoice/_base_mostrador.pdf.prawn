@@ -2,6 +2,7 @@ font_style = {
   face: Spree::PrintInvoice::Config[:font_face],
   size: Spree::PrintInvoice::Config[:font_size]
 }
+order = Spree::Order.find(doc.printable_id)
 
 prawn_document(force_download: true) do |pdf|
   pdf.define_grid(columns: 5, rows: 8, gutter: 10)
@@ -14,12 +15,12 @@ prawn_document(force_download: true) do |pdf|
   # CONTENT
   pdf.grid([1,0], [6,4]).bounding_box do
 
-    render 'spree/printables/shared/invoice/items_b', pdf: pdf, invoice: doc
+    render 'spree/printables/shared/invoice/items_b', pdf: pdf, invoice: doc, order: order
     pdf.move_down 10
     pdf.text "PRESUPUESTO VÁLIDO POR 10 DÍAS", size: 14
     pdf.move_down 10
 
-    render 'spree/printables/shared/totals_b', pdf: pdf, invoice: doc
+    render 'spree/printables/shared/totals_b', pdf: pdf, invoice: doc, order: order
 
     pdf.move_down 20
 
