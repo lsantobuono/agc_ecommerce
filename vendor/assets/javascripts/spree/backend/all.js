@@ -13,6 +13,9 @@
 //= require spree/backend/spree_i18n
 //= require spree/backend/spree_volume_pricing
 
+//= require jquery-ui/sortable
+//= require jquery.mjs.nestedSortable.js
+
 //= require jquery_nested_form
 //= require_tree .
 

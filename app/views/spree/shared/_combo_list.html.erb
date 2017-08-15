@@ -1,5 +1,8 @@
 
 <ul class="comboList">
+  <% if combos.empty? %>
+    <p> No se encontraron combos para la categoría seleccionada </p>
+  <% end %>
   <% combos.each do |c| %>
     <% if !c.hidden %>
       <%= render('spree/shared/preview_combo', {combo: c}) %>

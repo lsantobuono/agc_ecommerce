@@ -5,8 +5,9 @@
  *
  *= require spree/backend
  *= require summernote
+ *= require sortable_tree
  *= require_self
-
+ 
  *= require_tree .
 */
 
