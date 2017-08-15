@@ -11,7 +11,7 @@ module Spree
     checkout_flow do
       go_to_state :address
       go_to_state :metodo_envio, if: ->(order) { !order.creado_por_admin? }
-      go_to_state :confirmar, if: ->(order) { !order.creado_por_admin? }
+      #go_to_state :confirmar, if: ->(order) { !order.creado_por_admin? }
       # 
       # go_to_state :delivery
       # go_to_state :payment, if: ->(order) { order.payment_required? }

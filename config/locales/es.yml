@@ -53,7 +53,7 @@ es:
     order_summary: Resumen del presupuesto
     order_total: Total presupuesto
     order_approximate_total: Total aproximado presupuesto
-    order_processed_successfully: Tu pedido de cotización ha sido procesado con éxito 
+    order_processed_successfully: Tu pedido ha sido registrado con éxito. En breve será procesado.
     bonificacion: "% Bonif"
     eventualities: "Eventualidades"
     edit_profile: "Editar datos personales"
