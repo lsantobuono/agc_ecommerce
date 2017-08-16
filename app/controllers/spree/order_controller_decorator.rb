@@ -6,6 +6,18 @@ module Spree
     # El unico motivo por el que pongo esto es para no redirigir al carrito, no deberia tocarse nada mas !!!
     def populate
       order    = current_order(create_order_if_necessary: true)
+      
+      #Valido que no exista previamente un combo ML
+      if (!order.nil?)
+        if (!order.ml_user.nil?)
+          if (!order.combo_aplicados.first.nil?)
+            flash[:error] = "No puede agregar items a un pedido de Mercado Libre"
+            redirect_back_or_default(spree.root_path)
+            return
+          end
+        end
+      end
+
       variant  = Spree::Variant.find(params[:variant_id])
       quantity = params[:quantity].to_i
       options  = params[:options] || {}
@@ -37,6 +49,7 @@ module Spree
 
     def register_ml
       order = current_order(create_order_if_necessary: true)
+      order.empty! #Las vacío sin importar que tengan, porque al agregarse un combo de ML solo debe haber combos de ML
 
       order.ml_user =params[:ml_user]
       order.ml_purchase_id =params[:ml_purchase_id]
@@ -59,6 +72,8 @@ module Spree
 
     def register_ml_combo
       order = current_order(create_order_if_necessary: true)
+      order.empty! #Las vacío sin importar que tengan, porque al agregarse un combo de ML solo debe haber combos de ML
+      
       combo = Combo.find(params[:combo_id])
 
       order.ml_user =params[:ml_user]
@@ -81,6 +96,9 @@ module Spree
 
     def remove_combo_aplicado
       order = current_order
+      order.ml_user = nil
+      order.ml_purchase_id = nil
+      order.save
       combo_aplicado = order.combo_aplicados.find(params[:combo_aplicado])
       order.line_items.where(combo_aplicado: combo_aplicado).each do |line_item|
         order.contents.remove_line_item(line_item)
@@ -92,6 +110,17 @@ module Spree
     def populate_combos
       combo = Combo.find(params[:combo_id])
       order = current_order(create_order_if_necessary: true)
+
+      #Valido que no exista previamente un combo ML
+      if (!order.nil?)
+        if (!order.combo_aplicados.nil?)
+          if (!order.combo_aplicados.first.nil?)
+            flash[:error] = "No puede agregar combos a un pedido de Mercado Libre"
+            redirect_back_or_default(spree.root_path)
+            return
+          end
+        end
+      end
 
       if order.bill_address.blank? && order.user.present? # Sin esto pincha cuando un guest ordena un combo
         order.bill_address = order.user.bill_address

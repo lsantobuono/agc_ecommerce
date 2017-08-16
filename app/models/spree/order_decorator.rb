@@ -157,9 +157,10 @@ module Spree
         state_changes.destroy_all
         order_promotions.destroy_all
         combo_aplicados.destroy_all
-        self.ml_user=nil
-        self.ml_purchase_id=nil
 
+        self.ml_user = nil
+        self.ml_purchase_id = nil
+        self.save
 
         update_totals
         persist_totals
