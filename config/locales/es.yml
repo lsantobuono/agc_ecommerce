@@ -86,9 +86,9 @@ es:
       approved: aprobado
       delivered: entregado
       label:
-        pending: pending
-        notified: info
-        approved: complete
+        pending: error
+        notified: pending
+        approved: info
         delivered: complete
 
     look_for_similar_items: Artículos similares
