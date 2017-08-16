@@ -84,10 +84,12 @@ es:
       pending: pendiente
       notified: notificado
       approved: aprobado
+      delivered: entregado
       label:
-        pending: pending
-        notified: info
-        approved: complete
+        pending: error
+        notified: pending
+        approved: info
+        delivered: complete
 
     look_for_similar_items: Artículos similares
     approximate_total: Total Aproximado
@@ -117,6 +119,7 @@ es:
         events:
           send_presupuesto: Enviar presupuesto
           set_as_notified: Marcar como notificado
+          set_as_delivered: Marcar como entregado
           resend: Reenviar presupuesto
       tab:
         option_types: Tipos de Opciones

@@ -10,6 +10,13 @@
           data: { confirm: '¿Está seguro que desea marcar como notificado sin enviar email al cliente?' }
     %>
   <% end %>
+  <% if order.moderation_status == "approved" %>
+    <%= button_link_to Spree.t(:set_as_delivered, scope: 'admin.order.events'),
+          set_as_delivered_admin_order_url(order),
+          method: :post,
+          icon: 'envelope'
+    %>
+  <% end %>
   <% if can?(:resend, order) && order.email.present?  %>
     <% if order.moderation_status == "pending" %>
       <%= button_link_to Spree.t(:send_presupuesto, scope: 'admin.order.events'),
