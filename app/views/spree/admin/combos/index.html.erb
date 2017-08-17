@@ -6,6 +6,39 @@
   <%= button_link_to Spree.t(:new_combo), new_admin_combo_url, { :class => "btn-success", :icon => 'add', :id => 'admin_new_combo' } %>
 <% end if can?(:create, Combo) %>
 
+<% content_for :table_filter do %>
+  <div data-hook="admin_combos_index_search">
+    <%= search_form_for [:admin, @search], url: spree.admin_combos_url do |f| %>
+      <div class="form-group">
+        <%= f.label Spree.t(:name) %>
+        <%= f.text_field :name_cont, class: "form-control js-quick-search-target" %>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label Spree.t(:code) %>
+            <%= f.text_field :code_cont, :class => 'form-control' %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label Spree.t(:category) %>
+            <%= f.text_field :category_name_cont, :class => 'form-control' %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.check_box :hidden_true %>
+            <%= Spree.t(:show_hidden) %>
+          </div>
+        </div>
+      </div>
+      <div data-hook="admin_combos_index_search_buttons" class="form-actions">
+        <%= button Spree.t(:search), 'search' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
 <% if @collection.any? %>
   <table class="table" id="listing_combos">

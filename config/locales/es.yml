@@ -1,5 +1,6 @@
 es:
   spree:
+    show_hidden: "Combos ocultos"
     returns: "Devoluciones"
     add_to_cart: "AGREGAR AL CARRITO"
     shop_by_taxonomy: "%{taxonomy}"
