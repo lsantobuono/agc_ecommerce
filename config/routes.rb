@@ -123,6 +123,7 @@ Spree::Core::Engine.routes.draw do
       member do
         post :send_presupuesto
         post :set_as_notified
+        post :set_as_delivered
       end
     end
 
