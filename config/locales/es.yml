@@ -115,6 +115,7 @@ es:
     new_volume_price_model: "Nuevo modelo de precio por cantidad"
     confirmar: Confirmar
     filter: "Filtrar"
+    order_delivered: Pedido entregado
     admin:
       order:
         events:

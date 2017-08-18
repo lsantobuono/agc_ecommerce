@@ -47,7 +47,7 @@ module Spree::Admin
     end
     def set_as_delivered
       @order.update_attributes(moderation_status: :delivered)
-      flash[:success] = "wachin" # TOOD
+      flash[:success] = Spree.t(:order_delivered)
       redirect_to :back
     end
 
