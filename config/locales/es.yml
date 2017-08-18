@@ -116,12 +116,14 @@ es:
     confirmar: Confirmar
     filter: "Filtrar"
     order_delivered: Pedido entregado
+    status_resetted: Estado del pedido reiniciado
     admin:
       order:
         events:
           send_presupuesto: Enviar presupuesto
           set_as_notified: Marcar como notificado
           set_as_delivered: Marcar como entregado
+          set_as_pending: Reiniciar estado
           resend: Reenviar presupuesto
       tab:
         option_types: Tipos de Opciones

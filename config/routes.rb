@@ -124,6 +124,7 @@ Spree::Core::Engine.routes.draw do
         post :send_presupuesto
         post :set_as_notified
         post :set_as_delivered
+        post :set_as_pending
       end
     end
 

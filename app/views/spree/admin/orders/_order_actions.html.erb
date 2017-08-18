@@ -17,6 +17,13 @@
           icon: 'envelope'
     %>
   <% end %>
+  <% if order.moderation_status == "delivered" %>
+    <%= button_link_to Spree.t(:set_as_pending, scope: 'admin.order.events'),
+          set_as_pending_admin_order_url(order),
+          method: :post,
+          icon: 'refresh'
+    %>
+  <% end %>
   <% if can?(:resend, order) && order.email.present?  %>
     <% if order.moderation_status == "pending" %>
       <%= button_link_to Spree.t(:send_presupuesto, scope: 'admin.order.events'),
