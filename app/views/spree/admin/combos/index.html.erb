@@ -67,6 +67,9 @@
             <td class="code"><%= combo.hidden ? 'Verdadero' : 'Falso' %></td>
             <td class="actions actions-3 text-right" data-hook="admin_combos_index_row_actions">
               <%= link_to_edit combo, no_text: true, class: 'edit' if can?(:edit, combo) && !combo.deleted? %>
+              <%= link_to clone_combo_admin_combo_path(combo), method: :post, class: 'btn btn-primary with-tip btn-sm', "data-original-title" => 'Clonar' do %>
+                <span class="icon icon-clone"></span>
+              <% end %>
               <%= link_to_delete combo, no_text: true if can?(:delete, combo) && !combo.deleted? %>
             </td>
           </tr>

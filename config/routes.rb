@@ -134,7 +134,11 @@ Spree::Core::Engine.routes.draw do
       end
     end
 
-    resources :combos
+    resources :combos do
+      member do
+        post :clone_combo
+      end
+    end
     resources :products do
       collection do
         get :ordenar_productos

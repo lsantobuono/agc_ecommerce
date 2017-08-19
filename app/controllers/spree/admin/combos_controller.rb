@@ -6,6 +6,35 @@ module Spree::Admin
       Combo
     end
 
+    def clone_combo
+      ActiveRecord::Base.transaction do
+        combo = Combo.find(params[:id])
+        index = Combo.where("name LIKE ?", "Clon de #{combo.name}%").count + 1
+        cloned = Combo.create!(
+          name: "Clon de #{combo.name} #{index}",
+          code: "#{combo.code} #{index}",
+          description: combo.description,
+          image: combo.image,
+          hidden: combo.hidden,
+          caro: combo.caro,
+          category_id: combo.category_id,
+        )
+        combo.combo_lines.each do |combo_line|
+          cloned.combo_lines.create!(
+            product_id: combo_line.product_id,
+            quantity: combo_line.quantity,
+            price: combo_line.price,
+            taxon_id: combo_line.taxon_id,
+          )
+        end
+        flash[:success] = "Se ha clonado el combo"
+        redirect_to :back
+      end
+    rescue
+      flash[:error] = "Hubo un error al clonar el combo."
+      redirect_to :back
+    end
+
     private
 
     def set_products
