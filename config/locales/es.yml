@@ -140,7 +140,7 @@ es:
 
     address_instructions: "Ingrese sus detalles de facturación para agilizar el proceso de cotización."
     shipping_instructions: "Ingrese sus preferencias de envío para agilizar el proceso de cotización."
-    registration_before_order_instructions: "Bienvenido a AGC. Le pedimos que por favor se registre antes de realizar pedidos. Muchas Gracias. "
+    registration_before_order_instructions: "Bienvenido a AGC. Le pedimos que por favor se registre antes de solicitar presupuestos. Dicho registro no implica compromiso de compra. Muchas Gracias."
     price_file: "Archivo de precios"
     security_stock: "Stock de Seguridad"
     price_range: "Filtrar por Precios"
