@@ -11,7 +11,7 @@
     <%= search_form_for [:admin, @search], url: spree.admin_combos_url do |f| %>
       <div class="form-group">
         <%= f.label Spree.t(:name) %>
-        <%= f.text_field :name_cont, class: "form-control js-quick-search-target" %>
+        <%= f.text_field :name_unaccented_cont, class: "form-control js-quick-search-target" %>
       </div>
       <div class="row">
         <div class="col-md-6">

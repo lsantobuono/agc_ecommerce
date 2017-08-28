@@ -52,7 +52,7 @@ module Spree::Admin
 
       if request.xhr? && params[:q].present?
         @collection = @collection.includes(:category)
-                          .where("combos.name #{LIKE} :search
+                          .where("unaccent(combos.name) #{LIKE} :search
                                   OR combos.code #{LIKE} :search 
                                   OR combos.hidden = :search
                                   OR (categories.name #{LIKE} :search AND categories.id = combos.category_id)",
