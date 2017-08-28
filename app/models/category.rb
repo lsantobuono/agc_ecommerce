@@ -8,7 +8,7 @@ class Category < ActiveRecord::Base
 
   scope :with_combos, -> { joins(:categories).distinct }
 
-  scope :without_combos, -> { where.not(id: Combo.select(:category_id).uniq) }
+  scope :without_combos, -> { where.not(id: Combo.pluck(:category_id).uniq) }
 
   validates :name, presence: :true
   validate :depth_smaller_than_five
