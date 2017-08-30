@@ -46,8 +46,14 @@ module Spree
     def publicDownload
       fileName= "public/descargas/#{params[:file_id]}.#{params[:format]}"
 
+      type = 'application/pdf'
+
+      if (params[:format] == "jpg" || params[:format] == "jpeg")
+        type = "image/jpeg"
+      end
+
       send_file(fileName,
-        :type => 'application/pdf',
+        :type => type,
         :disposition => 'attachment',
         :url_based_filename => true)
     end
