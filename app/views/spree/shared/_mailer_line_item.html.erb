@@ -8,7 +8,7 @@
   </td>
     <td class="six sub-columns last right">
        <% price_item = ((line_item.display_price.money.fractional.to_i / 100.00) - (line_item.bonification * (line_item.display_price.money.fractional.to_i / 100.00) / 100.00 )) %>
-       <%= line_item.quantity %> x <%= Spree::Money.new(price_item).to_s %> 
+       <%= line_item.quantity %> x <%= Spree::Money.new((line_item.display_price.money.fractional.to_i / 100.00) ).to_s %> 
        <% if (line_item.bonification > 0) %>
         (Bonif. <%=  line_item.bonification %> %)
        <% end %>
