@@ -2,12 +2,12 @@
 lock '3.7.1'
 
 
-role :app, %w{ubuntu@agc.programando.com.ar}
-role :web, %w{ubuntu@agc.programando.com.ar}
-role :db, %w{ubuntu@agc.programando.com.ar}
+role :app, %w{ubuntu@54.207.11.48}
+role :web, %w{ubuntu@54.207.11.48}
+role :db, %w{ubuntu@54.207.11.48}
 
 set :ssh_options, {
-  keys: %w(~/keys/ec2-mono.pem)
+  keys: %w(~/keys/agc.pem)
   # forward_agent: false,
   # auth_methods: %w(password)
 }
