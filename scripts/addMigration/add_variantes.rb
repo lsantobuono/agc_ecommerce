@@ -2,8 +2,8 @@ module Spree
   require 'spreadsheet'    
   require "i18n"
 
-  book = Spreadsheet.open('scripts/addMigration/variantes.xls')
-  sheet1 = book.worksheet('Hoja1') 
+  book = Spreadsheet.open('scripts/addMigration/variantesB4.xls')
+  sheet1 = book.worksheet('Hoja1')
   sheet1.each do |row| 
     productoName = row[0]
     varianteSku = row[1]
@@ -31,33 +31,33 @@ module Spree
 
       v.cost_price = cost_price
       v.price = price
-        v.product = producto
-        
-        opts =  opciones.split(';')
-        opts.each do |o|
-          arrayOp = o.split(':')
-          myOp = OptionType::find_by(name: arrayOp[0])
-          if (myOp == nil)
-            puts arrayOp[0]
-            aux = OptionType::new()
-            aux.presentation = arrayOp[0]
-            aux.name = arrayOp[0] #Por ahora name y presentation coinciden, quiza haga falta cambiarlo
-            aux.save
-            myOp = aux 
-          end
+      v.product = producto
+      
+      opts =  opciones.split(';')
+      opts.each do |o|
+        arrayOp = o.split(':')
+        myOp = OptionType::find_by(name: arrayOp[0])
+        if (myOp == nil)
+          puts arrayOp[0]
+          aux = OptionType::new()
+          aux.presentation = arrayOp[0]
+          aux.name = arrayOp[0] #Por ahora name y presentation coinciden, quiza haga falta cambiarlo
+          aux.save
+          myOp = aux 
+        end
 
-          myOpVal = OptionValue::find_by(name:arrayOp[1],option_type_id: myOp.id)
-          if (myOpVal == nil)
-            aux = OptionValue::new()
-            aux.name = arrayOp[1]
-            aux.presentation = arrayOp[1]#Por ahora name y presentation coinciden, quiza haga falta cambiarlo
-            aux.option_type = myOp 
-            aux.save
-            myOpVal = aux
-          end
+        myOpVal = OptionValue::find_by(name:arrayOp[1],option_type_id: myOp.id)
+        if (myOpVal == nil)
+          aux = OptionValue::new()
+          aux.name = arrayOp[1]
+          aux.presentation = arrayOp[1]#Por ahora name y presentation coinciden, quiza haga falta cambiarlo
+          aux.option_type = myOp 
+          aux.save
+          myOpVal = aux
+        end
 
-          v.option_values << myOpVal
-      end
+        v.option_values << myOpVal
+    end
 
         img=Spree::Image.new(attachment: File.open("FOTOS/ETIQUETAS/#{varianteSku}.jpg"))
         v.images << img
