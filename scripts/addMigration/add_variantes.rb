@@ -57,68 +57,37 @@ module Spree
         end
 
         v.option_values << myOpVal
-    end
-
-        img=Spree::Image.new(attachment: File.open("FOTOS/ETIQUETAS/#{varianteSku}.jpg"))
-        v.images << img
-        
-        if !v.save
-          v.errors.each do |e|
-            puts "variant errores : #{e}"
-            puts "sku: #{producto.master.sku}-#{varianteSku}"
-          end
-        end
-        
-        producto.variants << v
-        producto.save
-        
-        stock_producto = producto.master.stock_items.first
-        stock_producto.backorderable = true  #El tema es asi.... si le creo una variante a un prod, no quiero que me joda
-        # el stock del master, porque el master no se va a usar si hay variantes...
-
-        if !stock_producto.save
-          stock_producto.errors.each do |e|
-            puts "stock_producto en variants errores : #{e}"
-          end
-        end
-
-        puts "OK #{productoName}-#{varianteSku}"
-        stock_items = v.stock_items.first
-        stock_items.count_on_hand = stock
-        stock_items.save
       end
 
-  end
-
-=begin
-  book = Spreadsheet.open('scripts/addMigration/imagenes.xls')
-  sheet1 = book.worksheet('NUEVAS') 
-  sheet1.each do |row| 
-    if (row[0] == 'P')
-      p = Product.find_by(name: row[1])
-      if (p != nil)
-        if (File.exists? row[2])
-          p.images << Spree::Image.new(attachment: File.open(row[2]))
-          puts row[2]
-        else 
-          puts "No existe file #{row[2]}"
+      img=Spree::Image.new(attachment: File.open("FOTOS/ETIQUETAS/#{varianteSku}.jpg"))
+      v.images << img
+      
+      if !v.save
+        v.errors.each do |e|
+          puts "variant errores : #{e}"
+          puts "sku: #{producto.master.sku}-#{varianteSku}"
         end
-      else 
-        puts "No existe prod #{row[1]}"
       end
-    elsif (row[0] == 'V')
-      v = Variant.find_by(sku: row[1])
-      if (v != nil)
-          if (File.exists? row[2])
-            v.images << Spree::Image.new(attachment: File.open(row[2]))
-          end
+      
+      producto.variants << v
+      producto.save
+      
+      stock_producto = producto.master.stock_items.first
+      stock_producto.backorderable = true  #El tema es asi.... si le creo una variante a un prod, no quiero que me joda
+      # el stock del master, porque el master no se va a usar si hay variantes...
+
+      if !stock_producto.save
+        stock_producto.errors.each do |e|
+          puts "stock_producto en variants errores : #{e}"
+        end
       end
+
+      puts "OK #{productoName}-#{varianteSku}"
+      stock_items = v.stock_items.first
+      stock_items.count_on_hand = stock
+      stock_items.save
+    else
+      puts "NO se encontro el producto #{productoName}"
     end
   end
-  Price.all.each do |p|
-    p.currency="ars"
-    p.save!
-  end
-=end
-
 end
