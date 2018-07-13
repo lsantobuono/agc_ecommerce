@@ -13,6 +13,7 @@ module Spree
     stock = row[5]
 
     producto = Product::where("unaccent(name)= '#{I18n.transliterate(productoName)}'").first
+
     if (producto != nil)
       old = Variant::find_by(sku: "#{producto.master.sku}-#{varianteSku}")
       if (old != nil)
@@ -59,9 +60,11 @@ module Spree
         v.option_values << myOpVal
       end
 
-      img=Spree::Image.new(attachment: File.open("FOTOS/ETIQUETAS/#{varianteSku}.jpg"))
-      v.images << img
-      
+      if (varianteSku != "E0") # Si es la etiqueta 0 no se guarda foto porque se usa la misma del producto
+        img=Spree::Image.new(attachment: File.open("FOTOS/ETIQUETAS/#{varianteSku}.jpg"))
+        v.images << img
+      end
+
       if !v.save
         v.errors.each do |e|
           puts "variant errores : #{e}"
