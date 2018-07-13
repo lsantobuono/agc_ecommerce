@@ -2,7 +2,7 @@ module Spree
   require 'spreadsheet'    
   require "i18n"
 
-  book = Spreadsheet.open('scripts/addMigration/variantesB4.xls')
+  book = Spreadsheet.open('scripts/addMigration/ETIQUETAS_0.xls')
   sheet1 = book.worksheet('Hoja1')
   sheet1.each do |row| 
     productoName = row[0]
