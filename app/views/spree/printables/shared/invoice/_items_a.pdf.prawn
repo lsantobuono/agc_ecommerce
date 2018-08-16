@@ -1,22 +1,17 @@
-header = [
-  pdf.make_cell(content: Spree.t(:sku)),
-  pdf.make_cell(content: Spree.t(:item_description)),
-  pdf.make_cell(content: Spree.t(:qty))
-]
-
-if (order.ml_user.nil?)
-  header+= [
-    pdf.make_cell(content: Spree.t(:price)),
-    pdf.make_cell(content: Spree.t(:bonificacion)),
-    pdf.make_cell(content: Spree.t(:subtotal))
-  ]
-end
-
-data = [header]
+data = []
 
 invoice.items.each do |item|
   precio = (item.display_price.money.fractional.to_i / 100.00 / 1.21).round(2)
-  row = [
+
+  row = []
+
+  if (item.images.first.present?)
+    row += [item.images.first.attachment.path]
+  else 
+    row += [""]
+  end
+
+  row += [
     item.sku,
     item.name,
     item.quantity
@@ -29,13 +24,71 @@ invoice.items.each do |item|
        (Spree::Money.new(precio* item.quantity* ((100-item.bonification)/100.00))).to_s
     ]
   end
+
   data += [row]
 end
 
-column_widths = [0.13, 0.37, 0.12, 0.12, 0.12, 0.14].map { |w| w * pdf.bounds.width }
 
-pdf.table(data, header: true, position: :center, column_widths: column_widths) do
-  row(0).style align: :center, font_style: :bold
-  column(0..2).style align: :left
-  column(3..6).style align: :right
+column_widths = [[0,100], [100,70], [170,150], [320,50], [370,50], [420,50], [470,50]]
+
+row_height = 55
+
+header = [
+  "",
+  Spree.t(:sku),
+  Spree.t(:item_description),
+  Spree.t(:qty)
+]
+
+if (order.ml_user.nil?)
+  header+= [
+    Spree.t(:price),
+    Spree.t(:bonificacion),
+    Spree.t(:subtotal)
+  ]
+end
+
+# Column Header Values
+pdf.bounding_box [0, pdf.cursor], :width => 520, :height => 20 do
+  header.each_with_index do |head,i|
+    pdf.bounding_box [column_widths[i][0],0], :height => 20, :width => column_widths[i][1] do
+      pdf.stroke_color '000000'
+      pdf.stroke_bounds
+      pdf.move_down 5 # a bit of padding
+      pdf.text head, :size => 10, align: :center
+    end
+  end
+end
+
+pdf.move_down 20
+
+# Build the Mock Table
+data.each_with_index do |p,i|
+  pdf.bounding_box [0, pdf.cursor], :height => row_height, :width => 520 do
+    #pdf.stroke_bounds
+    pdf.stroke do
+      pdf.line pdf.bounds.top_left,    pdf.bounds.top_right
+      pdf.line pdf.bounds.bottom_left, pdf.bounds.bottom_right
+      pdf.line pdf.bounds.top_left,    pdf.bounds.bottom_left
+      pdf.line pdf.bounds.top_right,   pdf.bounds.bottom_right
+    end
+    #pdf.move_down 5 # a bit of padding
+    cursor = pdf.cursor # keep current cursor value for all cells in this row
+    p.each_with_index do |v, j|
+      pdf.bounding_box [column_widths[j][0], cursor], :height => row_height, :width => column_widths[j][1] do
+        pdf.stroke do
+          pdf.line pdf.bounds.top_left,    pdf.bounds.bottom_left
+          pdf.line pdf.bounds.top_right,   pdf.bounds.bottom_right
+        end
+        if j == 0 # handle image column
+          if (v.present? && v != "")
+            pdf.move_down 5
+            pdf.image open(v), :fit => [90,45], position: :center, position: :center
+          end
+        else
+          pdf.text v, align: :center, valign: :center, :size => 10 unless v.blank?
+        end
+      end
+    end
+  end
 end

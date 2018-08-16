@@ -45,6 +45,10 @@ Spree::PermittedAttributes.store_attributes.push :eventuality_id, :help_content
 
 Spree::PermittedAttributes.line_item_attributes.push :bonification
 
+Rails.application.config.to_prepare do
+  Spree.user_class.whitelisted_ransackable_attributes = ['first_name','last_name']
+end
+
 
 if Rails.env.production?
   attachment_config = {

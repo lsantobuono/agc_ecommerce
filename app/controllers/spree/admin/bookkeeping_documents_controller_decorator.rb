@@ -8,6 +8,7 @@ module Spree
         @bookkeeping_documents = @search.result
         @bookkeeping_documents = @bookkeeping_documents.where(printable: @order) if order_focused?
         @bookkeeping_documents = @bookkeeping_documents.order("created_at desc").take(1)
+        @order_events = %w{approve cancel resume}
   #      @bookkeeping_documents = @bookkeeping_documents.page(params[:page] || 1).per(10)
       end
 

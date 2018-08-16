@@ -35,7 +35,8 @@ module Spree
           price: item.price,
           quantity: item.quantity,
           bonification: item.bonification,
-          total: item.total
+          total: item.total,
+          images: item.variant.images
         )
       end
     end
