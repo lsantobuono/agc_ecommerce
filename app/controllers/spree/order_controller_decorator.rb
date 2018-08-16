@@ -1,7 +1,6 @@
 module Spree
   OrdersController.class_eval do 
-
-
+    include ParserComboCompuesto
 
     # El unico motivo por el que pongo esto es para no redirigir al carrito, no deberia tocarse nada mas !!!
     def populate
@@ -51,8 +50,8 @@ module Spree
       order = current_order(create_order_if_necessary: true)
       order.empty! #Las vacío sin importar que tengan, porque al agregarse un combo de ML solo debe haber combos de ML
 
-      order.ml_user =params[:ml_user]
-      order.ml_purchase_id =params[:ml_purchase_id]
+      order.ml_user = params[:ml_user]
+      order.ml_purchase_id = params[:ml_purchase_id]
 
       if (params[:ml_user] == "")
         flash[:error] = "Por favor ingrese su usuario de Mercado Libre"
@@ -60,17 +59,22 @@ module Spree
         return
       end
 
-      combo = Combo.where('lower(code) = ?', order.ml_purchase_id.downcase).first
-      if (combo == nil)
-        flash[:error] = "Se ingresó un id de combo inválido, por favor chequee que sea correcto, o comuniquese con nosotros"
-        redirect_back_or_default(spree.root_path)
-      else
+      correct_string, content = parsear_combo_compuestos(order.ml_purchase_id)
+
+      if (correct_string)
         order.save
-        redirect_to ordenar_combo_path combo
+      else
+        flash[:error] = content
+        redirect_back_or_default(spree.root_path)
+        return
       end
+
+      redirect_to ordenar_combo_compuesto_path params[:ml_purchase_id]
+
     end
 
-    def register_ml_combo
+
+    def register_ml_combo #Esto es para entrar directamente con un combo en el link y poner solo el usuario...
       order = current_order(create_order_if_necessary: true)
       order.empty! #Las vacío sin importar que tengan, porque al agregarse un combo de ML solo debe haber combos de ML
       
@@ -105,6 +109,9 @@ module Spree
       end
       combo_aplicado.destroy
       redirect_back_or_default(spree.root_path)
+    end
+
+    def populate_multiple_combos
     end
 
     def populate_combos

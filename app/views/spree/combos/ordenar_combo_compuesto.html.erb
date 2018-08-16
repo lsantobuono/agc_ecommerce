@@ -1,0 +1,109 @@
+<% self.title = "Ordenar Combos Mercado Libre" %>
+
+<% @custom_flash=true %>
+
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>"><%= sanitize(value) %></div>
+<% end %>
+
+
+
+<%= render partial: 'form_multiple_combo', locals: { combos: @combos } %>
+
+
+<style>
+.status_label {
+  color: green;
+  font-weight: bold;
+}
+</style>
+
+
+<script>
+
+// Disable function
+jQuery.fn.extend({
+    disable: function(state) {
+        return this.each(function() {
+            this.disabled = state;
+        });
+    }
+});
+
+// El boton de MAS
+$(".plus-button").click(function() {
+  
+  var num = parseInt($(this).prev("input").val());
+  num  = num+1;
+  //El boton de resta correspondiente se habilita porque estoy sumandole 1 a esta variante
+  $(this).next(".substract-button").disable(false);
+
+  //Actualizo el input
+  $(this).prev("input").val(num);
+  
+  //Obtengo el nro de "disponible"
+  var disp = parseInt($(this).closest(".accordion-category").find(".available_quantity_label").text());
+  
+  disp = disp-1;
+
+  //Lo actualizo
+  $(this).closest(".accordion-category").find(".available_quantity_label").text(disp);
+
+  //Si llegue a la cantidad, pongo el label a correcto y disableo todos los botones de suma
+  if (disp == 0)
+  {
+    $(this).closest(".accordion-category").find('.plus-button').disable(true);
+    $(this).closest(".accordion-category").prev(".list-group-item").find(".status_label").text("Configuración correcta!");
+    $(this).closest(".accordion-category").closest(".row").prev(".list-group-item").find(".status_label").text("Configuración correcta!");
+
+  }
+  // Sino quito el correcto del label
+  else {
+    $(this).closest(".accordion-category").prev(".list-group-item").find(".status_label").text("");
+    $(this).closest(".accordion-category").closest(".row").prev(".list-group-item").find(".status_label").text("");
+  }
+});
+
+//Boton de Resta
+$(".substract-button").click(function() {
+
+  var num = parseInt($(this).prev().prev().val());
+  num  = num-1;
+  
+  //Si por algun motivo esto llevaria a menor que 0 , no deberia pasar, o a 0, disableo este boton
+  if (num <= 0)
+  {
+    num =0 ;
+    $(this).disable(true)
+  }
+
+  //Esto actualiza el valor del input
+  $(this).prev().prev().val(num);
+
+  //Obtengo disponible y lo actualizo
+  var disp = parseInt($(this).closest(".accordion-category").find(".available_quantity_label").text());
+  disp = disp+1;
+  $(this).closest(".accordion-category").find(".available_quantity_label").text(disp);
+
+  //Si la resta es correcta, todos los plus se habilitan automaticamente
+  $(this).closest(".accordion-category").find('.plus-button').disable(false);
+  //Si llegue a la cantidad, pongo el label a correcto y disableo todos los botones de suma
+  
+  if (disp == 0)
+  {
+    $(this).closest(".accordion-category").find('.plus-button').disable(true);
+    $(this).closest(".accordion-category").prev(".list-group-item").find(".status_label").text("Configuración correcta!");
+    $(this).closest(".accordion-category").closest(".row").prev(".list-group-item").find(".status_label").text("Configuración correcta!");
+  }
+  // Sino quito el correcto del label
+  else {
+    $(this).closest(".accordion-category").prev(".list-group-item").find(".status_label").text("");
+    $(this).closest(".accordion-category").closest(".row").prev(".list-group-item").find(".status_label").text("");
+  }
+
+});
+
+
+
+</script>
+

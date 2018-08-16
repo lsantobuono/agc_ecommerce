@@ -1,0 +1,41 @@
+<%= form_tag populate_combos_orders_path, id: "form-combo" do %>
+    <h1> Ordenar Combo <%= combo.name %> </h1>
+    <%= hidden_field_tag :"combo_id", combo.id %>
+    
+    <h1> El combo contiene:  </h1> 
+    <% combo.combo_lines.each do |cl| %>
+      <% if cl.taxon != nil %>
+        <h3> <%= pluralize(cl.quantity,"unidad","unidades") %> de la categoría <b><%= cl.taxon.name %></b>  </h3>
+        <div id="accordion-<%= (cl.id*cl.quantity)-cl.id %>">
+          <a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= (cl.id*cl.quantity)-cl.id %>" href="#<%= (cl.id*cl.quantity)-cl.id %>" style="padding:0 ; border:0;">
+            <p class="combo-instruction"> Seleccione productos y cantidades para la categoría (Deben sumar <b><%= cl.quantity %></b>)     
+              <span class="status_label" >
+              </span>
+            </p>
+          </a>
+          <div id="<%= (cl.id*cl.quantity)-cl.id %>" class="list-group panel-collapse accordion-body collapse accordion-category">
+          <p style="font-size: 1em;"> Disponible: 
+          <span class="available_quantity_label" id="available_quantity_<%= (cl.id*cl.quantity)-cl.id %>" >
+            <%= cl.quantity %>
+          </span>
+
+          
+          </p>
+            <% cl.taxon.all_children.each do |p| %> 
+              <%= render partial: "product_combo", locals: {p: p, cl: cl, type: 0} %>
+            <% end %>
+          </div>
+        </div>
+      <% elsif cl.taxon == nil && cl.product != nil %>
+        <% if cl.product.can_supply? %>
+          <h3> <%= pluralize(cl.quantity,"unidad","unidades") %> del producto <b><%= cl.product.name %></b>  </h3>
+          <%= render partial: "producto_unico_combo", locals: {p: cl.product, cl: cl, type: 1} %>
+        <% else %>
+          <h3 style="color: red">  <b><%= cl.product.name %></b> sin stock </h3>
+        <% end %>
+      <% end %>
+     <% end %>
+     <br>
+   <br>
+    <%= submit_tag "Continuar" , class: "btn btn-success" %>
+<% end %>  

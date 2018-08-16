@@ -1,5 +1,7 @@
 module Spree
   class CombosController < Spree::StoreController
+    include ParserComboCompuesto
+
     def index
       @combos=Combo.all
     end
@@ -19,6 +21,10 @@ module Spree
     def ordenar_combo
       @combo = Combo.find(params[:combo_id])
       render ("ordenar_combo")
+    end
+
+    def ordenar_combo_compuesto
+      correct_string, @combos = parsear_combo_compuestos(params[:combo_string])
     end
   end
 end
