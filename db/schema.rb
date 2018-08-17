@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170803145609) do
+ActiveRecord::Schema.define(version: 20180817210428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,12 @@ ActiveRecord::Schema.define(version: 20170803145609) do
   end
 
   add_index "combos", ["category_id"], name: "index_combos_on_category_id", using: :btree
+
+  create_table "complements", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "eventualities", force: :cascade do |t|
     t.string   "message",          null: false
