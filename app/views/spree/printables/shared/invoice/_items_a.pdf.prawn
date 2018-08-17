@@ -49,7 +49,12 @@ if (order.ml_user.nil?)
 end
 
 # Column Header Values
-pdf.bounding_box [0, pdf.cursor], :width => 520, :height => 20 do
+width = 370
+if (order.ml_user.nil?)
+  width = 520
+end
+
+pdf.bounding_box [0, pdf.cursor], :width => width, :height => 20 do
   header.each_with_index do |head,i|
     pdf.bounding_box [column_widths[i][0],0], :height => 20, :width => column_widths[i][1] do
       pdf.stroke_color '000000'
@@ -64,7 +69,7 @@ pdf.move_down 20
 
 # Build the Mock Table
 data.each_with_index do |p,i|
-  pdf.bounding_box [0, pdf.cursor], :height => row_height, :width => 520 do
+  pdf.bounding_box [0, pdf.cursor], :height => row_height, :width => width do
     #pdf.stroke_bounds
     pdf.stroke do
       pdf.line pdf.bounds.top_left,    pdf.bounds.top_right
@@ -91,4 +96,6 @@ data.each_with_index do |p,i|
       end
     end
   end
+  # create a new page every 6 rows  
+  pdf.start_new_page if i > 0 && i % 5 == 0
 end
