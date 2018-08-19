@@ -136,6 +136,8 @@ Spree::Core::Engine.routes.draw do
       end
     end
 
+    resources :complements
+
     resources :combos do
       member do
         post :clone_combo

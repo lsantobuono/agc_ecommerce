@@ -1,0 +1,14 @@
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @complement } %>
+
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:complements), spree.admin_complements_url %> /
+  <%= Spree.t(:new_complement) %>
+<% end %>
+
+<%= nested_form_for [:admin, @complement], :html => { :multipart => true } do |f| %>
+  <fieldset data-hook="new_complement">
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>
+

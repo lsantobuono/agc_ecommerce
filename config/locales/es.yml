@@ -34,6 +34,7 @@ es:
     add_volume_price: Agregar Precio por Cantidad
     volume_prices: Precios por Cantidad
     combo: Combo
+    complement: Complemento
     volume_price_model: Modelo de Precio por Cantidad
     stock: Stock
     discount_type: Tipo de Descuento
@@ -136,6 +137,7 @@ es:
         invoices: Facturas
         packaging_slips: Recibos embalaje
         categories: Categorias de Combos
+        complements: Complementos
     qty: Cantidad
 
     address_instructions: "Ingrese sus detalles de facturación para agilizar el proceso de cotización."
@@ -167,6 +169,8 @@ es:
         instructions: "Revise y conserve la siguiente información del pedido. Nos pondremos en contacto a la brevedad para detallar su presupuesto y coordinar pago y envío."
     api:
       must_specify_api_key: "No se permite acceder sin key"      
+    new_complement: Nuevo complemento
+    edit_complement: Editar complemento
     new_combo: Nuevo combo
     new_category: Nueva categoría
     edit_category: Editar categoría
