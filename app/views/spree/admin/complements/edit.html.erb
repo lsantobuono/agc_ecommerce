@@ -12,7 +12,7 @@
 <%#= render partial: 'spree/admin/shared/complement_tabs', locals: {current: :details} %>
 <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @complement } %>
 
-<%= nested_form_for [:admin, @complement], method: :put, html: { multipart: true } do |f| %>
+<%= form_for [:admin, @complement], method: :put, html: { multipart: true } do |f| %>
   <fieldset>
     <%= render partial: 'form', locals: { f: f } %>
     <%= render partial: 'spree/admin/shared/edit_resource_links' %>
