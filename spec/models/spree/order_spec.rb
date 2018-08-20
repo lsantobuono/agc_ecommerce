@@ -59,8 +59,8 @@ RSpec.describe Spree::Order do
 
         before do
           create_list(:applied_complement, rand(1..20))
-          Spree::Classification.create(product_id: line_item_1.variant.product.id, taxon_id: taxon_1.id)
-          Spree::Classification.create(product_id: line_item_2.variant.product.id, taxon_id: taxon_2.id)
+          Spree::Classification.create(product_id: line_item_1.variant.product.id, taxon_id: create(:taxon, parent_id: taxon_1.id).id)
+          Spree::Classification.create(product_id: line_item_2.variant.product.id, taxon_id: create(:taxon, parent_id: taxon_2.id).id)
         end
 
         it 'la cantidad de complementos es correcta' do

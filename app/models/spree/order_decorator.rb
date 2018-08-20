@@ -202,7 +202,22 @@ module Spree
     end
 
     def cantidades_por_complemento
-      self.line_items.unscoped.joins(variant: { product: { taxons: :applied_complements} } ).group('applied_complements.complement_id').sum('applied_complements.quantity * spree_line_items.quantity')
+      complementos = {}
+
+      self.line_items.each do |line_item|
+        line_item.variant.product.taxons.each do |taxons|
+          taxons.self_and_ancestors.each do |taxon|
+            taxon.applied_complements.each do |applied_complement|
+              if complementos[applied_complement.complement_id].present?
+                complementos[applied_complement.complement_id] += applied_complement.quantity * line_item.quantity
+              else
+                complementos[applied_complement.complement_id] = applied_complement.quantity * line_item.quantity
+              end
+            end
+          end
+        end
+      end
+      complementos
     end
   end
 end

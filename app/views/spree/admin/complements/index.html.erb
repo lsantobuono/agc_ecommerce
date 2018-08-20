@@ -8,11 +8,10 @@
 
 
 <% if @collection.any? %>
-  <table class="table" id="listing_complements">
+  <table class="table" id="listing_complements" style="max-width: 500px">
     <thead>
       <tr data-hook="admin_complements_index_headers">
         <th><%= sort_link @search,:name, Spree.t(:name), { default_order: "desc" }, {title: 'admin_complements_listing_name_title'} %></th>
-        <th><%= Spree.t(:hidden) %></th>
 
         <th data-hook="admin_complements_index_header_actions" class="actions"></th>
       </tr>
