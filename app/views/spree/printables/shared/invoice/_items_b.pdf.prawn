@@ -7,7 +7,7 @@ invoice.items.each do |item|
   row = []
 
   if (item.images.first.present?)
-    row += [item.images.first.attachment.path]
+    row += [item.images.first.attachment.url]
   else 
     row += [""]
   end
