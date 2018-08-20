@@ -18,15 +18,6 @@ RSpec.describe Combo do
       it 'tiene lineas' do
         expect(combo.combo_lines.count).to be > 0
       end
-
-      context 'asociado a una orden' do
-        let(:order) { create :order, combo: combo }
-
-        it do
-          expect(order.combo).not_to be_nil
-        end
-      end
     end
-
   end
 end
