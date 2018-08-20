@@ -191,5 +191,33 @@ module Spree
       consider_risk
     end
 
+    def complementos_para_mostrar
+      cantidades_por_complemento.map do |id, count|
+        # Un falso applied complement que es el resultado del group by
+        applied_complement = AppliedComplement.new
+        applied_complement.complement = Complement.find(id)
+        applied_complement.quantity = count
+        applied_complement
+      end
+    end
+
+    def cantidades_por_complemento
+      complementos = {}
+
+      self.line_items.each do |line_item|
+        line_item.variant.product.taxons.each do |taxons|
+          taxons.self_and_ancestors.each do |taxon|
+            taxon.applied_complements.each do |applied_complement|
+              if complementos[applied_complement.complement_id].present?
+                complementos[applied_complement.complement_id] += applied_complement.quantity * line_item.quantity
+              else
+                complementos[applied_complement.complement_id] = applied_complement.quantity * line_item.quantity
+              end
+            end
+          end
+        end
+      end
+      complementos
+    end
   end
 end

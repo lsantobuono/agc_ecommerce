@@ -28,6 +28,8 @@ prawn_document(force_download: true) do |pdf|
 
     render 'spree/printables/shared/invoice/items_a', pdf: pdf, invoice: doc, order: order
     pdf.move_down 10
+    render 'spree/printables/shared/invoice/complementos', pdf: pdf, invoice: doc, order: order
+    pdf.move_down 10
     pdf.text "PRESUPUESTO VÁLIDO POR 10 DÍAS", size: 14
     pdf.move_down 10
 

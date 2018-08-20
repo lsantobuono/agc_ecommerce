@@ -44,6 +44,7 @@ Spree::PermittedAttributes.user_attributes.push :phone_number, :first_name, :las
 Spree::PermittedAttributes.store_attributes.push :eventuality_id, :help_content
 
 Spree::PermittedAttributes.line_item_attributes.push :bonification
+Spree::PermittedAttributes.taxon_attributes.push({ :applied_complements_attributes => [:id, :complement_id, :quantity, :_destroy] })
 
 Rails.application.config.to_prepare do
   Spree.user_class.whitelisted_ransackable_attributes = ['first_name','last_name']

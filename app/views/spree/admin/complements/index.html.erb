@@ -1,0 +1,40 @@
+<% content_for :page_title do %>
+  Complementos
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_complement), new_admin_complement_url, { :class => "btn-success", :icon => 'add', :id => 'admin_new_complement' } %>
+<% end if can?(:create, Complement) %>
+
+
+<% if @collection.any? %>
+  <table class="table" id="listing_complements" style="max-width: 500px">
+    <thead>
+      <tr data-hook="admin_complements_index_headers">
+        <th><%= sort_link @search,:name, Spree.t(:name), { default_order: "desc" }, {title: 'admin_complements_listing_name_title'} %></th>
+
+        <th data-hook="admin_complements_index_header_actions" class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @collection.each do |complement| %>
+          <tr id="<%= spree_dom_id complement %>" data-hook="admin_complements_index_rows" class="<%= cycle('odd', 'even') %>">
+            <td class="name"><%= complement.name %></td>
+            <td class="actions actions-3 text-right" data-hook="admin_complements_index_row_actions">
+              <%= link_to_edit complement, no_text: true, class: 'edit' if can?(:edit, complement) %>
+              <%= link_to_delete complement, no_text: true if can?(:delete, complement) %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: 'Complements') %>,
+    <%= link_to Spree.t(:add_one), new_admin_complement_url %>!
+  </div>
+<% end %>
+
+
+
+

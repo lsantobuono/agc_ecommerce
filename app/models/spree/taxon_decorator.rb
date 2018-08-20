@@ -2,6 +2,9 @@ module Spree
   Taxon.class_eval do
 
     has_many :videos, dependent: :destroy
+    has_many :applied_complements, dependent: :destroy
+
+    accepts_nested_attributes_for :applied_complements, allow_destroy: true
 
     def all_children
       ret = Set.new

@@ -11,11 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170803145609) do
+ActiveRecord::Schema.define(version: 20180817220339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
+
+  create_table "applied_complements", force: :cascade do |t|
+    t.integer  "complement_id", null: false
+    t.integer  "taxon_id",      null: false
+    t.integer  "quantity",      null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "applied_complements", ["complement_id"], name: "index_applied_complements_on_complement_id", using: :btree
+  add_index "applied_complements", ["taxon_id"], name: "index_applied_complements_on_taxon_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -59,6 +70,12 @@ ActiveRecord::Schema.define(version: 20170803145609) do
   end
 
   add_index "combos", ["category_id"], name: "index_combos_on_category_id", using: :btree
+
+  create_table "complements", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "eventualities", force: :cascade do |t|
     t.string   "message",          null: false
@@ -1209,6 +1226,8 @@ ActiveRecord::Schema.define(version: 20170803145609) do
   add_index "spree_zones", ["default_tax"], name: "index_spree_zones_on_default_tax", using: :btree
   add_index "spree_zones", ["kind"], name: "index_spree_zones_on_kind", using: :btree
 
+  add_foreign_key "applied_complements", "complements"
+  add_foreign_key "applied_complements", "spree_taxons", column: "taxon_id"
   add_foreign_key "combo_aplicados", "combos"
   add_foreign_key "combo_aplicados", "spree_orders"
   add_foreign_key "combo_lines", "combos"
