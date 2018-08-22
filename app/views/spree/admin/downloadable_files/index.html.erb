@@ -22,7 +22,7 @@
        <% @collection.each do |downloadable_file| %>
            <tr id="<%= spree_dom_id downloadable_file %>" data-hook="admin_downloadable_files_index_rows" class="<%= cycle('odd', 'even') %>">
              <td class="name"><%= downloadable_file.name %></td>
-             <td ><%= downloadable_file.file.url %></td>
+             <td ><%= downloadable_files_download_path(downloadable_file) %></td>
              <td ><%= downloadable_file.private? ? "Si" : "No" %></td>
              <td class="actions actions-3 text-right" data-hook="admin_downloadable_files_index_row_actions">
                <%= link_to_edit downloadable_file, no_text: true, class: 'edit' if can?(:edit, downloadable_file) %>

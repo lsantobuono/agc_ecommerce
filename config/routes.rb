@@ -84,6 +84,7 @@ Spree::Core::Engine.routes.draw do
   get "/combos/combo_compuesto/:combo_string" => "combos#ordenar_combo_compuesto", as: :ordenar_combo_compuesto
   get "/combos/:combo_id" => "combos#ordenar_combo", as: :ordenar_combo
   get "/categories_combos/:category_id" => "categories#show"
+  get "/downloadable_files/:id" => "downloadable_files#download", as: :downloadable_files_download
 
 
   resources :orders, except: [:index, :new, :create, :destroy] do
@@ -137,6 +138,7 @@ Spree::Core::Engine.routes.draw do
     end
 
     resources :complements
+
     resources :downloadable_files
     
     resources :combos do

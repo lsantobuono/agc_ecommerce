@@ -64,6 +64,7 @@ es:
     configure_download: "Configurar Descargas"
     private: "Privado"
     file: "Archivo"
+    downloadable_files: "Archivos Descargables"
     #navbar
     home: INICIO
     my_account: MI CUENTA
