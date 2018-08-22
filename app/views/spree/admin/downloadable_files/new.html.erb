@@ -1,0 +1,13 @@
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @downloadable_file } %>
+
+<% content_for :page_title do %>
+ <%= link_to Spree.t(:downloadable_file), spree.admin_downloadable_files_url %> /
+ <%= Spree.t(:new_downloadable_file) %>
+<% end %>
+
+<%= nested_form_for [:admin, @downloadable_file], :html => { :multipart => true } do |f| %>
+ <fieldset data-hook="new_complement">
+   <%= render partial: 'form', locals: { f: f } %>
+   <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+ </fieldset>
+<% end %>

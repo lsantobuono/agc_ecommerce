@@ -1,0 +1,20 @@
+<% content_for :page_actions do %>
+  <% if can?(:create, DownloadableFile) %>
+    <%= button_link_to Spree.t(:new_downloadable_file), new_object_url, { class: "btn-success", icon: 'add', id: 'admin_new_downloadable_file' } %>
+  <% end %>
+<% end %>
+
+<% content_for :page_title do %>
+  Archivo Descargable: 
+  <%= @downloadable_file.name %>
+<% end %>
+
+<%#= render partial: 'spree/admin/shared/complement_tabs', locals: {current: :details} %>
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @downloadable_file } %>
+
+<%= form_for [:admin, @downloadable_file], method: :put, html: { multipart: true } do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

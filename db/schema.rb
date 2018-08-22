@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180817220339) do
+ActiveRecord::Schema.define(version: 20180822123532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,14 @@ ActiveRecord::Schema.define(version: 20180817220339) do
 
   create_table "complements", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "downloadable_files", force: :cascade do |t|
+    t.string   "file"
+    t.string   "name"
+    t.boolean  "private"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -1008,6 +1016,7 @@ ActiveRecord::Schema.define(version: 20180817220339) do
     t.string   "presupuesto_email_footer"
     t.text     "help_content"
     t.text     "download_content"
+    t.text     "private_download_content"
   end
 
   add_index "spree_stores", ["code"], name: "index_spree_stores_on_code", using: :btree

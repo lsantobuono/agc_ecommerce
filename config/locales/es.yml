@@ -35,6 +35,7 @@ es:
     volume_prices: Precios por Cantidad
     combo: Combo
     complement: Complemento
+    downloadable_file: Archivo Descargable
     volume_price_model: Modelo de Precio por Cantidad
     stock: Stock
     discount_type: Tipo de Descuento
@@ -61,6 +62,8 @@ es:
     edit_profile: "Editar datos personales"
     configure_help: "Configurar Ayuda"
     configure_download: "Configurar Descargas"
+    private: "Privado"
+    file: "Archivo"
     #navbar
     home: INICIO
     my_account: MI CUENTA
@@ -138,6 +141,7 @@ es:
         packaging_slips: Recibos embalaje
         categories: Categorias de Combos
         complements: Complementos
+        downloadable_files: Archivos Descargables
     qty: Cantidad
 
     address_instructions: "Ingrese sus detalles de facturación para agilizar el proceso de cotización."
@@ -171,6 +175,8 @@ es:
       must_specify_api_key: "No se permite acceder sin key"      
     new_complement: Nuevo complemento
     edit_complement: Editar complemento
+    new_downloadable_file: Nuevo archivo descargable
+    edit_downloadable_file: Editar archivo descargable
     new_combo: Nuevo combo
     new_category: Nueva categoría
     edit_category: Editar categoría

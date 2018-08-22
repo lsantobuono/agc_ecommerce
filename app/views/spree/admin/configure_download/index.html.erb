@@ -22,8 +22,16 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <%= f.label Spree.t(:configure_download) %>
+                <%= f.label "Descargas pública" %>
                 <%= f.text_area :download_content, as: :summernote, id:"summernote" %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <%= f.label "Descargas privadas" %>
+                <%= f.text_area :private_download_content, as: :summernote, id:"summernote2" %>
               </div>
             </div>
           </div>
@@ -41,6 +49,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#summernote').summernote();
+    $('#summernote2').summernote();
     $('.dropdown-toggle').dropdown();
   });
 </script>

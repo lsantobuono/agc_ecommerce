@@ -15,7 +15,7 @@ module Spree::Admin
     private
 
     def store_params
-      params.require(:store).permit(:download_content)
+      params.require(:store).permit(:download_content, :private_download_content)
     end
 
     def set_store

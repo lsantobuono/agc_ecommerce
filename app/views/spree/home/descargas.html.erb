@@ -1,3 +1,7 @@
 <% self.title = "Decargas" %>
 
 <%= Spree::Store.first.download_content.html_safe %>
+
+<% if current_spree_user && current_spree_user.confirmed? && Spree::Store.first.private_download_content.present? %>
+  <%= Spree::Store.first.private_download_content.html_safe %>
+<% end %>

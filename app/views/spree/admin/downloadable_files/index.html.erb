@@ -1,0 +1,44 @@
+<% content_for :page_title do %>
+   Archivos Descargables
+ <% end %>
+
+ <% content_for :page_actions do %>
+   <%= button_link_to Spree.t(:new_downloadable_file), new_admin_downloadable_file_path, { :class => "btn-success", :icon => 'add', :id => 'admin_new_downloadable_file' } %>
+ <% end if can?(:create, DownloadableFile) %>
+
+
+ <% if @collection.any? %>
+   <table class="table" id="listing_downloadable_files">
+     <thead>
+       <tr data-hook="admin_downloadable_files_index_headers">
+         <th><%= sort_link @search,:name, Spree.t(:name), { default_order: "desc" }, {title: 'admin_downloadable_files_listing_name_title'} %></th>
+         <th><%= Spree.t(:file) %></th>
+         <th><%= Spree.t(:private) %></th>
+
+         <th data-hook="admin_downloadable_files_index_header_actions" class="actions"></th>
+       </tr>
+     </thead>
+     <tbody>
+       <% @collection.each do |downloadable_file| %>
+           <tr id="<%= spree_dom_id downloadable_file %>" data-hook="admin_downloadable_files_index_rows" class="<%= cycle('odd', 'even') %>">
+             <td class="name"><%= downloadable_file.name %></td>
+             <td ><%= downloadable_file.file.url %></td>
+             <td ><%= downloadable_file.private? ? "Si" : "No" %></td>
+             <td class="actions actions-3 text-right" data-hook="admin_downloadable_files_index_row_actions">
+               <%= link_to_edit downloadable_file, no_text: true, class: 'edit' if can?(:edit, downloadable_file) %>
+               <%= link_to_delete downloadable_file, no_text: true if can?(:delete, downloadable_file) %>
+             </td>
+           </tr>
+       <% end %>
+     </tbody>
+   </table>
+ <% else %>
+   <div class="alert alert-info no-objects-found">
+     <%= Spree.t(:no_resource_found, resource: 'DownloadableFile') %>,
+     <%= link_to Spree.t(:add_one), new_admin_downloadable_file_url %>!
+   </div>
+ <% end %>
+
+
+
+
