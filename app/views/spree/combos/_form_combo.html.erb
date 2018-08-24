@@ -1,22 +1,23 @@
 <%= form_tag populate_combos_orders_path, id: "form-combo" do %>
 
     <% @combos.each do |c| %>
-      <h2> <%= c.name %>
+      <%#=<h2> <%= c.name %>
       <%#= hidden_field_tag "combos[#{c.id}][combo_id]", c.id %>
     
       <% c.combo_lines.each do |cl| %>
         <% if cl.taxon != nil %>
+          <% id = rand(10000) + cl.id %>
           <h3> <%= pluralize(cl.quantity,"unidad","unidades") %> de la categoría <b><%= cl.taxon.name %></b>  </h3>
-          <div id="accordion-<%= (cl.id*cl.quantity)-cl.id %>">
-            <a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= (cl.id*cl.quantity)-cl.id %>" href="#<%= (cl.id*cl.quantity)-cl.id %>" style="padding:0 ; border:0;">
+          <div id="accordion-<%= id %>">
+            <a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= id %>" href="#<%= id %>" style="padding:0 ; border:0;">
               <p class="combo-instruction"> Seleccione productos y cantidades para la categoría (Deben sumar <b><%= cl.quantity %></b>)     
                 <span class="status_label" >
                 </span>
               </p>
             </a>
-            <div id="<%= (cl.id*cl.quantity)-cl.id %>" class="list-group panel-collapse accordion-body collapse accordion-category">
+            <div id="<%= id %>" class="list-group panel-collapse accordion-body collapse accordion-category">
             <p style="font-size: 1em;"> Disponible: 
-            <span class="available_quantity_label" id="available_quantity_<%= (cl.id*cl.quantity)-cl.id %>" >
+            <span class="available_quantity_label" id="available_quantity_<%= id %>" >
               <%= cl.quantity %>
             </span>
 
