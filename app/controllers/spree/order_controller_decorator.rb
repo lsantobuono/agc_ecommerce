@@ -123,7 +123,6 @@ module Spree
           combo = Combo.find(combo_id)
           agregar_items_de_combo(order, combo, quantities)
         end
-
         order.validate_combos
 
         validate_population(order)
@@ -148,7 +147,7 @@ module Spree
     end
 
     def agregar_items_de_combo(order, combo, quantities)
-      combo_aplicado = ComboAplicado.create(combo: combo, order: order)
+      combo_aplicado = order.combo_aplicados.create(combo: combo)
 
       quantities.each do |key,value|
         quantity = value.to_i
