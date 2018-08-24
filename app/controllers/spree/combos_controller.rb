@@ -19,8 +19,8 @@ module Spree
 
 
     def ordenar_combo
-      @combo = Combo.find(params[:combo_id])
-      render ("ordenar_combo")
+      @combos = [Combo.find(params[:combo_id])]
+      render :ordenar_combo_compuesto
     end
 
     def ordenar_combo_compuesto

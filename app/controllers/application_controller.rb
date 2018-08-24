@@ -20,4 +20,14 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :mobile_device?
+
+  rescue_from Errors::MyRedirectException do |exception|
+    flash[:error] = exception.error_message if exception.error_message.present?
+    redirect_to exception.path
+  end
+
+  def go_back(error_message = nil)
+    path = request.env['HTTP_REFERER'].present? ? request.env['HTTP_REFERER'] : spree.root_path
+    raise Errors::MyRedirectException.new(path, error_message)
+  end
 end

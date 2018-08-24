@@ -111,69 +111,74 @@ module Spree
       redirect_back_or_default(spree.root_path)
     end
 
-    def populate_multiple_combos
-    end
-
     def populate_combos
-      combo = Combo.find(params[:combo_id])
       order = current_order(create_order_if_necessary: true)
 
-      #Valido que no exista previamente un combo ML
-      if (!order.nil?)
-        if (!order.combo_aplicados.nil?)
-          if (!order.combo_aplicados.first.nil?)
-            flash[:error] = "No puede agregar combos a un pedido de Mercado Libre"
-            redirect_back_or_default(spree.root_path)
-            return
-          end
-        end
-      end
+      validar_que_no_hay_combos_aplicados(order)
+      set_bill_address_if_blank(order)
 
-      if order.bill_address.blank? && order.user.present? # Sin esto pincha cuando un guest ordena un combo
-        order.bill_address = order.user.bill_address
-      end
       ActiveRecord::Base.transaction do
-        error = false
 
-        combo_aplicado = ComboAplicado.create(combo: combo, order: order)
-
-        params.each do |key,value|
-          quantity = value.to_i
-          if (key.starts_with? "quantity_") && quantity.between?(1, 2_147_483_647)
-            variant_id = key.split("_")[1]
-            variant  = Spree::Variant.find(variant_id)
-            options  = params[:options] || {}
-            begin
-              line_item = order.contents.add(variant, quantity, options, combo_aplicado)
-            rescue ActiveRecord::RecordInvalid => e
-              error = e.record.errors.full_messages.join(", ")
-            end
-          end
-        end
-
-        if error
-          flash[:error] = error
-          redirect_back_or_default(spree.root_path)
-          return
+        params[:combos].each do |combo_id, quantities|
+          combo = Combo.find(combo_id)
+          agregar_items_de_combo(order, combo, quantities)
         end
 
         order.validate_combos
 
-        if order.errors.empty?
-          flash[:success] = "Combo agregado al carrito!"
-          if order.es_de_mercadolibre? # Caso ML directo al checkout!
-            redirect_to checkout_state_path(order.checkout_steps.first)
-          else
-            redirect_to spree.root_path
-          end
+        validate_population(order)
+      end
+    end
+
+    def validate_population(order)
+      if order.errors.empty?
+        flash[:success] = "Combo agregado al carrito!"
+        if order.es_de_mercadolibre? # Caso ML directo al checkout!
+          redirect_to checkout_state_path(order.checkout_steps.first)
         else
-          errores = ""
-          order.errors.messages[:"Combo_Errors"].each do |m|
-            errores += "#{m.html_safe}<br>"
+          redirect_to spree.root_path
+        end
+      else
+        errores = ""
+        order.errors.messages[:"Combo_Errors"].each do |m|
+          errores += "#{m.html_safe}<br>"
+        end
+        go_back(errores)
+      end
+    end
+
+    def agregar_items_de_combo(order, combo, quantities)
+      combo_aplicado = ComboAplicado.create(combo: combo, order: order)
+
+      quantities.each do |key,value|
+        quantity = value.to_i
+        if (key.starts_with? "quantity_") && quantity.between?(1, 2_147_483_647)
+          variant_id = key.split("_")[1]
+          variant  = Spree::Variant.find(variant_id)
+          options  = params[:options] || {}
+          begin
+            line_item = order.contents.add(variant, quantity, options, combo_aplicado)
+          rescue ActiveRecord::RecordInvalid => e
+            error = e.record.errors.full_messages.join(", ")
+            go_back(error)
           end
-          flash[:error] = errores
-          redirect_back_or_default(spree.root_path)
-          raise ActiveRecord::Rollback
+        end
+      end
+    end
+
+    def set_bill_address_if_blank(order)
+      if order.bill_address.blank? && order.user.present? # Sin esto pincha cuando un guest ordena un combo
+        order.bill_address = order.user.bill_address
+      end
+    end
+
+    def validar_que_no_hay_combos_aplicados(order)
+      #Valido que no exista previamente un combo ML
+      if order.present?
+        if order.combo_aplicados.present?
+          if order.combo_aplicados.first.present?
+            go_back("No puede agregar combos a un pedido de Mercado Libre")
+          end
         end
       end
     end

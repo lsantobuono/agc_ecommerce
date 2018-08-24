@@ -90,7 +90,7 @@ Spree::Core::Engine.routes.draw do
   resources :orders, except: [:index, :new, :create, :destroy] do
     post :populate, on: :collection
     post :populate_combos, on: :collection
-    post :populate_multiple_combos, on: :collection
+    # post :populate_multiple_combos, on: :collection
     post :register_ml, on: :collection
     post :register_ml_combo, on: :collection
     delete :remove_combo_aplicado, on: :collection

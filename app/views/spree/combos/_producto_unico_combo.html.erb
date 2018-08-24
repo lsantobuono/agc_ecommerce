@@ -8,11 +8,11 @@
  <%= p.name %>
 <% if !p.has_variants? %>
   <% if type ==0 %>
-    <%= text_field_tag :"quantity_#{p.master.id}", 1, class: 'form-control ', value: 0,  readonly: true, min: 0, style:"width:50px; display:inline-block; height: 2em; " %> <!-- Caso de categoria, productos con cantidad variable -->
+    <%= text_field_tag "combos[#{cl.combo_id}]quantity_#{p.master.id}", 1, class: 'form-control ', value: 0,  readonly: true, min: 0, style:"width:50px; display:inline-block; height: 2em; " %> <!-- Caso de categoria, productos con cantidad variable -->
       <button id=<%= "plus_#{p.master.id}" %> class="plus-button" type=button >+</button>
       <button id=<%= "substract_#{p.master.id}" %> class="substract-button" type=button disabled>-</button>
   <% else %>
-    <%= text_field_tag :"quantity_#{p.master.id}", 1, class: 'form-control ', value: cl.quantity, readonly: true, min: 0, style:"width:50px; display:inline-block; height: 2em; " %><br> <!-- Caso de producto con cantidad fija -->
+    <%= text_field_tag "combos[#{cl.combo_id}]quantity_#{p.master.id}", 1, class: 'form-control ', value: cl.quantity, readonly: true, min: 0, style:"width:50px; display:inline-block; height: 2em; " %><br> <!-- Caso de producto con cantidad fija -->
   <% end %>
 <% else %>
   - Despliegue la lista para elegir las variantes deseadas del producto.
@@ -48,7 +48,7 @@
           <% end %>
         </td>
         <td class="cellComboChoose"><p style="margin:0px; line-height:2em; "><b><%=variant_options variant%></b></p></td>
-        <td class="cellComboChoose"><%= text_field_tag :"quantity_#{variant.id}", 0, class: 'form-control',  readonly: true, min: 0,
+        <td class="cellComboChoose"><%= text_field_tag "combos[#{cl.combo_id}]quantity_#{variant.id}", 0, class: 'form-control',  readonly: true, min: 0,
           style:"width:50px; display:inline-block; height: 2em;" %> <!-- Caso de variantes -->
           <button id=<%= "plus_#{variant.id}" %> class="plus-button " type=button >+</button>
           <button id=<%= "substract_#{variant.id}" %> class="substract-button " type=button disabled>-</button>
