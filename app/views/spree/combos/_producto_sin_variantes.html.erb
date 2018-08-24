@@ -1,0 +1,13 @@
+<% if defined? product.images.first.attachment %>
+  <p class="combo-instruction">
+    <%= image_tag(product.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px; display:inline-block;") %>
+  </p>
+<% end %>
+
+<%= product.name %>
+
+<%= text_field_tag "combos[#{combo_random_id}]quantity_#{product.master.id}", 1,
+  class: 'form-control ', value: combo_line.quantity, readonly: true, min: 0, style:"width:50px; display:inline-block; height: 2em;" %>
+
+<br> <!-- Caso de producto con cantidad fija -->
+<br>

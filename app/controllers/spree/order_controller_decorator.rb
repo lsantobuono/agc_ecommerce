@@ -118,10 +118,9 @@ module Spree
       set_bill_address_if_blank(order)
 
       ActiveRecord::Base.transaction do
-
-        params[:combos].each do |combo_id, quantities|
-          combo = Combo.find(combo_id)
-          agregar_items_de_combo(order, combo, quantities)
+        params[:combos].each do |hash, parameters|
+          combo = Combo.find(parameters[:combo_id])
+          agregar_items_de_combo(order, combo, parameters)
         end
         order.validate_combos
 
@@ -146,10 +145,10 @@ module Spree
       end
     end
 
-    def agregar_items_de_combo(order, combo, quantities)
+    def agregar_items_de_combo(order, combo, parameters)
       combo_aplicado = order.combo_aplicados.create(combo: combo)
 
-      quantities.each do |key,value|
+      parameters.each do |key,value|
         quantity = value.to_i
         if (key.starts_with? "quantity_") && quantity.between?(1, 2_147_483_647)
           variant_id = key.split("_")[1]

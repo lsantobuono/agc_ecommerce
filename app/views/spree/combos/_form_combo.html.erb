@@ -1,44 +1,27 @@
 <%= form_tag populate_combos_orders_path, id: "form-combo" do %>
+  <% @combos.each do |combo| %>
+    <% combo_random_id = rand(1000000000000) %>
+    <%= hidden_field_tag "combos[#{combo_random_id}][combo_id]", combo.id %>
+    <% combo.combo_lines.each do |combo_line| %>
+      <% if combo_line.taxon.present? %>
+        <%= render partial: 'taxon', locals: {combo_line: combo_line, combo_random_id: combo_random_id} %>
 
-    <% @combos.each do |c| %>
-      <%#=<h2> <%= c.name %>
-      <%#= hidden_field_tag "combos[#{c.id}][combo_id]", c.id %>
-    
-      <% c.combo_lines.each do |cl| %>
-        <% if cl.taxon != nil %>
-          <% id = rand(10000) + cl.id %>
-          <h3> <%= pluralize(cl.quantity,"unidad","unidades") %> de la categoría <b><%= cl.taxon.name %></b>  </h3>
-          <div id="accordion-<%= id %>">
-            <a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= id %>" href="#<%= id %>" style="padding:0 ; border:0;">
-              <p class="combo-instruction"> Seleccione productos y cantidades para la categoría (Deben sumar <b><%= cl.quantity %></b>)     
-                <span class="status_label" >
-                </span>
-              </p>
-            </a>
-            <div id="<%= id %>" class="list-group panel-collapse accordion-body collapse accordion-category">
-            <p style="font-size: 1em;"> Disponible: 
-            <span class="available_quantity_label" id="available_quantity_<%= id %>" >
-              <%= cl.quantity %>
-            </span>
+      <% elsif combo_line.product.present? && combo_line.product.can_supply? %>
+        <% if combo_line.product.has_variants? %>
+          <h3> <%= pluralize(combo_line.quantity,"unidad","unidades") %> del producto <b><%= combo_line.product.name %></b></h3>
+          <%= render partial: "producto_con_variantes", locals: {product: combo_line.product, combo_line: combo_line, combo_random_id: combo_random_id} %>
 
-            
-            </p>
-              <% cl.taxon.all_children.each do |p| %> 
-                <%= render partial: "product_combo", locals: {p: p, cl: cl, type: 0} %>
-              <% end %>
-            </div>
-          </div>
-        <% elsif cl.taxon == nil && cl.product != nil %>
-          <% if cl.product.can_supply? %>
-            <h3> <%= pluralize(cl.quantity,"unidad","unidades") %> del producto <b><%= cl.product.name %></b>  </h3>
-            <%= render partial: "producto_unico_combo", locals: {p: cl.product, cl: cl, type: 1} %>
-          <% else %>
-            <h3 style="color: red">  <b><%= cl.product.name %></b> sin stock </h3>
-          <% end %>
+        <% else %>
+          <h3> <%= pluralize(combo_line.quantity,"unidad","unidades") %> del producto <b><%= combo_line.product.name %></b></h3>
+          <%= render partial: "producto_sin_variantes", locals: {product: combo_line.product, combo_line: combo_line, combo_random_id: combo_random_id} %>
+
         <% end %>
+      <% else %>
+        <h3 style="color: red"><b><%= combo_line.product.name %></b> sin stock </h3>
       <% end %>
     <% end %>
-   <br>
-   <br>
-   <%= submit_tag "Continuar" , class: "btn btn-success" %>
+  <% end %>
+ <br>
+ <br>
+ <%= submit_tag "Continuar" , class: "btn btn-success" %>
 <% end %>  

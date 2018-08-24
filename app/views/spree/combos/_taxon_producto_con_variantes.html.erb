@@ -1,0 +1,40 @@
+<% accordion_id = rand(1000000000000) %>
+
+<div id="accordion-<%= accordion_id %>">
+  <a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= accordion_id %>" href="#<%= accordion_id %>" style="padding:0 ; border:0;">
+    <% if defined? product.images.first.attachment %>
+      <%= image_tag(product.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px; display:inline-block;") %> 
+    <% end %>
+
+    <%= product.name %>
+    - Despliegue la lista para elegir las variantes deseadas del producto.
+  </a>
+  <div class="row" style="margin: 0;">
+    <br>
+    <div id="<%= accordion_id %>" class="list-group panel-collapse accordion-body collapse">
+      <div class="select-variant-panel">
+        <table>
+          <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+            <tr>
+              <% i = product.variant_images.find_by(viewable_id: variant.id) # Busco la foto de la variant %>
+              <td class="cellComboChoose">  
+                <% if i != nil              # Si no hay foto para la variant uso la primer imagen del producto %>
+                   <%= image_tag(i.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 1px;") %> 
+                <% else %>
+                  <%= image_tag(product.images.first.attachment.url(:mini), class: "thumbnail", style: "margin-bottom: 0px;") %> 
+                <% end %>
+              </td>
+              <td class="cellComboChoose"><p style="margin:0px; line-height:2em; "><b><%=variant_options variant%></b></p></td>
+              <td class="cellComboChoose"><%= text_field_tag "combos[#{combo_random_id}]quantity_#{variant.id}", 0, class: 'form-control',  readonly: true, min: 0,
+                style:"width:50px; display:inline-block; height: 2em;" %> <!-- Caso de variantes -->
+                <button id=<%= "plus_#{variant.id}" %> class="plus-button " type=button >+</button>
+                <button id=<%= "substract_#{variant.id}" %> class="substract-button " type=button disabled>-</button>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>   
+<br>
