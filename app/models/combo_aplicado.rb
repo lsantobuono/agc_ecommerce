@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: combo_aplicados
+#
+#  id             :integer          not null, primary key
+#  combo_id       :integer          not null
+#  spree_order_id :integer          not null
+#
+
 class ComboAplicado < ActiveRecord::Base
   belongs_to :combo
   belongs_to :order, class_name: 'Spree::Order', foreign_key: 'spree_order_id', inverse_of: :combo_aplicados

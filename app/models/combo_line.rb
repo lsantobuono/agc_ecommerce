@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: combo_lines
+#
+#  id         :integer          not null, primary key
+#  combo_id   :integer          not null
+#  product_id :integer
+#  quantity   :integer          not null
+#  price      :decimal(, )
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  taxon_id   :integer
+#
+
 class ComboLine < ActiveRecord::Base
   belongs_to :combo
   belongs_to :taxon, class_name: 'Spree::Taxon'
