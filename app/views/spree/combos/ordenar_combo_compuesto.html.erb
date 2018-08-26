@@ -6,7 +6,7 @@
   <div class="alert alert-<%= key %>"><%= sanitize(value) %></div>
 <% end %>
 
-<%= render partial: 'form_combo', locals: { combos: @combos } %>
+<%= render partial: 'form_combo', locals: { combos_y_cantidades: @combos_y_cantidades } %>
 
 <style>
 .status_label {

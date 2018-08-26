@@ -18,10 +18,7 @@ module ParserComboCompuesto
       if (combo.nil?)
         return false,"El id de combo '#{c}' es inválido, por favor chequee que sea correcto, o comuniquese con nosotros."
       else
-        i = 1
-        for i in 1..cantidad_combo.to_i
-          ret.push(combo)
-        end
+        ret.push({ random_id: rand(1000000000000), combo: combo, quantity: cantidad_combo.to_i})
       end
     end
     return true,ret

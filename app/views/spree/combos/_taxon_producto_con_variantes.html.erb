@@ -25,7 +25,7 @@
                 <% end %>
               </td>
               <td class="cellComboChoose"><p style="margin:0px; line-height:2em; "><b><%=variant_options variant%></b></p></td>
-              <td class="cellComboChoose"><%= text_field_tag "combos[#{combo_random_id}]quantity_#{variant.id}", 0, class: 'form-control',  readonly: true, min: 0,
+              <td class="cellComboChoose"><%= text_field_tag "combos[#{combo_y_cantidad[:random_id]}]quantity_#{variant.id}", 0, class: 'form-control',  readonly: true, min: 0,
                 style:"width:50px; display:inline-block; height: 2em;" %> <!-- Caso de variantes -->
                 <button id=<%= "plus_#{variant.id}" %> class="plus-button " type=button >+</button>
                 <button id=<%= "substract_#{variant.id}" %> class="substract-button " type=button disabled>-</button>

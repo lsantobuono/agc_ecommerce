@@ -4,7 +4,7 @@
 
 <%= product.name %>
 
-<%= text_field_tag "combos[#{combo_random_id}]quantity_#{product.master.id}", 1,
+<%= text_field_tag "combos[#{combo_y_cantidad[:random_id]}]quantity_#{product.master.id}", 1,
   class: 'form-control ', value: 0, readonly: true, min: 0, style:"width:50px; display:inline-block; height: 2em; " %>
   <!-- Caso de categoria, productos con cantidad variable -->
 <button id=<%= "plus_#{product.master.id}" %> class="plus-button" type=button >+</button>

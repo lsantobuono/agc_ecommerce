@@ -19,12 +19,13 @@ module Spree
 
 
     def ordenar_combo
-      @combos = [Combo.find(params[:combo_id])]
+      combo = Combo.find(params[:combo_id])
+      @combos_y_cantidades = [{ random_id: rand(1000000000000), combo: combo, quantity: 1}]
       render :ordenar_combo_compuesto
     end
 
     def ordenar_combo_compuesto
-      correct_string, @combos = parsear_combo_compuestos(params[:combo_string])
+      correct_string, @combos_y_cantidades = parsear_combo_compuestos(params[:combo_string])
     end
   end
 end

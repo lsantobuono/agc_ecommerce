@@ -5,6 +5,7 @@
 #  id             :integer          not null, primary key
 #  combo_id       :integer          not null
 #  spree_order_id :integer          not null
+#  quantity       :integer          default(1), not null
 #
 
 class ComboAplicado < ActiveRecord::Base
@@ -37,28 +38,29 @@ class ComboAplicado < ActiveRecord::Base
     #Entonces, para validar el combo line de tipo producto es trivial, en taxon tengo que ver que el producto sea hijo de esa taxon
     #Podria haber quilombos si un combo tiene un taxon, y tambien un hijo de esa taxon, hay que consultar esto....
 
-
     combo.combo_lines_taxons.each do |cl|
+      cantidad_requerida = cl.quantity * self.quantity
       matcheoTaxons=false
       orderTaxonQuantities.each do |key, value|
-        if (cl.taxon_id == key && cl.quantity == value)
+        if (cl.taxon_id == key && cantidad_requerida == value)
           matcheoTaxons=true
         end
       end
       if !matcheoTaxons
-        order.errors.add("Combo_Errors", "Error en la sumatoria de productos de la categoría <b> #{cl.taxon.name} </b>. La suma debe ser de <b> #{cl.quantity} </b>")
+        order.errors.add("Combo_Errors", "Error en la sumatoria de productos de la categoría <b> #{cl.taxon.name} </b>. La suma debe ser de <b> #{cantidad_requerida} </b>")
       end
     end
 
     combo.combo_lines_products.each do |cl|
+      cantidad_requerida = cl.quantity * self.quantity
       matcheoProductos=false
       orderProductQuantities.each do |key,value|
-        if (cl.product_id==key && cl.quantity == value)
+        if (cl.product_id==key && cantidad_requerida == value)
            matcheoProductos=true
         end
       end
       if !matcheoProductos
-        order.errors.add("Combo_Errors", "Error en la sumatoria de productos del producto <b> #{cl.product.name} </b>. La suma debe ser de <b> #{cl.quantity} </b>")
+        order.errors.add("Combo_Errors", "Error en la sumatoria de productos del producto <b> #{cl.product.name} </b>. La suma debe ser de <b> #{cantidad_requerida} </b>")
       end
     end
   end

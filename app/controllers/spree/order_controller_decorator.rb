@@ -120,7 +120,7 @@ module Spree
       ActiveRecord::Base.transaction do
         params[:combos].each do |hash, parameters|
           combo = Combo.find(parameters[:combo_id])
-          agregar_items_de_combo(order, combo, parameters)
+          agregar_items_de_combo(order, combo, parameters[:quantity].to_i, parameters)
         end
         order.validate_combos
 
@@ -145,8 +145,8 @@ module Spree
       end
     end
 
-    def agregar_items_de_combo(order, combo, parameters)
-      combo_aplicado = order.combo_aplicados.create(combo: combo)
+    def agregar_items_de_combo(order, combo, quantity, parameters)
+      combo_aplicado = order.combo_aplicados.create(combo: combo, quantity: quantity)
 
       parameters.each do |key,value|
         quantity = value.to_i

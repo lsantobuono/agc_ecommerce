@@ -1,10 +1,11 @@
 <% accordion_id = rand(1000000000000) %>
+<% cantidad_requerida = combo_line.quantity * combo_y_cantidad[:quantity] %>
 
-<h3><%= pluralize(combo_line.quantity,"unidad","unidades") %> de la categoría <b><%= combo_line.taxon.name %></b></h3>
+<h3><%= pluralize(cantidad_requerida,"unidad","unidades") %> de la categoría <b><%= combo_line.taxon.name %></b></h3>
 
 <div id="accordion-<%= accordion_id %>">
   <a class="list-group-item" data-toggle="collapse" data-parent="accordion-<%= accordion_id %>" href="#<%= accordion_id %>" style="padding:0 ; border:0;">
-    <p class="combo-instruction"> Seleccione productos y cantidades para la categoría (Deben sumar <b><%= combo_line.quantity %></b>)     
+    <p class="combo-instruction"> Seleccione productos y cantidades para la categoría (Deben sumar <b><%= cantidad_requerida %></b>)     
       <span class="status_label"></span>
     </p>
   </a>
@@ -12,17 +13,16 @@
   <div id="<%= accordion_id %>" class="list-group panel-collapse accordion-body collapse accordion-category">
     <p style="font-size: 1em;"> Disponible: 
       <span class="available_quantity_label">
-        <%= combo_line.quantity %>
+        <%= cantidad_requerida %>
       </span>
     </p>
     <% combo_line.taxon.all_children.each do |product| %> 
-                <%#= render partial: :product_combo, locals: {product: product, combo_line: combo_line} %>
       <% if product.can_supply? %>
         <% if product.has_variants? %>
-          <%= render partial: "taxon_producto_con_variantes", locals: {product: product, combo_line: combo_line, combo_random_id: combo_random_id} %>
+          <%= render partial: "taxon_producto_con_variantes", locals: {product: product, combo_line: combo_line, combo_y_cantidad: combo_y_cantidad} %>
 
         <% else %>
-          <%= render partial: "taxon_producto_sin_variantes", locals: {product: product, combo_line: combo_line, combo_random_id: combo_random_id} %>
+          <%= render partial: "taxon_producto_sin_variantes", locals: {product: product, combo_line: combo_line, combo_y_cantidad: combo_y_cantidad} %>
 
         <% end %>
       <% else %>
