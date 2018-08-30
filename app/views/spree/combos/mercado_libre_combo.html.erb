@@ -2,7 +2,7 @@
     <p style=" font-size: 1em;"> <%= Spree.t(:instrucciones_ml_combo) %>  </p>
     <%= text_field_tag :"ml_user", nil, class: 'form-control ', style:"width:400px; height: 2em; ", placeholder: "Usuario ML" %>
     <br>
-    <%= hidden_field_tag :combo_id, @combo.id %>
+    <%= hidden_field_tag :ml_purchase_id, params[:combo_id] %>
 
     <%= submit_tag "Continuar" , class: "btn btn-success" %>
 <% end %>  

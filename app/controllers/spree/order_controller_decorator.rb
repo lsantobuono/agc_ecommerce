@@ -78,9 +78,8 @@ module Spree
       order = current_order(create_order_if_necessary: true)
       order.empty! #Las vacío sin importar que tengan, porque al agregarse un combo de ML solo debe haber combos de ML
       
-      combo = Combo.find(params[:combo_id])
-
-      order.ml_user =params[:ml_user]
+      order.ml_user = params[:ml_user]
+      order.ml_purchase_id = params[:ml_purchase_id]
 
       if (params[:ml_user] == "")
         flash[:error] = "Por favor ingrese su usuario de Mercado Libre"
@@ -88,14 +87,17 @@ module Spree
         return
       end
 
-      if (combo == nil)
-        flash[:error] = "Se ingresó un id de combo inválido, por favor chequee que sea correcto, o comuniquese con nosotros"
+      correct_string, content = parsear_combo_compuestos(order.ml_purchase_id)
+
+      if (correct_string)
+        order.save
+      else
+        flash[:error] = content
         redirect_back_or_default(spree.root_path)
         return
       end
 
-      order.save
-      redirect_to ordenar_combo_path combo
+      redirect_to ordenar_combo_compuesto_path params[:ml_purchase_id]
     end
 
     def remove_combo_aplicado

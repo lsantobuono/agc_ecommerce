@@ -10,10 +10,11 @@ module Spree
     end
 
     def mercado_libre_combo
-      @combo = Combo.where('lower(code) = ?', params[:combo_id].downcase).first
-      if (@combo == nil)
-        flash[:error] = "Se ingresó un enlace inváido"
-        redirect_to(spree.root_path)
+      correct_string, @combos_y_cantidades = parsear_combo_compuestos(params[:combo_id])
+      if (!correct_string)
+        flash[:error] = @combos_y_cantidades
+        redirect_back_or_default(spree.root_path)
+        return
       end
     end
 
