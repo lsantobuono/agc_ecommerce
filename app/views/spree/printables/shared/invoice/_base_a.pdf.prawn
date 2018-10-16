@@ -5,7 +5,7 @@ font_style = {
 
 order = Spree::Order.find(doc.printable_id)
 
-prawn_document(force_download: true) do |pdf|
+prawn_document(force_download: true, :margin => [10,10,10,10]) do |pdf|
   pdf.define_grid(columns: 5, rows: 8, gutter: 10)
   pdf.font font_style[:face], size: font_style[:size]
 

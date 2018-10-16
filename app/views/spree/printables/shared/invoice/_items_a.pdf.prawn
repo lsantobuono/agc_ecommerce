@@ -67,7 +67,12 @@ end
 
 pdf.move_down 20
 
-# Build the Mock Table
+
+size = data.count
+current_page = 1
+last_page = 1 + (size-1) / 7
+
+
 data.each_with_index do |p,i|
   pdf.bounding_box [0, pdf.cursor], :height => row_height, :width => width do
     #pdf.stroke_bounds
@@ -96,6 +101,17 @@ data.each_with_index do |p,i|
       end
     end
   end
-  # create a new page every 6 rows  
-  pdf.start_new_page if i > 0 && i % 5 == 0
+
+  im = Rails.application.assets.find_asset("down_arrow.png")
+
+  # create a new page every 7 rows  
+  if (i > 0) && (i+1) % 7 == 0 
+    if current_page != last_page
+      pdf.move_down 5
+      pdf.image im.filename, vposition: :down, position: :right, height: 30
+    end
+    pdf.start_new_page
+    current_page += 1
+  end
+
 end
