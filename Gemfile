@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby '2.4.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.8.rc1'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 gem 'pg'
@@ -92,7 +92,7 @@ gem 'spree_i18n', github: 'spree-contrib/spree_i18n', branch: '3-1-stable'
 
 gem 'spree_volume_pricing', :git => 'https://github.com/lsantobuono/spree_volume_pricing.git', branch: 'master'
 
-gem 'puma'
+gem 'puma', '~> 3.12.0'
 
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 
