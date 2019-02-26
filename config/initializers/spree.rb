@@ -51,9 +51,8 @@ Rails.application.config.to_prepare do
 end
 
 
-# if Rails.env.production?
-  ENV['AWS_ACCESS_KEY_ID']="AKIAJ3KXUR7PHDLOXCRQ"
-  ENV['AWS_SECRET_ACCESS_KEY']="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"
+  ENV['AWS_ACCESS_KEY_ID']=""
+  ENV['AWS_SECRET_ACCESS_KEY']=""
   ENV['S3_BUCKET_NAME']="agcbucket90"
   attachment_config = {
     s3_credentials: {
