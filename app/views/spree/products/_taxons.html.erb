@@ -63,6 +63,11 @@
                     <%= render :partial => 'spree/products/cart_form_home' , :locals => {product: product} %>
                   </div>
                 <% if current_spree_user && current_spree_user.confirmed? %>
+                  <div class="panel-footer text-center" style="padding: 5px 5px">
+                    <span style="font-size: 14px; color: #2c5488;">
+                      PRECIO DE LISTA
+                    </span>
+                  </div> 
                   <div class="panel-footer text-center">
                     <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                       <span class="price selling lead" itemprop="price"><%= display_price(product) %></span>
