@@ -49,6 +49,8 @@
         <th><%= Spree.t(:productos) %></th>
         <th><%= Spree.t(:categoria) %></th>
         <th><%= Spree.t(:hidden) %></th>
+        <th><%= Spree.t(:price_cash) %></th>
+        <th><%= Spree.t(:price_mercado_pago) %></th>
 
         <th data-hook="admin_combos_index_header_actions" class="actions"></th>
       </tr>
@@ -65,6 +67,8 @@
               <td class="code"> - </td>
             <% end %>
             <td class="code"><%= combo.hidden ? 'Verdadero' : 'Falso' %></td>
+            <td class="code"><%= combo.price_cash.present? ?  combo.price_cash : "-"%></td>
+            <td class="code"><%= combo.price_mercado_pago.present? ?  combo.price_mercado_pago : "-" %></td>
             <td class="actions actions-3 text-right" data-hook="admin_combos_index_row_actions">
               <%= link_to_edit combo, no_text: true, class: 'edit' if can?(:edit, combo) && !combo.deleted? %>
               <%= link_to clone_combo_admin_combo_path(combo), method: :post, class: 'btn btn-primary with-tip btn-sm', "data-original-title" => 'Clonar' do %>

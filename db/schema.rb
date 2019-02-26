@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180826002747) do
+ActiveRecord::Schema.define(version: 20190226221722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,16 +58,18 @@ ActiveRecord::Schema.define(version: 20180826002747) do
   end
 
   create_table "combos", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.string   "code",        null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",               null: false
+    t.string   "code",               null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.datetime "deleted_at"
     t.string   "description"
     t.string   "image"
     t.boolean  "hidden"
     t.boolean  "caro"
     t.integer  "category_id"
+    t.decimal  "price_cash"
+    t.decimal  "price_mercado_pago"
   end
 
   add_index "combos", ["category_id"], name: "index_combos_on_category_id", using: :btree
