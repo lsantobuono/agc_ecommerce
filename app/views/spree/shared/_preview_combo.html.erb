@@ -1,7 +1,88 @@
 <li>
-	<%= link_to ordenar_combo_url(combo) do %>
+	<!--<%= link_to ordenar_combo_url(combo) do %>
 		<%= image_tag combo.image, style: "max-width:15em; float:left" %>
 		<h3><%= combo.code %></h3>
 		<%= combo.description %>
-	<% end %>
+	<% end %>-->
+  <div class="row">
+    <div class="hidden-price-cash" style="display:none"> <%= combo.price_cash %> </div>
+    <div class="hidden-price-mercado-pago" style="display:none"> <%= combo.price_mercado_pago %> </div>
+
+    <div class="col-xs-12 col-md-4">
+      <img src="https://dummyimage.com/600x400/000/fff" class="main-img">
+      <div class="row">
+        <div class="col-xs-4">
+          <img src="https://dummyimage.com/600x400/000/fff">
+        </div>
+        <div class="col-xs-4">
+          <img src="https://dummyimage.com/600x400/000/fff">
+        </div>
+        <div class="col-xs-4">
+          <img src="https://dummyimage.com/600x400/000/fff">
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-8">
+      <h3><%= combo.code %></h3> <br>
+      <p style="font-size: 16px;"><%= combo.description %></p> <br>
+      <div class="row">
+        <div class="col-xs-6 col-md-4" >
+          <div class="field" style="margin-left: 20px">
+            <label > Cantidad </label>
+            <div class="row">
+              <div class="col-xs-4">
+                <input  type="number" value="1" class="form-control quantity-input" style=" width: 50px">
+              </div>
+              <div class="col-xs-4">
+                <button type="submit" class="btn btn-primary btn-success" style="padding:5px"> Ordenar </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 text-center">
+          <% file = DownloadableFile.where(file: "#{combo.code}.pdf").first %>
+          <% if file.present? %>
+            <%= link_to spree.downloadable_files_download_path(file.id) do%>
+              <%= image_tag "pdf-icon.png", style:"width:2em" %>
+              <%= "+ INFO" %>
+            <%end%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <p> PRECIO FINAL  </p>
+  <hr>
+  <div class="row">
+    <div class="col-xs-6 col-md-3" style="padding-top: 20px">
+      <p class="price-cash">
+        <%= "$ #{combo.price_cash.to_i}" %>
+      </p>
+    </div>
+    <div class="col-xs-6 col-md-5" style="padding-top: 20px">
+      <p class="contado-text">
+      PAGO CONTADO EN NUESTRO LOCAL <br>
+      O TRANSFERENCIA BANCARIA
+      </p>
+    </div>
+    <div class=" col-xs-2 col-md-2 col-cash-image ">
+      <%= image_tag "cash.png", style: "max-height: 80px; width: auto;" %>
+    </div>
+    <div class="col-xs-2 col-md-2">
+      <%= image_tag "bank.png", style: "max-height: 80px; width: auto;" %>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-3" style="padding-top: 30px">
+      <p class="price-mercado-pago">
+        <%= "$ #{combo.price_mercado_pago.to_i}" %>
+      <p>
+    </div>
+    <div class="col-md-9">
+      <%= image_tag "mercadopago.png", style: "max-height: 100px; width: auto;" %>
+    </div>
+  </div>
+
 </li>

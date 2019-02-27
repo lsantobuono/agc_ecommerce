@@ -59,75 +59,6 @@ html, body {
 }
 
 
-/* esclusivo para responsive, en principio no son tantas cosas asi que por ahora tiremos todo aca */ 
-
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-
-
-
-.wrapper {
-  min-height: 100%;
-  margin-bottom: -530px;
-}
-
-.footer,
-.push {
-  height: 530px;
-}
-
-.footer {
-  .col-md-4 {
-    margin-top:1em;
-  }
-}
-  #main-nav-bar {
-    ul > li {
-      padding-left:1em;
-    }
-  }
-  #random-img-show { //La imagensita en mobile queda mal.
-    display:none ;
-  }
-
-  #nav-bar-social {
-    float: right!important;
-  }
-  #nav-bar-social>li, {
-   float: left !important;
-  }
-  #nav-bar-social:last-child {
-    margin-right: -15px !important; 
-  }
-
- // #search_input {
- //   display:inline-block;
- // }
-
-  .line-item-description {
-    display: none;    
-  }
-
-  #variant_text_line_item {
-    display: none;    
-  }
-
-  .about-image-bot {
-    display:none
-  }
-  .about-image-top {
-    display:none
-  }
-
-  .img-responsive {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .button-checkout-home {
-   display:none;
-  }
-}
-
 .custom-tooltip{display:inline;position:relative}
 .custom-tooltip:hover{text-decoration:none}
 
@@ -312,12 +243,11 @@ html, body {
 
 /* Index display de previews */
 
-#content {
-  hr {
-    margin-top:10px;
-    margin-bottom: 10px ; //Las hr se usan para separar la descripcion d e los productos, pero 20px es medio mucho
-  }
+hr {
+  margin-top:10px;
+  margin-bottom: 10px ; //Las hr se usan para separar la descripcion d e los productos, pero 20px es medio mucho
 }
+
 .product-list-item{
   .panel.panel-default.panel-image {
     &:hover {
@@ -698,31 +628,52 @@ label {
 /* combos */
 
 .comboList {
-    
+  
+  padding-left:  0;
+
+  .col-xs-2,.col-xs-4 {
+    padding: 5px;
+  }
+
+  label {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #555555;
+    font-weight: 500;
+  }
   list-style-type: none;
-  width: 80%;
+  width: 100%;
 
   * {margin: 0; padding: 0;}
 
+  .main-img {
+    padding: 5px;
+  }
   img {
-    width:100px;
+    max-width: 100%;
   }
-   
-  div {
-    margin: 20px;
+
+  hr {
+    background-color: $navbar-blue;
+    height: 3px;
+    margin-top: 3px;
+    margin-bottom: 3px;
   }
-      
+
+  .contado-text {
+    font-size:16px;
+  }
+
   h3 {
+    color: $navbar-blue;
     font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
   }
    
-  li img {
-    float: left;
-    margin: 0 15px 0 0;
-  }
-   
   li p {
-    font: 200 12px/1.5 Georgia, Times New Roman, serif;
+    color: $navbar-blue;
+    font-size: 2em;
+    font: Georgia, Times New Roman, serif;
   }
    
   li {
@@ -731,8 +682,8 @@ label {
   }
    
   li:hover {
-    background: #eee;
-    cursor: pointer;
+    //background: #eee;
+    //cursor: pointer;
   }
 }
 
@@ -827,12 +778,84 @@ input,textarea {
 }
 
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 
+/* esclusivo para responsive, en principio no son tantas cosas asi que por ahora tiremos todo aca */ 
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
   .product-list-item {
     img {
       width:auto; 
     }
   }
 
+  .comboList {
+    .col-cash-image {
+      margin-left: 30%;
+    }
+    .contado-text {
+      font-size:12px;
+    }
+  }
+
+  .wrapper {
+    min-height: 100%;
+    margin-bottom: -530px;
+  }
+
+  .footer,
+  .push {
+    height: 530px;
+  }
+
+  .footer {
+    .col-md-4 {
+      margin-top:1em;
+    }
+  }
+    #main-nav-bar {
+      ul > li {
+        padding-left:1em;
+      }
+    }
+    #random-img-show { //La imagensita en mobile queda mal.
+      display:none ;
+    }
+
+    #nav-bar-social {
+      float: right!important;
+    }
+    #nav-bar-social>li, {
+     float: left !important;
+    }
+    #nav-bar-social:last-child {
+      margin-right: -15px !important; 
+    }
+
+   // #search_input {
+   //   display:inline-block;
+   // }
+
+    .line-item-description {
+      display: none;    
+    }
+
+    #variant_text_line_item {
+      display: none;    
+    }
+
+    .about-image-bot {
+      display:none
+    }
+    .about-image-top {
+      display:none
+    }
+
+    .img-responsive {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .button-checkout-home {
+     display:none;
+    }
 }
