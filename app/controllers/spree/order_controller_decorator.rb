@@ -186,6 +186,7 @@ module Spree
     def set_bill_address_if_blank(order)
       if order.bill_address.blank? && order.user.present? # Sin esto pincha cuando un guest ordena un combo
         order.bill_address = order.user.bill_address
+        order.save
       end
     end
 

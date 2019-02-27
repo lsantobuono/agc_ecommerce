@@ -33,7 +33,7 @@ module Spree
     end
 
     def should_hide_billing?
-      !es_de_mercadolibre? && total < 1000
+      !es_de_mercadolibre? && !combo_order? && total < 1000
     end
 
     def es_de_mercadolibre?
