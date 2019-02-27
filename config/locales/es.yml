@@ -1,5 +1,7 @@
 es:
   spree:
+    price_cash: "Precio Efectivo"
+    price_mercado_pago: "Precio Mercado Pago"
     price: "Precio de lista"
     show_hidden: "Combos ocultos"
     returns: "Devoluciones"

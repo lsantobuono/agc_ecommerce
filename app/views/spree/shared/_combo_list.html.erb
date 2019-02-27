@@ -6,6 +6,23 @@
   <% combos.each do |c| %>
     <% if !c.hidden %>
       <%= render('spree/shared/preview_combo', {combo: c}) %>
+      <br><br>
+      <hr><hr>
+      <br><br>
     <% end %>
   <% end %>
 </table>
+
+
+<script >
+$(".quantity-input").change(function() {
+  li  = $(this).closest("li");
+  let cash = parseFloat(li.find(".hidden-price-cash").text());
+  let mercado_pago = parseFloat(li.find(".hidden-price-mercado-pago").text());
+
+  let multiplicator = parseInt(li.find(".quantity-input").val());
+  li.find(".price-cash").text("$ "+cash*multiplicator) ;
+  li.find(".price-mercado-pago").text("$ "+mercado_pago*multiplicator) ;
+});
+
+</script>

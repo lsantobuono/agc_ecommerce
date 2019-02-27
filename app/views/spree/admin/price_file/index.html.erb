@@ -19,26 +19,42 @@
 <% if defined? @listaCambios %>
   <div class="panel-body">
     <% if @listaCambios.empty? %>
-      No hay nada que actualizar
+      No hay productos que actualizar
     <% else %>
       <% @listaCambios.each do |key,value| %>
         <p> Se actualizará la variante de id <b><%= key %></b>.  Precio actual: <b><%= value[0] %></b> >>> Se cambiará a: <b> <%= value[1] %></b> </p>
       <% end %>
-
+    <% end %>
+    <% if @listaCambiosCombos.empty? %>
+      No hay combos que actualizar
+    <% else %>
+      <% @listaCambiosCombos.each do |key,value| %>
+        <p> Se actualizará el combo de código <b><%= key %></b>. 
+         Precio actual efectivo: <b><%= value[0] %></b> >>> Se cambiará a: <b> <%= value[1] %></b> 
+         Precio actual mercadopago: <b><%= value[2] %></b> >>> Se cambiará a: <b> <%= value[3] %></b> </p>
+      <% end %>
+    <% end %>
+    <% if !@listaCambios.empty? || !@listaCambiosCombos.empty? %>
       <%= form_tag spree.admin_confirm_prices_files_path() do %>
         <fieldset >
           <%= button "Confirmar cambios", 'save' %>
         </fieldset>
-      <% end -%>
+      <% end %>
     <% end %>
   </div>
 <% end %>
 
 
+
 <% if defined? @preciosActualizados %>
   <div class="panel-body" style="color:green">
     <% @preciosActualizados.each do |key,value| %>
-      <p> Se actualizó le variante id <b><%= key %></b>.  Precio anterior: <b><%= value[0] %></b> >>> Se cambió a: <b> <%= value[1] %></b> </p>
+      <p> Se actualizó la variante id <b><%= key %></b>.  Precio anterior: <b><%= value[0] %></b> >>> Se cambió a: <b> <%= value[1] %></b> </p>
+    <% end %>
+    <% @preciosActualizadosCombos.each do |key,value| %>
+      <p> Se actualizó el combo con código <b><%= key %></b>.  
+      Precio efectivo anterior: <b><%= value[0] %></b> >>> Se cambió a: <b> <%= value[1] %></b> 
+      Precio mercadopago anterior: <b><%= value[2] %></b> >>> Se cambió a: <b> <%= value[3] %></b> </p>
     <% end %>
   </div>
 <% end %>
