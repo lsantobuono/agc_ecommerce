@@ -8,6 +8,8 @@ module Spree
 
     has_many :combo_aplicados, inverse_of: :order, foreign_key: :spree_order_id, dependent: :destroy
 
+    scope :incomplete, -> { where(completed_at: nil).where(combo_order: false) }
+
     checkout_flow do
       go_to_state :address
       go_to_state :metodo_envio, if: ->(order) { !order.creado_por_admin? }

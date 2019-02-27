@@ -87,6 +87,11 @@ Spree::Core::Engine.routes.draw do
   get "/combos/:combo_id" => "combos#ordenar_combo", as: :ordenar_combo
   get "/categories_combos/:category_id" => "categories#show"
   get "/downloadable_files/:id" => "downloadable_files#download", as: :downloadable_files_download
+  
+
+  get "/combo_order_checkout/:order_id/address" => "combo_order_checkout#address", as: :combo_order_checkout_address
+
+  get "/combos/:combo_id/seleccionar_cantidad" => "combos#seleccionar_cantidad", as: :combo_seleccionar_cantidad
 
 
   resources :orders, except: [:index, :new, :create, :destroy] do

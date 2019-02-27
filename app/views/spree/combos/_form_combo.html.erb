@@ -1,4 +1,5 @@
 <%= form_tag populate_combos_orders_path, id: "form-combo" do %>
+  <%= hidden_field_tag :combo_order, @combo_order ? true : false %>
   <% @combos_y_cantidades.each do |combo_y_cantidad| %>
     <%= hidden_field_tag "combos[#{combo_y_cantidad[:random_id]}][quantity]", combo_y_cantidad[:quantity] %>
     <%= hidden_field_tag "combos[#{combo_y_cantidad[:random_id]}][combo_id]", combo_y_cantidad[:combo].id %>

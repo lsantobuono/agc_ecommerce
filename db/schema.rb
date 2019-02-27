@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180826002747) do
+ActiveRecord::Schema.define(version: 20190227141412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -398,6 +398,7 @@ ActiveRecord::Schema.define(version: 20180826002747) do
     t.string   "metodo_envio_otros"
     t.string   "checkout_notes"
     t.integer  "moderation_status",                                                default: 0,       null: false
+    t.boolean  "combo_order",                                                      default: false,   null: false
   end
 
   add_index "spree_orders", ["approver_id"], name: "index_spree_orders_on_approver_id", using: :btree
