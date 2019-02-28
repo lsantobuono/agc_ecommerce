@@ -145,14 +145,16 @@ module Spree
     def validate_population(order)
       # byebug
       if order.errors.empty?
-        flash[:success] = "Combo agregado al carrito!"
         if order.es_de_mercadolibre? # Caso ML directo al checkout!
+          flash[:success] = "Combo seleccionado correctamente"
           redirect_to checkout_state_path(order.checkout_steps.first)
         elsif order.combo_order? 
+          flash[:success] = "Combo seleccionado correctamente"
           redirect_to combo_order_checkout_address_path(order.id)
 
           # redirect_to checkout_state_path(:address)
         else
+          flash[:success] = "Combo agregado al carrito!"
           redirect_to spree.root_path
         end
       else
@@ -165,7 +167,7 @@ module Spree
     end
 
     def agregar_items_de_combo(order, combo, quantity, parameters)
-      combo_aplicado = order.combo_aplicados.create(combo: combo, quantity: quantity)
+      combo_aplicado = order.combo_aplicados.create(combo: combo, quantity: quantity, price_cash: combo.price_cash, price_mercado_pago: combo.price_mercado_pago)
 
       parameters.each do |key,value|
         quantity = value.to_i

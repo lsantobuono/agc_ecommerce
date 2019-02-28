@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190227141412) do
+ActiveRecord::Schema.define(version: 20190227235427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,9 +39,11 @@ ActiveRecord::Schema.define(version: 20190227141412) do
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
 
   create_table "combo_aplicados", force: :cascade do |t|
-    t.integer "combo_id",                   null: false
-    t.integer "spree_order_id",             null: false
-    t.integer "quantity",       default: 1, null: false
+    t.integer "combo_id",                       null: false
+    t.integer "spree_order_id",                 null: false
+    t.integer "quantity",           default: 1, null: false
+    t.decimal "price_cash"
+    t.decimal "price_mercado_pago"
   end
 
   add_index "combo_aplicados", ["combo_id"], name: "index_combo_aplicados_on_combo_id", using: :btree

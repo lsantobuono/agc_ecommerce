@@ -21,3 +21,5 @@
 public/spree
 public/uploads
 public/sitemap*
+
+.rbenv-vars

@@ -95,6 +95,7 @@ Spree::Core::Engine.routes.draw do
   patch "/combo_order_checkout/:order_id/metodo_envio" => "combo_order_checkout#metodo_envio_update", as: :combo_order_checkout_metodo_envio_update
   get "/combo_order_checkout/:order_id/forma_de_pago" => "combo_order_checkout#forma_de_pago", as: :combo_order_checkout_forma_de_pago
   patch "/combo_order_checkout/:order_id/forma_de_pago" => "combo_order_checkout#forma_de_pago_update", as: :combo_order_checkout_forma_de_pago_update
+  get "/combo_order_checkout/:order_id/generar_mercadopago_preference" => "combo_order_checkout#generar_mercadopago_preference", as: :combo_order_checkout_generar_mercadopago_preference
 
   get "/combo_order_checkout/:order_id/payment_return" => "combo_order_checkout#payment_return", as: :payment_return
 
