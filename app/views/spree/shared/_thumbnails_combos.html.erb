@@ -1,11 +1,13 @@
 
 <ul id="product-thumbnails" class="thumbnails list-inline" data-hook>
-  <li class='vtmb-all tmb-<%=  Spree::Product.first.images.first.viewable.id %>'>
-    <%= link_to(image_tag(Spree::Product.first.images.first.attachment.url, class: "thumbnail"), Spree::Product.first.images.first.attachment.url) %>
+  <li class='vtmb-all tmb-<%=  combo.image.model.id %>'>
+    <%= link_to(image_tag(combo.image.url, class: "thumbnail"), combo.image.url) %>
   </li>
-  <li class='vtmb-all tmb-<%= Spree::Product.first.images.second.viewable.id%>'>
-    <%= link_to(image_tag(Spree::Product.first.images.second.attachment.url, class: "thumbnail"), Spree::Product.first.images.second.attachment.url) %>
-  </li>
+  <% combo.images.each do |i| %>
+    <li class='vtmb-all tmb-<%=  i.viewable.id %>'>
+      <%= link_to(image_tag(i.attachment.url, class: "thumbnail"), i.attachment.url) %>
+    </li>
+  <% end %>
 </ul>
 
 <style>

@@ -22,9 +22,12 @@ class Combo < ActiveRecord::Base
   has_many :combo_lines
   has_many :combo_lines_products, -> { with_product }, class_name: 'ComboLine'
   has_many :combo_lines_taxons, -> { with_taxon }, class_name: 'ComboLine'
+  
+  has_many :images, -> { order(:position) }, as: :viewable, dependent: :destroy, class_name: 'Spree::Image'
 
   accepts_nested_attributes_for :combo_lines_products, allow_destroy: true
   accepts_nested_attributes_for :combo_lines_taxons, allow_destroy: true
+  accepts_nested_attributes_for :images, allow_destroy: true
 
   mount_uploader :image, Spree::ComboImageUploader
 

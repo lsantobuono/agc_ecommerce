@@ -1,5 +1,6 @@
 es:
   spree:
+    image_principal: "Imagen principal"
     price_cash: "Precio Efectivo"
     price_mercado_pago: "Precio Mercado Pago"
     price: "Precio de lista"

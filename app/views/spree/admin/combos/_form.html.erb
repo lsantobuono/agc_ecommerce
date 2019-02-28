@@ -69,7 +69,7 @@
           -->
           <div data-hook="admin_combo_form_image"   >
             <%= f.field_container :image do %>
-              <%= f.label :image, Spree.t(:image) %>
+              <%= f.label :image, Spree.t(:image_principal) %>
               <%= f.file_field :image  %>
               <%= f.error_message_on :image %>
             <% end %>
@@ -145,6 +145,36 @@
           <%= f.link_to_add :combo_lines_taxons do %>
             <button class="btn btn-default">
               Agregar categoría
+              <span class="icon icon-add"></span>
+            </button>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            Imagenes
+          </h1>
+        </div>
+        <div style="padding: 20px 20px">
+          <%= f.fields_for :images, f.object.images do |line_form| %>
+            <div class="row">
+              <div class="col-sm-6">
+                <div data-hook="admin_product_form_shipping_categories">
+                  <%= line_form.file_field :attachment %>
+                  <p> <%= line_form.object.attachment_file_name %> </p>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <%= line_form.link_to_remove do %>
+                  <span class="icon icon-remove"></span>
+                <% end %>
+              </div>            
+            </div>
+          <% end %>
+          <%= f.link_to_add :images do %>
+            <button class="btn btn-default">
+              Agregar imagen
               <span class="icon icon-add"></span>
             </button>
           <% end %>
