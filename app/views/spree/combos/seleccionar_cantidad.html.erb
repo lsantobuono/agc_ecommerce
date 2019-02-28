@@ -1,0 +1,6 @@
+<h1><%= @combo.name %></h1>
+<h3>Ingrese la cantidad de combos que desea comprar:</h3>
+<%= form_tag ordenar_combo_path(@combo.id), method: :get do %>
+  <%= text_field_tag :cantidad, 1, type: :number%>
+  <%= button_tag "Continuar", class: 'btn btn-primary' %>
+<% end %>

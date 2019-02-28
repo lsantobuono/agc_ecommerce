@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190228163310) do
+ActiveRecord::Schema.define(version: 20190228181321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,9 +39,11 @@ ActiveRecord::Schema.define(version: 20190228163310) do
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry", using: :btree
 
   create_table "combo_aplicados", force: :cascade do |t|
-    t.integer "combo_id",                   null: false
-    t.integer "spree_order_id",             null: false
-    t.integer "quantity",       default: 1, null: false
+    t.integer "combo_id",                       null: false
+    t.integer "spree_order_id",                 null: false
+    t.integer "quantity",           default: 1, null: false
+    t.decimal "price_cash"
+    t.decimal "price_mercado_pago"
   end
 
   add_index "combo_aplicados", ["combo_id"], name: "index_combo_aplicados_on_combo_id", using: :btree
@@ -355,51 +357,55 @@ ActiveRecord::Schema.define(version: 20190228163310) do
   add_index "spree_order_promotions", ["promotion_id", "order_id"], name: "index_spree_order_promotions_on_promotion_id_and_order_id", using: :btree
 
   create_table "spree_orders", force: :cascade do |t|
-    t.string   "number",                       limit: 32
-    t.decimal  "item_total",                              precision: 10, scale: 2, default: 0.0,     null: false
-    t.decimal  "total",                                   precision: 10, scale: 2, default: 0.0,     null: false
+    t.string   "number",                         limit: 32
+    t.decimal  "item_total",                                precision: 10, scale: 2, default: 0.0,     null: false
+    t.decimal  "total",                                     precision: 10, scale: 2, default: 0.0,     null: false
     t.string   "state"
-    t.decimal  "adjustment_total",                        precision: 10, scale: 2, default: 0.0,     null: false
+    t.decimal  "adjustment_total",                          precision: 10, scale: 2, default: 0.0,     null: false
     t.integer  "user_id"
     t.datetime "completed_at"
     t.integer  "bill_address_id"
     t.integer  "ship_address_id"
-    t.decimal  "payment_total",                           precision: 10, scale: 2, default: 0.0
+    t.decimal  "payment_total",                             precision: 10, scale: 2, default: 0.0
     t.string   "shipment_state"
     t.string   "payment_state"
     t.string   "email"
     t.text     "special_instructions"
-    t.datetime "created_at",                                                                         null: false
-    t.datetime "updated_at",                                                                         null: false
+    t.datetime "created_at",                                                                           null: false
+    t.datetime "updated_at",                                                                           null: false
     t.string   "currency"
     t.string   "last_ip_address"
     t.integer  "created_by_id"
-    t.decimal  "shipment_total",                          precision: 10, scale: 2, default: 0.0,     null: false
-    t.decimal  "additional_tax_total",                    precision: 10, scale: 2, default: 0.0
-    t.decimal  "promo_total",                             precision: 10, scale: 2, default: 0.0
-    t.string   "channel",                                                          default: "spree"
-    t.decimal  "included_tax_total",                      precision: 10, scale: 2, default: 0.0,     null: false
-    t.integer  "item_count",                                                       default: 0
+    t.decimal  "shipment_total",                            precision: 10, scale: 2, default: 0.0,     null: false
+    t.decimal  "additional_tax_total",                      precision: 10, scale: 2, default: 0.0
+    t.decimal  "promo_total",                               precision: 10, scale: 2, default: 0.0
+    t.string   "channel",                                                            default: "spree"
+    t.decimal  "included_tax_total",                        precision: 10, scale: 2, default: 0.0,     null: false
+    t.integer  "item_count",                                                         default: 0
     t.integer  "approver_id"
     t.datetime "approved_at"
-    t.boolean  "confirmation_delivered",                                           default: false
-    t.boolean  "considered_risky",                                                 default: false
+    t.boolean  "confirmation_delivered",                                             default: false
+    t.boolean  "considered_risky",                                                   default: false
     t.string   "guest_token"
     t.datetime "canceled_at"
     t.integer  "canceler_id"
     t.integer  "store_id"
-    t.integer  "state_lock_version",                                               default: 0,       null: false
-    t.decimal  "taxable_adjustment_total",                precision: 10, scale: 2, default: 0.0,     null: false
-    t.decimal  "non_taxable_adjustment_total",            precision: 10, scale: 2, default: 0.0,     null: false
+    t.integer  "state_lock_version",                                                 default: 0,       null: false
+    t.decimal  "taxable_adjustment_total",                  precision: 10, scale: 2, default: 0.0,     null: false
+    t.decimal  "non_taxable_adjustment_total",              precision: 10, scale: 2, default: 0.0,     null: false
     t.string   "ml_user"
     t.string   "ml_purchase_id"
-    t.boolean  "creado_por_admin",                                                 default: false,   null: false
+    t.boolean  "creado_por_admin",                                                   default: false,   null: false
     t.string   "custom_mail_header"
     t.integer  "tipo_factura"
     t.integer  "metodo_envio"
     t.string   "metodo_envio_otros"
     t.string   "checkout_notes"
-    t.integer  "moderation_status",                                                default: 0,       null: false
+    t.integer  "moderation_status",                                                  default: 0,       null: false
+    t.boolean  "combo_order",                                                        default: false,   null: false
+    t.string   "mercadopago_preference_id"
+    t.string   "mercadopago_init_point"
+    t.string   "mercadopago_sandbox_init_point"
   end
 
   add_index "spree_orders", ["approver_id"], name: "index_spree_orders_on_approver_id", using: :btree

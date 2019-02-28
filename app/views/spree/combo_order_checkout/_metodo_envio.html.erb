@@ -1,0 +1,4 @@
+<%= form_for @order, url: combo_order_checkout_metodo_envio_update_path(@order.id) do |form| %>
+  <%= form.hidden_field :state_lock_version %>
+  <%= render "spree/checkout/metodo_envio", form: form %>
+<% end %>

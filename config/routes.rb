@@ -87,6 +87,19 @@ Spree::Core::Engine.routes.draw do
   get "/combos/:combo_id" => "combos#ordenar_combo", as: :ordenar_combo
   get "/categories_combos/:category_id" => "categories#show"
   get "/downloadable_files/:id" => "downloadable_files#download", as: :downloadable_files_download
+  
+
+  get "/combo_order_checkout/:order_id/address" => "combo_order_checkout#address", as: :combo_order_checkout_address
+  patch "/combo_order_checkout/:order_id/address" => "combo_order_checkout#address_update", as: :combo_order_checkout_address_update
+  get "/combo_order_checkout/:order_id/metodo_envio" => "combo_order_checkout#metodo_envio", as: :combo_order_checkout_metodo_envio
+  patch "/combo_order_checkout/:order_id/metodo_envio" => "combo_order_checkout#metodo_envio_update", as: :combo_order_checkout_metodo_envio_update
+  get "/combo_order_checkout/:order_id/forma_de_pago" => "combo_order_checkout#forma_de_pago", as: :combo_order_checkout_forma_de_pago
+  patch "/combo_order_checkout/:order_id/forma_de_pago" => "combo_order_checkout#forma_de_pago_update", as: :combo_order_checkout_forma_de_pago_update
+  get "/combo_order_checkout/:order_id/redirect_mercadopago" => "combo_order_checkout#redirect_mercadopago", as: :combo_order_checkout_redirect_mercadopago
+
+  get "/combo_order_checkout/:order_id/payment_return" => "combo_order_checkout#payment_return", as: :payment_return
+
+  get "/combos/:combo_id/seleccionar_cantidad" => "combos#seleccionar_cantidad", as: :combo_seleccionar_cantidad
 
 
   resources :orders, except: [:index, :new, :create, :destroy] do
