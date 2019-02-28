@@ -109,6 +109,31 @@
 
         <div id="shipping_specs" class="row">
           <div class="col-md-6">
+            <div class="form-group">
+              <%= f.label :volume, Spree.t(:volume) %>
+              <%= f.text_field :volume, size: 4, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div  class="form-group">
+              <%= f.label :restrictive_measure, Spree.t(:restrictive_measure) %>
+              <%= f.text_field :restrictive_measure, size: 4, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div id="shipping_specs_weight_field" data-hook="admin_product_form_weight" class="form-group">
+              <%= f.label :weight, Spree.t(:weight) %>
+              <%= f.text_field :weight, size: 4, class: 'form-control' %>
+            </div>
+          </div>
+
+
+        </div>
+
+        <!--<div id="shipping_specs" class="row">
+          <div class="col-md-6">
             <div id="shipping_specs_weight_field" data-hook="admin_product_form_weight" class="form-group">
               <%= f.label :weight, Spree.t(:weight) %>
               <%= f.text_field :weight, size: 4, class: 'form-control' %>
@@ -135,7 +160,7 @@
               <%= f.text_field :depth, size: 4, class: 'form-control' %>
             </div>
           </div>
-        </div>
+        </div>-->
       <% end %>
 
 

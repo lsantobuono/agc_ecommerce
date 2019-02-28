@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190226221722) do
+ActiveRecord::Schema.define(version: 20190228163310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -531,6 +531,8 @@ ActiveRecord::Schema.define(version: 20190226221722) do
     t.datetime "discontinue_on"
     t.integer  "security_stock"
     t.integer  "position"
+    t.float    "volume"
+    t.float    "restrictive_measure"
   end
 
   add_index "spree_products", ["available_on"], name: "index_spree_products_on_available_on", using: :btree

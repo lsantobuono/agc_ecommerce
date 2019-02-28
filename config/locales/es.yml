@@ -1,5 +1,7 @@
 es:
   spree:
+    volume: "Volumen"
+    restrictive_measure: "Medida restrictiva"
     image_principal: "Imagen principal"
     price_cash: "Precio Efectivo"
     price_mercado_pago: "Precio Mercado Pago"
