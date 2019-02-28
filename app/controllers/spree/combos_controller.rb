@@ -18,10 +18,15 @@ module Spree
       end
     end
 
+    def seleccionar_cantidad
+      @combo = Combo.find(params[:combo_id])
+    end
 
     def ordenar_combo
       combo = Combo.find(params[:combo_id])
-      @combos_y_cantidades = [{ random_id: rand(1000000000000), combo: combo, quantity: 1}]
+      cantidad = params[:cantidad].present? ? params[:cantidad].to_i : 1
+      @combos_y_cantidades = [{ random_id: rand(1000000000000), combo: combo, quantity: cantidad}]
+      @combo_order = true
       render :ordenar_combo_compuesto
     end
 

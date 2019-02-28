@@ -117,3 +117,6 @@ gem 'sortable_tree_rails'
 
 gem 'jquery-ui-rails'
 
+gem 'mercadopago-sdk'
+
+

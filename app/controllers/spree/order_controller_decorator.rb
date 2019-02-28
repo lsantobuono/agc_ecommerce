@@ -113,8 +113,20 @@ module Spree
       redirect_back_or_default(spree.root_path)
     end
 
+    def new_combo_order_params
+      { currency: current_currency, store_id: current_store.id, user_id: try_spree_current_user.try(:id), combo_order: true }
+    end
+
     def populate_combos
-      order = current_order(create_order_if_necessary: true)
+      # byebug
+      if params[:combo_order] == "true"
+        # Si es una orden de combo entonces creo una orden especial
+        order = Spree::Order.create!(new_combo_order_params)
+        
+      else
+        # Si no agrego el combo al carrito normal
+        order = current_order(create_order_if_necessary: true)
+      end
 
       validar_que_no_hay_combos_aplicados(order)
       set_bill_address_if_blank(order)
@@ -131,11 +143,18 @@ module Spree
     end
 
     def validate_population(order)
+      # byebug
       if order.errors.empty?
-        flash[:success] = "Combo agregado al carrito!"
         if order.es_de_mercadolibre? # Caso ML directo al checkout!
+          flash[:success] = "Combo seleccionado correctamente"
           redirect_to checkout_state_path(order.checkout_steps.first)
+        elsif order.combo_order? 
+          flash[:success] = "Combo seleccionado correctamente"
+          redirect_to combo_order_checkout_address_path(order.id)
+
+          # redirect_to checkout_state_path(:address)
         else
+          flash[:success] = "Combo agregado al carrito!"
           redirect_to spree.root_path
         end
       else
@@ -148,7 +167,7 @@ module Spree
     end
 
     def agregar_items_de_combo(order, combo, quantity, parameters)
-      combo_aplicado = order.combo_aplicados.create(combo: combo, quantity: quantity)
+      combo_aplicado = order.combo_aplicados.create(combo: combo, quantity: quantity, price_cash: combo.price_cash, price_mercado_pago: combo.price_mercado_pago)
 
       parameters.each do |key,value|
         quantity = value.to_i
@@ -169,6 +188,7 @@ module Spree
     def set_bill_address_if_blank(order)
       if order.bill_address.blank? && order.user.present? # Sin esto pincha cuando un guest ordena un combo
         order.bill_address = order.user.bill_address
+        order.save
       end
     end
 

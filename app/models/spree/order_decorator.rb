@@ -8,6 +8,8 @@ module Spree
 
     has_many :combo_aplicados, inverse_of: :order, foreign_key: :spree_order_id, dependent: :destroy
 
+    scope :incomplete, -> { where(completed_at: nil).where(combo_order: false) }
+
     checkout_flow do
       go_to_state :address
       go_to_state :metodo_envio, if: ->(order) { !order.creado_por_admin? }
@@ -30,8 +32,16 @@ module Spree
       update_column(:confirmation_delivered, true)
     end
 
+    def mp_init_point
+      if Rails.env.development?
+        mercadopago_init_point
+      else
+        mercadopago_sandbox_init_point
+      end
+    end
+
     def should_hide_billing?
-      !es_de_mercadolibre? && total < 1000
+      !es_de_mercadolibre? && !combo_order? && total < 1000
     end
 
     def es_de_mercadolibre?

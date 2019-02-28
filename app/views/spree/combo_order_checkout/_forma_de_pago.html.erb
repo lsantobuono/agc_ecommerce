@@ -1,0 +1,57 @@
+<% combo = @order.combo_aplicados.first %>
+<p> PRECIO FINAL  </p>
+<hr>
+<a class="opcion-envio" href="cosas">
+  <div class="row">
+    <div class="col-xs-6 col-md-3" style="padding-top: 20px">
+      <p class="price-cash">
+        <%= "$ #{combo.price_cash.to_i}" %>
+      </p>
+    </div>
+    <div class="col-xs-6 col-md-5" style="padding-top: 20px">
+      <p class="contado-text">
+      PAGO CONTADO EN NUESTRO LOCAL
+      </p>
+    </div>
+    <div class=" col-xs-2 col-md-2 col-cash-image ">
+      <%= image_tag "cash.png", style: "max-height: 80px; width: auto;" %>
+    </div>
+  </div>
+</a>
+<hr>
+<a class="opcion-envio" href="cosas">
+  <div class="row">
+    <div class="col-xs-6 col-md-3" style="padding-top: 20px">
+      <p class="price-cash">
+        <%= "$ #{combo.price_cash.to_i}" %>
+      </p>
+    </div>
+    <div class="col-xs-6 col-md-5" style="padding-top: 20px">
+      <p class="contado-text">
+      TRANSFERENCIA BANCARIA
+      </p>
+    </div>
+    <div class="col-xs-2 col-md-2">
+      <%= image_tag "bank.png", style: "max-height: 80px; width: auto;" %>
+    </div>
+  </div>
+</a>
+<hr>
+<a class="opcion-envio" href="<%= combo_order_checkout_redirect_mercadopago_path(@order.id) %>" method="post">
+  <div class="row">
+    <div class="col-md-3" style="padding-top: 30px">
+      <p class="price-mercado-pago">
+        <%= "$ #{combo.price_mercado_pago.to_i}" %>
+      <p>
+    </div>
+    <div class="col-md-9">
+      <%= image_tag "mercadopago.png", style: "max-height: 100px; width: auto;" %>
+    </div>
+  </div>
+</a>
+<style type="text/css">
+  .opcion-envio:hover {
+    background-color: #dedede;
+    display: block;
+  }
+</style>
