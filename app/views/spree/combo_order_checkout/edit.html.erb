@@ -3,7 +3,7 @@
 
   <div class="row" data-hook="checkout_header" style="margin-bottom: 2em;">
     <div class="col-sm-6">
-      <h1 data-hook="checkout_title"><%= Spree.t('checkout_steps.'+@state) %></h1>
+      <h1 data-hook="checkout_title"><%= Spree.t('checkout_steps.'+@order.state) %></h1>
     </div>
       <div class="col-sm-6" data-hook="checkout_progress">
     </div>
@@ -11,9 +11,9 @@
 
   <div class="row" data-hook="checkout_content">
     <div class="col-md-9" data-hook="checkout_form_wrapper">
-      <%= render @state %>
+      <%= render @order.state %>
     </div>
-    <% if false # @state != 'confirm' %>
+    <% if false # @order.state != 'confirm' %>
       <div id="checkout-summary" data-hook="checkout_summary_box" class="col-md-3">
         <%= render partial: "spree/checkout/summary", locals: { order: @order } %>
       </div>

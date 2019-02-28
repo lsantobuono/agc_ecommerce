@@ -4,6 +4,7 @@ module Spree
       enum tipo_factura: [:consumidor_final, :factura_b, :factura_a]
       enum metodo_envio: [:mercado_envios, :retiro_local, :micro_domicilio, :micro_terminal, :motomensajeria, :other]
       enum moderation_status: [:pending, :notified, :approved, :delivered]
+      enum forma_de_pago: [:en_local, :transferencia, :mercadopago]
     end
 
     has_many :combo_aplicados, inverse_of: :order, foreign_key: :spree_order_id, dependent: :destroy
@@ -13,7 +14,8 @@ module Spree
     checkout_flow do
       go_to_state :address
       go_to_state :metodo_envio, if: ->(order) { !order.creado_por_admin? }
-      #go_to_state :confirmar, if: ->(order) { !order.creado_por_admin? }
+      go_to_state :forma_de_pago, if: ->(order) { order.combo_order? && !order.creado_por_admin? }
+      go_to_state :mercadopago, if: ->(order) { order.combo_order? && order.forma_de_pago == "mercadopago" && !order.creado_por_admin? }
       # 
       # go_to_state :delivery
       # go_to_state :payment, if: ->(order) { order.payment_required? }
@@ -34,9 +36,9 @@ module Spree
 
     def mp_init_point
       if Rails.env.development?
-        mercadopago_init_point
-      else
         mercadopago_sandbox_init_point
+      else
+        mercadopago_init_point
       end
     end
 
@@ -75,6 +77,7 @@ module Spree
     Spree::Order.state_machine.before_transition to: :metodo_envio, do: :assign_default_addresses!
     Spree::Order.state_machine.before_transition from: :metodo_envio, do: :validate_metodo_envio
     Spree::Order.state_machine.before_transition from: :metodo_envio, do: :persist_user_address!
+    Spree::Order.state_machine.before_transition from: :forma_de_pago, do: :validate_forma_de_pago
     Spree::Order.state_machine.before_transition to: :complete, do: :validate_combos
     # Al crear los shipments se decrementa el stock
     # Spree::Order.state_machine.before_transition :to => :complete, :do => :create_proposed_shipments
@@ -139,6 +142,13 @@ module Spree
     def validate_metodo_envio
       unless creado_por_admin? || metodo_envio.present?
         self.errors.add(:base, 'Seleccione el método de envío')
+        return false
+      end
+    end
+
+    def validate_forma_de_pago
+      unless creado_por_admin? || forma_de_pago.present?
+        self.errors.add(:base, 'Seleccione la forma de pago')
         return false
       end
     end

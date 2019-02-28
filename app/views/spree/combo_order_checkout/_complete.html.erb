@@ -1,0 +1,7 @@
+<% if @order.en_local? %>
+<h1>Pagas en local</h1>
+<% elsif @order.transferencia? %>
+<h1>Pagas por transferencia</h1>
+<% elsif @order.mercadopago? %>
+<h1>Pagas por mercadopago</h1>
+<% end %>

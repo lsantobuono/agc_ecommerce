@@ -89,13 +89,13 @@ Spree::Core::Engine.routes.draw do
   get "/downloadable_files/:id" => "downloadable_files#download", as: :downloadable_files_download
   
 
+  patch "/combo_order_checkout/:order_id/update" => "combo_order_checkout#update", as: :combo_order_checkout_update
   get "/combo_order_checkout/:order_id/address" => "combo_order_checkout#address", as: :combo_order_checkout_address
-  patch "/combo_order_checkout/:order_id/address" => "combo_order_checkout#address_update", as: :combo_order_checkout_address_update
   get "/combo_order_checkout/:order_id/metodo_envio" => "combo_order_checkout#metodo_envio", as: :combo_order_checkout_metodo_envio
-  patch "/combo_order_checkout/:order_id/metodo_envio" => "combo_order_checkout#metodo_envio_update", as: :combo_order_checkout_metodo_envio_update
   get "/combo_order_checkout/:order_id/forma_de_pago" => "combo_order_checkout#forma_de_pago", as: :combo_order_checkout_forma_de_pago
-  patch "/combo_order_checkout/:order_id/forma_de_pago" => "combo_order_checkout#forma_de_pago_update", as: :combo_order_checkout_forma_de_pago_update
-  get "/combo_order_checkout/:order_id/redirect_mercadopago" => "combo_order_checkout#redirect_mercadopago", as: :combo_order_checkout_redirect_mercadopago
+  get "/combo_order_checkout/:order_id/mercadopago" => "combo_order_checkout#mercadopago", as: :combo_order_checkout_mercadopago
+  get "/combo_order_checkout/:order_id/select_forma_de_pago" => "combo_order_checkout#select_forma_de_pago", as: :combo_order_checkout_select_forma_de_pago
+  get "/combo_order_checkout/:order_id/complete" => "combo_order_checkout#complete", as: :combo_order_checkout_complete
 
   get "/combo_order_checkout/:order_id/payment_return" => "combo_order_checkout#payment_return", as: :payment_return
 
