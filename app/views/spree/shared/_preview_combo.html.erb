@@ -9,8 +9,8 @@
     <div class="hidden-price-cash" style="display:none"> <%= combo.price_cash %> </div>
     <div class="hidden-price-mercado-pago" style="display:none"> <%= combo.price_mercado_pago %> </div>
 
-    <div class="col-xs-12 col-md-4" id="product-images" data-hook="product_images">
-      <div id="main-image" class="panel panel-default" data-hook>
+    <div class="col-xs-12 col-md-4 combo-images" data-hook="product_images">
+      <div class="panel panel-default main-image" data-hook>
         <div class="panel-body text-center" style="height:270px;">
           <span class="image-helper"></span>
           <%= image_tag combo.image.url, :itemprop => "image" %>
@@ -84,3 +84,5 @@
   </div>
 
 </li>
+
+

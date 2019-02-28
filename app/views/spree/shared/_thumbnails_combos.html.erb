@@ -1,5 +1,5 @@
 
-<ul id="product-thumbnails" class="thumbnails list-inline" data-hook>
+<ul class="combo-thumbnails thumbnails list-inline" data-hook>
   <li class='vtmb-all tmb-<%=  combo.image.model.id %>'>
     <%= link_to(image_tag(combo.image.url, class: "thumbnail"), combo.image.url) %>
   </li>
@@ -12,7 +12,7 @@
 
 <style>
 
-#product-thumbnails li {
+.combo-thumbnails li {
   max-width: 30%;
 }
 </style>
