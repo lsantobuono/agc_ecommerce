@@ -32,6 +32,14 @@ module Spree
       update_column(:confirmation_delivered, true)
     end
 
+    def mp_init_point
+      if Rails.env.development?
+        mercadopago_init_point
+      else
+        mercadopago_sandbox_init_point
+      end
+    end
+
     def should_hide_billing?
       !es_de_mercadolibre? && !combo_order? && total < 1000
     end
