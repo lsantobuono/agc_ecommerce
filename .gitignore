@@ -17,7 +17,11 @@
 /tmp
 
 .byebug_history
+.rbenv-vars
+
 
 public/spree
 public/uploads
 public/sitemap*
+
+
