@@ -5,11 +5,22 @@
 		<%= combo.description %>
 	<% end %>-->
   <div class="row">
+    
     <div class="hidden-price-cash" style="display:none"> <%= combo.price_cash %> </div>
     <div class="hidden-price-mercado-pago" style="display:none"> <%= combo.price_mercado_pago %> </div>
 
-    <div class="col-xs-12 col-md-4">
-      <img src="https://dummyimage.com/600x400/000/fff" class="main-img">
+    <div class="col-xs-12 col-md-4" id="product-images" data-hook="product_images">
+      <div id="main-image" class="panel panel-default" data-hook>
+        <div class="panel-body text-center" style="height:270px;">
+          <span class="image-helper"></span>
+          <%= image_tag combo.image, :itemprop => "image" %>
+        </div>
+      </div>
+      <div id="thumbnails" data-hook>
+        <%= render :partial => 'spree/shared/thumbnails_combos', locals: { combo: combo } %>
+      </div>
+    </div>
+      <!--<img src="https://dummyimage.com/600x400/000/fff" class="main-img">
       <div class="row">
         <div class="col-xs-4">
           <img src="https://dummyimage.com/600x400/000/fff">
@@ -20,8 +31,8 @@
         <div class="col-xs-4">
           <img src="https://dummyimage.com/600x400/000/fff">
         </div>
-      </div>
-    </div>
+      </div>-->
+
     <div class="col-xs-12 col-md-8">
       <h3><%= combo.code %></h3> <br>
       <p style="font-size: 16px;"><%= combo.description %></p> <br>

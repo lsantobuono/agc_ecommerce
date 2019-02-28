@@ -1,0 +1,16 @@
+
+<ul id="product-thumbnails" class="thumbnails list-inline" data-hook>
+  <li class='vtmb-all tmb-<%=  Spree::Product.first.images.first.viewable.id %>'>
+    <%= link_to(image_tag(Spree::Product.first.images.first.attachment.url, class: "thumbnail"), Spree::Product.first.images.first.attachment.url) %>
+  </li>
+  <li class='vtmb-all tmb-<%= Spree::Product.first.images.second.viewable.id%>'>
+    <%= link_to(image_tag(Spree::Product.first.images.second.attachment.url, class: "thumbnail"), Spree::Product.first.images.second.attachment.url) %>
+  </li>
+</ul>
+
+<style>
+
+#product-thumbnails li {
+  max-width: 30%;
+}
+</style>
