@@ -1,7 +1,7 @@
 <% combo = @order.combo_aplicados.first %>
 <p> PRECIO FINAL  </p>
 <hr>
-<a class="opcion-envio" href="cosas">
+<a class="opcion-envio" href="<%= combo_order_checkout_select_forma_de_pago_path(@order.id, forma_de_pago: 'en_local') %>" method="post">
   <div class="row">
     <div class="col-xs-6 col-md-3" style="padding-top: 20px">
       <p class="price-cash">
@@ -19,7 +19,7 @@
   </div>
 </a>
 <hr>
-<a class="opcion-envio" href="cosas">
+<a class="opcion-envio" href="<%= combo_order_checkout_select_forma_de_pago_path(@order.id, forma_de_pago: 'transferencia') %>" method="post">
   <div class="row">
     <div class="col-xs-6 col-md-3" style="padding-top: 20px">
       <p class="price-cash">
@@ -37,7 +37,7 @@
   </div>
 </a>
 <hr>
-<a class="opcion-envio" href="<%= combo_order_checkout_redirect_mercadopago_path(@order.id) %>" method="post">
+<a class="opcion-envio" href="<%= combo_order_checkout_select_forma_de_pago_path(@order.id, forma_de_pago: 'mercadopago') %>" method="post">
   <div class="row">
     <div class="col-md-3" style="padding-top: 30px">
       <p class="price-mercado-pago">
