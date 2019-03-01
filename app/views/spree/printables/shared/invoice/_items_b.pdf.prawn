@@ -17,7 +17,7 @@ invoice.items.each do |item|
     item.name,
     item.quantity
   ]
-  if (order.ml_user.nil?)
+  if (order.ml_user.nil? && !order.combo_order)
     row += [
       (Spree::Money.new(precio)).to_s, # El fractional devuelve centavos asi que lo divido x 100
       "#{item.bonification}%",
@@ -39,7 +39,7 @@ header = [
   Spree.t(:qty)
 ]
 
-if (order.ml_user.nil?)
+if (order.ml_user.nil? && !order.combo_order)
   header+= [
     Spree.t(:price),
     Spree.t(:bonificacion),
@@ -50,7 +50,7 @@ end
 
 # Column Header Values
 width = 370
-if (order.ml_user.nil?)
+if (order.ml_user.nil? && !order.combo_order)
   width = 520
 end
 

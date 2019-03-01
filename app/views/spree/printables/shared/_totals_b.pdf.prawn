@@ -1,23 +1,14 @@
 # TOTALS
 totals = []
-
-# Adjustments
-#invoice.adjustments.each do |adjustment|
-#  totals << [pdf.make_cell(content: adjustment.label), adjustment.display_amount.to_s]
-#end
-
-# Shipments
-#invoice.shipments.each do |shipment|
-#  totals << [pdf.make_cell(content: shipment.shipping_method.name), shipment.display_cost.to_s]
-#end
-
-# TOTAL
-
 sumTotal = 0
 
-invoice.items.each do |item|
-  precio_redondeado = (item.display_price.money.fractional.to_i / 100.00).round(2)
-  sumTotal +=  precio_redondeado* item.quantity* ((100-item.bonification)/100.00)
+if order.combo_order
+  sumTotal = invoice.display_item_total.money.fractional.to_i / 100.00
+else
+  invoice.items.each do |item|
+    precio_redondeado = (item.display_price.money.fractional.to_i / 100.00).round(2)
+    sumTotal +=  precio_redondeado* item.quantity* ((100-item.bonification)/100.00)
+  end
 end
 
 sumTotal = sumTotal.round 2
