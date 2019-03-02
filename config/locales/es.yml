@@ -56,7 +56,7 @@ es:
     checkout_steps:
       address: Datos para facturación
       metodo_envio: Información de envío
-      complete: Completaste tu compra!
+      complete: Pedido finalizado
     instrucciones_ml: Si ya ha adquirido un producto o combo por Mercado Libre, por favor ingrese su usuario e id de producto adquirido
     instrucciones_ml_combo: Por favor ingrese su usuario de Mercado Libre 
     thank_you_for_your_order: Por favor imprime una copia de esta página de confirmación para tus archivos.

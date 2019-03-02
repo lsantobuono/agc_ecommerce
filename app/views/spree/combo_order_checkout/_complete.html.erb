@@ -1,7 +1,43 @@
 <% if @order.en_local? %>
-<h1>Pagas en local</h1>
+
+  <p>LO ESPERAMOS EN NUESTRO LOCAL</p>
+  <p>Lunes - Viernes: 8:00-19:00 &nbsp; Sábados: 10:00-19:00</p>
+  <p>
+    Virrey Cisneros 8649 - Jose León Suarez
+    <br>
+    Prov. de Buenos Aires – Argentina
+  </p>
+  <a class="btn btn-primary" href="/contact" style="color:white">Ver mapa</a>
+  <p>
+    <a href="www.agc.com.ar">www.agc.com.ar</a>
+    &nbsp;
+    <a href="mailto:info@agc.com.ar">info@agc.com.ar</a>
+    
+  </p>
+
+  PUEDE SEGUIR RECORRIENDO NUESTRA WEB Y SOLICITAR MAS COMBOS O
+  PRESUPUESTOS DE PRODUCTOS CARGANDO EL CARRITO
+
 <% elsif @order.transferencia? %>
-<h1>Pagas por transferencia</h1>
+  <p>DATOS PARA REALIZAR LA TRANSFERENCIA:</p>
+  <p>
+    Banco Galicia, sucursal: Lomas de Martínez
+    <br>
+    Caja de Ahorros en pesos N°402129380515
+    <br>
+    a nombre de Claudio Marenco
+    <br>
+    CBU: 0070051130004021293853
+    <br>
+    cuit: 20-14725538-2
+  </p>
+  <p>
+    PUEDE SEGUIR RECORRIENDO NUESTRA WEB Y SOLICITAR MAS COMBOS O
+    PRESUPUESTOS DE PRODUCTOS CARGANDO EL CARRITO
+  </p>
+  
+
+
 <% elsif @order.mercadopago? %>
 <h1>Pagas por mercadopago</h1>
 <% end %>
