@@ -15,7 +15,7 @@ module Spree
       go_to_state :address
       go_to_state :metodo_envio, if: ->(order) { !order.creado_por_admin? }
       go_to_state :forma_de_pago, if: ->(order) { order.combo_order? && !order.creado_por_admin? }
-      go_to_state :mercadopago, if: ->(order) { order.combo_order? && order.forma_de_pago == "mercadopago" && !order.creado_por_admin? }
+      # go_to_state :mercadopago, if: ->(order) { order.combo_order? && order.forma_de_pago == "mercadopago" && !order.creado_por_admin? }
       # 
       # go_to_state :delivery
       # go_to_state :payment, if: ->(order) { order.payment_required? }
@@ -23,6 +23,20 @@ module Spree
       # go_to_state :confirm, if: ->(order) { order.confirmation_required? }
       go_to_state :complete
       # remove_transition from: :delivery, to: :confirm
+    end
+
+    def price_cash
+      return unless combo_order?
+      combo_aplicado = combo_aplicados.first
+      return 0 unless combo_aplicado.price_cash.present?
+      (combo_aplicado.price_cash * combo_aplicado.quantity).round(2)
+    end
+
+    def price_mercado_pago
+      return unless combo_order?
+      combo_aplicado = combo_aplicados.first
+      return 0 unless combo_aplicado.price_mercado_pago.present?
+      (combo_aplicado.price_mercado_pago * combo_aplicado.quantity).round(2)
     end
 
     def can_approve?
@@ -81,6 +95,8 @@ module Spree
     Spree::Order.state_machine.before_transition to: :complete, do: :validate_combos
     # Al crear los shipments se decrementa el stock
     # Spree::Order.state_machine.before_transition :to => :complete, :do => :create_proposed_shipments
+
+
 
 
     # Este decorator es de la gema de print invoice... por algun motivo si no lo agrego aca no anda, creo que tiene que ver

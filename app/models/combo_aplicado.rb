@@ -2,10 +2,12 @@
 #
 # Table name: combo_aplicados
 #
-#  id             :integer          not null, primary key
-#  combo_id       :integer          not null
-#  spree_order_id :integer          not null
-#  quantity       :integer          default(1), not null
+#  id                 :integer          not null, primary key
+#  combo_id           :integer          not null
+#  spree_order_id     :integer          not null
+#  quantity           :integer          default(1), not null
+#  price_cash         :decimal(, )
+#  price_mercado_pago :decimal(, )
 #
 
 class ComboAplicado < ActiveRecord::Base

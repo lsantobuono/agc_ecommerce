@@ -3,6 +3,9 @@ module Spree
     def address
       @order = Spree::Order.find(params[:order_id])
       # @state = "address"
+      if @order.bill_address.blank?
+        @order.bill_address = Spree::Address.new(country: Spree::Country.build_default)
+      end
       render 'edit'
     end
 
@@ -33,16 +36,14 @@ module Spree
     def select_forma_de_pago
       @order = Spree::Order.find(params[:order_id])
       @order.update_attributes(forma_de_pago: params[:forma_de_pago])
-      # @order.next
         
       if @order.next
-        if @order.state == "mercadopago"
-          unless @order.mp_init_point.present?
-            unless generar_mercadopago_preference
-              return
-            end
+        if @order.state == "complete" && @order.forma_de_pago == "mercadopago"
+          if generar_mercadopago_preference
+            redirect_to @order.mp_init_point
+          else
+            render 'edit'
           end
-          redirect_to @order.mp_init_point
         else
           redirect_to url_for(controller: 'combo_order_checkout', action: @order.state)
         end
@@ -52,13 +53,14 @@ module Spree
     end
 
     def generar_mercadopago_preference
+      combo_aplicado = @order.combo_aplicados.first
       $mp = MercadoPago.new(ENV['MERDACOPAGO_CLIENT_ID'], ENV['MERDACOPAGO_SECRET_KEY'])
       preference_data = {
           "items": [
               {
-                  "title": "testCreate",
-                  "quantity": 1,
-                  "unit_price": 10.2,
+                  "title": "#{combo_aplicado.combo.code} - #{combo_aplicado.combo.name}",
+                  "quantity": combo_aplicado.quantity.to_i,
+                  "unit_price": combo_aplicado.price_mercado_pago.to_f,
                   "currency_id": "ARS"
               }
           ],

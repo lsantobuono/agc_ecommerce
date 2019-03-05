@@ -63,12 +63,14 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
+  post "/mercadopago_webhook" => "mercadopago#mercadopago_webhook"
+  get "/mercadopago_webhook" => "mercadopago#mercadopago_webhook"
   get '*id', :to => 'spree/taxons#show', :as => :categories
   
 end
 
 Spree::Core::Engine.routes.draw do
+  # root 'categories#show', :defaults => { category_id: "16" }
   get '/' => 'categories#show', :defaults => { category_id: "16" }
 
   get "/contact" => "home#contact"

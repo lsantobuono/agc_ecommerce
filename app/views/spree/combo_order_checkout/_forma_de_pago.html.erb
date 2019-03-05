@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-xs-6 col-md-3" style="padding-top: 20px">
       <p class="price-cash">
-        <%= "$ #{combo.price_cash.to_i}" %>
+        <%= "$ #{@order.price_cash}" %>
       </p>
     </div>
     <div class="col-xs-6 col-md-5" style="padding-top: 20px">
@@ -23,7 +23,7 @@
   <div class="row">
     <div class="col-xs-6 col-md-3" style="padding-top: 20px">
       <p class="price-cash">
-        <%= "$ #{combo.price_cash.to_i}" %>
+        <%= "$ #{@order.price_cash}" %>
       </p>
     </div>
     <div class="col-xs-6 col-md-5" style="padding-top: 20px">
@@ -41,7 +41,7 @@
   <div class="row">
     <div class="col-md-3" style="padding-top: 30px">
       <p class="price-mercado-pago">
-        <%= "$ #{combo.price_mercado_pago.to_i}" %>
+        <%= "$ #{@order.price_mercado_pago}" %>
       <p>
     </div>
     <div class="col-md-9">

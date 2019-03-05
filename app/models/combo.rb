@@ -2,17 +2,19 @@
 #
 # Table name: combos
 #
-#  id          :integer          not null, primary key
-#  name        :string           not null
-#  code        :string           not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  deleted_at  :datetime
-#  description :string
-#  image       :string
-#  hidden      :boolean
-#  caro        :boolean
-#  category_id :integer
+#  id                 :integer          not null, primary key
+#  name               :string           not null
+#  code               :string           not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  deleted_at         :datetime
+#  description        :string
+#  image              :string
+#  hidden             :boolean
+#  caro               :boolean
+#  category_id        :integer
+#  price_cash         :decimal(, )
+#  price_mercado_pago :decimal(, )
 #
 
 class Combo < ActiveRecord::Base
