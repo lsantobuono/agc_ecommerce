@@ -1,5 +1,16 @@
 module Spree
   class ComboOrderCheckoutController < Spree::StoreController
+    before_action except: [:registration] do
+      unless spree_current_user.present?
+        redirect_to combo_order_checkout_registration_path(params[:order_id])
+      end
+    end
+
+    def registration
+      @order = Spree::Order.find(params[:order_id])
+      @user = Spree::User.new
+    end
+
     def address
       @order = Spree::Order.find(params[:order_id])
       # @state = "address"
@@ -11,6 +22,9 @@ module Spree
 
     def metodo_envio
       @order = Spree::Order.find(params[:order_id])
+      if @order.ship_address.blank?
+        @order.ship_address = Spree::Address.build_default
+      end
       render 'edit'
     end
 

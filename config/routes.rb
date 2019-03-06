@@ -91,6 +91,8 @@ Spree::Core::Engine.routes.draw do
   get "/downloadable_files/:id" => "downloadable_files#download", as: :downloadable_files_download
   
 
+  get "/combo_order_checkout/:order_id/registration" => "combo_order_checkout#registration", as: :combo_order_checkout_registration
+  post "/combo_order_checkout/:order_id/registration" => "combo_order_checkout#registration_create", as: :combo_order_checkout_registration_create
   patch "/combo_order_checkout/:order_id/update" => "combo_order_checkout#update", as: :combo_order_checkout_update
   get "/combo_order_checkout/:order_id/address" => "combo_order_checkout#address", as: :combo_order_checkout_address
   get "/combo_order_checkout/:order_id/metodo_envio" => "combo_order_checkout#metodo_envio", as: :combo_order_checkout_metodo_envio
