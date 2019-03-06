@@ -14,7 +14,7 @@
 
 
 <script >
-  $(".quantity-input").change(function() {
+  $(".quantity-input").on('change click', function() {
     li  = $(this).closest("li");
     let cash = parseFloat(li.find(".hidden-price-cash").text());
     let mercado_pago = parseFloat(li.find(".hidden-price-mercado-pago").text());

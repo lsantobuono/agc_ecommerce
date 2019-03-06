@@ -53,6 +53,30 @@
         </td>
       </tr>
       <tr>
+        <td width="35%" data-hook>
+          <strong><%= Spree.t(:forma_de_pago) %>:</strong>
+        </td>
+        <td>
+          <% if @order.forma_de_pago.present? %>
+            <span>
+              <%= Spree.t("formas_de_pago.#{@order.forma_de_pago}") %>
+            </span>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td width="35%" data-hook>
+          <strong><%= Spree.t(:payment_status) %>:</strong>
+        </td>
+        <td>
+          <% if @order.payment_status.present? %>
+            <span>
+              <%= Spree.t("payment_statuses.#{@order.payment_status}") %>
+            </span>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
         <td data-hook='admin_order_tab_subtotal_title'>
           <strong><%= Spree.t(:subtotal) %>:</strong>
         </td>

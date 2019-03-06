@@ -112,9 +112,20 @@ es:
       other: Otros
       retiro_local: Retiro en el local del vendedor
       mercado_envios: Ya aboné Mercado Envíos
+      mercado_envios_mercadopago: Mercado Envíos (Sólo si paga con MercadoPago)
       micro_domicilio: Micro a domicilio
       micro_terminal: Micro a terminal
       motomensajeria: Moto Mensajería
+    forma_de_pago: Forma de pago
+    formas_de_pago:
+      mercadopago: MercadoPago
+      en_local: En local
+      transferencia: Transferencia
+    payment_status: Estado del pago
+    payment_statuses:
+      pendiente: Pendiente
+      aprobado: Aprobado
+      rechazado: Rechazado
 
     order_line_items: "Items de Orden"
     error_email_resent: "Error, no hay email configurado en el pedido"

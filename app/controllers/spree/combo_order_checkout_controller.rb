@@ -4,7 +4,7 @@ module Spree
       @order = Spree::Order.find(params[:order_id])
       # @state = "address"
       if @order.bill_address.blank?
-        @order.bill_address = Spree::Address.new(country: Spree::Country.build_default)
+        @order.bill_address = Spree::Address.build_default
       end
       render 'edit'
     end
@@ -38,6 +38,7 @@ module Spree
       @order.update_attributes(forma_de_pago: params[:forma_de_pago])
         
       if @order.next
+        @order.update_with_updater! # Esto actualiza el total segun el metodo de pago que eligió
         if @order.state == "complete" && @order.forma_de_pago == "mercadopago"
           if generar_mercadopago_preference
             redirect_to @order.mp_init_point
@@ -69,7 +70,7 @@ module Spree
               "pending": payment_return_url(@order.id, status: "pending"),
               "failure": payment_return_url(@order.id, status: "failure"),
           },
-          "external_reference": @order.id,
+          "external_reference": @order.number,
           "shipments": {
             "mode": "me2",
             "dimensions": "20x20x20,1000",

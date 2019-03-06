@@ -1,42 +1,44 @@
 <% combo = @order.combo_aplicados.first %>
 <p> PRECIO FINAL  </p>
 <hr>
-<a class="opcion-envio" href="<%= combo_order_checkout_select_forma_de_pago_path(@order.id, forma_de_pago: 'en_local') %>" method="post">
-  <div class="row">
-    <div class="col-xs-6 col-md-3" style="padding-top: 20px">
-      <p class="price-cash">
-        <%= "$ #{@order.price_cash}" %>
-      </p>
+<% unless @order.metodo_envio == 'mercado_envios_mercadopago' %>
+  <a class="opcion-envio" href="<%= combo_order_checkout_select_forma_de_pago_path(@order.id, forma_de_pago: 'en_local') %>" method="post">
+    <div class="row">
+      <div class="col-xs-6 col-md-3" style="padding-top: 20px">
+        <p class="price-cash">
+          <%= "$ #{@order.price_cash}" %>
+        </p>
+      </div>
+      <div class="col-xs-6 col-md-5" style="padding-top: 20px">
+        <p class="contado-text">
+        PAGO CONTADO EN NUESTRO LOCAL
+        </p>
+      </div>
+      <div class=" col-xs-2 col-md-2 col-cash-image ">
+        <%= image_tag "cash.png", style: "max-height: 80px; width: auto;" %>
+      </div>
     </div>
-    <div class="col-xs-6 col-md-5" style="padding-top: 20px">
-      <p class="contado-text">
-      PAGO CONTADO EN NUESTRO LOCAL
-      </p>
+  </a>
+  <hr>
+  <a class="opcion-envio" href="<%= combo_order_checkout_select_forma_de_pago_path(@order.id, forma_de_pago: 'transferencia') %>" method="post">
+    <div class="row">
+      <div class="col-xs-6 col-md-3" style="padding-top: 20px">
+        <p class="price-cash">
+          <%= "$ #{@order.price_cash}" %>
+        </p>
+      </div>
+      <div class="col-xs-6 col-md-5" style="padding-top: 20px">
+        <p class="contado-text">
+        TRANSFERENCIA BANCARIA
+        </p>
+      </div>
+      <div class="col-xs-2 col-md-2">
+        <%= image_tag "bank.png", style: "max-height: 80px; width: auto;" %>
+      </div>
     </div>
-    <div class=" col-xs-2 col-md-2 col-cash-image ">
-      <%= image_tag "cash.png", style: "max-height: 80px; width: auto;" %>
-    </div>
-  </div>
-</a>
-<hr>
-<a class="opcion-envio" href="<%= combo_order_checkout_select_forma_de_pago_path(@order.id, forma_de_pago: 'transferencia') %>" method="post">
-  <div class="row">
-    <div class="col-xs-6 col-md-3" style="padding-top: 20px">
-      <p class="price-cash">
-        <%= "$ #{@order.price_cash}" %>
-      </p>
-    </div>
-    <div class="col-xs-6 col-md-5" style="padding-top: 20px">
-      <p class="contado-text">
-      TRANSFERENCIA BANCARIA
-      </p>
-    </div>
-    <div class="col-xs-2 col-md-2">
-      <%= image_tag "bank.png", style: "max-height: 80px; width: auto;" %>
-    </div>
-  </div>
-</a>
-<hr>
+  </a>
+  <hr>
+<% end %>
 <a class="opcion-envio" href="<%= combo_order_checkout_select_forma_de_pago_path(@order.id, forma_de_pago: 'mercadopago') %>" method="post">
   <div class="row">
     <div class="col-md-3" style="padding-top: 30px">
