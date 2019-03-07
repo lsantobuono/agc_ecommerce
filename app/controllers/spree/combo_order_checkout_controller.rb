@@ -71,26 +71,27 @@ module Spree
       combo_aplicado = @order.combo_aplicados.first
       $mp = MercadoPago.new(ENV['MERDACOPAGO_CLIENT_ID'], ENV['MERDACOPAGO_SECRET_KEY'])
       preference_data = {
-          "items": [
-              {
-                  "title": "#{combo_aplicado.combo.code} - #{combo_aplicado.combo.name}",
-                  "quantity": combo_aplicado.quantity.to_i,
-                  "unit_price": combo_aplicado.price_mercado_pago.to_f,
-                  "currency_id": "ARS"
-              }
-          ],
-          "back_urls": {
-              "success": payment_return_url(@order.id, status: "success"),
-              "pending": payment_return_url(@order.id, status: "pending"),
-              "failure": payment_return_url(@order.id, status: "failure"),
-          },
-          "external_reference": @order.number,
-          "shipments": {
-            "mode": "me2",
-            "dimensions": "20x20x20,1000",
-
+        "items": [
+          {
+            "title": "#{combo_aplicado.combo.name}",
+            "quantity": combo_aplicado.quantity.to_i,
+            "unit_price": combo_aplicado.price_mercado_pago.to_f,
+            "currency_id": "ARS"
           }
+        ],
+        "back_urls": {
+          "success": payment_return_url(@order.id, status: "success"),
+          "pending": payment_return_url(@order.id, status: "pending"),
+          "failure": payment_return_url(@order.id, status: "failure"),
+        },
+        "external_reference": @order.number,
       }
+      if @order.metodo_envio == 'mercado_envios_mercadopago'
+        preference_data['shipments'] = {
+          "mode": "me2",
+          "dimensions": combo_aplicado.dimensions_and_weight,
+        }
+      end
       preference = $mp.create_preference(preference_data)
       if preference["status"] == "201"
         @order.update_attributes(

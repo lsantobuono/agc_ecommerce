@@ -14,17 +14,26 @@ class ComboAplicado < ActiveRecord::Base
   belongs_to :combo
   belongs_to :order, class_name: 'Spree::Order', foreign_key: 'spree_order_id', inverse_of: :combo_aplicados
 
-  #1728   12x12x12
-  #3375   15x15x15
-  #4000   20x20x10
-  #6000   20x20x15
-  #8000   20x20x20
-  #12000  30x20x20
-  #16000  40x20x20
-  #39000  45x35x25
-  #55000  45x35x35
   VOLUME_BOXES = [1728,3375,4000,6000,8000,12000,16000,39000,55000]
   RESTRICTIVE_MEASURE_BOXES = [12,15,20,20,20,30,40,45,45]
+
+  def dimensions_and_weight
+    "#{dimensions},#{get_weight.to_i}"
+  end
+
+  def dimensions
+    {
+       1728 => '12x12x12',
+       3375 => '15x15x15',
+       4000 => '20x20x10',
+       6000 => '20x20x15',
+       8000 => '20x20x20',
+      12000 => '30x20x20',
+      16000 => '40x20x20',
+      39000 => '45x35x25',
+      55000 => '45x35x35',
+    }[get_minimum_box]
+  end
 
   #Esto probablemente termine en orden, por si hay más de un combo aplicado
   def get_minimum_box
@@ -42,7 +51,9 @@ class ComboAplicado < ActiveRecord::Base
   def get_volume
     volume = 0
     order.line_items.where(combo_aplicado: self).each do  |li|
-      volume += li.variant.product.volume
+      if li.variant.product.volume.present? && li.quantity.present?
+        volume += li.variant.product.volume * li.quantity
+      end
     end
     return volume
   end
@@ -50,7 +61,9 @@ class ComboAplicado < ActiveRecord::Base
   def get_weight
     weight = 0
     order.line_items.where(combo_aplicado: self).each do  |li|
-      weight += li.variant.product.weight
+      if li.variant.product.weight.present? && li.quantity.present?
+        weight += li.variant.product.weight * li.quantity
+      end
     end
     return weight
   end
@@ -58,7 +71,9 @@ class ComboAplicado < ActiveRecord::Base
   def get_restrictive_measure
     current_max = -1
     order.line_items.where(combo_aplicado: self).each do  |li|
-      current_max = li.variant.product.restrictive_measure if current_max < li.variant.product.restrictive_measure
+      if li.variant.product.restrictive_measure.present? && current_max < li.variant.product.restrictive_measure
+        current_max = li.variant.product.restrictive_measure
+      end
     end
     return current_max
   end
