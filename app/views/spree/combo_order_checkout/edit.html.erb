@@ -2,11 +2,19 @@
   <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
 
   <div class="row" data-hook="checkout_header" style="margin-bottom: 2em;">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       <h1 data-hook="checkout_title"><%= Spree.t('checkout_steps.'+@order.state) %></h1>
     </div>
-      <div class="col-sm-6" data-hook="checkout_progress">
-    </div>
+    <% if ['address', 'metodo_envio', 'forma_de_pago'].include?(@order.state) %>
+      <div class="col-sm-12" data-hook="checkout_progress">
+          <div class="steps-container">
+            <div class="step">Seleccion de modelos/colores</div>
+            <div class="step <%= @order.state == 'address' ? 'active' : '' %>">Datos para la factura</div>
+            <div class="step <%= @order.state == 'metodo_envio' ? 'active' : '' %>">Datos para el envío</div>
+            <div class="step <%= @order.state == 'forma_de_pago' ? 'active' : '' %>">Pago</div>
+          </div>
+        <% end %>
+      </div>
   </div>
 
   <div class="row" data-hook="checkout_content">
@@ -28,3 +36,9 @@
 <% if I18n.locale != :en %>
   <%= javascript_include_tag 'jquery.validate/localization/messages_' + I18n.locale.to_s.downcase.gsub('-', '') %>
 <% end %>
+
+<style type="text/css">
+  .steps-container {
+    margin-bottom: 20px;
+  }
+</style>

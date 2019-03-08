@@ -1,6 +1,8 @@
 module Spree
   UserRegistrationsController.class_eval do
     def create
+      # @order = Spree::Order.find(params[:order_id])
+      @on_success_return_to = params[:on_success_return_to]
       @user = build_resource(spree_user_params)
       resource_saved = resource.save
       yield resource if block_given?
@@ -9,9 +11,9 @@ module Spree
           set_flash_message :notice, :signed_up
           sign_up(resource_name, resource)
           session[:spree_user_signup] = true
-          if params[:on_success_return_to].present?
+          if @on_success_return_to.present?
             # Si es el checkout de combos
-            return redirect_to params[:on_success_return_to]
+            return redirect_to @on_success_return_to
           end
           respond_with resource, location: after_sign_up_path_for(resource)
         else

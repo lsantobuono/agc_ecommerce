@@ -69,3 +69,16 @@ HOLA
     </span>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $("#order_use_billing").change(function() {
+    if( $("#order_use_billing").is(":checked") ) {
+      $("#shipping input:not([type=checkbox]), #shipping select").attr('disabled', true)
+      $("#shipping .inner").hide();
+    } else {
+      $("#shipping input:not([type=checkbox]), #shipping select").attr('disabled', false)
+      $("#shipping .inner").show();
+    }
+  })
+  $("#order_use_billing").change();
+</script>

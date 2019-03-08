@@ -8,6 +8,7 @@ module Spree
 
     def registration
       @order = Spree::Order.find(params[:order_id])
+      @on_success_return_to = combo_order_checkout_address_path(@order.id)
       @user = Spree::User.new
     end
 
@@ -31,6 +32,14 @@ module Spree
     def update
       @order = Spree::Order.find(params[:order_id])
       @order.update_attributes(order_params)
+      if @order.email.nil? && spree_current_user.try(:email).present?
+        @order.email = spree_current_user.email
+        @order.save
+      end
+      if spree_current_user.present? && spree_current_user.bill_address.nil? && @order.bill_address.present?
+        spree_current_user.bill_address = @order.bill_address
+        spree_current_user.save
+      end
       if @order.next
         redirect_to url_for(controller: 'combo_order_checkout', action: @order.state)
       else
@@ -113,8 +122,9 @@ module Spree
     private
 
       def order_params
-        parameters = params.require(:order).permit(:tipo_factura, :metodo_envio, :checkout_notes,
-          bill_address_attributes: [:firstname, :dni_cuit, :address1, :city, :country_id, :state_id, :phone, :id])
+        parameters = params.require(:order).permit(:tipo_factura, :metodo_envio, :checkout_notes, :use_billing,
+          bill_address_attributes: [:firstname, :dni_cuit, :address1, :city, :country_id, :state_id, :phone, :id],
+          ship_address_attributes: [:firstname, :dni_cuit, :address1, :city, :country_id, :state_id, :phone, :id])
       end
   end
 end

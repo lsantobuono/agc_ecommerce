@@ -1,0 +1,18 @@
+.status_label {
+  color: green;
+  font-weight: bold;
+}
+.steps-container .step {
+  background-image: image-url('checkout_step_fondo.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 200px;
+  height: 57px;
+  vertical-align: top;
+  padding: 10px;
+}
+.steps-container .step.active {
+  background-position-y: -67px;
+  color: white;
+  font-weight: bold;
+}

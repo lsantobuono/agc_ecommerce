@@ -6,14 +6,17 @@
   <div class="alert alert-<%= key %>"><%= sanitize(value) %></div>
 <% end %>
 
-<%= render partial: 'form_combo', locals: { combos_y_cantidades: @combos_y_cantidades } %>
+<% if @combo_order %>
+  <div class="steps-container">
+    <div class="step active">Seleccion de modelos/colores</div>
+    <div class="step">Datos para la factura</div>
+    <div class="step">Datos para el envío</div>
+    <div class="step">Pago</div>
+  </div>
+<% end %>
 
-<style>
-.status_label {
-  color: green;
-  font-weight: bold;
-}
-</style>
+
+<%= render partial: 'form_combo', locals: { combos_y_cantidades: @combos_y_cantidades } %>
 
 
 <script>
