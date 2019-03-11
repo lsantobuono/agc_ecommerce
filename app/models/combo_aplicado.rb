@@ -14,8 +14,8 @@ class ComboAplicado < ActiveRecord::Base
   belongs_to :combo
   belongs_to :order, class_name: 'Spree::Order', foreign_key: 'spree_order_id', inverse_of: :combo_aplicados
 
-  VOLUME_BOXES = [1728,3375,4000,6000,8000,12000,16000,39000,55000]
-  RESTRICTIVE_MEASURE_BOXES = [12,15,20,20,20,30,40,45,45]
+  VOLUME_BOXES = [1728,3375,4000,6000,8000,12000,16000,39000,55000,45000]
+  RESTRICTIVE_MEASURE_BOXES = [12,15,20,20,20,30,40,45,45,90]
 
   def dimensions_and_weight
     "#{dimensions},#{get_weight.to_i}"
@@ -32,6 +32,7 @@ class ComboAplicado < ActiveRecord::Base
       16000 => '40x20x20',
       39000 => '45x35x25',
       55000 => '45x35x35',
+      45000 => '90x25x20',
     }[get_minimum_box]
   end
 
