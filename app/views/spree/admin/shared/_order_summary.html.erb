@@ -54,6 +54,20 @@
       </tr>
       <tr>
         <td width="35%" data-hook>
+          <strong>Dimensiones (cm) y peso (gr):</strong>
+        </td>
+        <td>
+          <span>
+            <% if @order.metodo_envio == "mercado_envios_mercadopago" %>
+              <%= @order.dimensions_and_weight_from_api %>
+            <% else %>
+              <%= @order.dimensions_and_weight %>
+            <% end %>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td width="35%" data-hook>
           <strong><%= Spree.t(:forma_de_pago) %>:</strong>
         </td>
         <td>

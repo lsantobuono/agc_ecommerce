@@ -66,7 +66,7 @@ module Spree
           if generar_mercadopago_preference
             redirect_to @order.mp_init_point
           else
-            render 'edit'
+            redirect_to url_for(controller: 'combo_order_checkout', action: @order.state)
           end
         else
           redirect_to url_for(controller: 'combo_order_checkout', action: @order.state)
@@ -98,7 +98,7 @@ module Spree
       if @order.metodo_envio == 'mercado_envios_mercadopago'
         preference_data['shipments'] = {
           "mode": "me2",
-          "dimensions": combo_aplicado.dimensions_and_weight,
+          "dimensions": @order.dimensions_and_weight,
         }
       end
       preference = $mp.create_preference(preference_data)
@@ -111,7 +111,7 @@ module Spree
         # redirect_to @order.mp_init_point
         true
       else
-        redirect_to :back, alert: "Hubo un error al generar el link de pago"
+        # redirect_to :back, alert: "Hubo un error al generar el link de pago"
         false
       end
     end

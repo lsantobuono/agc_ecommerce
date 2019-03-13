@@ -38,5 +38,10 @@
 
 
 <% elsif @order.mercadopago? %>
-<h1>Pagas por mercadopago</h1>
+  <% if @order.mercadopago_preference_id.present? %>
+    <h1>Pagas por mercadopago</h1>
+  <% else %>
+    <h3>No se pudo generar el link de pago</h3>
+    <a href="/contact">Póngase en contacto con nosotros</a> 
+  <% end %>
 <% end %>
