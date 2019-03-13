@@ -11,13 +11,13 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="padding-left:0; padding-right:0;">
       <ul class="nav navbar-nav"  data-hook>
-        <li id="home-link" data-hook><%= link_to "PRODUCTOS", spree.products_path %></li>
-        <li><%= link_to "NOSOTROS", spree.about_us_path %></li>
-        <li><%= link_to "COMBOS", spree.combos_path %></li>
-        <li><%= link_to "MERCADO LIBRE", spree.mercado_libre_path %></li>
-        <li><%= link_to "DESCARGAS", spree.descargas_path %></li>
-        <li><%= link_to "CONTACTO", spree.contact_path %></li>
-        <li><%= link_to "AYUDA", spree.help_path %></li>
+        <li id="home-link" data-hook><%= link_to "PRODUCTOS", spree.products_path, class: "#{'active' if (params[:controller] == 'spree/products' || params[:controller] == 'spree/taxons')}" %></li>
+        <li><%= link_to "NOSOTROS", spree.about_us_path, class: "#{'active' if (params[:controller] == 'spree/home') && (params[:action] == 'about_us')}" %></li>
+        <li><%= link_to "COMBOS", spree.combos_path , class: "#{'active' if (params[:controller] == 'spree/combos' || params[:controller] == 'spree/categories') && (params[:action] != 'mercado_libre')}"%></li>
+        <li><%= link_to "MERCADO LIBRE", spree.mercado_libre_path, class: "#{'active' if (params[:controller] == 'spree/combos') && (params[:action] == 'mercado_libre')}" %></li>
+        <li><%= link_to "DESCARGAS", spree.descargas_path, class:  "#{'active' if (params[:controller] == 'spree/home') && (params[:action] == 'descargas')}" %></li>
+        <li><%= link_to "CONTACTO", spree.contact_path , class: "#{'active' if (params[:controller] == 'spree/home') && (params[:action] == 'contact')}"%></li>
+        <li><%= link_to "AYUDA", spree.help_path, class:  "#{'active' if (params[:controller] == 'spree/home') && (params[:action] == 'help')}" %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right"  style="padding-right:1em" data-hook>
         <%= render "spree/shared/login_bar" %>

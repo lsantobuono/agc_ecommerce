@@ -5,7 +5,7 @@
     <nav id="taxonomies" class="sidebar-item" data-hook style="font-size:0.9em;">
       <div class="panel-group accordion" id="accordion">
         <h4 class='taxonomy-root'><!--<a data-toggle="collapse" data-parent="#accordion" >-->
-        </span><%= Spree.t(:shop_by_taxonomy, taxonomy: "Categorías") %><!--</a>--></h4>
+        </span><%= Spree.t(:shop_by_taxonomy, taxonomy: "") %><!--</a>--></h4>
       </div>
       <hr>
       <%= taxons_tree_combos(nil,@category, max_level,20,true) %>
