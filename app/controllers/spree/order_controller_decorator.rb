@@ -137,8 +137,10 @@ module Spree
           agregar_items_de_combo(order, combo, parameters[:quantity].to_i, parameters)
         end
         order.validate_combos
-        order.state = "address"
-        order.save!
+        if order.errors.empty?
+          order.state = "address"
+          order.save!
+        end
 
         validate_population(order)
       end
