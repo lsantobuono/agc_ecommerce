@@ -42,7 +42,7 @@ header = [
 
 if (order.ml_user.nil? && !order.combo_order)
   header+= [
-    Spree.t(:price),
+    "Precio",
     Spree.t(:bonificacion),
     Spree.t(:subtotal)
   ]
