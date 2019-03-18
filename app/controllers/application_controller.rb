@@ -30,4 +30,12 @@ class ApplicationController < ActionController::Base
     path = request.env['HTTP_REFERER'].present? ? request.env['HTTP_REFERER'] : spree.root_path
     raise Errors::MyRedirectException.new(path, error_message)
   end
+
+  def default_url_options(options={})
+    if Rails.env.production?
+      options.merge({ protocol: "https" })
+    else
+      options
+    end
+  end
 end
