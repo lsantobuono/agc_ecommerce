@@ -11,6 +11,8 @@ module Spree
                    :payments,
                    :shipments,
                    :metodo_envio,
+                   :forma_de_pago,
+                   :dimensions_and_weight,
                    :metodo_envio_otros,
                    :checkout_notes
 

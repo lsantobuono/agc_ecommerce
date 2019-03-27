@@ -98,7 +98,7 @@ module Spree
       if @order.metodo_envio == 'mercado_envios_mercadopago'
         preference_data['shipments'] = {
           "mode": "me2",
-          "dimensions": @order.dimensions_and_weight,
+          "dimensions": @order.calculate_dimensions_and_weight,
         }
       end
       preference = $mp.create_preference(preference_data)

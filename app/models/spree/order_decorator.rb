@@ -45,8 +45,16 @@ module Spree
     RESTRICTIVE_MEASURE_BOXES = [12,15,20,20,20,30,40,45,45,90]
 
 
-    def dimensions_and_weight
+    def calculate_dimensions_and_weight
       "#{dimensions},#{get_weight.to_i}"
+    end
+
+    def dimensions_and_weight
+      if metodo_envio == "mercado_envios_mercadopago"
+        dimensions_and_weight_from_api
+      else
+        calculate_dimensions_and_weight
+      end
     end
 
     def dimensions

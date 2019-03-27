@@ -58,11 +58,7 @@
         </td>
         <td>
           <span>
-            <% if @order.metodo_envio == "mercado_envios_mercadopago" %>
-              <%= @order.dimensions_and_weight_from_api %>
-            <% else %>
-              <%= @order.dimensions_and_weight %>
-            <% end %>
+            <%= @order.dimensions_and_weight %>
           </span>
         </td>
       </tr>

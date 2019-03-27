@@ -32,6 +32,9 @@ if (bill_address != nil)
   billing << "\n#{bill_address.city}, #{bill_address.state.name}"
   billing << "\n#{bill_address.country.name}"
   billing << "\n#{bill_address.phone}"
+  if printable.forma_de_pago.present?
+    billing << "\nForma de pago: #{Spree.t("formas_de_pago.#{printable.forma_de_pago}")}"
+  end
 
   dataAddress = [[address_cell_billing], [billing]]
 end
@@ -52,6 +55,8 @@ if (ship_address != nil)
     metodo_envio_str=Spree.t("metodos_envio.#{printable.metodo_envio}")
     shipping << "\nTipo Envio: #{metodo_envio_str}"
   end
+
+  shipping << "\nDimensiones y peso: #{printable.dimensions_and_weight}"
 
   if (printable.checkout_notes != "")
     shipping << "\nNotas adicionales: #{printable.checkout_notes}"
