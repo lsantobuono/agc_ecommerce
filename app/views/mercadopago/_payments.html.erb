@@ -1,0 +1,39 @@
+<div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Pagos</h4>
+      </div>
+      <div class="modal-body">
+        <% if error %>
+          <h3>Hubo un error</h3>
+        <% elsif payments.empty? %>
+          <h3>No se registraron pagos</h3>
+        <% else %>
+          <table class="table">
+            <tr>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Costo de envío</th>
+              <th>Pagado</th>
+              <th>Total recibido</th>
+            </tr>
+            <% payments.each do |payment| %>
+              <tr>
+                <td><%= DateTime.parse(payment["date_created"]).strftime("%d/%m/%Y %H:%M") %></td>
+                <td><%= payment["status"] %> (<%= payment["status_detail"] %>)</td>
+                <td><%= payment["shipping_cost"] %></td>
+                <td><%= payment["transaction_details"]["total_paid_amount"] %></td>
+                <td><%= payment["transaction_details"]["net_received_amount"] %></td>
+              </tr>
+            <% end %>
+          </table>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

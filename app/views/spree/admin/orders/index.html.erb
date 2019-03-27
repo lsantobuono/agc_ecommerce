@@ -162,6 +162,7 @@
          <% if Spree::Order.checkout_step_names.include?(:delivery) %>
           <th><%= sort_link @search, :shipment_state, I18n.t(:shipment_state, :scope => 'activerecord.attributes.spree/order') %></th>
          <% end %>
+        <th>Forma de pago</th>
         <th><%= sort_link @search, :email,            I18n.t(:email, :scope => 'activerecord.attributes.spree/order') %></th>
         <th>Nombre</th>
         <th>Apellido</th>
@@ -173,7 +174,7 @@
     </thead>
     <tbody>
     <% @orders.each do |order| %>
-      <tr data-hook="admin_orders_index_rows" class="state-<%= order.state.downcase %> <%= cycle('odd', 'even') %>">
+      <tr data-hook="admin_orders_index_rows" class="state-<%= order.state.downcase %> <%= cycle('odd', 'even') %> <%= order.mercadopago? ? 'mercadopago' : '' %>">
         <td>
           <%= order_time(@show_only_completed ? order.completed_at : order.created_at) %>
         </td>
@@ -196,6 +197,11 @@
             <% end %>
           </td>
         <% end %>
+        <td>
+          <% if order.forma_de_pago.present? %>
+            <%= Spree.t("formas_de_pago.#{order.forma_de_pago}") %>
+          <% end %>
+        </td>
         <td>
           <% if order.user %>
             <%= link_to order.email, edit_admin_user_path(order.user) %>
@@ -233,3 +239,9 @@
 <% end %>
 
 <%= render 'spree/admin/shared/index_table_options', collection: @orders, simple: true %>
+
+<style type="text/css">
+  tr.mercadopago {
+    background-color: #cfcfff;
+  }
+</style>

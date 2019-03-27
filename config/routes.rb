@@ -63,8 +63,9 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  post "/mercadopago_webhook" => "mercadopago#mercadopago_webhook"
-  get "/mercadopago_webhook" => "mercadopago#mercadopago_webhook"
+  # post "/mercadopago_webhook" => "mercadopago#mercadopago_webhook"
+  # get "/mercadopago_webhook" => "mercadopago#mercadopago_webhook"
+  get "/search_payments" => "mercadopago#search_payments", as: :search_payments
   get '*id', :to => 'spree/taxons#show', :as => :categories
   
 end

@@ -79,10 +79,8 @@
           <strong><%= Spree.t(:payment_status) %>:</strong>
         </td>
         <td>
-          <% if @order.payment_status.present? %>
-            <span>
-              <%= Spree.t("payment_statuses.#{@order.payment_status}") %>
-            </span>
+          <% if @order.mercadopago? %>
+            <a href="/search_payments?order_number=<%= @order.number %>" data-remote="true">Ver pagos</a>
           <% end %>
         </td>
       </tr>

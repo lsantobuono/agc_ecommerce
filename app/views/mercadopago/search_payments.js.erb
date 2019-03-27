@@ -1,0 +1,3 @@
+var modal = $('<%= j render partial: 'payments', locals: { payments: @payments, error: @error } %>');
+$('body').append(modal);
+modal.modal();
