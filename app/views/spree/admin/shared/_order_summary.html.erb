@@ -54,11 +54,21 @@
       </tr>
       <tr>
         <td width="35%" data-hook>
-          <strong>Dimensiones (cm) y peso (gr):</strong>
+          <strong>Dimensiones:</strong>
         </td>
         <td>
           <span>
-            <%= @order.dimensions_and_weight %>
+            <%= @order.dimensions_and_weight.split(',')[0] %> cm
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td width="35%" data-hook>
+          <strong>Peso:</strong>
+        </td>
+        <td>
+          <span>
+            <%= @order.dimensions_and_weight.split(',')[1] %> gr
           </span>
         </td>
       </tr>

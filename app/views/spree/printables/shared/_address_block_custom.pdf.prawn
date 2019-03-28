@@ -56,7 +56,8 @@ if (ship_address != nil)
     shipping << "\nTipo Envio: #{metodo_envio_str}"
   end
 
-  shipping << "\nDimensiones y peso: #{printable.dimensions_and_weight}"
+  shipping << "\nDimensiones: #{printable.dimensions_and_weight.split(',')[0]}cm"
+  shipping << "\nPeso: #{printable.dimensions_and_weight.split(',')[1]}gr"
 
   if (printable.checkout_notes != "")
     shipping << "\nNotas adicionales: #{printable.checkout_notes}"
