@@ -7,7 +7,10 @@ role :web, %w{ubuntu@agc2019.programando.com.ar}
 role :db, %w{ubuntu@agc2019.programando.com.ar}
 
 set :ssh_options, {
-  keys: %w(~/keys/ec2-2017.pem)
+  keys: %w(~/keys/ec2-2017.pem),
+  compression: false,
+  keepalive: true
+# port: 17341,
   # forward_agent: false,
   # auth_methods: %w(password)
 }
