@@ -52,7 +52,7 @@ end
 
 
 # if Rails.env.production?
-  ENV['S3_BUCKET_NAME']="agcbucket90"
+#  ENV['S3_BUCKET_NAME']="agcbucket90"
   attachment_config = {
     s3_credentials: {
       access_key_id:     ENV['AWS_ACCESS_KEY_ID'],
