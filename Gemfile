@@ -92,7 +92,7 @@ gem 'spree_i18n', github: 'spree-contrib/spree_i18n', branch: '3-1-stable'
 
 gem 'spree_volume_pricing', :git => 'https://github.com/lsantobuono/spree_volume_pricing.git', branch: 'master'
 
-gem 'puma', '~> 4.3.1'
+gem 'puma', '~> 4.3.3'
 
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 
