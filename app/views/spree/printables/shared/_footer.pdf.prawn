@@ -12,7 +12,6 @@ pdf.repeat(:all) do
     pdf.text "Virrey Cisneros 8649 - José León Suarez - Prov. de Bs As.", align: :right, size: 11
     pdf.text "www.agc.com.ar info@agc.com.ar ", align: :right, size: 11
     pdf.text "Tel:(011) 4729-7481", align: :right, size: 11
-    pdf.text "Whatsapp: +54911 6051 0878", align: :right, size: 11
   end
 end
 
