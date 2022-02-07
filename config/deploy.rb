@@ -2,9 +2,9 @@
 lock '3.7.1'
 
 
-role :app, %w{ubuntu@18.228.225.176}
-role :web, %w{ubuntu@18.228.225.176}
-role :db, %w{ubuntu@18.228.225.176}
+role :app, %w{ubuntu@www.agc.com.ar}
+role :web, %w{ubuntu@www.agc.com.ar}
+role :db, %w{ubuntu@www.agc.com.ar}
 
 set :ssh_options, {
   keys: %w(~/keys/ec2-2017.pem),
