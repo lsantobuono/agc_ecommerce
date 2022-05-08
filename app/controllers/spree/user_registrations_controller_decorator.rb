@@ -2,8 +2,15 @@ module Spree
   UserRegistrationsController.class_eval do
     def create
       # @order = Spree::Order.find(params[:order_id])
-      @on_success_return_to = params[:on_success_return_to]
       @user = build_resource(spree_user_params)
+
+      unless verify_recaptcha(model: resource)
+        clean_up_passwords(resource)
+        render 'spree/combo_order_checkout/registration'
+        return
+      end
+
+      @on_success_return_to = params[:on_success_return_to]
       resource_saved = resource.save
       yield resource if block_given?
       if resource_saved

@@ -503,6 +503,8 @@ GEM
       nokogiri (~> 1.5)
       trollop (~> 2.1)
     rdoc (4.3.0)
+    recaptcha (5.9.0)
+      json
     redis (3.3.2)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
@@ -722,6 +724,7 @@ DEPENDENCIES
   puma (~> 4.3.5)
   rails (= 4.2.8.rc1)
   rails_db
+  recaptcha
   rollbar
   rspec-rails
   sass-rails (~> 5.0)
@@ -749,4 +752,4 @@ RUBY VERSION
    ruby 2.4.4p296
 
 BUNDLED WITH
-   1.17.1
+   1.17.3

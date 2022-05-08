@@ -120,3 +120,4 @@ gem 'jquery-ui-rails'
 gem 'mercadopago-sdk'
 
 
+gem "recaptcha"

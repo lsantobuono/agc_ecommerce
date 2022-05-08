@@ -38,14 +38,17 @@ module Spree
     	@message = Message.new
   	end
   
-	def createMessage
-		@message = Message.new(message_params)
-		if @message.valid?
-			MessageMailer.message_me(@message).deliver_now
-			flash.now[:info] = "Mensaje Enviado. Gracias por contactarnos."
-		end
-		render "spree/home/contact"
-  	end
+  def createMessage
+    @message = Message.new(message_params)
+    if verify_recaptcha(model: @message) && @message.valid?
+      MessageMailer.message_me(@message).deliver_now
+      flash.now[:info] = "Mensaje Enviado. Gracias por contactarnos."
+    else
+      # flash.now[:error] = "Hubo un error"
+      # Se muestran los errores del modelo
+    end
+    render "spree/home/contact"
+  end
 
     def publicDownload
       fileName= "public/descargas/#{params[:file_id]}.#{params[:format]}"
