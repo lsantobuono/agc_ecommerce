@@ -1,4 +1,8 @@
 es:
+  recaptcha:
+    errors:
+      verification_failed: 'El captcha es incorrecto, intente nuevamente'
+      recaptcha_unreachable: 'Hubo un error con el captcha, intente nuevamente'
   spree:
     volume: "Volumen"
     restrictive_measure: "Medida restrictiva"

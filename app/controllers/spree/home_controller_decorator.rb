@@ -42,6 +42,7 @@ module Spree
     @message = Message.new(message_params)
     if verify_recaptcha(model: @message) && @message.valid?
       MessageMailer.message_me(@message).deliver_now
+      @message = Message.new
       flash.now[:info] = "Mensaje Enviado. Gracias por contactarnos."
     else
       # flash.now[:error] = "Hubo un error"
