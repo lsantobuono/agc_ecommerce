@@ -72,7 +72,8 @@ end
 
 Spree::Core::Engine.routes.draw do
   # root 'categories#show', :defaults => { category_id: "16" }
-  get '/' => 'categories#show', :defaults => { category_id: "16" }
+  get '/' => 'products#index'
+  # get '/' => 'categories#show', :defaults => { category_id: "16" }
 
   get "/contact" => "home#contact"
   get "/about_us" => "home#about_us"
